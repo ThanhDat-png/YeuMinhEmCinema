@@ -1,69 +1,53 @@
-# YeuMinhEm Cinema
+﻿# YeuMinhEm Cinema
 
-Đồ án môn Ngôn ngữ lập trình C#: hệ thống quản lý rạp chiếu phim và đặt vé.
+Đồ án C#: Admin Windows Forms, ADO.NET và SQL Server; giao diện web khách hàng đang là bản HTML/CSS/JavaScript demo.
 
-## Nội dung hiện có
+Đọc **BAT-DAU-O-DAY.md** để cập nhật trên máy đã có database.
 
-- Admin Windows Forms C#, .NET 10, ADO.NET (`Microsoft.Data.SqlClient`).
-- Code truy cập SQL Server cho phim, rạp, phòng chiếu và ghế.
-- Bản giao diện web HTML/CSS/JavaScript, dùng dữ liệu mô phỏng và localStorage.
-- Script SQL tạo database, bảng Phim, rạp, phòng, loại ghế, ghế và dữ liệu mẫu.
+## Đã có trong mã nguồn
+
+- Quản lý phim; rạp/phòng/ghế kết nối SQL Server.
+- Module lịch chiếu: danh sách và lọc, thêm/sửa, ngừng/mở bán, hủy,
+  lịch phòng trong ngày, sao chép có xem trước và xuất CSV.
+- Thủ tục SQL kiểm tra trùng lịch và khoảng dọn phòng, thao tác trong transaction.
+- Bộ kiểm tra CSV và SQL integration riêng.
+
+## Chưa hoàn thiện trong đợt này
+
+Các màn hình đơn đặt vé, bán vé, F&B, khách hàng, nhân viên/phân quyền và báo cáo
+còn cần phát triển nghiệp vụ/database. Website chưa có backend ASP.NET Core;
+Core/Data/Web là các thư mục chuẩn bị, không phải ba project đã hoàn chỉnh.
+Chưa có thanh toán thực và quy trình hoàn vé. Đây chưa phải toàn bộ đồ án hoàn thiện.
 
 ## Cấu trúc
 
-| Thư mục | Mục đích |
+| Thư mục | Nội dung |
 | --- | --- |
-| `src/YeuMinhEmCinema.Admin` | Project WinForms hiện có |
-| `src/YeuMinhEmCinema.Web` | Dành cho ASP.NET Core, chưa có project |
-| `src/YeuMinhEmCinema.Core` | Dành cho mô hình dùng chung, chưa có project |
-| `src/YeuMinhEmCinema.Data` | Dành cho DAL dùng chung, chưa có project |
-| `Database/Scripts` | Cấu trúc database |
-| `Database/Seed` | Dữ liệu mẫu |
-| `Design/Web` | Giao diện web chạy thử và hướng dẫn gốc |
-| `Design/Admin` | Dành cho tài liệu thiết kế Admin |
-| `Docs/BaoCao`, `Docs/Diagrams` | Dành cho báo cáo và sơ đồ |
-| `Docs/HuongDan` | Hướng dẫn chạy và kết quả kiểm tra đóng gói |
-| `Tests` | Dành cho kiểm thử, chưa có test project |
+| src/YeuMinhEmCinema.Admin | WinForms C#, .NET 10 |
+| src/YeuMinhEmCinema.Core, Data, Web | Giữ chỗ cho bước phát triển tiếp |
+| Database/Scripts | Tạo bảng và thủ tục SQL |
+| Database/Seed | Dữ liệu mẫu, không chạy lại trên máy hiện có để sửa chữ |
+| Design/Web | Web demo và tài nguyên |
+| Design/Admin | Tài liệu thiết kế Admin |
+| Docs | Báo cáo, sơ đồ, hướng dẫn |
+| Tests | Kiểm tra CSV và tích hợp SQL |
 
-## Chạy Admin trên Windows
+## Chạy
 
-Cần .NET 10 SDK, SQL Server Express và Visual Studio hỗ trợ .NET 10/Windows Forms.
-Thiết lập database theo `Database/README.md`, kiểm tra chuỗi kết nối trong `CauHinh.cs`.
-Mở `YeuMinhEmCinema.slnx` bằng Visual Studio, hoặc chạy tại thư mục gốc:
+Cần Windows, .NET 10 SDK, SQL Server/Express. Chạy SQL theo Database/README.md.
 
 ```powershell
-dotnet restore .\YeuMinhEmCinema.slnx
 dotnet build .\YeuMinhEmCinema.slnx
 dotnet run --project .\src\YeuMinhEmCinema.Admin\YeuMinhEmCinema.Admin.csproj
 ```
 
-## Chạy giao diện Web
+Web demo: mở Design/Web/dist/index.html bằng Live Server.
 
-Mở `Design/Web/dist/index.html` bằng Live Server trong VS Code.
-Trang admin web minh họa ở `Design/Web/dist/admin.html`.
-Nếu đã cài Python, có thể chạy:
+## Kiểm chứng bản sửa
 
-```powershell
-py -m http.server 8080 --directory .\Design\Web\dist
-```
+Đã biên dịch Admin bằng .NET SDK 10.0.100 với EnableWindowsTargeting=true trên Linux,
+0 lỗi/0 cảnh báo. Đã kiểm tra cú pháp SQL bằng Microsoft ScriptDom (TSql160Parser).
+Test CSV đã chạy đạt; test SQL integration đã biên dịch nhưng chưa chạy SQL Server.
+Chưa chạy giao diện WinForms trên Windows; cần kiểm thử theo Docs/HuongDan/LICH-CHIEU-HOAN-THIEN.md.
 
-Truy cập http://localhost:8080. Web demo chưa kết nối database của WinForms.
-
-## Phạm vi chưa hoàn thành
-
-Chưa có backend ASP.NET Core và kết nối đặt vé web với SQL Server.
-Các màn hình lịch chiếu, đơn đặt vé, khách hàng, bán vé, F&B, kiểm tra vé,
-nhân viên và báo cáo còn cần triển khai/kiểm thử nghiệp vụ với database.
-Chưa có hệ thống thanh toán thực, bộ kiểm thử, báo cáo đồ án và sơ đồ hoàn chỉnh.
-Các thư mục giữ chỗ không đồng nghĩa chức năng đã triển khai.
-
-## GitHub
-
-```powershell
-git add .
-git commit -m "Sap xep ma nguon va bo sung huong dan"
-git push
-```
-
-Bản ZIP không chứa lịch sử Git. Khi cập nhật repo đã liên kết, copy nội dung
-vào thư mục repo cũ và giữ nguyên thư mục `.git` của repo đó.
+ZIP không chứa lịch sử Git hoặc dữ liệu database. Giữ .git khi cập nhật repo hiện có.
