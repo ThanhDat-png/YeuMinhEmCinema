@@ -1,4 +1,4 @@
--- Dữ liệu minh họa, tùy chọn. Chạy sau script tạo dbo.Phim.
+﻿-- Dữ liệu minh họa, tùy chọn. Chạy sau script tạo dbo.Phim.
 USE [YeuMinhEmCinema];
 GO
 IF NOT EXISTS (SELECT 1 FROM dbo.Phim WHERE TenPhim = N'Phim minh họa')

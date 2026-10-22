@@ -1,4 +1,4 @@
--- Chạy file này trước các script Rạp - Phòng - Ghế.
+﻿-- Chạy file này trước các script Rạp - Phòng - Ghế.
 -- Chỉ tạo nếu chưa tồn tại; không xóa hoặc thay thế dữ liệu đang có.
 USE master;
 GO

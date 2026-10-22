@@ -1,4 +1,4 @@
--- ============================================================================
+﻿-- ============================================================================
 -- HỆ THỐNG QUẢN LÝ RẠP CHIẾU PHIM YEUMINHEM CINEMA
 -- Script 00: TOÀN BỘ CẤU TRÚC VÀ DỮ LIỆU MẪU RẠP - PHÒNG - GHẾ
 -- (File gộp để tiện mở và bấm Execute một lần duy nhất trong SQL Server Management Studio)

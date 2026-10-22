@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 
 namespace YeuMinhEmCinema.Admin
 {
@@ -174,7 +174,11 @@ namespace YeuMinhEmCinema.Admin
             btnDoiTrangThaiGhe.Enabled = false;
 
             flpGhe.SuspendLayout();
-            flpGhe.Controls.Clear();
+            while (flpGhe.Controls.Count > 0)
+                flpGhe.Controls[0].Dispose();
+            flpGhe.FlowDirection = FlowDirection.TopDown;
+            flpGhe.WrapContents = false;
+            flpGhe.AutoScrollPosition = Point.Empty;
 
             try
             {
@@ -220,6 +224,18 @@ namespace YeuMinhEmCinema.Admin
                 {
                     string tenHang = nhomHang.Key;
 
+                    // Mỗi hàng là một panel không ngắt dòng. Hàng rộng dùng thanh cuộn ngang.
+                    FlowLayoutPanel hangGhe = new FlowLayoutPanel
+                    {
+                        AutoSize = true,
+                        AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                        FlowDirection = FlowDirection.LeftToRight,
+                        WrapContents = false,
+                        Margin = new Padding(0, 0, 0, 6),
+                        Padding = Padding.Empty
+                    };
+                    flpGhe.Controls.Add(hangGhe);
+
                     // Nhãn tên hàng ghế hiển thị ở đầu mỗi hàng
                     Label lblTenHang = new Label
                     {
@@ -231,7 +247,7 @@ namespace YeuMinhEmCinema.Admin
                         TextAlign = ContentAlignment.MiddleCenter,
                         Margin = new Padding(2, 4, 4, 4)
                     };
-                    flpGhe.Controls.Add(lblTenHang);
+                    hangGhe.Controls.Add(lblTenHang);
 
                     var danhSachGheTrongHang = nhomHang.OrderBy(r => r.Field<int>("SoGhe")).ToList();
                     for (int i = 0; i < danhSachGheTrongHang.Count; i++)
@@ -278,13 +294,8 @@ namespace YeuMinhEmCinema.Admin
                             ChonGhe(info);
                         };
 
-                        flpGhe.Controls.Add(btnGhe);
+                        hangGhe.Controls.Add(btnGhe);
 
-                        // Đánh dấu xuống dòng sau chiếc ghế cuối cùng của hàng này
-                        if (i == danhSachGheTrongHang.Count - 1)
-                        {
-                            flpGhe.SetFlowBreak(btnGhe, true);
-                        }
                     }
                 }
             }
@@ -312,7 +323,7 @@ namespace YeuMinhEmCinema.Admin
             {
                 btnGhe.Text = $"{info.HangGhe}{info.SoGhe}";
                 btnGhe.ForeColor = Color.White;
-                btnGhe.FlatAppearance.BorderColor = Color.Transparent;
+                btnGhe.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
 
                 if (info.TenLoaiGhe.Contains("VIP", StringComparison.OrdinalIgnoreCase))
                 {
@@ -337,7 +348,7 @@ namespace YeuMinhEmCinema.Admin
             {
                 _gheDangChon.NutGhe.FlatAppearance.BorderSize = 1;
                 _gheDangChon.NutGhe.FlatAppearance.BorderColor =
-                    _gheDangChon.TrangThai != "Hoạt động" ? Color.FromArgb(239, 68, 68) : Color.Transparent;
+                    _gheDangChon.TrangThai != "Hoạt động" ? Color.FromArgb(239, 68, 68) : Color.FromArgb(203, 213, 225);
             }
 
             _gheDangChon = info;
@@ -397,7 +408,11 @@ namespace YeuMinhEmCinema.Admin
                     $"• Chọn một phòng chiếu trong cây danh mục bên trái để xem sơ đồ ghế.";
 
                 flpGhe.SuspendLayout();
-                flpGhe.Controls.Clear();
+                while (flpGhe.Controls.Count > 0)
+                flpGhe.Controls[0].Dispose();
+            flpGhe.FlowDirection = FlowDirection.TopDown;
+            flpGhe.WrapContents = false;
+            flpGhe.AutoScrollPosition = Point.Empty;
                 flpGhe.ResumeLayout(true);
 
                 _gheDangChon = null;
