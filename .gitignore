@@ -1,0 +1,22 @@
+# Visual Studio / .NET
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+TestResults/
+*.log
+# Local secrets and database files
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+appsettings.*.local.json
+*.mdf
+*.ldf
+*.bak
+# Web dependencies
+node_modules/
+# Operating system
+Thumbs.db
+.DS_Store
