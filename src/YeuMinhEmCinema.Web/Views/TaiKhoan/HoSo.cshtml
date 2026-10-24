@@ -1,24 +1,72 @@
 @model HoSoModel
 @{
-    ViewData["Title"] = "Tài khoản";
+    ViewData["Title"] = "Tài khoản của tôi";
 }
-<div class="container page-content">
-    <form asp-action="HoSo" method="post" class="account-form" data-submit>
-        <h1>Thông tin cá nhân</h1>
-        <div asp-validation-summary="ModelOnly" class="validation"></div>
-        <label asp-for="HoTen">Họ tên</label>
-        <input asp-for="HoTen" maxlength="150" />
-        <span asp-validation-for="HoTen" class="validation"></span>
-        <label asp-for="Email">Email (không bắt buộc)</label>
-        <input asp-for="Email" type="email" autocomplete="email" />
-        <span asp-validation-for="Email" class="validation"></span>
-        <label asp-for="DienThoai">Điện thoại</label>
-        <input asp-for="DienThoai" maxlength="20" />
-        <span asp-validation-for="DienThoai" class="validation"></span>
-        <label asp-for="NgaySinh">Ngày sinh</label>
-        <input asp-for="NgaySinh" type="date" />
-        <span asp-validation-for="NgaySinh" class="validation"></span>
-        <button type="submit" class="button">Lưu thông tin</button>
-        <a asp-action="DoiMatKhau">Đổi mật khẩu</a>
-    </form>
+<div class="container page-content profile-page">
+    <div class="profile-heading">
+        <p class="eyebrow">YEUMINHEM CINEMA · THÀNH VIÊN</p>
+        <h1>Tài khoản của tôi</h1>
+        <p>Góc riêng của bạn và những cuộc hẹn cùng điện ảnh.</p>
+    </div>
+    <div class="profile-layout">
+        <aside class="profile-identity">
+            <span class="profile-badge">THÀNH VIÊN CINEMA</span>
+            <div class="profile-portrait">
+                <img src="@Url.Action("AnhDaiDien")" alt="Ảnh đại diện của bạn" />
+            </div>
+            <h2>@Model.HoTen</h2>
+            <p class="profile-caption">Mỗi thước phim, một kỷ niệm.</p>
+            <form asp-action="DoiAnh" method="post" enctype="multipart/form-data" data-submit>
+                <label for="anh">Đổi ảnh đại diện</label>
+                <input id="anh" name="anh" type="file" accept="image/png,image/jpeg" required />
+                <p class="profile-help">PNG hoặc JPEG · Tối đa 2 MB</p>
+                <button type="submit" class="button">Lưu ảnh đại diện</button>
+            </form>
+            <a class="profile-order-link" asp-controller="Don" asp-action="Index">Xem đơn và vé của tôi →</a>
+        </aside>
+        <section class="profile-details" aria-labelledby="profile-title">
+            <div class="profile-section-heading">
+                <span class="profile-step">01</span>
+                <div>
+                    <p class="eyebrow">THÔNG TIN THÀNH VIÊN</p>
+                    <h2 id="profile-title">Hồ sơ cá nhân</h2>
+                </div>
+            </div>
+            <form asp-action="HoSo" method="post" class="profile-form" data-submit>
+                <div asp-validation-summary="ModelOnly" class="validation"></div>
+                <div class="profile-field">
+                    <label asp-for="HoTen">Họ tên</label>
+                    <input asp-for="HoTen" maxlength="150" autocomplete="name" />
+                    <span asp-validation-for="HoTen" class="validation"></span>
+                </div>
+                <div class="profile-field">
+                    <label asp-for="Email">Email (không bắt buộc)</label>
+                    <input asp-for="Email" type="email" autocomplete="email" />
+                    <span asp-validation-for="Email" class="validation"></span>
+                </div>
+                <div class="profile-field">
+                    <label asp-for="DienThoai">Điện thoại</label>
+                    <input asp-for="DienThoai" type="tel" maxlength="20" autocomplete="tel" />
+                    <span asp-validation-for="DienThoai" class="validation"></span>
+                </div>
+                <div class="profile-field">
+                    <label asp-for="NgaySinh">Ngày sinh</label>
+                    <input asp-for="NgaySinh" type="date" />
+                    <span asp-validation-for="NgaySinh" class="validation"></span>
+                </div>
+                <div class="profile-actions">
+                    <button type="submit" class="button">Lưu thông tin</button>
+                    <a asp-controller="Home" asp-action="Index">Về trang chủ</a>
+                </div>
+            </form>
+            <div class="profile-security">
+                <div>
+                    <p class="eyebrow">02 · BẢO MẬT</p>
+                    <h3>Mật khẩu tài khoản</h3>
+                    <p>Đổi mật khẩu bằng mật khẩu hiện tại của bạn.</p>
+                </div>
+                <a class="button" asp-action="DoiMatKhau">Đổi mật khẩu</a>
+            </div>
+        </section>
+    </div>
 </div>

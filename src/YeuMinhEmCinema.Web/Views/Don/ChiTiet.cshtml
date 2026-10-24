@@ -16,15 +16,12 @@
 }
 <div class="container page-content order-print">
     <a class="no-print" asp-action="Index">← Đơn của tôi</a>
+    <div class="order-layout">
+    <section class="order-main">
     <h1>Đơn #@ma</h1>
     <p>Mã tham chiếu: @don["MaThamChieu"]</p>
     <p><strong>@HienThi.TrangThai(trangThai)</strong></p>
     <p>Liên hệ: @don["HoTenLienHe"] · @don["DienThoaiLienHe"]</p>
-    @if (trangThai == "CHO_THANH_TOAN")
-    {
-        <p>Hạn thanh toán: @HienThi.GioUtc(don["HanThanhToanUtc"]) (giờ Việt Nam)</p>
-        <p data-deadline="@DateTime.SpecifyKind(Convert.ToDateTime(don["HanThanhToanUtc"]), DateTimeKind.Utc).ToString("O")" role="status">Thời hạn giữ ghế do server quyết định.</p>
-    }
     <h2>Vé xem phim</h2>
     <div class="cinema-grid">
         @foreach (DataRow row in ve.Rows)
@@ -51,7 +48,18 @@
             </article>
         }
     </div>
-    <h2>Bắp nước</h2>
+    </section>
+    <aside class="order-summary">
+    <h2>Chi tiết thanh toán</h2>
+    @if (trangThai == "DA_HUY")
+    {
+        <p class="notice">Đã hủy — ghế đã được giải phóng.</p>
+    }
+    else if (trangThai == "HET_HAN")
+    {
+        <p class="notice">Đơn đã hết hạn giữ ghế.</p>
+    }
+    <h3>Bắp nước</h3>
     @foreach (DataRow row in bap.Rows)
     {
         var thanhTien = (decimal)row["DonGia"] * (int)row["SoLuong"];
@@ -66,8 +74,21 @@
     {
         <p>Thành phần combo: @row["TenThanhPhan"] · @row["SoLuongTrongCombo"] / combo</p>
     }
-    <p>Tiền vé: @HienThi.Tien(tienVe) · Bắp nước: @HienThi.Tien(tienBap)</p>
-    <h2>Tổng: @HienThi.Tien(don["TongTien"])</h2>
+    <dl class="order-price-lines">
+        <div><dt>Tiền vé</dt><dd>@HienThi.Tien(tienVe)</dd></div>
+        <div><dt>Bắp nước</dt><dd>@HienThi.Tien(tienBap)</dd></div>
+    </dl>
+    <h2 class="order-total">
+        <span>@(trangThai == "DA_HUY" || trangThai == "HET_HAN" ? "Giá trị đơn" : "Tổng thanh toán")</span>
+        <strong>@HienThi.Tien(don["TongTien"])</strong>
+    </h2>
+    @if (trangThai == "CHO_THANH_TOAN")
+    {
+        <p>Hạn thanh toán: @HienThi.GioUtc(don["HanThanhToanUtc"]) (giờ Việt Nam)</p>
+        <p data-deadline="@DateTime.SpecifyKind(Convert.ToDateTime(don["HanThanhToanUtc"]), DateTimeKind.Utc).ToString("O")" role="status">Thời hạn giữ ghế do server quyết định.</p>
+    }
+
+
     @foreach (DataRow row in Model.ChiTiet.Tables[3].Rows)
     {
         <p>Giao dịch: @row["MaGiaoDich"] · @HienThi.Tien(row["SoTien"]) · @HienThi.GioUtc(row["NgayThuUtc"])</p>
@@ -107,5 +128,15 @@
     {
         <p>Hoàn tiền cần liên hệ rạp trước giờ chiếu khi chưa có vé sử dụng; hệ thống chỉ hỗ trợ hoàn toàn bộ theo quy trình của rạp.</p>
     }
-    <button type="button" class="button no-print" data-print>In phiếu / lưu PDF</button>
+    @if (trangThai == "DA_THANH_TOAN")
+    {
+        <button type="button" class="button no-print" data-print>In vé / lưu PDF</button>
+    }
+    @if (trangThai == "DA_HUY" || trangThai == "HET_HAN")
+    {
+        <a class="button no-print" asp-controller="Phim" asp-action="Lich">Đặt vé lại</a>
+    }
+    <a class="button secondary no-print" asp-action="Index">Về đơn của tôi</a>
+    </aside>
+    </div>
 </div>

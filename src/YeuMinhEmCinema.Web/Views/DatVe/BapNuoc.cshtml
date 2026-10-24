@@ -7,7 +7,7 @@
     <h1>Bắp nước & combo</h1>
     <partial name="_Suat" model="Model" />
     <div asp-validation-summary="All" class="validation" role="alert"></div>
-    <p>Chọn số lượng từ 0–99; 0 là bỏ sản phẩm. Tối đa 20 loại. Giá cuối được SQL tính lại khi giữ ghế.</p>
+    <p>Bấm chọn món, sau đó nhập số lượng hoặc dùng nút − / +. Bạn có thể bỏ qua bước chọn bắp nước.</p>
     <ul>
         @foreach (var ma in Model.Ghe)
         {
@@ -34,12 +34,19 @@
             {
                 var row = Model.Menu.Rows[i];
                 var soLuong = Model.Fnb.FirstOrDefault(f => f.MaSanPham == (int)row["MaSanPham"])?.SoLuong ?? 0;
-                <article class="cinema-card">
+                <article class="cinema-card fnb-card">
                     <h3>@row["TenSanPham"]</h3>
+                    <button type="button" class="fnb-select" aria-controls="quantity-@i" aria-pressed="@(soLuong > 0 ? "true" : "false")" data-fnb-select>Chọn món</button>
                     <p>@row["Nhom"] · @HienThi.Tien(row["DonGia"])</p>
                     <input name="Fnb[@i].MaSanPham" value="@row["MaSanPham"]" type="hidden" />
+                    <div id="quantity-@i" class="fnb-quantity">
                     <label for="fnb-@i">Số lượng @row["TenSanPham"]</label>
+                    <div class="quantity-stepper">
+                    <button type="button" data-quantity-step="-1" aria-label="Giảm số lượng @row["TenSanPham"]">−</button>
                     <input id="fnb-@i" name="Fnb[@i].SoLuong" type="number" min="0" max="99" value="@soLuong" data-price="@Convert.ToDecimal(row["DonGia"]).ToString(System.Globalization.CultureInfo.InvariantCulture)" />
+                    <button type="button" data-quantity-step="1" aria-label="Tăng số lượng @row["TenSanPham"]">+</button>
+                    </div>
+                    </div>
                     <p>Thành tiền: <output data-line-total>@HienThi.Tien(Convert.ToDecimal(row["DonGia"]) * soLuong)</output></p>
                 </article>
             }

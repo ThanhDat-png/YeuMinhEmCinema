@@ -5,14 +5,26 @@
     var poster = new Phim { Poster = phim["Poster"] as string };
     var trailer = HienThi.Trailer(phim["Trailer"]);
 }
-<div class="container page-content">
-    <a href="/#phim">← Danh sách phim</a>
-    <section class="film-detail">
-        <img class="slide-poster" src="@poster.AnhPoster" alt="Poster @phim["TenPhim"]" />
-        <div>
+<div class="film-atmosphere" aria-hidden="true">
+    <img class="film-backdrop" src="@poster.AnhPoster" alt="" />
+</div>
+<div class="container page-content film-detail-page">
+    @if (Model.MaRap.HasValue)
+    {
+        <a asp-action="PhimTaiRap" asp-route-id="@Model.MaRap">← Phim tại rạp đã chọn</a>
+    }
+    else
+    {
+        <a href="/#phim">← Danh sách phim</a>
+    }
+    <section class="film-detail cinema-film-hero reference-film-hero">
+        <img class="film-backdrop" src="@poster.AnhPoster" alt="" aria-hidden="true" />
+
+        <div class="film-hero-copy">
             <p class="eyebrow">@phim["TrangThai"] · @phim["GioiHanTuoi"]</p>
             <h1>@phim["TenPhim"]</h1>
             <p>@phim["ThoiLuong"] phút · Khởi chiếu @Convert.ToDateTime(phim["NgayKhoiChieu"]).ToString("dd/MM/yyyy")</p>
+            <a class="button" href="#lich-chieu">Chọn suất chiếu</a>
             <p class="description">@phim["MoTa"]</p>
             @if (trailer != null)
             {
@@ -20,6 +32,6 @@
             }
         </div>
     </section>
-    <h2>Lịch chiếu</h2>
+    <h2 id="lich-chieu">@(Model.XemGanNhat ? "Suất chiếu gần nhất" : "Lịch chiếu")</h2>
     <partial name="_Lich" model="Model" />
 </div>

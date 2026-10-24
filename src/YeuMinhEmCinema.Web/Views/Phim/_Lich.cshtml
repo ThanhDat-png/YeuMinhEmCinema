@@ -1,9 +1,16 @@
 @model LichModel
-<form asp-controller="Phim" asp-action="Lich" method="get" class="filters">
+@{
+    var trangChiTiet = Model.Phim != null;
+}
+<form asp-controller="Phim" asp-action="@(trangChiTiet ? "ChiTiet" : "Lich")" method="get" class="filters">
+    @if (trangChiTiet)
+    {
+        <input type="hidden" name="id" value="@Model.MaPhim" />
+    }
     <div>
         <label for="maPhim">Phim</label>
-        <select id="maPhim" name="maPhim" required>
-            <option value="">Chọn phim</option>
+        <select id="maPhim" name="maPhim" disabled="@trangChiTiet">
+            <option value="">Tất cả phim</option>
             @foreach (DataRow row in Model.DanhSachPhim.Rows)
             {
                 <option value="@row["MaPhim"]" selected="@(Model.MaPhim == (int)row["MaPhim"])">@row["TenPhim"]</option>
@@ -22,17 +29,26 @@
     </div>
     <div>
         <label for="ngay">Ngày chiếu (giờ Việt Nam)</label>
-        <input id="ngay" name="ngay" type="date" value="@Model.Ngay.ToString("yyyy-MM-dd")" required />
+        <input id="ngay" name="ngay" type="date" value="@(Model.XemGanNhat ? "" : Model.Ngay.ToString("yyyy-MM-dd"))" />
     </div>
     <button type="submit" class="button">Xem lịch</button>
+    @if (trangChiTiet)
+    {
+        <a asp-action="ChiTiet" asp-route-id="@Model.MaPhim" asp-route-maRap="@Model.MaRap">Suất gần nhất</a>
+    }
+    else
+    {
+        <a asp-action="Lich" asp-route-maPhim="@Model.MaPhim" asp-route-maRap="@Model.MaRap">Suất gần nhất</a>
+    }
 </form>
-@if (Model.MaPhim == null)
+<p class="muted">@(Model.XemGanNhat ? "Các suất sắp tới, xếp theo thời gian gần nhất (tối đa 18 suất)." : "Lịch theo ngày bạn đã chọn.") Bỏ trống ngày để xem suất gần nhất; chọn rạp để đổi nơi xem.</p>
+<h2>@(Model.XemGanNhat ? "Các suất chiếu sắp tới" : "Suất chiếu theo ngày")</h2>
+@if (Model.Lich.Rows.Count == 0)
 {
-    <p class="notice">Chọn phim để xem các suất đang mở bán.</p>
-}
-else if (Model.Lich.Rows.Count == 0)
-{
-    <p class="notice">Chưa có suất phù hợp. Thử rạp hoặc ngày khác.</p>
+    <div class="notice">
+        <p>Chưa có suất mở bán phù hợp. Hãy chọn rạp khác hoặc bấm Suất gần nhất.</p>
+        <a class="button" asp-controller="Home" asp-action="Index" asp-fragment="phim">Khám phá phim</a>
+    </div>
 }
 else
 {
@@ -40,6 +56,14 @@ else
         @foreach (DataRow row in Model.Lich.Rows)
         {
             <article class="cinema-card">
+                @if (Model.Lich.Columns.Contains("TenPhim"))
+                {
+                    var anh = new Phim { Poster = row["Poster"] as string };
+                    <div class="schedule-film">
+                        <img class="slide-poster" src="@anh.AnhPoster" alt="Poster @row["TenPhim"]" />
+                        <h3>@row["TenPhim"]</h3>
+                    </div>
+                }
                 <h3>@row["TenRap"]</h3>
                 <p>@row["DiaChi"]</p>
                 <p>@row["TenPhong"] · @row["DinhDang"]</p>

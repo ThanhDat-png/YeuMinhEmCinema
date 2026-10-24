@@ -56,6 +56,7 @@
                     </p>
                 </div>
             </div>
+            <div class="carousel-frame">
             <div class="carousel" aria-roledescription="trình chiếu">
                 @for (var i = 0; i < Model.PhimNoiBat.Count; i++)
                 {
@@ -72,28 +73,21 @@
                             <p>
                                 @phim.ThoiLuong phút · Khởi chiếu @phim.NgayKhoiChieu.ToString("dd/MM/yyyy")
                             </p>
-                            <a class="button" asp-action="Index" asp-route-tuKhoa="@phim.TenPhim" asp-fragment="phim">
-                                Xem trong danh sách
+                            <a class="button" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim">
+                                Xem chi tiết
                             </a>
                         </div>
                     </article>
                 }
             </div>
             <div class="slide-controls" hidden>
-                <button type="button" id="previous" aria-label="Phim trước">
-                    ←
+                <button type="button" class="slide-arrow slide-previous" id="previous" aria-label="Phim trước">
+                    ❮
                 </button>
-                <div class="dots" aria-label="Chọn phim">
-                    @for (var i = 0; i < Model.PhimNoiBat.Count; i++)
-                    {
-                        <button type="button" data-slide="@i" aria-label="Phim @(i + 1)" aria-pressed="@(i == 0 ? "true" : "false")">
-                            @(i + 1)
-                        </button>
-                    }
-                </div>
-                <button type="button" id="next" aria-label="Phim tiếp theo">
-                    →
+                <button type="button" class="slide-arrow slide-next" id="next" aria-label="Phim tiếp theo">
+                    ❯
                 </button>
+            </div>
             </div>
         </section>
     }

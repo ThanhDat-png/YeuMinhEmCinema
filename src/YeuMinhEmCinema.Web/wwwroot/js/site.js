@@ -9,7 +9,7 @@ if (header) {
 }
 
 document.querySelectorAll('img').forEach(function (image) {
-    if (image.classList.contains('slide-poster') || image.closest('.poster-wrap')) {
+    if (image.classList.contains('film-backdrop') || image.classList.contains('slide-poster') || image.closest('.poster-wrap')) {
         // complete/naturalWidth phát hiện lỗi xảy ra trước khi script gắn sự kiện.
         // Gỡ listener trước khi đổi src để ảnh thay thế lỗi không tạo vòng lặp.
         let replaced = false;
@@ -44,13 +44,19 @@ window.addEventListener('pageshow', function () {
     });
 });
 
-// Slide chỉ chuyển thủ công; không có timer hoặc nút tự chuyển.
+// Tự chuyển sau 5 giây; tạm nghỉ khi người dùng đọc hoặc thao tác.
 const featured = document.querySelector('.featured');
 if (featured) {
     const slides = Array.from(featured.querySelectorAll('.slide'));
     const dots = Array.from(featured.querySelectorAll('[data-slide]'));
+    const pauseButton = featured.querySelector('[data-slide-pause]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let index = 0;
-    // Cập nhật đồng thời slide và chỉ báo để trạng thái không lệch nhau.
+    let timer = null;
+    let paused = reducedMotion.matches;
+    let hovered = false;
+    let touching = false;
+
     function show(next) {
         index = (next + slides.length) % slides.length;
         slides.forEach(function (slide, position) {
@@ -60,22 +66,68 @@ if (featured) {
             dot.setAttribute('aria-pressed', String(position === index));
         });
     }
+
+    function restart() {
+        window.clearInterval(timer);
+        timer = null;
+        const hasFocus = featured.contains(document.activeElement);
+        if (!paused && !hovered && !touching && !hasFocus && !document.hidden) {
+            timer = window.setInterval(function () {
+                show(index + 1);
+            }, 5000);
+        }
+    }
+
+    function updatePause() {
+        if (pauseButton) {
+            pauseButton.setAttribute('aria-pressed', String(paused));
+            pauseButton.textContent = paused ? 'Tự chạy' : 'Tạm dừng';
+        }
+        restart();
+    }
+
     if (slides.length > 1) {
         featured.querySelector('.slide-controls').hidden = false;
         document.getElementById('previous').addEventListener('click', function () {
             show(index - 1);
+            restart();
         });
         document.getElementById('next').addEventListener('click', function () {
             show(index + 1);
+            restart();
         });
         dots.forEach(function (dot) {
             dot.addEventListener('click', function () {
                 show(Number(dot.dataset.slide));
+                restart();
             });
+        });
+        pauseButton?.addEventListener('click', function () {
+            paused = !paused;
+            updatePause();
+        });
+        featured.addEventListener('mouseenter', function () {
+            hovered = true;
+            restart();
+        });
+        featured.addEventListener('mouseleave', function () {
+            hovered = false;
+            restart();
+        });
+        featured.addEventListener('focusin', restart);
+        featured.addEventListener('focusout', function () {
+            window.setTimeout(restart, 0);
+        });
+        document.addEventListener('visibilitychange', restart);
+        reducedMotion.addEventListener('change', function (event) {
+            paused = event.matches;
+            updatePause();
         });
         let touchX = null;
         featured.addEventListener('touchstart', function (event) {
             touchX = event.changedTouches[0].clientX;
+            touching = true;
+            restart();
         }, { passive: true });
         featured.addEventListener('touchend', function (event) {
             if (touchX !== null) {
@@ -85,7 +137,15 @@ if (featured) {
                 }
             }
             touchX = null;
+            touching = false;
+            restart();
         }, { passive: true });
+        featured.addEventListener('touchcancel', function () {
+            touchX = null;
+            touching = false;
+            restart();
+        }, { passive: true });
+        updatePause();
     }
 }
 
@@ -134,6 +194,51 @@ if (fnb) {
         });
         document.getElementById('estimated-total').textContent = money.format(total);
     }
+    // Giữ ô số lượng trong form để gửi đúng model, chỉ ẩn khi chưa chọn.
+    function syncCard(card) {
+        const input = card.querySelector('input[data-price]');
+        const selected = Number(input.value) > 0;
+        const button = card.querySelector('[data-fnb-select]');
+        card.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', String(selected));
+        button.textContent = selected ? 'Bỏ chọn' : 'Chọn món';
+        card.querySelector('.fnb-quantity').hidden = !selected;
+    }
+
+    fnb.querySelectorAll('.fnb-card').forEach(function (card) {
+        const input = card.querySelector('input[data-price]');
+        const select = card.querySelector('[data-fnb-select]');
+        // Có thể bấm khoảng trống trên thẻ hoặc dùng nút chọn bằng bàn phím.
+        function toggle() {
+            input.value = Number(input.value) > 0 ? '0' : '1';
+            syncCard(card);
+            updateEstimate();
+        }
+        select.addEventListener('click', toggle);
+        card.addEventListener('click', function (event) {
+            if (!event.target.closest('button, input, label, .fnb-quantity')) {
+                toggle();
+            }
+        });
+        card.querySelectorAll('[data-quantity-step]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const quantity = Number(input.value) || 0;
+                input.value = String(Math.max(0, Math.min(99, quantity + Number(button.dataset.quantityStep))));
+                syncCard(card);
+                updateEstimate();
+            });
+        });
+        input.addEventListener('input', function () {
+            // Cho phép xóa ô rồi gõ số mới mà không làm ô nhập biến mất.
+            updateEstimate();
+        });
+        input.addEventListener('change', function () {
+            input.value = String(Math.max(0, Math.min(99, Math.trunc(Number(input.value) || 0))));
+            syncCard(card);
+            updateEstimate();
+        });
+        syncCard(card);
+    });
     fnb.addEventListener('input', updateEstimate);
     updateEstimate();
 }

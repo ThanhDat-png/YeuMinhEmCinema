@@ -11,5 +11,6 @@ public class LichModel
     public DataTable DanhSachPhim { get; set; } = new();
     public DataTable Rap { get; set; } = new();
     public DataTable Lich { get; set; } = new();
+    public bool XemGanNhat { get; set; }
     public DataRow? Phim { get; set; }
 }

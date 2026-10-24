@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using YeuMinhEmCinema.Web.Data;
 using YeuMinhEmCinema.Web.ViewModels;
@@ -44,6 +45,23 @@ public class PhimController : Controller
         return View(data.Rap());
     }
 
+    public IActionResult PhimTaiRap(int id)
+    {
+        if (!ModelState.IsValid || id <= 0)
+        {
+            return BadRequest("Mã rạp không hợp lệ.");
+        }
+        var rap = data.Rap().AsEnumerable().FirstOrDefault(row => (int)row["MaRap"] == id);
+        if (rap == null)
+        {
+            return NotFound("Rạp không tồn tại hoặc đang ngừng hoạt động.");
+        }
+        ViewData["TenRap"] = rap["TenRap"];
+        ViewData["DiaChi"] = rap["DiaChi"];
+        ViewData["MaRap"] = id;
+        return View(data.PhimTaiRap(id));
+    }
+
     private bool HopLe(int? phim, int? rap, DateTime? ngay)
     {
         return ModelState.IsValid && (phim == null || phim > 0) && (rap == null || rap > 0)
@@ -57,13 +75,14 @@ public class PhimController : Controller
             MaPhim = phim,
             MaRap = rap,
             Ngay = ngay?.Date ?? DateTime.UtcNow.AddHours(7).Date,
+            XemGanNhat = !ngay.HasValue,
             DanhSachPhim = data.DanhSach(),
             Rap = data.Rap()
         };
-        if (phim.HasValue)
-        {
-            model.Lich = data.Lich(phim.Value, rap, model.Ngay);
-        }
+        // Không chọn phim vẫn có suất gợi ý; mọi bộ lọc khách chọn đều được giữ.
+        model.Lich = phim.HasValue && ngay.HasValue
+            ? data.Lich(phim.Value, rap, model.Ngay)
+            : data.GanNhat(phim, rap, ngay);
         return model;
     }
 }

@@ -175,6 +175,86 @@ public class TaiKhoanController : Controller
         return View(model);
     }
 
+    /// <summary>Ảnh đại diện chỉ được đọc bởi chính tài khoản đang đăng nhập.</summary>
+    [Authorize(Roles = "KhachHang")]
+    [HttpGet]
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+    public IActionResult AnhDaiDien()
+    {
+        var path = DuongDanAnh();
+        if (!System.IO.File.Exists(path))
+        {
+            return Redirect("~/images/brand-mascot.png");
+        }
+        var bytes = System.IO.File.ReadAllBytes(path);
+        var type = KieuAnh(bytes);
+        if (type == null)
+        {
+            return Redirect("~/images/brand-mascot.png");
+        }
+        Response.Headers["X-Content-Type-Options"] = "nosniff";
+        return File(bytes, type);
+    }
+
+    /// <summary>Không dùng tên file khách gửi; giới hạn PNG/JPEG 2 MB và lưu ngoài wwwroot.</summary>
+    [Authorize(Roles = "KhachHang")]
+    [HttpPost]
+    [RequestSizeLimit(3 * 1024 * 1024)]
+    public async Task<IActionResult> DoiAnh(IFormFile? anh)
+    {
+        if (anh == null || anh.Length == 0 || anh.Length > 2 * 1024 * 1024)
+        {
+            TempData["ThongBao"] = "Chọn ảnh PNG hoặc JPEG, dung lượng tối đa 2 MB.";
+            return RedirectToAction(nameof(HoSo));
+        }
+        using var stream = new MemoryStream();
+        await anh.CopyToAsync(stream);
+        var bytes = stream.ToArray();
+        if (KieuAnh(bytes) == null)
+        {
+            TempData["ThongBao"] = "File không có định dạng PNG/JPEG hợp lệ.";
+            return RedirectToAction(nameof(HoSo));
+        }
+        var path = DuongDanAnh();
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        // File tạm riêng cho mỗi request tránh hai lần tải đồng thời ghi đè dở dang.
+        var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+        try
+        {
+            await System.IO.File.WriteAllBytesAsync(temporary, bytes);
+            System.IO.File.Move(temporary, path, true);
+        }
+        finally
+        {
+            if (System.IO.File.Exists(temporary))
+            {
+                System.IO.File.Delete(temporary);
+            }
+        }
+        TempData["ThongBao"] = "Đã cập nhật ảnh đại diện.";
+        return RedirectToAction(nameof(HoSo));
+    }
+
+    private string DuongDanAnh()
+    {
+        var environment = HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+        return Path.Combine(environment.ContentRootPath, "App_Data", "Avatars", Id() + ".bin");
+    }
+
+    private static string? KieuAnh(byte[] bytes)
+    {
+        if (bytes.Length >= 24 && bytes.AsSpan(0, 8).SequenceEqual(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 }))
+        {
+            return "image/png";
+        }
+        if (bytes.Length >= 4 && bytes[0] == 255 && bytes[1] == 216 && bytes[2] == 255
+            && bytes[^2] == 255 && bytes[^1] == 217)
+        {
+            return "image/jpeg";
+        }
+        return null;
+    }
+
     private int Id()
     {
         return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);

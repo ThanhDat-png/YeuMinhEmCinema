@@ -38,8 +38,10 @@
                 <div class="account-nav">
                     @if (User.Identity?.IsAuthenticated == true)
                     {
-                        <span class="customer-name">Chào @User.Identity.Name</span>
-                        <a asp-controller="TaiKhoan" asp-action="HoSo">Tài khoản</a>
+                        <a class="account-profile" asp-controller="TaiKhoan" asp-action="HoSo">
+                            <img class="nav-avatar" src="@Url.Action("AnhDaiDien", "TaiKhoan")" alt="" />
+                            <span>Chào @User.Identity.Name</span>
+                        </a>
                         <a asp-controller="Don" asp-action="Index">Đơn của tôi</a>
                         <form asp-controller="TaiKhoan" asp-action="DangXuat" method="post">
                             <button type="submit" class="nav-button">Đăng xuất</button>

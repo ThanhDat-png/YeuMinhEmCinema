@@ -14,7 +14,7 @@
             <article class="cinema-card">
                 <h2>@row["TenRap"]</h2>
                 <p>@row["DiaChi"]</p>
-                <a class="button" asp-action="Lich" asp-route-maRap="@row["MaRap"]">Xem lịch tại rạp</a>
+                <a class="button" asp-action="PhimTaiRap" asp-route-id="@row["MaRap"]">Xem lịch tại rạp</a>
             </article>
         }
     </div>
