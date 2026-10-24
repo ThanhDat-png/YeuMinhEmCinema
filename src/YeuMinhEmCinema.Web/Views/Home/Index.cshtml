@@ -1,0 +1,266 @@
+@model TrangChuViewModel
+@{
+    ViewData["Title"] = "Khám phá điện ảnh";
+}
+<section class="hero">
+    <div class="container hero-content">
+        <p class="eyebrow">
+            CHÀO MỪNG ĐẾN VỚI YEUMINHEM CINEMA
+        </p>
+        <h1>
+            Chạm vào cảm xúc.
+            <br />
+            <span>
+                Sống cùng điện ảnh.
+            </span>
+        </h1>
+        <p>
+            Một khoảng thời gian dành cho bạn, những người thương và những câu chuyện trên màn ảnh rộng.
+        </p>
+        <a class="button" href="#phim">
+            Khám phá phim
+        </a>
+        <a class="text-link" href="#rap">
+            Tìm hiểu cụm rạp ↗
+        </a>
+    </div>
+</section>
+<div class="container page-content">
+    @if (Model.Loi != null)
+    {
+        <div class="notice" role="alert">
+            <h2>
+                Dữ liệu tạm thời chưa sẵn sàng
+            </h2>
+            <p>
+                @Model.Loi
+            </p>
+            <a href="/">
+                Tải lại trang chủ
+            </a>
+        </div>
+    }
+    @if (Model.PhimNoiBat.Count > 0)
+    {
+        <section class="featured" aria-labelledby="hot-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">
+                        TIÊU ĐIỂM MÀN ẢNH
+                    </p>
+                    <h2 id="hot-title">
+                        Phim hot hôm nay
+                    </h2>
+                    <p>
+                        Khám phá những phim đang chiếu mới khởi chiếu.
+                    </p>
+                </div>
+            </div>
+            <div class="carousel" aria-roledescription="trình chiếu">
+                @for (var i = 0; i < Model.PhimNoiBat.Count; i++)
+                {
+                    var phim = Model.PhimNoiBat[i];
+                    <article class="slide" hidden="@(i != 0)">
+                        <img class="slide-poster" src="@phim.AnhPoster" alt="Poster @phim.TenPhim" />
+                        <div>
+                            <p class="eyebrow">
+                                ĐANG CHIẾU · @phim.GioiHanTuoi
+                            </p>
+                            <h3>
+                                @phim.TenPhim
+                            </h3>
+                            <p>
+                                @phim.ThoiLuong phút · Khởi chiếu @phim.NgayKhoiChieu.ToString("dd/MM/yyyy")
+                            </p>
+                            <a class="button" asp-action="Index" asp-route-tuKhoa="@phim.TenPhim" asp-fragment="phim">
+                                Xem trong danh sách
+                            </a>
+                        </div>
+                    </article>
+                }
+            </div>
+            <div class="slide-controls" hidden>
+                <button type="button" id="previous" aria-label="Phim trước">
+                    ←
+                </button>
+                <div class="dots" aria-label="Chọn phim">
+                    @for (var i = 0; i < Model.PhimNoiBat.Count; i++)
+                    {
+                        <button type="button" data-slide="@i" aria-label="Phim @(i + 1)" aria-pressed="@(i == 0 ? "true" : "false")">
+                            @(i + 1)
+                        </button>
+                    }
+                </div>
+                <button type="button" id="next" aria-label="Phim tiếp theo">
+                    →
+                </button>
+            </div>
+        </section>
+    }
+    <section id="phim" aria-labelledby="movies-title">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">
+                    CÂU CHUYỆN TIẾP THEO CỦA BẠN
+                </p>
+                <h2 id="movies-title">
+                    Khám phá phim
+                </h2>
+            </div>
+        </div>
+        <form method="get" action="/#phim" class="filters" data-loading>
+            <div>
+                <label for="tuKhoa">
+                    Tên phim
+                </label>
+                <input id="tuKhoa" name="tuKhoa" maxlength="200" value="@Model.TuKhoa" placeholder="Nhập tên phim muốn tìm" />
+            </div>
+            <div>
+                <label for="trangThai">
+                    Trạng thái
+                </label>
+                <select id="trangThai" name="trangThai">
+                    <option value="">
+                        Tất cả phim
+                    </option>
+                    <option selected="@(Model.TrangThai == "Đang chiếu")">
+                        Đang chiếu
+                    </option>
+                    <option selected="@(Model.TrangThai == "Sắp chiếu")">
+                        Sắp chiếu
+                    </option>
+                </select>
+            </div>
+            <button class="button" type="submit">
+                Tìm phim
+            </button>
+            <a href="/#phim">
+                Xóa bộ lọc
+            </a>
+            <span class="loading" role="status" hidden>
+                Đang tải danh sách phim…
+            </span>
+        </form>
+        @if (Model.Loi == null)
+        {
+            <p class="muted">
+                Tìm thấy @Model.TongKetQua phim.
+            </p>
+            @foreach (var trangThai in new[] { "Đang chiếu", "Sắp chiếu" })
+            {
+                var danhSach = Model.Phim.Where(p => p.TrangThai == trangThai).ToList();
+                if (danhSach.Count > 0)
+                {
+                    <h3 class="group-title">
+                        Phim @trangThai.ToLower()
+                    </h3>
+                    <div class="movie-grid">
+                        @foreach (var phim in danhSach)
+                        {
+                            <article class="movie-card" id="phim-@phim.MaPhim">
+                                <div class="poster-wrap">
+                                    <img src="@phim.AnhPoster" alt="Poster @phim.TenPhim" loading="lazy" />
+                                    <span class="age">
+                                        @phim.GioiHanTuoi
+                                    </span>
+                                </div>
+                                <div class="card-content">
+                                    <p class="eyebrow">
+                                        @phim.TrangThai
+                                    </p>
+                                    <h4>
+                                        @phim.TenPhim
+                                    </h4>
+                                    <p>
+                                        @phim.ThoiLuong phút
+                                    </p>
+                                    <p>
+                                        Khởi chiếu @phim.NgayKhoiChieu.ToString("dd/MM/yyyy")
+                                    </p>
+                                    <a class="button" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim">Xem chi tiết</a>
+                                </div>
+                            </article>
+                        }
+                    </div>
+                }
+                else if (Model.Phim.Count > 0 &&
+                    (Model.TrangThai == null || Model.TrangThai == trangThai))
+                {
+                    <h3 class="group-title">
+                        Phim @trangThai.ToLower()
+                    </h3>
+                    <p class="muted">
+                        Chưa có phim @trangThai.ToLower() phù hợp trên trang này.
+                    </p>
+                }
+            }
+            @if (Model.Phim.Count == 0)
+            {
+                <div class="notice">
+                    <h3>
+                        Chưa có phim phù hợp
+                    </h3>
+                    <p>
+                        Thử đổi tên phim, xóa bộ lọc hoặc quay lại trang đầu.
+                    </p>
+                    <a href="/#phim">
+                        Xem danh sách phim
+                    </a>
+                </div>
+            }
+            <nav class="pagination" aria-label="Phân trang phim">
+                @if (Model.Trang > 1)
+                {
+                    <a asp-action="Index" asp-route-trang="@(Model.Trang - 1)" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThai="@Model.TrangThai" asp-fragment="phim">
+                        ← Trang trước
+                    </a>
+                }
+                @if (Model.TongTrang > 0)
+                {
+                    <span>
+                        Trang @Model.Trang / @Model.TongTrang
+                    </span>
+                }
+                @if (Model.Trang < Model.TongTrang)
+                {
+                    <a asp-action="Index" asp-route-trang="@(Model.Trang + 1)" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThai="@Model.TrangThai" asp-fragment="phim">
+                        Trang sau →
+                    </a>
+                }
+            </nav>
+        }
+    </section>
+    <section id="rap" class="cinemas" aria-labelledby="cinemas-title">
+        <p class="eyebrow">
+            HẸN NHAU Ở RẠP
+        </p>
+        <h2 id="cinemas-title">
+            Cụm rạp YeuMinhEm
+        </h2>
+        <p>
+            Chọn không gian điện ảnh gần bạn và cùng nhau tận hưởng những câu chuyện mới.
+        </p>
+        <div class="cinema-grid">
+            @foreach (var rap in Model.Rap)
+            {
+                <article class="cinema-card">
+                    <span aria-hidden="true">
+                        ↗
+                    </span>
+                    <h3>
+                        @rap.TenRap
+                    </h3>
+                    <p>
+                        @rap.DiaChi
+                    </p>
+                </article>
+            }
+        </div>
+        @if (Model.Rap.Count == 0 && Model.Loi == null)
+        {
+            <p class="notice">
+                Chưa có thông tin rạp đang hoạt động. Vui lòng quay lại sau.
+            </p>
+        }
+    </section>
+</div>

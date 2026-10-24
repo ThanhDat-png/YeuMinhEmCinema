@@ -1,65 +1,72 @@
-using System.Data;
-
-namespace YeuMinhEmCinema.Admin
+﻿using System.Data;
+namespace YeuMinhEmCinema.Admin;
+public partial class UcGiaVeVaFnb : UserControl
 {
-    public partial class UcGiaVeVaFnb : UserControl
+    private readonly DataGridView _gia=LichChieuUi.Bang(),_fnb=LichChieuUi.Bang(),_tp=LichChieuUi.Bang();
+    private readonly ComboBox _loai=LichChieuUi.Combo(),_ttGia=LichChieuUi.Combo(180),_nhom=LichChieuUi.Combo(160),_ttFnb=LichChieuUi.Combo(160);
+    private readonly TextBox _timGia=new(){Width=220,MaxLength=200,PlaceholderText="Loại ghế / định dạng"},_timFnb=new(){Width=220,MaxLength=200,PlaceholderText="Mã hoặc tên sản phẩm"};
+    private readonly Label _soGia=new(){AutoSize=true,Padding=new Padding(6)},_soFnb=new(){AutoSize=true,Padding=new Padding(6)};
+    public UcGiaVeVaFnb()
     {
-        public UcGiaVeVaFnb()
-        {
-            InitializeComponent();
-            NapGiaVeMinhHoa();
-            NapFnbMinhHoa();
-        }
-
-        private void NapGiaVeMinhHoa()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Mã loại vé", typeof(string));
-            dt.Columns.Add("Loại ghế", typeof(string));
-            dt.Columns.Add("Định dạng phòng", typeof(string));
-            dt.Columns.Add("Ngày thường (T2 - T5)", typeof(string));
-            dt.Columns.Add("Cuối tuần (T6 - CN) & Lễ", typeof(string));
-            dt.Columns.Add("Ghi chú phụ thu", typeof(string));
-
-            dt.Rows.Add("VE-STD-2D", "Ghế thường (Standard)", "2D Digital", "80.000 đ", "95.000 đ", "Áp dụng giá chuẩn");
-            dt.Rows.Add("VE-VIP-2D", "Ghế VIP", "2D Digital", "90.000 đ", "110.000 đ", "+10.000 đ so với ghế thường");
-            dt.Rows.Add("VE-SWT-2D", "Ghế đôi (Sweetbox)", "2D Digital", "190.000 đ / cặp", "230.000 đ / cặp", "Bao gồm 2 vị trí ngồi");
-            dt.Rows.Add("VE-STD-3D", "Ghế thường (Standard)", "3D RealD", "110.000 đ", "130.000 đ", "Đã gồm kính 3D mượn");
-            dt.Rows.Add("VE-IMAX-2D", "Ghế chuẩn IMAX", "IMAX Laser", "140.000 đ", "165.000 đ", "Màn chiếu cực đại Laser");
-            dt.Rows.Add("VE-GOLD-2D", "Ghế thương gia (Gold Class)", "Gold Class", "180.000 đ", "220.000 đ", "Ghế massage + welcome drink");
-
-            dgvGiaVe.DataSource = dt;
-        }
-
-        private void NapFnbMinhHoa()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Mã món", typeof(string));
-            dt.Columns.Add("Tên sản phẩm / Combo", typeof(string));
-            dt.Columns.Add("Phân loại", typeof(string));
-            dt.Columns.Add("Kích cỡ", typeof(string));
-            dt.Columns.Add("Đơn giá", typeof(string));
-            dt.Columns.Add("Trạng thái", typeof(string));
-
-            dt.Rows.Add("FNB01", "Bắp rang bơ phô mai", "Bắp rang", "Lớn (Large)", "55.000 đ", "Đang bán");
-            dt.Rows.Add("FNB02", "Bắp rang bơ Caramel", "Bắp rang", "Lớn (Large)", "55.000 đ", "Đang bán");
-            dt.Rows.Add("FNB03", "Coca Cola tươi", "Nước ngọt", "32oz (Lớn)", "35.000 đ", "Đang bán");
-            dt.Rows.Add("FNB04", "Sprite tươi", "Nước ngọt", "32oz (Lớn)", "35.000 đ", "Đang bán");
-            dt.Rows.Add("FNB05", "Combo Solo (1 Bắp + 1 Nước)", "Combo F&B", "Tiêu chuẩn", "79.000 đ", "Đang bán");
-            dt.Rows.Add("FNB06", "Combo Couple (1 Bắp lớn + 2 Nước)", "Combo F&B", "Cặp đôi", "109.000 đ", "Bán chạy nhất");
-            dt.Rows.Add("FNB07", "Combo Gia Đình (2 Bắp + 4 Nước + 1 Snack)", "Combo F&B", "Gia đình", "199.000 đ", "Đang bán");
-            dt.Rows.Add("FNB08", "Snack khoai tây Lay's", "Đồ ăn nhẹ", "Gói 75g", "25.000 đ", "Đang bán");
-
-            dgvFnb.DataSource = dt;
-        }
-
-        private void BtnChuaTrienKhai_Click(object? sender, EventArgs e)
-        {
-            MessageBox.Show(
-                "Chức năng đang được phát triển (chưa có cơ sở dữ liệu cho giá vé và menu F&B).",
-                "Thông báo",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
+        InitializeComponent();Dock=DockStyle.Fill;Font=new Font("Segoe UI",10F);BackColor=Color.White;
+        var tabs=new TabControl{Dock=DockStyle.Fill};var g=new TabPage("Giá vé");var f=new TabPage("Sản phẩm & combo");tabs.TabPages.AddRange(new[]{g,f});Controls.Add(tabs);
+        _ttGia.Items.AddRange(new object[]{"Tất cả trạng thái","Đang bật","Ngừng áp dụng"});_ttGia.SelectedIndex=0;
+        _ttFnb.Items.AddRange(new object[]{"Tất cả trạng thái","Bật bán","Ngừng bán"});_ttFnb.SelectedIndex=0;
+        _nhom.Items.AddRange(new object[]{"Tất cả nhóm","Bắp","Nước","Đồ ăn","Combo"});_nhom.SelectedIndex=0;
+        var ag=new FlowLayoutPanel{AutoSize=true,Dock=DockStyle.Fill,WrapContents=true};
+        ag.Controls.AddRange(new Control[]{LichChieuUi.Nhom("Loại ghế",_loai),LichChieuUi.Nhom("Trạng thái",_ttGia),LichChieuUi.Nhom("Tìm kiếm",_timGia)});
+        ag.Controls.Add(LichChieuUi.Nut("Lọc",(_,_)=>TaiGia()));ag.Controls.Add(LichChieuUi.Nut("Làm mới",(_,_)=>Nap()));
+        ag.Controls.Add(LichChieuUi.Nut("+ Thêm giá",(_,_)=>SuaGia(null),true));ag.Controls.Add(LichChieuUi.Nut("Sửa giá / bật tắt",(_,_)=>{var row=Chon(_gia);if(row==null){MessageBox.Show("Chọn một dòng giá để sửa.");return;}SuaGia(row);}));
+        ag.Controls.Add(LichChieuUi.Nut("Tra giá theo ngày",(_,_)=>{using var form=new FormTraGiaVe();form.ShowDialog(FindForm());}));
+        ag.Controls.Add(LichChieuUi.Nut("Xuất CSV",(_,_)=>GiaVeFnbUi.Xuat(_gia,FindForm()!,"GiaVe")));
+        var lg=Khung(ag,_gia,_soGia);g.Controls.Add(lg);
+        lg.Controls.Add(GiaVeFnbUi.GhiChu("Giá cho mỗi mã ghế. Ngày thường: T2–T5; cuối tuần: T6–CN. Hai mốc ngày được tính gồm cả ngày đầu/cuối. Chưa cấu hình ngày lễ riêng."),0,0);
+        var af=new FlowLayoutPanel{AutoSize=true,Dock=DockStyle.Fill,WrapContents=true};
+        af.Controls.AddRange(new Control[]{LichChieuUi.Nhom("Nhóm",_nhom),LichChieuUi.Nhom("Trạng thái cấu hình",_ttFnb),LichChieuUi.Nhom("Tìm kiếm",_timFnb)});
+        af.Controls.Add(LichChieuUi.Nut("Lọc",(_,_)=>TaiFnb()));af.Controls.Add(LichChieuUi.Nut("Làm mới",(_,_)=>Nap()));
+        af.Controls.Add(LichChieuUi.Nut("+ Thêm món / combo",(_,_)=>SuaFnb(null),true));af.Controls.Add(LichChieuUi.Nut("Sửa / bật tắt bán",(_,_)=>{var row=Chon(_fnb);if(row==null){MessageBox.Show("Chọn sản phẩm để sửa.");return;}SuaFnb(row);}));
+        af.Controls.Add(LichChieuUi.Nut("Xuất CSV",(_,_)=>GiaVeFnbUi.Xuat(_fnb,FindForm()!,"MenuFnb")));
+        var split=new TableLayoutPanel{Dock=DockStyle.Fill,ColumnCount=1,RowCount=3};split.ColumnStyles.Add(new ColumnStyle(SizeType.Percent,100));
+        split.RowStyles.Add(new RowStyle(SizeType.Percent,65));split.RowStyles.Add(new RowStyle(SizeType.AutoSize));split.RowStyles.Add(new RowStyle(SizeType.Percent,35));
+        split.Controls.Add(_fnb,0,0);split.Controls.Add(GiaVeFnbUi.GhiChu("Thành phần combo đang chọn (sản phẩm lẻ không có thành phần):"),0,1);split.Controls.Add(_tp,0,2);
+        var lf=Khung(af,split,_soFnb);f.Controls.Add(lf);lf.Controls.Add(GiaVeFnbUi.GhiChu("Combo không lồng combo. Ngừng bán món lẻ có thể làm combo liên quan chưa bán được. Module này chưa quản lý tồn kho."),0,0);
+        _fnb.SelectionChanged+=(_,_)=>TaiThanhPhan();_gia.CellDoubleClick+=(_,e)=>{if(e.RowIndex>=0)SuaGia(Chon(_gia));};
+        _fnb.CellDoubleClick+=(_,e)=>{if(e.RowIndex>=0)SuaFnb(Chon(_fnb));};
+        _timGia.KeyDown+=(_,e)=>{if(e.KeyCode==Keys.Enter){e.SuppressKeyPress=true;TaiGia();}};
+        _timFnb.KeyDown+=(_,e)=>{if(e.KeyCode==Keys.Enter){e.SuppressKeyPress=true;TaiFnb();}};
+        Load+=(_,_)=>Nap();
     }
+    private static TableLayoutPanel Khung(Control bar,Control grid,Control count)
+    {
+        var p=new TableLayoutPanel{Dock=DockStyle.Fill,ColumnCount=1,RowCount=4,Padding=new Padding(10)};
+        p.ColumnStyles.Add(new ColumnStyle(SizeType.Percent,100));p.RowStyles.Add(new RowStyle(SizeType.AutoSize));p.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        p.RowStyles.Add(new RowStyle(SizeType.Percent,100));p.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        p.Controls.Add(bar,0,1);p.Controls.Add(grid,0,2);p.Controls.Add(count,0,3);return p;
+    }
+    private static DataRow? Chon(DataGridView g)=>(g.CurrentRow?.DataBoundItem as DataRowView)?.Row;
+    private void Nap()
+    {
+        try{LichChieuUi.Gan(_loai,GiaVeFnbDAL.LoaiGhe(),"MaLoai","TenLoai","Tất cả loại ghế");_ttGia.SelectedIndex=0;_ttFnb.SelectedIndex=0;_nhom.SelectedIndex=0;_timGia.Clear();_timFnb.Clear();TaiGia();TaiFnb();}
+        catch(Exception ex){GiaVeFnbUi.Loi(ex,FindForm()!);}
+    }
+    private void TaiGia()
+    {
+        try{var dt=GiaVeFnbDAL.GiaVe(_timGia.Text,LichChieuUi.Ma(_loai),_ttGia.SelectedIndex==0?null:_ttGia.SelectedIndex==1);
+            AdminUi.BindTable(_gia,dt);GiaVeFnbUi.DinhDang(_gia);_soGia.Text=$"{dt.Rows.Count} dòng giá. Chọn Sửa giá để thay đổi hoặc ngừng áp dụng; không xóa giá.";}
+        catch(Exception ex){_gia.DataSource=null;GiaVeFnbUi.Loi(ex,FindForm()!);}
+    }
+    private void TaiFnb()
+    {
+        try{var dt=GiaVeFnbDAL.Fnb(_timFnb.Text,_nhom.SelectedIndex==0?null:_nhom.Text,_ttFnb.SelectedIndex==0?null:_ttFnb.SelectedIndex==1);
+            AdminUi.BindTable(_fnb,dt);GiaVeFnbUi.DinhDang(_fnb);_soFnb.Text=$"{dt.Rows.Count} sản phẩm. Có thể bán = bật bán và thành phần combo hợp lệ.";TaiThanhPhan();}
+        catch(Exception ex){_fnb.DataSource=null;_tp.DataSource=null;GiaVeFnbUi.Loi(ex,FindForm()!);}
+    }
+    private void TaiThanhPhan()
+    {
+        var row=Chon(_fnb);if(row==null||row["Nhom"].ToString()!="Combo"){_tp.DataSource=null;return;}
+        try{AdminUi.BindTable(_tp,GiaVeFnbDAL.ThanhPhan(Convert.ToInt32(row["MaSanPham"])));GiaVeFnbUi.DinhDang(_tp);}
+        catch(Exception ex){_tp.DataSource=null;GiaVeFnbUi.Loi(ex,FindForm()!);}
+    }
+    private void SuaGia(DataRow? row){using var f=new FormGiaVe(row);if(f.ShowDialog(FindForm())==DialogResult.OK)TaiGia();}
+    private void SuaFnb(DataRow? row){using var f=new FormFnb(row);if(f.ShowDialog(FindForm())==DialogResult.OK)TaiFnb();}
 }

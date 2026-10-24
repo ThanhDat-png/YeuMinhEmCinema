@@ -1,0 +1,54 @@
+﻿=== build-verified.log ===
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  YeuMinhEmCinema.Admin -> /workspace/scratch/8ea38a27b509/winforms-final/YeuMinhEmCinema/src/YeuMinhEmCinema.Admin/bin/Release/net10.0-windows/YeuMinhEmCinema.Admin.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.63
+
+
+=== smoke.log ===
+PASS: Hai tài khoản cùng mật khẩu nhận salt/hash khác nhau
+PASS: Mật khẩu tiếng Việt kiểm tra đúng
+PASS: Không tự Trim mật khẩu
+PASS: Sai mật khẩu bị từ chối
+PASS: Hash hỏng bị từ chối
+PASS: Mật khẩu ngắn không được tạo
+PASS: CSV có UTF-8 BOM
+PASS: CSV giữ tiếng Việt, escape dấu nháy và chặn công thức
+PASS: QR vé tạo được PNG hợp lệ
+
+
+=== csv-smoke.log ===
+PASS: BOM, Unicode, comma, quotes, multiline, NULL, dates, formula escaping.
+
+
+=== sql-check-all.log ===
+SQL files=35; inline queries=20; procedure calls checked=29; errors=0
+
+
+=== pricing-test-build2.log ===
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  PricingIntegration -> /workspace/scratch/8ea38a27b509/winforms-final/YeuMinhEmCinema/Tests/PricingIntegration/bin/Debug/net10.0/PricingIntegration.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.45
+
+
+=== schedule-test-build.log ===
+  Determining projects to restore...
+  Restored /workspace/scratch/8ea38a27b509/winforms-final/YeuMinhEmCinema/Tests/SqlIntegration/SqlIntegration.csproj (in 271 ms).
+  SqlIntegration -> /workspace/scratch/8ea38a27b509/winforms-final/YeuMinhEmCinema/Tests/SqlIntegration/bin/Debug/net10.0/SqlIntegration.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.92

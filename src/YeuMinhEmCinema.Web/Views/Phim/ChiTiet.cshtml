@@ -1,0 +1,25 @@
+@model LichModel
+@{
+    var phim = Model.Phim!;
+    ViewData["Title"] = phim["TenPhim"];
+    var poster = new Phim { Poster = phim["Poster"] as string };
+    var trailer = HienThi.Trailer(phim["Trailer"]);
+}
+<div class="container page-content">
+    <a href="/#phim">← Danh sách phim</a>
+    <section class="film-detail">
+        <img class="slide-poster" src="@poster.AnhPoster" alt="Poster @phim["TenPhim"]" />
+        <div>
+            <p class="eyebrow">@phim["TrangThai"] · @phim["GioiHanTuoi"]</p>
+            <h1>@phim["TenPhim"]</h1>
+            <p>@phim["ThoiLuong"] phút · Khởi chiếu @Convert.ToDateTime(phim["NgayKhoiChieu"]).ToString("dd/MM/yyyy")</p>
+            <p class="description">@phim["MoTa"]</p>
+            @if (trailer != null)
+            {
+                <a class="button" href="@trailer" target="_blank" rel="noopener noreferrer">Xem trailer ↗</a>
+            }
+        </div>
+    </section>
+    <h2>Lịch chiếu</h2>
+    <partial name="_Lich" model="Model" />
+</div>

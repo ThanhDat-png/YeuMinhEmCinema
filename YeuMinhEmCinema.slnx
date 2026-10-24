@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="src/YeuMinhEmCinema.Admin/YeuMinhEmCinema.Admin.csproj" />
+  <Project Path="src/YeuMinhEmCinema.Web/YeuMinhEmCinema.Web.csproj" />
 </Solution>

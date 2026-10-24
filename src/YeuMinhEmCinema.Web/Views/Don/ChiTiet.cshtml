@@ -1,0 +1,111 @@
+@model DonModel
+@{
+    ViewData["Title"] = "Chi tiết đơn & vé";
+    var don = Model.ChiTiet.Tables[0].Rows[0];
+    var ve = Model.ChiTiet.Tables[1];
+    var bap = Model.ChiTiet.Tables[2];
+    var trangThai = (string)don["TrangThai"];
+    var conHan = Convert.ToDateTime(don["HanThanhToanUtc"]) > DateTime.UtcNow;
+    if (trangThai == "CHO_THANH_TOAN" && !conHan)
+    {
+        trangThai = "HET_HAN";
+    }
+    var ma = (long)don["MaDonHang"];
+    decimal tienVe = 0;
+    decimal tienBap = 0;
+}
+<div class="container page-content order-print">
+    <a class="no-print" asp-action="Index">← Đơn của tôi</a>
+    <h1>Đơn #@ma</h1>
+    <p>Mã tham chiếu: @don["MaThamChieu"]</p>
+    <p><strong>@HienThi.TrangThai(trangThai)</strong></p>
+    <p>Liên hệ: @don["HoTenLienHe"] · @don["DienThoaiLienHe"]</p>
+    @if (trangThai == "CHO_THANH_TOAN")
+    {
+        <p>Hạn thanh toán: @HienThi.GioUtc(don["HanThanhToanUtc"]) (giờ Việt Nam)</p>
+        <p data-deadline="@DateTime.SpecifyKind(Convert.ToDateTime(don["HanThanhToanUtc"]), DateTimeKind.Utc).ToString("O")" role="status">Thời hạn giữ ghế do server quyết định.</p>
+    }
+    <h2>Vé xem phim</h2>
+    <div class="cinema-grid">
+        @foreach (DataRow row in ve.Rows)
+        {
+            tienVe += (decimal)row["DonGia"];
+            <article class="cinema-card ticket">
+                <h3>@row["TenPhim"]</h3>
+                <p>@row["TenRap"] · @row["TenPhong"]</p>
+                <p>@Convert.ToDateTime(row["GioBatDau"]).ToString("dd/MM/yyyy HH:mm")</p>
+                <p>Ghế @row["NhanGhe"] · @HienThi.Tien(row["DonGia"])</p>
+                @if (row["MaVe"] != DBNull.Value)
+                {
+                    <p>@HienThi.TrangThai(row["TrangThaiVe"])</p>
+                    <p class="ticket-code">Mã vé: @row["MaVe"]</p>
+                    @if (trangThai == "DA_THANH_TOAN" && (string)row["TrangThaiVe"] != "DA_HUY")
+                    {
+                        <img class="qr" src="@Url.Action("Qr", new { id = row["MaVe"] })" alt="QR vé ghế @row["NhanGhe"]" />
+                    }
+                }
+                else
+                {
+                    <p>Chưa phát hành vé.</p>
+                }
+            </article>
+        }
+    </div>
+    <h2>Bắp nước</h2>
+    @foreach (DataRow row in bap.Rows)
+    {
+        var thanhTien = (decimal)row["DonGia"] * (int)row["SoLuong"];
+        tienBap += thanhTien;
+        <p>@row["TenSanPham"] · @row["SoLuong"] × @HienThi.Tien(row["DonGia"]) = @HienThi.Tien(thanhTien)</p>
+    }
+    @if (bap.Rows.Count == 0)
+    {
+        <p>Không mua bắp nước.</p>
+    }
+    @foreach (DataRow row in Model.ChiTiet.Tables[5].Rows)
+    {
+        <p>Thành phần combo: @row["TenThanhPhan"] · @row["SoLuongTrongCombo"] / combo</p>
+    }
+    <p>Tiền vé: @HienThi.Tien(tienVe) · Bắp nước: @HienThi.Tien(tienBap)</p>
+    <h2>Tổng: @HienThi.Tien(don["TongTien"])</h2>
+    @foreach (DataRow row in Model.ChiTiet.Tables[3].Rows)
+    {
+        <p>Giao dịch: @row["MaGiaoDich"] · @HienThi.Tien(row["SoTien"]) · @HienThi.GioUtc(row["NgayThuUtc"])</p>
+        @if (row["MaGiaoDich"].ToString()!.StartsWith("MOPHONG-WEB-"))
+        {
+            <p class="notice">Giao dịch mô phỏng đồ án, không thu tiền ngân hàng thật.</p>
+        }
+    }
+    @foreach (DataRow row in Model.ChiTiet.Tables[4].Rows)
+    {
+        <p>Đã ghi nhận hoàn @HienThi.Tien(row["SoTien"]) · @HienThi.GioUtc(row["NgayHoanUtc"]) · @row["LyDo"]</p>
+    }
+    @if (trangThai == "CHO_THANH_TOAN" && Model.ChoPhepMoPhong)
+    {
+        <div class="notice no-print">
+            <h2>Thanh toán mô phỏng — chỉ Development</h2>
+            <p>Đây là môi trường đồ án, không thu tiền thật và không yêu cầu thông tin thẻ ngân hàng.</p>
+            <form asp-action="ThanhToan" method="post" data-submit>
+                <input name="id" value="@ma" type="hidden" />
+                <button class="button" type="submit" name="ketQua" value="thanh-cong">Mô phỏng thành công</button>
+                <button class="button" type="submit" name="ketQua" value="that-bai">Mô phỏng thất bại</button>
+            </form>
+        </div>
+    }
+    else if (trangThai == "CHO_THANH_TOAN")
+    {
+        <p class="notice">Chưa tích hợp cổng thanh toán trực tuyến. Mô phỏng chỉ được bật cho môi trường phát triển.</p>
+    }
+    @if (trangThai == "CHO_THANH_TOAN")
+    {
+        <form asp-action="Huy" method="post" class="no-print" data-submit>
+            <input name="id" value="@ma" type="hidden" />
+            <button type="submit" class="button">Hủy đơn & giải phóng ghế</button>
+        </form>
+    }
+    @if (trangThai == "DA_THANH_TOAN")
+    {
+        <p>Hoàn tiền cần liên hệ rạp trước giờ chiếu khi chưa có vé sử dụng; hệ thống chỉ hỗ trợ hoàn toàn bộ theo quy trình của rạp.</p>
+    }
+    <button type="button" class="button no-print" data-print>In phiếu / lưu PDF</button>
+</div>

@@ -1,0 +1,20 @@
+@model DoiMatKhauModel
+@{
+    ViewData["Title"] = "Đổi mật khẩu";
+}
+<div class="container page-content">
+    <form asp-action="DoiMatKhau" method="post" class="account-form" data-submit>
+        <h1>Đổi mật khẩu</h1>
+        <div asp-validation-summary="ModelOnly" class="validation"></div>
+        <label asp-for="MatKhauCu">Mật khẩu hiện tại</label>
+        <input asp-for="MatKhauCu" type="password" autocomplete="current-password" />
+        <span asp-validation-for="MatKhauCu" class="validation"></span>
+        <label asp-for="MatKhauMoi">Mật khẩu mới (12–200 ký tự)</label>
+        <input asp-for="MatKhauMoi" type="password" autocomplete="new-password" />
+        <span asp-validation-for="MatKhauMoi" class="validation"></span>
+        <label asp-for="XacNhanMatKhau">Xác nhận mật khẩu mới</label>
+        <input asp-for="XacNhanMatKhau" type="password" autocomplete="new-password" />
+        <span asp-validation-for="XacNhanMatKhau" class="validation"></span>
+        <button type="submit" class="button">Đổi mật khẩu</button>
+    </form>
+</div>

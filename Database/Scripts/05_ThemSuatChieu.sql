@@ -34,7 +34,7 @@ BEGIN
     SET NOCOUNT ON;
     IF @PhutDonPhong IS NULL OR @PhutDonPhong NOT BETWEEN 0 AND 120
         THROW 50002,N'Thời gian dọn phòng phải từ 0 đến 120 phút.',1;
-    IF @GioBatDau IS NULL OR @GioBatDau<=SYSDATETIME()
+    IF @GioBatDau IS NULL OR @GioBatDau<=CONVERT(DATETIME2(0),DATEADD(HOUR,7,SYSUTCDATETIME()))
         THROW 50003,N'Giờ bắt đầu phải ở tương lai.',1;
     DECLARE @phut INT, @ngay DATE, @tt NVARCHAR(30);
     SELECT @phut=ThoiLuong,@ngay=NgayKhoiChieu,@tt=TrangThai

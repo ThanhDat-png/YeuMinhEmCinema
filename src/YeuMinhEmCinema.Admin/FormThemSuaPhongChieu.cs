@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 
 namespace YeuMinhEmCinema.Admin
 {
@@ -89,7 +89,8 @@ namespace YeuMinhEmCinema.Admin
 
                 string dinhDang = row["DinhDang"]?.ToString() ?? "2D Digital";
                 int idxDinhDang = cboDinhDang.Items.IndexOf(dinhDang);
-                cboDinhDang.SelectedIndex = idxDinhDang >= 0 ? idxDinhDang : 0;
+                if(idxDinhDang<0){cboDinhDang.Items.Add(dinhDang);idxDinhDang=cboDinhDang.Items.Count-1;}
+                cboDinhDang.SelectedIndex=idxDinhDang;
 
                 string trangThai = row["TrangThai"]?.ToString() ?? "Đang hoạt động";
                 int idxTrangThai = cboTrangThai.Items.IndexOf(trangThai);

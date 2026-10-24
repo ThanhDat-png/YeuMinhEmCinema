@@ -1,0 +1,49 @@
+@model LichSuModel
+@{
+    ViewData["Title"] = "Đơn của tôi";
+    var cacTrangThai = new[] { "CHO_THANH_TOAN", "DA_THANH_TOAN", "DA_HUY", "HET_HAN", "DA_HOAN_TIEN" };
+}
+<div class="container page-content">
+    <h1>Đơn của tôi</h1>
+    <form asp-action="Index" method="get" class="filters">
+        <div>
+            <label for="trangThai">Trạng thái</label>
+            <select id="trangThai" name="trangThai">
+                <option value="">Tất cả</option>
+                @foreach (var tt in cacTrangThai)
+                {
+                    <option value="@tt" selected="@(Model.TrangThai == tt)">@HienThi.TrangThai(tt)</option>
+                }
+            </select>
+        </div>
+        <button class="button" type="submit">Lọc đơn</button>
+    </form>
+    <p>Tìm thấy @Model.Tong đơn.</p>
+    @if (Model.Don.Rows.Count == 0)
+    {
+        <p class="notice">Bạn chưa có đơn phù hợp. <a href="/#phim">Khám phá phim</a></p>
+    }
+    <div class="cinema-grid">
+        @foreach (DataRow row in Model.Don.Rows)
+        {
+            <article class="cinema-card">
+                <h2>Đơn #@row["MaDonHang"]</h2>
+                <p>@HienThi.TrangThai(row["TrangThai"])</p>
+                <p>@HienThi.Tien(row["TongTien"])</p>
+                <p>@HienThi.GioUtc(row["NgayTaoUtc"])</p>
+                <a class="button" asp-action="ChiTiet" asp-route-id="@row["MaDonHang"]">Chi tiết đơn & vé</a>
+            </article>
+        }
+    </div>
+    <nav class="pagination" aria-label="Phân trang đơn">
+        @if (Model.Trang > 1)
+        {
+            <a asp-route-trang="@(Model.Trang - 1)" asp-route-trangThai="@Model.TrangThai">← Trang trước</a>
+        }
+        <span>Trang @Model.Trang / @Math.Max(1, Model.TongTrang)</span>
+        @if (Model.Trang < Model.TongTrang)
+        {
+            <a asp-route-trang="@(Model.Trang + 1)" asp-route-trangThai="@Model.TrangThai">Trang sau →</a>
+        }
+    </nav>
+</div>

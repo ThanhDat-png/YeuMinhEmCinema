@@ -1,4 +1,4 @@
-namespace YeuMinhEmCinema.Admin
+﻿namespace YeuMinhEmCinema.Admin
 {
     partial class UcRapPhongChieu
     {

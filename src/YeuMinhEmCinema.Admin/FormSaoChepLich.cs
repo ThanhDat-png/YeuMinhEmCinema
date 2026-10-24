@@ -27,7 +27,7 @@ public sealed class FormSaoChepLich : Form
         _nguon.ValueChanged+=(_,_)=>HuyXem();_dich.ValueChanged+=(_,_)=>HuyXem();
         _phong.SelectedIndexChanged+=(_,_)=>HuyXem();
         _rap.SelectedIndexChanged+=(_,_)=>{if(!_loading)NapPhong();HuyXem();};
-        Load+=(_,_)=>{_loading=true;try{LichChieuUi.Gan(_rap,SuatChieuDAL.LayRap(),"MaRap","TenRap","Tất cả rạp");NapPhong();}
+        Load+=(_,_)=>{_loading=true;try{LichChieuUi.Gan(_rap,SuatChieuDAL.LayRap(),"MaRap","TenRap");NapPhong();}
             catch(Exception ex){LichChieuUi.Loi(ex,this);}finally{_loading=false;}};
     }
     private void HuyXem(){_chuKy=null;_luu.Enabled=false;_bang.DataSource=null;_note.Text="Xem trước để kiểm tra toàn bộ lịch tại ngày đích. Suất mới ở trạng thái Mở bán.";}
@@ -42,7 +42,7 @@ public sealed class FormSaoChepLich : Form
         try
         {
             var dt=SuatChieuDAL.SaoChep(_nguon.Value,_dich.Value,LichChieuUi.Ma(_rap),LichChieuUi.Ma(_phong),true);
-            _bang.DataSource=dt;LichChieuUi.DinhDang(_bang);
+            AdminUi.BindTable(_bang,dt);LichChieuUi.DinhDang(_bang);
             if(dt.Rows.Count>0){_chuKy=dt.Rows[0]["ChuKy"].ToString();_luu.Enabled=true;}
             _note.Text=$"{dt.Rows.Count} suất dự kiến ngày {_dich.Value:dd/MM/yyyy}. Ghi cả nhóm hoặc không ghi suất nào.";
         }

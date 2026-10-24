@@ -14,7 +14,7 @@ BEGIN
         FROM dbo.SuatChieu WITH(UPDLOCK,HOLDLOCK) WHERE MaSuatChieu=@MaSuatChieu;
         IF @cu IS NULL THROW 50010,N'Suất chiếu không tồn tại.',1;
         IF @tt=N'Đã hủy' THROW 50011,N'Không thể sửa suất đã hủy.',1;
-        IF @gio<=SYSDATETIME() THROW 50012,N'Không thể sửa suất đã bắt đầu.',1;
+        IF @gio<=CONVERT(DATETIME2(0),DATEADD(HOUR,7,SYSUTCDATETIME())) THROW 50012,N'Không thể sửa suất đã bắt đầu.',1;
         EXEC dbo.sp_YMC_KiemTraLienQuan @MaSuatChieu;
         DECLARE @nho INT=CASE WHEN @cu<@MaPhong THEN @cu ELSE @MaPhong END;
         DECLARE @lon INT=CASE WHEN @cu<@MaPhong THEN @MaPhong ELSE @cu END;

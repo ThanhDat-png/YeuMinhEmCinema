@@ -1,0 +1,21 @@
+@model DataTable
+@{
+    ViewData["Title"] = "Cụm rạp";
+}
+<div class="container page-content">
+    <h1>Cụm rạp YeuMinhEm Cinema</h1>
+    @if (Model.Rows.Count == 0)
+    {
+        <p class="notice">Chưa có rạp đang hoạt động.</p>
+    }
+    <div class="cinema-grid">
+        @foreach (DataRow row in Model.Rows)
+        {
+            <article class="cinema-card">
+                <h2>@row["TenRap"]</h2>
+                <p>@row["DiaChi"]</p>
+                <a class="button" asp-action="Lich" asp-route-maRap="@row["MaRap"]">Xem lịch tại rạp</a>
+            </article>
+        }
+    </div>
+</div>

@@ -68,7 +68,7 @@ public partial class UcLichChieu : UserControl
             if(_locNgay.Checked&&_tu.Value.Date>_den.Value.Date){MessageBox.Show("Từ ngày phải trước hoặc bằng đến ngày.");return;}
             var dt=SuatChieuDAL.LayDanhSachSuatChieu(_locNgay.Checked?_tu.Value.Date:null,_locNgay.Checked?_den.Value.Date:null,
                 LichChieuUi.Ma(_rap),LichChieuUi.Ma(_phong),LichChieuUi.Ma(_phim),_tt.SelectedIndex<=0?null:_tt.Text,_tim.Text);
-            _bang.DataSource=dt;LichChieuUi.DinhDang(_bang);
+            AdminUi.BindTable(_bang,dt);LichChieuUi.DinhDang(_bang);
             _tong.Text=dt.Rows.Count==0?"Không có suất chiếu phù hợp.":$"{dt.Rows.Count} suất. Phòng sẵn sàng = giờ kết thúc + thời gian dọn phòng.";
             if(chon.HasValue)foreach(DataGridViewRow row in _bang.Rows)
                 if(Convert.ToInt32(row.Cells["MaSuatChieu"].Value)==chon.Value){_bang.CurrentCell=row.Cells["MaSuatChieu"];row.Selected=true;break;}

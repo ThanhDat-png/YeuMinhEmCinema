@@ -1,0 +1,24 @@
+@model HoSoModel
+@{
+    ViewData["Title"] = "Tài khoản";
+}
+<div class="container page-content">
+    <form asp-action="HoSo" method="post" class="account-form" data-submit>
+        <h1>Thông tin cá nhân</h1>
+        <div asp-validation-summary="ModelOnly" class="validation"></div>
+        <label asp-for="HoTen">Họ tên</label>
+        <input asp-for="HoTen" maxlength="150" />
+        <span asp-validation-for="HoTen" class="validation"></span>
+        <label asp-for="Email">Email (không bắt buộc)</label>
+        <input asp-for="Email" type="email" autocomplete="email" />
+        <span asp-validation-for="Email" class="validation"></span>
+        <label asp-for="DienThoai">Điện thoại</label>
+        <input asp-for="DienThoai" maxlength="20" />
+        <span asp-validation-for="DienThoai" class="validation"></span>
+        <label asp-for="NgaySinh">Ngày sinh</label>
+        <input asp-for="NgaySinh" type="date" />
+        <span asp-validation-for="NgaySinh" class="validation"></span>
+        <button type="submit" class="button">Lưu thông tin</button>
+        <a asp-action="DoiMatKhau">Đổi mật khẩu</a>
+    </form>
+</div>

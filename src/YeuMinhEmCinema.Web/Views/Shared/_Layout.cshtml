@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Khám phá phim đang chiếu, phim sắp chiếu và cụm rạp YeuMinhEm Cinema." />
+        <title>
+            @ViewData["Title"] · YeuMinhEm Cinema
+        </title>
+        <link rel="icon" href="~/images/brand-mascot.png" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </head>
+    <body>
+        <a class="skip" href="#noi-dung">
+            Đến nội dung
+        </a>
+        <header class="site-header">
+            <nav class="container navigation" aria-label="Điều hướng chính">
+                <a class="brand" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/brand-mascot.png" alt="" />
+                    <span>
+                        YeuMinhEm
+                        <strong>
+                            Cinema
+                        </strong>
+                    </span>
+                </a>
+                <div class="nav-links">
+                    <a href="/">Trang chủ</a>
+                    <a href="/#phim">
+                        Phim
+                    </a>
+                    <a asp-controller="Phim" asp-action="Lich">Lịch chiếu</a>
+                    <a asp-controller="Phim" asp-action="Rap">
+                        Cụm rạp
+                    </a>
+                </div>
+                <div class="account-nav">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <span class="customer-name">Chào @User.Identity.Name</span>
+                        <a asp-controller="TaiKhoan" asp-action="HoSo">Tài khoản</a>
+                        <a asp-controller="Don" asp-action="Index">Đơn của tôi</a>
+                        <form asp-controller="TaiKhoan" asp-action="DangXuat" method="post">
+                            <button type="submit" class="nav-button">Đăng xuất</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="TaiKhoan" asp-action="DangNhap">Đăng nhập</a>
+                        <a asp-controller="TaiKhoan" asp-action="DangKy">Đăng ký</a>
+                    }
+                </div>
+            </nav>
+        </header>
+        <main id="noi-dung">
+            @if (TempData["ThongBao"] is string thongBao)
+            {
+                <div class="container notice" role="status">@thongBao</div>
+            }
+            @RenderBody()
+        </main>
+        <footer id="lien-he" class="container footer">
+            <div>
+                <a class="brand" href="/">
+                    YeuMinhEm
+                    <strong>
+                        Cinema
+                    </strong>
+                </a>
+                <p>
+                    Nơi mỗi thước phim trở thành một kỷ niệm.
+                </p>
+            </div>
+            <div>
+                <strong>
+                    Thông tin & liên hệ
+                </strong>
+                <p>
+                    Vui lòng liên hệ trực tiếp tại địa chỉ rạp bên trên.
+                </p>
+                <a href="/#phim">
+                    Danh sách phim
+                </a>
+                ·
+                <a href="/#rap">
+                    Địa chỉ cụm rạp
+                </a>
+            </div>
+        </footer>
+        <script src="~/js/site.js" asp-append-version="true" defer>
+        </script>
+    </body>
+</html>

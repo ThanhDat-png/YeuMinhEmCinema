@@ -1,4 +1,4 @@
-namespace YeuMinhEmCinema.Admin
+﻿namespace YeuMinhEmCinema.Admin
 {
     partial class FormThemSuaPhim
     {
@@ -186,7 +186,7 @@ namespace YeuMinhEmCinema.Admin
             cboGioiHanTuoi.DropDownStyle = ComboBoxStyle.DropDownList;
             cboGioiHanTuoi.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             cboGioiHanTuoi.FormattingEnabled = true;
-            cboGioiHanTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18", "C" });
+            cboGioiHanTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
             cboGioiHanTuoi.Location = new Point(24, 162);
             cboGioiHanTuoi.Name = "cboGioiHanTuoi";
             cboGioiHanTuoi.Size = new Size(249, 25);

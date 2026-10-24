@@ -1,101 +1,26 @@
-using System.Data;
-
-namespace YeuMinhEmCinema.Admin
+﻿using System.Data;
+namespace YeuMinhEmCinema.Admin;
+public partial class UcDonDatVe:DataPage
 {
-    public partial class UcDonDatVe : UserControl
-    {
-        public UcDonDatVe()
-        {
-            InitializeComponent();
-            cboTrangThai.SelectedIndex = 0;
-            NapDonHangMinhHoa();
-        }
-
-        private void NapDonHangMinhHoa()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Mã đơn", typeof(string));
-            dt.Columns.Add("Thời gian đặt", typeof(string));
-            dt.Columns.Add("Tên khách hàng", typeof(string));
-            dt.Columns.Add("Số điện thoại", typeof(string));
-            dt.Columns.Add("Tên phim", typeof(string));
-            dt.Columns.Add("Suất chiếu", typeof(string));
-            dt.Columns.Add("Phòng chiếu", typeof(string));
-            dt.Columns.Add("Ghế ngồi", typeof(string));
-            dt.Columns.Add("Combo F&B", typeof(string));
-            dt.Columns.Add("Tổng tiền", typeof(string));
-            dt.Columns.Add("Phương thức", typeof(string));
-            dt.Columns.Add("Trạng thái", typeof(string));
-
-            dt.Rows.Add("DH1029", "21/10/2026 15:45", "Trần Minh Quân", "0901234567", "Đào, Phở và Piano", "19:30", "Phòng 01 (2D)", "C5, C6", "Combo Solo", "259.000 đ", "Momo", "Đã thanh toán");
-            dt.Rows.Add("DH1028", "21/10/2026 15:30", "Nguyễn Thu Hà", "0912345678", "Mai", "20:00", "Phòng 03 (IMAX)", "D7, D8, D9, D10", "Combo Couple", "589.000 đ", "Thẻ ATM", "Đã thanh toán");
-            dt.Rows.Add("DH1027", "21/10/2026 15:12", "Lê Văn Đạt", "0987654321", "Lật Mặt 7: Một Điều Ước", "18:15", "Phòng 02 (2D)", "B4", "Không có", "90.000 đ", "Tiền mặt tại quầy", "Đã thanh toán");
-            dt.Rows.Add("DH1026", "21/10/2026 14:50", "Phạm Hoàng Yến", "0933445566", "Kung Fu Panda 4", "17:00", "Phòng 01 (2D)", "E1, E2, E3", "2 Bắp ngọt lớn", "380.000 đ", "ZaloPay", "Đã thanh toán");
-            dt.Rows.Add("DH1025", "21/10/2026 14:20", "Vũ Minh Khang", "0977889900", "Dune: Hành Tinh Cát 2", "16:30", "Phòng 03 (IMAX)", "F5, F6", "Combo Couple", "389.000 đ", "VNPay", "Đã thanh toán");
-            dt.Rows.Add("DH1024", "21/10/2026 13:40", "Đỗ Thị Mai", "0944556677", "Mai", "19:00", "Phòng 02 (2D)", "A1, A2", "Không có", "180.000 đ", "Trực tuyến", "Đang giữ chỗ");
-            dt.Rows.Add("DH1023", "21/10/2026 12:15", "Bùi Quốc Anh", "0966112233", "Godzilla x Kong", "15:00", "Phòng 01 (2D)", "B8", "Không có", "90.000 đ", "Chưa thanh toán", "Đã hủy");
-
-            dgvDonHang.DataSource = dt;
-        }
-
-        private void btnLoc_Click(object sender, EventArgs e)
-        {
-            NapDonHangMinhHoa();
-            MessageBox.Show(
-                "Đã lọc danh sách đơn hàng theo từ khóa và trạng thái (Dữ liệu minh họa).",
-                "Thông báo",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
-        private void btnChiTiet_Click(object sender, EventArgs e)
-        {
-            if (dgvDonHang.CurrentRow == null)
-            {
-                MessageBox.Show("Vui lòng chọn một đơn hàng trong danh sách để xem chi tiết.", "Chưa chọn dòng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            DataGridViewRow row = dgvDonHang.CurrentRow;
-            string maDon = row.Cells["Mã đơn"].Value?.ToString() ?? "";
-            string tenKhach = row.Cells["Tên khách hàng"].Value?.ToString() ?? "";
-            string sdt = row.Cells["Số điện thoại"].Value?.ToString() ?? "";
-            string tenPhim = row.Cells["Tên phim"].Value?.ToString() ?? "";
-            string suat = row.Cells["Suất chiếu"].Value?.ToString() ?? "";
-            string phong = row.Cells["Phòng chiếu"].Value?.ToString() ?? "";
-            string ghe = row.Cells["Ghế ngồi"].Value?.ToString() ?? "";
-            string fnb = row.Cells["Combo F&B"].Value?.ToString() ?? "";
-            string tongTien = row.Cells["Tổng tiền"].Value?.ToString() ?? "";
-            string pttt = row.Cells["Phương thức"].Value?.ToString() ?? "";
-            string trangThai = row.Cells["Trạng thái"].Value?.ToString() ?? "";
-
-            string chiTiet =
-                $"═══════════════════════════════════════\n" +
-                $"   HÓA ĐƠN VÉ XEM PHIM YEUMINHEM CINEMA\n" +
-                $"═══════════════════════════════════════\n\n" +
-                $"• Mã đơn hàng: {maDon}\n" +
-                $"• Khách hàng: {tenKhach} (SĐT: {sdt})\n" +
-                $"• Phim: {tenPhim}\n" +
-                $"• Suất chiếu: {suat} - {phong}\n" +
-                $"• Vị trí ghế: {ghe}\n" +
-                $"• Dịch vụ kèm theo: {fnb}\n" +
-                $"• Phương thức thanh toán: {pttt}\n" +
-                $"• Trạng thái: {trangThai}\n\n" +
-                $"───────────────────────────────────────\n" +
-                $"▶ TỔNG THANH TOÁN: {tongTien}\n" +
-                $"───────────────────────────────────────\n\n" +
-                $"(Dữ liệu minh họa — chưa kết nối cơ sở dữ liệu)";
-
-            MessageBox.Show(chiTiet, $"Chi tiết đơn hàng {maDon}", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void BtnChuaTrienKhai_Click(object? sender, EventArgs e)
-        {
-            MessageBox.Show(
-                "Chức năng in vé đang được phát triển (chưa có kết nối máy in vé nhiệt hoặc cơ sở dữ liệu).",
-                "Thông báo",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-    }
+ private readonly ComboBox rap=AdminUi.Combo(),tt=AdminUi.Combo();
+ private readonly DateTimePicker tu=new(){Value=DateTime.Today.AddDays(-7),Width=140,Format=DateTimePickerFormat.Short},den=new(){Width=140,Format=DateTimePickerFormat.Short};
+ private readonly Label page=new(){AutoSize=true,Margin=new Padding(8)};private int trang=1;
+ public UcDonDatVe():base("Đơn đặt vé và giao dịch")
+ {
+  Bar.Controls.AddRange(new Control[]{AdminUi.Label("Rạp"),rap,AdminUi.Label("Từ"),tu,AdminUi.Label("Đến"),den,tt});
+  tt.Items.AddRange(new object[]{"Tất cả","CHO_THANH_TOAN","DA_THANH_TOAN","DA_HUY","HET_HAN","DA_HOAN_TIEN"});tt.SelectedIndex=0;
+  Action("Lọc",()=>{trang=1;Reload();});Action("Trước",()=>{trang=Math.Max(1,trang-1);Reload();});Action("Sau",()=>{trang++;Reload();});Bar.Controls.Add(page);
+  Action("Chi tiết / xuất vé QR",Detail);Action("Hủy đơn chưa trả",Cancel,"DON_HANG_HUY");Action("Ghi nhận hoàn tiền",Refund,"HOAN_TIEN");
+  if(Db.Has("BAN_VE")&&!Db.Has("DON_HANG_HUY"))Action("Hủy đơn quầy tự tạo",Cancel,"BAN_VE");
+  StandardActions(Reload);Load+=(_,_)=>Run(()=>{AdminUi.Bind(rap,Db.Raps(),"MaRap","TenRap");Reload();});
+ }
+ private void Reload(){var t=GiaoDichDAL.Don(AdminUi.Id(rap),tu.Value,den.Value,tt.SelectedIndex==0?null:tt.Text,trang);AdminUi.Bind(Grid,t);page.Text=$"Trang {trang} — {t.Rows.Count} dòng";}
+ private long Selected()=>Convert.ToInt64(AdminUi.Row(Grid)["MaDonHang"]);
+ private void Detail(){long id=Selected();var ds=GiaoDichDAL.ChiTiet(id);using var f=AdminUi.Dialog($"Đơn #{id}");var tabs=new TabControl{Dock=DockStyle.Fill};
+  string[] names={"Đơn hàng","Vé","Bắp nước","Thu tiền","Hoàn tiền","Thành phần combo"};for(int i=0;i<ds.Tables.Count;i++){var p=new TabPage(names[i]);var g=AdminUi.Grid();AdminUi.Bind(g,ds.Tables[i]);p.Controls.Add(g);tabs.TabPages.Add(p);}
+  var export=AdminUi.Button("Xuất phiếu / vé QR",()=>HoaDonExporter.Xuat(id));export.Dock=DockStyle.Bottom;f.Controls.Add(tabs);f.Controls.Add(export);f.ShowDialog(this);}
+ private void Cancel(){long id=Selected();using var f=new EditDialog("Hủy đơn chưa thanh toán");var reason=f.TextField("Lý do",max:500);f.Save(()=>{if(string.IsNullOrWhiteSpace(reason.Text))throw new ArgumentException("Nhập lý do.");GiaoDichDAL.Huy(id,reason.Text.Trim());});if(f.ShowDialog(this)==DialogResult.OK)Reload();}
+ private void Refund(){long id=Selected();using var f=new EditDialog("Ghi nhận hoàn TOÀN BỘ đơn");f.Field("Chỉ lưu sau khi đã hoàn tiền thực tế cho khách.",new Label{Text="SQL không tự chuyển tiền.",AutoSize=true});var code=f.TextField("Mã giao dịch hoàn (duy nhất)",max:100);var reason=f.TextField("Lý do",max:500);
+  var checkedBox=f.Field("Xác nhận",new CheckBox{Text="Đã hoàn tiền và đối chiếu chứng từ",AutoSize=true});f.Save(()=>{if(!checkedBox.Checked||string.IsNullOrWhiteSpace(code.Text)||string.IsNullOrWhiteSpace(reason.Text))throw new ArgumentException("Điền mã/lý do và xác nhận đã hoàn tiền.");
+   Db.Call("dbo.sp_YMC_GhiNhanHoanTien",("@NguoiThucHien",Db.Actor),("@MaDonHang",id),("@MaGiaoDichHoan",code.Text.Trim()),("@LyDo",reason.Text.Trim()));});if(f.ShowDialog(this)==DialogResult.OK)Reload();}
 }

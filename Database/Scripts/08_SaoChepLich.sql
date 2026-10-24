@@ -13,7 +13,7 @@ BEGIN
         EXEC dbo.sp_YMC_KhoaLich;
         IF @NgayNguon IS NULL OR @NgayDich IS NULL OR @NgayNguon=@NgayDich
             THROW 50030,N'Chọn ngày nguồn và đích khác nhau.',1;
-        IF @NgayDich<CAST(SYSDATETIME() AS DATE)
+        IF @NgayDich<CAST(CONVERT(DATETIME2(0),DATEADD(HOUR,7,SYSUTCDATETIME())) AS DATE)
             THROW 50031,N'Ngày đích không được ở quá khứ.',1;
         DECLARE @src TABLE(MaCu INT PRIMARY KEY,MaPhim INT,MaPhong INT,
             BatDau DATETIME2(0),KetThuc DATETIME2(0),Don INT,TT NVARCHAR(30));

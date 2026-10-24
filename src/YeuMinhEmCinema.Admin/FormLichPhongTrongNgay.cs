@@ -18,7 +18,7 @@ public sealed class FormLichPhongTrongNgay : Form
     }
     private void Tai()
     {
-        try{var dt=SuatChieuDAL.LayLichPhongTrongNgay(_ma,_ngay.Value);_bang.DataSource=dt;LichChieuUi.DinhDang(_bang);
+        try{var dt=SuatChieuDAL.LayLichPhongTrongNgay(_ma,_ngay.Value);AdminUi.BindTable(_bang,dt);LichChieuUi.DinhDang(_bang);
             _count.Text=$"{dt.Rows.Count} suất chiếm phòng trong ngày (gồm suất qua đêm và thời gian dọn phòng).";}
         catch(Exception ex){_bang.DataSource=null;LichChieuUi.Loi(ex,this);}
     }

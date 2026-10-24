@@ -1,0 +1,54 @@
+@model DatVeModel
+@{
+    ViewData["Title"] = "Chọn bắp nước";
+    decimal tienVe = 0;
+}
+<div class="container page-content">
+    <h1>Bắp nước & combo</h1>
+    <partial name="_Suat" model="Model" />
+    <div asp-validation-summary="All" class="validation" role="alert"></div>
+    <p>Chọn số lượng từ 0–99; 0 là bỏ sản phẩm. Tối đa 20 loại. Giá cuối được SQL tính lại khi giữ ghế.</p>
+    <ul>
+        @foreach (var ma in Model.Ghe)
+        {
+            var ghe = Model.SoDo.AsEnumerable().FirstOrDefault(r => (int)r["MaGhe"] == ma);
+            if (ghe != null && ghe["Gia"] != DBNull.Value)
+            {
+                tienVe += (decimal)ghe["Gia"];
+                <li>@ghe["HangGhe"]@ghe["SoGhe"] · @HienThi.Tien(ghe["Gia"])</li>
+            }
+        }
+    </ul>
+    <p>Tiền vé dự kiến: <strong>@HienThi.Tien(tienVe)</strong></p>
+    <form asp-action="GiuGhe" method="post" data-submit>
+        <input asp-for="MaSuatChieu" type="hidden" />
+        <input asp-for="MaYeuCau" type="hidden" />
+        <input asp-for="HoTen" type="hidden" />
+        <input asp-for="DienThoai" type="hidden" />
+        @foreach (var ma in Model.Ghe)
+        {
+            <input name="Ghe" value="@ma" type="hidden" />
+        }
+        <div class="cinema-grid" data-fnb data-ticket-total="@tienVe.ToString(System.Globalization.CultureInfo.InvariantCulture)">
+            @for (var i = 0; i < Model.Menu.Rows.Count; i++)
+            {
+                var row = Model.Menu.Rows[i];
+                var soLuong = Model.Fnb.FirstOrDefault(f => f.MaSanPham == (int)row["MaSanPham"])?.SoLuong ?? 0;
+                <article class="cinema-card">
+                    <h3>@row["TenSanPham"]</h3>
+                    <p>@row["Nhom"] · @HienThi.Tien(row["DonGia"])</p>
+                    <input name="Fnb[@i].MaSanPham" value="@row["MaSanPham"]" type="hidden" />
+                    <label for="fnb-@i">Số lượng @row["TenSanPham"]</label>
+                    <input id="fnb-@i" name="Fnb[@i].SoLuong" type="number" min="0" max="99" value="@soLuong" data-price="@Convert.ToDecimal(row["DonGia"]).ToString(System.Globalization.CultureInfo.InvariantCulture)" />
+                    <p>Thành tiền: <output data-line-total>@HienThi.Tien(Convert.ToDecimal(row["DonGia"]) * soLuong)</output></p>
+                </article>
+            }
+        </div>
+        @if (Model.Menu.Rows.Count == 0)
+        {
+            <p class="notice">Chưa có sản phẩm đang bán. Bạn có thể tiếp tục chỉ mua vé.</p>
+        }
+        <p>Tổng dự kiến: <strong id="estimated-total">Xem tổng chính thức ở bước kiểm tra đơn</strong></p>
+        <button type="submit" class="button">Giữ ghế & kiểm tra đơn</button>
+    </form>
+</div>

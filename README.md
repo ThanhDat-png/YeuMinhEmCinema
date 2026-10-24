@@ -1,53 +1,23 @@
 ﻿# YeuMinhEm Cinema
 
-Đồ án C#: Admin Windows Forms, ADO.NET và SQL Server; giao diện web khách hàng đang là bản HTML/CSS/JavaScript demo.
+Đồ án C# — Admin Windows Forms, ADO.NET và SQL Server Express.
 
-Đọc **BAT-DAU-O-DAY.md** để cập nhật trên máy đã có database.
+Bắt đầu bằng **BAT-DAU-O-DAY.md**. Máy đã có SQL 00–22 chỉ cần chạy thêm **23_WinForms_HoanThien.sql** trước khi chạy bản Admin mới.
 
-## Đã có trong mã nguồn
+| Mục Admin | Chức năng đã có code nối SQL |
+|---|---|
+| Đăng nhập | Băm mật khẩu, Admin đầu tiên, khóa tạm sau sai liên tiếp, đổi mật khẩu, đăng xuất |
+| Phim | Xem/tìm/lọc/thêm/sửa/ngừng chiếu; bảo vệ phim có lịch tương lai |
+| Rạp/phòng/ghế | Danh sách, sơ đồ thật, thêm/sửa/trạng thái, tạo ghế theo lô giữ nguyên ghế cũ |
+| Lịch chiếu | Thêm/sửa, kiểm xung đột và dọn phòng, đổi trạng thái, xem lịch phòng, xem trước/sao chép, CSV |
+| Giá/bắp nước | Khoảng hiệu lực, loại ngày/ghế/định dạng, combo thành phần, rowversion, tra giá |
+| Bán vé | Suất theo rạp/ngày, sơ đồ thật, số lượng bắp nước, giữ ghế có hạn, xác nhận thu, xuất phiếu/vé QR |
+| Đơn hàng | Lọc/phân trang, 6 bảng chi tiết, hủy chưa trả, ghi nhận hoàn toàn bộ, xuất phiếu/QR |
+| Kiểm vé | Đọc GUID từ QR/máy quét, xem thông tin, xác nhận vào rạp một lần |
+| Khách hàng | Tìm, thêm tại quầy, sửa, trạng thái hồ sơ, lịch sử đơn theo phạm vi rạp |
+| Nhân viên | Tạo tài khoản/hồ sơ, sửa nhân sự, gán/thu hồi rạp và vai trò, bộ quyền theo vai trò, khóa/tái kích hoạt, đặt lại mật khẩu |
+| Tổng quan/báo cáo | Thu/hoàn/thuần, hiệu quả phim, bắp nước, biểu đồ, lọc rạp/ngày và CSV |
 
-- Quản lý phim; rạp/phòng/ghế kết nối SQL Server.
-- Module lịch chiếu: danh sách và lọc, thêm/sửa, ngừng/mở bán, hủy,
-  lịch phòng trong ngày, sao chép có xem trước và xuất CSV.
-- Thủ tục SQL kiểm tra trùng lịch và khoảng dọn phòng, thao tác trong transaction.
-- Bộ kiểm tra CSV và SQL integration riêng.
+Khả năng biên dịch không đồng nghĩa mọi màn hình đã được chạy kiểm thử. Xem **KET-QUA-WINFORMS.md** để biết mức xác nhận thực tế.
 
-## Chưa hoàn thiện trong đợt này
-
-Các màn hình đơn đặt vé, bán vé, F&B, khách hàng, nhân viên/phân quyền và báo cáo
-còn cần phát triển nghiệp vụ/database. Website chưa có backend ASP.NET Core;
-Core/Data/Web là các thư mục chuẩn bị, không phải ba project đã hoàn chỉnh.
-Chưa có thanh toán thực và quy trình hoàn vé. Đây chưa phải toàn bộ đồ án hoàn thiện.
-
-## Cấu trúc
-
-| Thư mục | Nội dung |
-| --- | --- |
-| src/YeuMinhEmCinema.Admin | WinForms C#, .NET 10 |
-| src/YeuMinhEmCinema.Core, Data, Web | Giữ chỗ cho bước phát triển tiếp |
-| Database/Scripts | Tạo bảng và thủ tục SQL |
-| Database/Seed | Dữ liệu mẫu, không chạy lại trên máy hiện có để sửa chữ |
-| Design/Web | Web demo và tài nguyên |
-| Design/Admin | Tài liệu thiết kế Admin |
-| Docs | Báo cáo, sơ đồ, hướng dẫn |
-| Tests | Kiểm tra CSV và tích hợp SQL |
-
-## Chạy
-
-Cần Windows, .NET 10 SDK, SQL Server/Express. Chạy SQL theo Database/README.md.
-
-```powershell
-dotnet build .\YeuMinhEmCinema.slnx
-dotnet run --project .\src\YeuMinhEmCinema.Admin\YeuMinhEmCinema.Admin.csproj
-```
-
-Web demo: mở Design/Web/dist/index.html bằng Live Server.
-
-## Kiểm chứng bản sửa
-
-Đã biên dịch Admin bằng .NET SDK 10.0.100 với EnableWindowsTargeting=true trên Linux,
-0 lỗi/0 cảnh báo. Đã kiểm tra cú pháp SQL bằng Microsoft ScriptDom (TSql160Parser).
-Test CSV đã chạy đạt; test SQL integration đã biên dịch nhưng chưa chạy SQL Server.
-Chưa chạy giao diện WinForms trên Windows; cần kiểm thử theo Docs/HuongDan/LICH-CHIEU-HOAN-THIEN.md.
-
-ZIP không chứa lịch sử Git hoặc dữ liệu database. Giữ .git khi cập nhật repo hiện có.
+Các project Core/Data/Web vẫn giữ cấu trúc gốc; không tuyên bố Web ASP.NET đã hoàn thiện. Source có chú thích theo lớp DAL/UI. Không chứa mật khẩu/database người dùng.

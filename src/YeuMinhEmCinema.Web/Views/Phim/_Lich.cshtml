@@ -1,0 +1,52 @@
+@model LichModel
+<form asp-controller="Phim" asp-action="Lich" method="get" class="filters">
+    <div>
+        <label for="maPhim">Phim</label>
+        <select id="maPhim" name="maPhim" required>
+            <option value="">Chọn phim</option>
+            @foreach (DataRow row in Model.DanhSachPhim.Rows)
+            {
+                <option value="@row["MaPhim"]" selected="@(Model.MaPhim == (int)row["MaPhim"])">@row["TenPhim"]</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="maRap">Rạp</label>
+        <select id="maRap" name="maRap">
+            <option value="">Tất cả rạp</option>
+            @foreach (DataRow row in Model.Rap.Rows)
+            {
+                <option value="@row["MaRap"]" selected="@(Model.MaRap == (int)row["MaRap"])">@row["TenRap"]</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="ngay">Ngày chiếu (giờ Việt Nam)</label>
+        <input id="ngay" name="ngay" type="date" value="@Model.Ngay.ToString("yyyy-MM-dd")" required />
+    </div>
+    <button type="submit" class="button">Xem lịch</button>
+</form>
+@if (Model.MaPhim == null)
+{
+    <p class="notice">Chọn phim để xem các suất đang mở bán.</p>
+}
+else if (Model.Lich.Rows.Count == 0)
+{
+    <p class="notice">Chưa có suất phù hợp. Thử rạp hoặc ngày khác.</p>
+}
+else
+{
+    <div class="cinema-grid">
+        @foreach (DataRow row in Model.Lich.Rows)
+        {
+            <article class="cinema-card">
+                <h3>@row["TenRap"]</h3>
+                <p>@row["DiaChi"]</p>
+                <p>@row["TenPhong"] · @row["DinhDang"]</p>
+                <p>@Convert.ToDateTime(row["GioBatDau"]).ToString("dd/MM/yyyy HH:mm")</p>
+                <p>@row["SoGheTrong"] ghế trống</p>
+                <a class="button" asp-controller="DatVe" asp-action="Ghe" asp-route-id="@row["MaSuatChieu"]">Chọn ghế</a>
+            </article>
+        }
+    </div>
+}

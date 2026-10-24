@@ -1,38 +1,52 @@
-﻿# Cập nhật quản lý suất chiếu
+﻿# Cập nhật WinForms YeuMinhEm Cinema
 
-## Bạn đã có database và các suất kiểm thử
+Bản này sửa trực tiếp source bạn gửi YeuMinhEmCinema(4).zip. Không chứa mật khẩu Admin, không chứa database .bak/.mdf.
 
-1. Đóng Admin. Sao lưu folder code hiện tại trước khi ghi đè.
-2. Giải nén ZIP này, vào folder YeuMinhEmCinema, copy các file/thư mục bên trong
-   vào folder repo hiện tại (có YeuMinhEmCinema.slnx). Chọn ghi đè file trùng tên.
-   Giữ nguyên thư mục .git của repo cũ. Không lồng thêm một folder YeuMinhEmCinema.
-3. Trong SSMS, kết nối .\SQLEXPRESS, chạy từng file theo thứ tự:
-   - Database/Scripts/05_ThemSuatChieu.sql
-   - Database/Scripts/06_SuaSuatChieu.sql
-   - Database/Scripts/07_DoiTrangThaiSuatChieu.sql
-   - Database/Scripts/08_SaoChepLich.sql
-   Dừng và kiểm tra nếu Messages có lỗi. File 05 đã cập nhật, cần chạy lại dù trước đây đã có thủ tục thêm.
-   Không chạy lại seed hoặc các script tạo rạp cũ trên máy đã có dữ liệu.
-4. Mở PowerShell tại folder có solution rồi chạy:
+## Máy bạn đã chạy SQL 00–22 và đã có tài khoản Admin
+
+1. Đóng ứng dụng Admin và Visual Studio để tránh chép trúng file đang chạy.
+2. Giải nén vào một thư mục riêng. Có thể mở và thử bản riêng trước khi chép vào repo.
+3. Trong SSMS kết nối `.\SQLEXPRESS`, mở **Database/Scripts/23_WinForms_HoanThien.sql** và nhấn F5 chạy toàn bộ.
+4. Chạy **Database/KIEM-TRA-WINFORMS.sql**. Các cột ID object phải khác NULL. File không sửa tài khoản.
+5. Mở **src/YeuMinhEmCinema.Admin/YeuMinhEmCinema.Admin.csproj** bằng Visual Studio.
+6. Build (Ctrl+Shift+B), rồi F5. NuGet tự khôi phục thư viện, gồm QRCoder để xuất vé QR.
+7. Đăng nhập bằng tài khoản Admin đã tạo trước đây. Không cần tạo lại tài khoản hoặc chạy lại seed.
+
+Không cần chạy lại CAI-DAT-TAT-CA.sql trên database đang dùng. Nếu sau này chạy lại các script cũ 11/15/22, hãy chạy 23 cuối cùng để giữ bản tích hợp mới.
+
+Nếu chép vào repo cũ, chép NỘI DUNG thư mục YeuMinhEmCinema vào đúng thư mục dự án, chọn thay thế file. Giữ thư mục .git của bạn; tránh lồng thành YeuMinhEmCinema/YeuMinhEmCinema. Các Designer chuyển sang giao diện bằng code có file stub đi kèm, phải chép thay thế cả chúng.
+
+## Chạy bằng lệnh
+
+Mở PowerShell tại thư mục có YeuMinhEmCinema.slnx:
 
 ```powershell
-dotnet build .\YeuMinhEmCinema.slnx
 dotnet run --project .\src\YeuMinhEmCinema.Admin\YeuMinhEmCinema.Admin.csproj
 ```
 
-5. Vào Lịch chiếu. Mặc định hiển thị mọi ngày để thấy cả các suất kiểm thử.
+Hoặc nhấp đúp **CHAY-ADMIN.cmd**. Cần Windows, .NET SDK 10 và SQL Server đang chạy; không phải app Web.
 
-## Nếu cài trên máy mới
+## Muốn thử riêng trên database Test
 
-Đọc Database/README.md. Chạy tạo database, bảng và dữ liệu mẫu theo đúng thứ tự;
-không chỉ chạy script 05–08 trên một database rỗng.
+Mở bản sao file 23, đổi dòng `USE YeuMinhEmCinema;` thành `USE YeuMinhEmCinema_Test;`, chạy trên SSMS.
+Sau đó chạy từ PowerShell:
 
-## Phạm vi bản cập nhật
+```powershell
+$env:YMC_CONNECTION = 'Server=.\SQLEXPRESS;Database=YeuMinhEmCinema_Test;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;'
+dotnet run --project .\src\YeuMinhEmCinema.Admin\YeuMinhEmCinema.Admin.csproj
+Remove-Item Env:\YMC_CONNECTION
+```
 
-Hoàn thiện code module lịch chiếu: danh sách/lọc, thêm/sửa, đổi trạng thái/hủy,
-lịch phòng trong ngày, sao chép có xem trước, xuất CSV. Không xóa hoặc đặt lại dữ liệu cũ.
-Bản ZIP là mã nguồn; dữ liệu bạn đã sửa trong SQL Server không tự đi theo ZIP.
+Database Test có cấu trúc riêng. Dữ liệu fixture của bài thử trước đã rollback, nên có thể cần tạo Admin/danh mục riêng trong Test để thao tác UI.
 
-Admin đã được build với .NET 10: 0 lỗi, 0 cảnh báo. Kiểm tra cú pháp SQL và test CSV đã đạt.
-Chưa chạy ứng dụng WinForms trên Windows và chưa thực thi các thủ tục mới trên SQL Server tại môi trường sửa.
-Các module bán vé, F&B, tài khoản, báo cáo và backend web chưa được hoàn thiện trong đợt này.
+## Database mới hoàn toàn
+
+Mở Database/CAI-DAT-TAT-CA.sql và chạy toàn bộ (đã kèm 23 ở cuối). Seed tùy chọn, không bắt buộc. Đủ bảng giá cho từng loại ghế/định dạng/ngày chiếu trước khi bán. Không có admin/mật khẩu mặc định.
+
+## Điểm cần hiểu khi chạy
+
+- Danh mục và tài khoản hiện có giữ trên SQL Server; ZIP không mang theo hay thay mật khẩu.
+- Các màn hình từng minh họa đã thay bằng truy vấn/thao tác SQL. Web trong Design là bản thiết kế cũ, không phải Web backend mới.
+- Thu/hoàn chỉ GHI NHẬN tiền đã nhận/đã hoàn. Không tích hợp ngân hàng thật; không bấm xác nhận nếu chưa thu/hoàn tiền.
+- Đọc Docs/HuongDan/WINFORMS.md để biết quy trình từng mục và các giới hạn đã chốt.
+- Bản này đã build và kiểm tra tự động như KET-QUA-WINFORMS.md; chưa chạy GUI Windows hay SQL 23 trong môi trường đóng gói. Cần kiểm tra chức năng trên máy bạn.

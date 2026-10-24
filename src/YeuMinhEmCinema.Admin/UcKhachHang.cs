@@ -1,77 +1,20 @@
-using System.Data;
-
-namespace YeuMinhEmCinema.Admin
+﻿using System.Data;
+namespace YeuMinhEmCinema.Admin;
+public partial class UcKhachHang:DataPage
 {
-    public partial class UcKhachHang : UserControl
-    {
-        public UcKhachHang()
-        {
-            InitializeComponent();
-            cboHangThanhVien.SelectedIndex = 0;
-            NapKhachHangMinhHoa();
-        }
-
-        private void NapKhachHangMinhHoa()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Mã KH", typeof(string));
-            dt.Columns.Add("Họ và tên", typeof(string));
-            dt.Columns.Add("Số điện thoại", typeof(string));
-            dt.Columns.Add("Email", typeof(string));
-            dt.Columns.Add("Hạng thành viên", typeof(string));
-            dt.Columns.Add("Điểm tích lũy", typeof(string));
-            dt.Columns.Add("Tổng chi tiêu", typeof(string));
-            dt.Columns.Add("Ngày đăng ký", typeof(string));
-
-            dt.Rows.Add("KH001", "Trần Minh Quân", "0901234567", "quan.tran@gmail.com", "Diamond Club", "1.250 điểm", "8.500.000 đ", "12/01/2024");
-            dt.Rows.Add("KH002", "Nguyễn Thu Hà", "0912345678", "ha.nguyen@yahoo.com", "VIP Member", "680 điểm", "4.200.000 đ", "15/03/2024");
-            dt.Rows.Add("KH003", "Lê Văn Đạt", "0987654321", "dat.le@outlook.com", "Standard", "150 điểm", "950.000 đ", "05/06/2025");
-            dt.Rows.Add("KH004", "Phạm Hoàng Yến", "0933445566", "yen.pham@gmail.com", "VIP Member", "820 điểm", "5.600.000 đ", "20/08/2024");
-            dt.Rows.Add("KH005", "Vũ Minh Khang", "0977889900", "khang.vu@gmail.com", "Diamond Club", "1.890 điểm", "12.300.000 đ", "10/11/2023");
-            dt.Rows.Add("KH006", "Đỗ Thị Mai", "0944556677", "mai.do@gmail.com", "Standard", "90 điểm", "600.000 đ", "02/09/2025");
-
-            dgvKhachHang.DataSource = dt;
-        }
-
-        private void dgvKhachHang_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvKhachHang.CurrentRow == null) return;
-
-            DataGridViewRow row = dgvKhachHang.CurrentRow;
-            string ma = row.Cells["Mã KH"].Value?.ToString() ?? "";
-            string ten = row.Cells["Họ và tên"].Value?.ToString() ?? "";
-            string sdt = row.Cells["Số điện thoại"].Value?.ToString() ?? "";
-            string email = row.Cells["Email"].Value?.ToString() ?? "";
-            string hang = row.Cells["Hạng thành viên"].Value?.ToString() ?? "";
-            string diem = row.Cells["Điểm tích lũy"].Value?.ToString() ?? "";
-            string tongTien = row.Cells["Tổng chi tiêu"].Value?.ToString() ?? "";
-
-            lblChiTietKhach.Text =
-                $"• Khách hàng: {ten} ({ma}) | Hạng: {hang} | Điểm thưởng: {diem} | Tổng chi tiêu: {tongTien}\n" +
-                $"• Liên hệ: {sdt} - Email: {email}\n" +
-                $"• Lịch sử xem gần nhất: Đào, Phở và Piano (Suất 19:30, 2 vé VIP C5-C6) | Mai (Suất 20:00, 4 vé IMAX)\n" +
-                $"• Ưu đãi khả dụng: 01 Vé sinh nhật miễn phí (tháng 11) + Voucher giảm 20% Combo F&B.\n" +
-                $"(Dữ liệu minh họa — chưa kết nối cơ sở dữ liệu)";
-        }
-
-        private void btnTimKiem_Click(object sender, EventArgs e)
-        {
-            NapKhachHangMinhHoa();
-            MessageBox.Show(
-                "Đã tìm kiếm danh sách khách hàng (Dữ liệu minh họa).",
-                "Thông báo",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
-        private void BtnChuaTrienKhai_Click(object? sender, EventArgs e)
-        {
-            MessageBox.Show(
-                "Chức năng thêm khách hàng mới đang được phát triển.\n" +
-                "(Dữ liệu minh họa — chưa kết nối cơ sở dữ liệu).",
-                "Thông báo",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-    }
+ private readonly TextBox search=AdminUi.Text(150);
+ public UcKhachHang():base("Hồ sơ khách hàng")
+ {
+  Bar.Controls.AddRange(new Control[]{AdminUi.Label("Tên / số điện thoại"),search});Action("Tìm",Reload);Action("Thêm khách tại quầy",()=>Edit(null),"KHACH_HANG_QUAN_LY");
+  Action("Sửa hồ sơ",()=>Edit(AdminUi.Row(Grid)),"KHACH_HANG_QUAN_LY");Action("Bật / ngừng hồ sơ",Status,"KHACH_HANG_QUAN_LY");Action("Lịch sử đơn",Orders);StandardActions(Reload);Load+=(_,_)=>Run(Reload);
+ }
+ private void Reload(){Db.Require("KHACH_HANG_XEM");AdminUi.Bind(Grid,Db.Query(@"SELECT k.*,t.TenDangNhap FROM dbo.KhachHang k LEFT JOIN dbo.TaiKhoan t ON t.MaTaiKhoan=k.MaTaiKhoan
+ WHERE(@K=N'' OR CHARINDEX(@K,k.HoTen)>0 OR CHARINDEX(@K,k.DienThoai)>0) AND(EXISTS(SELECT 1 FROM dbo.TaiKhoanVaiTro tv JOIN dbo.VaiTro v ON v.MaVaiTro=tv.MaVaiTro WHERE tv.MaTaiKhoan=@A AND v.TenVaiTro='ADMIN' AND v.DangHoatDong=1)
+ OR EXISTS(SELECT 1 FROM dbo.DonHang d JOIN dbo.SuatChieu s ON s.MaSuatChieu=d.MaSuatChieu JOIN dbo.PhongChieu p ON p.MaPhong=s.MaPhong WHERE d.MaKhachHang=k.MaKhachHang AND dbo.fn_YMC_CoPhamViRap(@A,p.MaRap)=1)) ORDER BY k.MaKhachHang DESC",("@K",search.Text.Trim()),("@A",Db.Actor)));}
+ private void Edit(DataRow? r){using var f=new EditDialog(r==null?"Thêm khách tại quầy":"Sửa hồ sơ khách");var name=f.TextField("Họ tên",Convert.ToString(r?["HoTen"])??"");var phone=f.TextField("Điện thoại",Convert.ToString(r?["DienThoai"])??"",20);
+  var birth=f.Field("Ngày sinh (bỏ tích nếu chưa biết)",new DateTimePicker{ShowCheckBox=true,Checked=r?["NgaySinh"] is DateTime,Format=DateTimePickerFormat.Short});if(r?["NgaySinh"] is DateTime d)birth.Value=d;
+  f.Save(()=>{if(string.IsNullOrWhiteSpace(name.Text))throw new ArgumentException("Nhập họ tên.");if(r==null)Db.Call("dbo.sp_YMC_TaoKhachTaiQuay",("@NguoiThucHien",Db.Actor),("@HoTen",name.Text.Trim()),("@DienThoai",phone.Text.Trim()),("@NgaySinh",birth.Checked?birth.Value.Date:null));
+   else Db.Call("dbo.sp_YMC_CapNhatKhachHang",("@NguoiThucHien",Db.Actor),("@MaKhachHang",r["MaKhachHang"]),("@HoTen",name.Text.Trim()),("@DienThoai",phone.Text.Trim()),("@NgaySinh",birth.Checked?birth.Value.Date:null),("@PhienBan",r["PhienBan"]));});if(f.ShowDialog(this)==DialogResult.OK)Reload();}
+ private void Status(){var r=AdminUi.Row(Grid);if(!AdminUi.Confirm("Đổi trạng thái hồ sơ khách? Tài khoản đăng nhập là trạng thái riêng."))return;Db.Call("dbo.sp_YMC_DoiTrangThaiKhach",("@NguoiThucHien",Db.Actor),("@MaKhachHang",r["MaKhachHang"]),("@DangHoatDong",!(bool)r["DangHoatDong"]),("@PhienBan",r["PhienBan"]));Reload();}
+ private void Orders(){var r=AdminUi.Row(Grid);Db.Require("DON_HANG_XEM");var t=Db.Query(@"SELECT d.MaDonHang,d.TrangThai,d.TongTien,d.NgayTaoUtc,f.TenPhim,p.TenPhong,r.TenRap FROM dbo.DonHang d JOIN dbo.SuatChieu s ON s.MaSuatChieu=d.MaSuatChieu JOIN dbo.Phim f ON f.MaPhim=s.MaPhim JOIN dbo.PhongChieu p ON p.MaPhong=s.MaPhong JOIN dbo.Rap r ON r.MaRap=p.MaRap WHERE d.MaKhachHang=@K AND dbo.fn_YMC_CoPhamViRap(@A,r.MaRap)=1 ORDER BY d.MaDonHang DESC",("@K",r["MaKhachHang"]),("@A",Db.Actor));using var f=AdminUi.Dialog("Lịch sử đơn trong rạp được phân công");var g=AdminUi.Grid();AdminUi.Bind(g,t);f.Controls.Add(g);f.ShowDialog(this);}
 }

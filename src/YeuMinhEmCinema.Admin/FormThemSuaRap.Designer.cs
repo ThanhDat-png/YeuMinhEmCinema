@@ -1,4 +1,4 @@
-namespace YeuMinhEmCinema.Admin
+﻿namespace YeuMinhEmCinema.Admin
 {
     partial class FormThemSuaRap
     {
@@ -111,7 +111,7 @@ namespace YeuMinhEmCinema.Admin
             cboTrangThai.DropDownStyle = ComboBoxStyle.DropDownList;
             cboTrangThai.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             cboTrangThai.FormattingEnabled = true;
-            cboTrangThai.Items.AddRange(new object[] { "Đang hoạt động", "Ngừng hoạt động", "Bảo trì" });
+            cboTrangThai.Items.AddRange(new object[] { "Đang hoạt động", "Ngừng hoạt động" });
             cboTrangThai.Location = new Point(20, 238);
             cboTrangThai.Name = "cboTrangThai";
             cboTrangThai.Size = new Size(440, 25);

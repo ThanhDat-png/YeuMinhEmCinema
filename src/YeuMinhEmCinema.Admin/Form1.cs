@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 
 namespace YeuMinhEmCinema.Admin
 {
@@ -14,6 +14,7 @@ namespace YeuMinhEmCinema.Admin
 
             // Khởi tạo danh sách các nút điều hướng sidebar
             KhoiTaoMenuSidebar();
+            KhoiTaoPhanQuyen();
 
             // Thiết lập giá trị mặc định cho bộ lọc phim
             cboLocTrangThai.SelectedIndex = 0;
@@ -44,41 +45,39 @@ namespace YeuMinhEmCinema.Admin
         /// </summary>
         private void ChuyenManHinh(string maManHinh, string tieuDe, Button nutDangChon)
         {
-            // Cập nhật tiêu đề màn hình trên thanh Header
-            lblScreenTitle.Text = tieuDe;
-
-            // Cập nhật hiệu ứng nút menu active
-            foreach (Button btn in _danhSachNutMenu)
+            try{Db.RefreshRights();ApplyRights();}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
+            if(!Allowed(maManHinh)){MessageBox.Show("Bạn không có quyền mở màn hình này.");return;}
+            UserControl? destination=null;
+            if(maManHinh!="QuanLyPhim" && !_danhSachManHinhPhu.TryGetValue(maManHinh,out destination))
             {
-                btn.BackColor = Color.FromArgb(20, 20, 26);
-                btn.ForeColor = Color.FromArgb(203, 213, 225);
-                btn.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular);
-            }
-
-            nutDangChon.BackColor = Color.FromArgb(211, 47, 47);
-            nutDangChon.ForeColor = Color.White;
-            nutDangChon.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-
-            // Xử lý hiển thị nội dung
-            if (maManHinh == "QuanLyPhim")
-            {
-                pnlQuanLyPhim.BringToFront();
-                return;
-            }
-
-            // Nếu màn hình phụ chưa được tạo thì khởi tạo và thêm vào panel nội dung
-            if (!_danhSachManHinhPhu.TryGetValue(maManHinh, out UserControl? uc))
-            {
-                uc = TaoManHinhPhu(maManHinh);
-                if (uc != null)
+                try
                 {
-                    uc.Dock = DockStyle.Fill;
-                    pnlContent.Controls.Add(uc);
-                    _danhSachManHinhPhu[maManHinh] = uc;
+                    destination=TaoManHinhPhu(maManHinh);
+                    if(destination==null)return;
+                    destination.Dock=DockStyle.Fill;
+                    destination.Visible=false;
+                    pnlContent.Controls.Add(destination);
+                    _danhSachManHinhPhu[maManHinh]=destination;
+                }
+                catch(Exception ex){destination?.Dispose();MessageBox.Show(Db.Error(ex));return;}
+            }
+            pnlContent.SuspendLayout();
+            try
+            {
+                foreach(var page in _danhSachManHinhPhu.Values)page.Visible=false;
+                pnlQuanLyPhim.Visible=maManHinh=="QuanLyPhim";
+                if(destination!=null){destination.Visible=true;destination.BringToFront();}
+                else pnlQuanLyPhim.BringToFront();
+                lblScreenTitle.Text=tieuDe;
+                foreach(Button btn in _danhSachNutMenu)
+                {
+                    bool active=btn==nutDangChon;
+                    btn.BackColor=active?AdminUi.Primary:Color.FromArgb(20,20,26);
+                    btn.ForeColor=active?Color.White:Color.FromArgb(203,213,225);
+                    btn.Font=new Font("Segoe UI",9.75F,active?FontStyle.Bold:FontStyle.Regular);
                 }
             }
-
-            uc?.BringToFront();
+            finally{pnlContent.ResumeLayout(true);}
         }
 
         private UserControl? TaoManHinhPhu(string maManHinh)
@@ -116,42 +115,42 @@ namespace YeuMinhEmCinema.Admin
 
         private void btnNavLichChieu_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("LichChieu", "📅 LỊCH CHIẾU & SUẤT CHIẾU (DỮ LIỆU MINH HỌA)", btnNavLichChieu);
+            ChuyenManHinh("LichChieu", "📅 QUẢN LÝ LỊCH CHIẾU", btnNavLichChieu);
         }
 
         private void btnNavGiaVeFnb_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("GiaVeFnb", "🍿 GIÁ VÉ & SẢN PHẨM F&B (DỮ LIỆU MINH HỌA)", btnNavGiaVeFnb);
+            ChuyenManHinh("GiaVeFnb", "🍿 QUẢN LÝ GIÁ VÉ & F&B", btnNavGiaVeFnb);
         }
 
         private void btnNavDonDatVe_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("DonDatVe", "📑 ĐƠN ĐẶT VÉ & HÓA ĐƠN (DỮ LIỆU MINH HỌA)", btnNavDonDatVe);
+            ChuyenManHinh("DonDatVe", "📑 ĐƠN ĐẶT VÉ & HÓA ĐƠN", btnNavDonDatVe);
         }
 
         private void btnNavBanVe_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("BanVe", "🛒 BÁN VÉ TẠI QUẦY - POS (DỮ LIỆU MINH HỌA)", btnNavBanVe);
+            ChuyenManHinh("BanVe", "🛒 BÁN VÉ TẠI QUẦY - POS", btnNavBanVe);
         }
 
         private void btnNavKiemTraVe_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("KiemTraVe", "🔍 KIỂM TRA VÉ & SOÁT VÉ (DỮ LIỆU MINH HỌA)", btnNavKiemTraVe);
+            ChuyenManHinh("KiemTraVe", "🔍 KIỂM TRA VÉ & SOÁT VÉ", btnNavKiemTraVe);
         }
 
         private void btnNavKhachHang_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("KhachHang", "👥 THÀNH VIÊN & KHÁCH HÀNG (DỮ LIỆU MINH HỌA)", btnNavKhachHang);
+            ChuyenManHinh("KhachHang", "👥 THÀNH VIÊN & KHÁCH HÀNG", btnNavKhachHang);
         }
 
         private void btnNavNhanVien_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("NhanVien", "👤 NHÂN SỰ & PHÂN QUYỀN (DỮ LIỆU MINH HỌA)", btnNavNhanVien);
+            ChuyenManHinh("NhanVien", "👤 NHÂN SỰ & PHÂN QUYỀN", btnNavNhanVien);
         }
 
         private void btnNavBaoCao_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("BaoCao", "📈 BÁO CÁO DOANH THU & THỐNG KÊ (DỮ LIỆU MINH HỌA)", btnNavBaoCao);
+            ChuyenManHinh("BaoCao", "📈 BÁO CÁO DOANH THU & THỐNG KÊ", btnNavBaoCao);
         }
 
         #endregion
@@ -164,6 +163,7 @@ namespace YeuMinhEmCinema.Admin
         /// </summary>
         private void TaiDanhSachPhim()
         {
+            if(!rightsReady || !Db.Has("PHIM_XEM")) return;
             string tuKhoa = txtTimKiemPhim.Text.Trim();
             string trangThai = cboLocTrangThai.SelectedItem?.ToString() ?? "Tất cả trạng thái";
 
@@ -218,7 +218,7 @@ namespace YeuMinhEmCinema.Admin
 
         private void CapNhatChiTietPhimDangChon()
         {
-            if (dgvPhim.CurrentRow == null)
+            if (dgvPhim.CurrentRow == null || !dgvPhim.Columns.Contains("MaPhim"))
             {
                 lblChiTietPhim.Text = "Chưa có phim nào được chọn.";
                 return;
@@ -253,6 +253,7 @@ namespace YeuMinhEmCinema.Admin
         // Sự kiện khi nhấn nút Thêm phim mới
         private void btnThemPhim_Click(object? sender, EventArgs e)
         {
+            try{Db.Require("PHIM_QUAN_LY");}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
             using FormThemSuaPhim form = new FormThemSuaPhim();
             if (form.ShowDialog(this) == DialogResult.OK)
             {
@@ -264,7 +265,8 @@ namespace YeuMinhEmCinema.Admin
         // Sự kiện khi nhấn nút Sửa phim
         private void btnSuaPhim_Click(object? sender, EventArgs e)
         {
-            if (dgvPhim.CurrentRow == null)
+            try{Db.Require("PHIM_QUAN_LY");}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
+            if (dgvPhim.CurrentRow == null || !dgvPhim.Columns.Contains("MaPhim"))
             {
                 MessageBox.Show("Vui lòng chọn một bộ phim trong bảng để chỉnh sửa.", "Chưa chọn phim", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -282,7 +284,8 @@ namespace YeuMinhEmCinema.Admin
         // Sự kiện khi nhấn nút Ngừng chiếu (không xóa vật lý theo yêu cầu nghiệp vụ)
         private void btnNgungChieu_Click(object? sender, EventArgs e)
         {
-            if (dgvPhim.CurrentRow == null)
+            try{Db.Require("PHIM_QUAN_LY");}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
+            if (dgvPhim.CurrentRow == null || !dgvPhim.Columns.Contains("MaPhim"))
             {
                 MessageBox.Show("Vui lòng chọn một bộ phim trong bảng để ngừng chiếu.", "Chưa chọn phim", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

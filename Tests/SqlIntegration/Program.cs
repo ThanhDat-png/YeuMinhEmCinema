@@ -1,6 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
 
+if(Environment.GetEnvironmentVariable("YMC_TEST_CONNECTION") is not string testCs || !new SqlConnectionStringBuilder(testCs).InitialCatalog.EndsWith("_Test",StringComparison.OrdinalIgnoreCase))
+ throw new InvalidOperationException("Chỉ chạy khi YMC_TEST_CONNECTION trỏ database có hậu tố _Test.");
 // Chỉ chạy thủ công sau khi cài script 04–08. Tạo và dọn fixture riêng, không sửa dữ liệu người dùng.
 var cs=Environment.GetEnvironmentVariable("YMC_TEST_CONNECTION")??
     @"Server=.\SQLEXPRESS;Database=YeuMinhEmCinema;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";

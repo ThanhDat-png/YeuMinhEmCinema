@@ -10,7 +10,7 @@ internal static class LichChieuUi
     public static Button Nut(string text,EventHandler click,bool chinh=false)
     {
         var b=new Button{Text=text,AutoSize=true,Padding=new Padding(8,5,8,5),
-            BackColor=chinh?Color.FromArgb(211,47,47):Color.FromArgb(51,65,85),ForeColor=Color.White,
+            BackColor=chinh?Color.FromArgb(211, 47, 47):Color.FromArgb(51,65,85),ForeColor=Color.White,
             FlatStyle=FlatStyle.Flat,Cursor=Cursors.Hand,Margin=new Padding(4)};
         b.Click+=click;return b;
     }

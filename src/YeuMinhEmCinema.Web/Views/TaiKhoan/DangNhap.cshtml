@@ -1,0 +1,19 @@
+@model DangNhapModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+<div class="container page-content">
+    <form asp-action="DangNhap" method="post" class="account-form" data-submit>
+        <h1>Đăng nhập</h1>
+        <div asp-validation-summary="ModelOnly" class="validation"></div>
+        <input asp-for="ReturnUrl" type="hidden" />
+        <label asp-for="TenDangNhap">Tên đăng nhập</label>
+        <input asp-for="TenDangNhap" autocomplete="username" />
+        <span asp-validation-for="TenDangNhap" class="validation"></span>
+        <label asp-for="MatKhau">Mật khẩu</label>
+        <input asp-for="MatKhau" type="password" autocomplete="current-password" />
+        <span asp-validation-for="MatKhau" class="validation"></span>
+        <button type="submit" class="button">Đăng nhập</button>
+        <a asp-action="DangKy">Chưa có tài khoản? Đăng ký</a>
+    </form>
+</div>
