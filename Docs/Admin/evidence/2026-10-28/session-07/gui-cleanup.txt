@@ -1,0 +1,2 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+PASS: Đã dọn đúng phim 591 và ba thể loại 80/81/82 fixture GUI T07, giữ nguyên dữ liệu khác.

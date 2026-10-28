@@ -14,6 +14,7 @@ namespace YeuMinhEmCinema.Admin
 
             // Khởi tạo danh sách các nút điều hướng sidebar
             KhoiTaoMenuSidebar();
+            KhoiTaoTheLoai();
             KhoiTaoPhanQuyen();
 
             // Thiết lập giá trị mặc định cho bộ lọc phim
@@ -187,6 +188,7 @@ namespace YeuMinhEmCinema.Admin
                 // Cấu hình tiêu đề và tỷ trọng hiển thị
                 DatTieuDeCot("MaPhim", "Mã phim", 60);
                 DatTieuDeCot("TenPhim", "Tên phim", 180);
+                DatTieuDeCot("TheLoai", "Thể loại", 140);
                 DatTieuDeCot("ThoiLuong", "Thời lượng (phút)", 85);
                 DatTieuDeCot("NgayKhoiChieu", "Ngày khởi chiếu", 95);
                 DatTieuDeCot("GioiHanTuoi", "Giới hạn tuổi", 75);

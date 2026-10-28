@@ -1,4 +1,4 @@
-# Sử dụng Admin
+﻿# Sử dụng Admin
 
 ## Đăng nhập và quyền
 
@@ -78,3 +78,11 @@ Biểu đồ phim/suất/F&B hiển thị tối đa15 mục đầu của bảng,
 Giao dịch lưu UTC; nhãn ngày giờ *_Utc trong bảng và file chi tiết thể hiện UTC. Suất chiếu lưu giờ Việt Nam. CSV UTF-8 BOM hỗ trợ Excel, chặn ô bắt đầu bằng dấu công thức.
 
 Các truy vấn Admin dùng SQL cục bộ đồng bộ và có timeout; database chậm có thể làm chờ giao diện. Bản này dành cho đồ án/quy mô cục bộ; chưa kiểm thử tải hay cân bằng nhiều máy quầy. Web backend/cổng thanh toán production không thuộc bản cập nhật WinForms này.
+
+## Thể loại phim (T07)
+
+Nâng cấp SQL30 trên database đã có29 trước khi dùng bản Admin mới. Quản lý phim → Danh mục thể loại: xem mã/tên/mô tả/trạng thái/số phim; thêm/sửa/ngừng hoặc sử dụng lại theo PHIM_QUAN_LY. PHIM_XEM chỉ xem; SQL kiểm lại quyền mỗi lần, kể cả form đã mở.
+
+Tạo/lưu phim như cũ, chọn dòng phim rồi bấm Thể loại của phim; đánh dấu nhiều loại và Lưu thể loại. Có thể bỏ hết (có xác nhận). Phim cũ không bắt buộc gán; không tự thêm thể loại từ mô tả phim. Loại ngừng đã gán vẫn hiển thị và có thể giữ/bỏ, nhưng không gán mới cho phim khác. Tải lại để nhận danh mục mới nếu bị ngừng trong khi đang chọn.
+
+Danh mục phim/thể loại dùng chung hệ thống; không tự cấp quyền quản lý phim cho quản lý rạp. Web giữ giao diện/hợp đồng cũ, chưa có filter hoặc hiển thị thể loại từ T07. DOCX chưa sửa.

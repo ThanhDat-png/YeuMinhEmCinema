@@ -1,0 +1,21 @@
+PASS: Trùng giờ
+PASS: Bắt đầu nằm trong suất cũ
+PASS: Bắt đầu trước và giao suất cũ
+PASS: Thiếu một phút dọn phòng
+PASS: Đúng ranh giới 20:13
+PASS: Phòng khác cùng giờ
+PASS: Sửa không xung đột với chính mình
+PASS: Đổi phòng trùng lịch
+PASS: Ngừng bán vẫn chiếm lịch
+PASS: Không mở lại suất đã hủy
+PASS: Hủy giải phóng lịch
+PASS: Giờ quá khứ
+PASS: Suất qua đêm
+PASS: Xung đột từ suất hôm trước qua đêm
+PASS: Sao chép toàn nhóm, không lấy suất hủy
+PASS: Sao chép trùng ngày đích
+PASS: Cả nhóm bị chặn khi suất cuối xung đột
+PASS: Không có suất sao chép dở dang
+PASS: Nguồn đổi sau xem trước
+PASS: Hai kết nối đồng thời chỉ tạo một suất
+Đã dọn fixture: YMC_TEST_4f2dea32a89140ac8f0926cb302f58fc

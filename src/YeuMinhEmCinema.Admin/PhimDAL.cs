@@ -2,7 +2,7 @@
 namespace YeuMinhEmCinema.Admin;
 public static class PhimDAL
 {
- public static DataTable LayDanhSachPhim(string? tuKhoa=null,string? trangThai=null){Db.Require("PHIM_XEM");return Db.Query("SELECT * FROM dbo.Phim WHERE (@TK IS NULL OR CHARINDEX(@TK,TenPhim)>0) AND(@TT IS NULL OR TrangThai=@TT) ORDER BY MaPhim DESC",("@TK",string.IsNullOrWhiteSpace(tuKhoa)?null:tuKhoa.Trim()),("@TT",trangThai is null or "Tất cả" or "Tất cả trạng thái"?null:trangThai));}
+ public static DataTable LayDanhSachPhim(string? tuKhoa=null,string? trangThai=null){Db.Require("PHIM_XEM");return Db.Table("dbo.sp_YMC_LayPhimKemTheLoaiAdmin",("@NguoiThucHien",Db.Actor),("@TuKhoa",string.IsNullOrWhiteSpace(tuKhoa)?null:tuKhoa.Trim()),("@TrangThai",trangThai is null or "Tất cả" or "Tất cả trạng thái"?null:trangThai));}
  public static DataRow? LayPhimTheoMa(int maPhim){Db.Require("PHIM_XEM");return Db.First(Db.Query("SELECT * FROM dbo.Phim WHERE MaPhim=@M",("@M",maPhim)));}
  private static (bool,string) Luu(int? ma,string ten,string? mota,int thoiluong,DateTime ngay,string tuoi,string? poster,string? trailer,string tt)
  {try{Db.Call("dbo.sp_YMC_LuuPhim",("@NguoiThucHien",Db.Actor),("@MaPhim",ma),("@TenPhim",ten.Trim()),("@MoTa",mota),("@ThoiLuong",thoiluong),("@NgayKhoiChieu",ngay.Date),("@GioiHanTuoi",tuoi),("@Poster",poster),("@Trailer",trailer),("@TrangThai",tt));return(true,"Đã lưu phim.");}catch(Exception e){return(false,Db.Error(e));}}

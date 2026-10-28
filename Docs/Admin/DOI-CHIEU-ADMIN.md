@@ -1,4 +1,4 @@
-# Đối chiếu Admin với báo cáo
+﻿# Đối chiếu Admin với báo cáo
 
 Mốc ngày 28/10/2026, commit `5a0ee37`. Tập trung hoàn thiện WinForms Admin trong hôm nay. Hồ sơ này là danh sách thực hiện, chưa phải biên bản nghiệm thu sản phẩm.
 
@@ -45,9 +45,9 @@ Dùng ngừng hoạt động/đóng bán, không xóa dữ liệu đã tham chi�
 
 Ưu tiên UI, bộ lọc, truy vấn chỉ đọc và kiểm quyền. SQL mới/mở rộng phải có script áp dụng, ca rollback và kiểm lời gọi cũ; không tự đổi hợp đồng Web.
 
-### D09 Thể loại chưa được coi là đã có
+### D09 Thể loại bổ sung tại T07
 
-Đây là thiếu thật trong bản đúng. Giữ ở backlog P2, chỉ bổ sung additive không làm Web phải đổi. Nếu chưa làm trong ngày, báo cáo phải ghi rõ giới hạn; không xóa dấu vết thiếu để đánh đạt.
+Thiếu ở mốc đầu đã được xử lý bằng SQL30 additive và UI WinForms; không làm Web đổi hợp đồng. Phim cũ không bắt buộc thể loại. Web hiển thị/lọc thể loại chưa triển khai, phải ghi rõ giới hạn trong báo cáo.
 
 ### D10 Loại bỏ bản gửi nhầm
 
@@ -115,11 +115,11 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 
 ### ADM-07 Thể loại phim
 
-- Báo cáo: 4.1.1; 5.2 bảng Genres/MovieGenres.
-- Hiện trạng: Chưa có bảng thể loại, quan hệ phim-thể loại hoặc UI quản lý thể loại trong mã hiện tại.
-- Xử lý: **THIEU_CO_DIEU_KIEN — P2 — OPEN**.
-- Vị trí: `Database/Scripts/00_TaoDatabase_Phim.sql`, `src/YeuMinhEmCinema.Admin/PhimDAL.cs`, `src/YeuMinhEmCinema.Admin/FormThemSuaPhim.cs`.
-- Điều kiện đóng mục: Nếu bổ sung: migration cộng thêm, không đổi cột/hợp đồng cũ và không bắt Web sửa theo. Nếu chưa làm trong ngày: ghi rõ chưa có, không đánh dấu đạt và bỏ khẳng định đã triển khai trong báo cáo.
+- Báo cáo:4.1.1;5.2 Genres/MovieGenres.
+- Hiện trạng: TheLoai/PhimTheLoai, SQL30 và UI danh mục/gán nhiều thể loại đã bổ sung. Không thay schema Phim/giao dịch/hợp đồng Web.
+- Xử lý: **BO_SUNG_ADDITIVE — P2 — DONE**, phiên7.
+- Minh chứng: Database/Tests/10_Admin_TheLoaiPhim.sql, PHIEN-07-KET-QUA.md và evidence/session-07;37 ca nâng cấp/cài mới, GUI admin tạo/sửa/ngừng/gán2 loại.
+- SQL kiểm PHIM_XEM/PHIM_QUAN_LY, giữ quyền mặc định; phim cũ được để trống. Checklist Word riêng, chưa sửa DOCX. Web hiển thị/lọc thể loại chưa làm.
 
 ### ADM-08 Rạp và phòng chiếu
 
@@ -381,9 +381,9 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 
 ### T07 Thể loại và phần mô tả còn thiếu
 
-- Ưu tiên: P2; phiên dự kiến: 3; trạng thái: OPEN.
-- Liên quan: ADM-07, ADM-32.
-- Kết quả cần có: Ước lượng thay đổi schema additive sau P1; chỉ thực hiện nếu không làm Web đổi. Nếu chưa làm ghi thiếu rõ ràng.
+- Ưu tiên:P2; phiên7; trạng thái:DONE theo phạm vi sản phẩm.
+- ADM-07 DONE; ADM-32 còn OPEN tại T09 do chưa chỉnh Word/sơ đồ tổng.
+- Kết quả: SQL30 additive, UI danh mục/gán nhiều thể loại,37 ca nâng cấp/cài mới,hồi quy và GUI. Xem PHIEN-07-KET-QUA.md.
 
 ### T08 Bộ demo và nghiệm thu Admin
 
@@ -427,3 +427,7 @@ T05, ADM-04/ADM-09/ADM-16 DONE đúng phạm vi tìm kiếm và phòng chỉ xem
 ## Cập nhật phiên 6
 
 T06, ADM-25/ADM-26 DONE theo phạm vi đã duyệt; chỉ mở rộng báo cáo hiện có. Không đổi schema/Web/.NET10, chỉ Test. T07 chưa làm theo yêu cầu rõ của người dùng. Checklist chỉnh Word và toàn bộ yêu cầu OPEN/PARTIAL đã lưu riêng, không tuyên bố DOCX được cập nhật. Chưa commit/push phiên6.
+
+## Cập nhật phiên7
+
+T07/ADM-07 DONE; chỉ mở rộng Admin/SQL, giữ Web và runtime/schema giao dịch. ADM-32 chưa đóng vì Word/sơ đồ tổng chưa sửa. T08/T09 còn mở, không tự triển khai. Kết quả/checklist Word/tồn tại ở PHIEN-07-*.md. Các dòng kế hoạch phiên cũ là lịch sử; trạng thái hiện hành ở THEO-DOI.json. T06 đã commit a4e3ae6 theo lệnh người dùng; T07 chưa commit/push.

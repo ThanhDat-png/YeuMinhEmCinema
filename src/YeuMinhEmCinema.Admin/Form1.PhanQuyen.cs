@@ -13,7 +13,8 @@ public partial class Form1
  {
   string[] ids={"TongQuan","QuanLyPhim","RapPhong","LichChieu","GiaVeFnb","DonDatVe","BanVe","KiemTraVe","KhachHang","NhanVien","BaoCao"};
   for(int i=0;i<ids.Length;i++)_danhSachNutMenu[i].Enabled=Allowed(ids[i]);
-  bool phim=Db.Has("PHIM_XEM"),edit=phim&&Db.Has("PHIM_QUAN_LY");btnThemPhim.Enabled=btnSuaPhim.Enabled=btnNgungChieu.Enabled=edit;
+  bool phim=Db.Has("PHIM_XEM"),edit=phim&&Db.Has("PHIM_QUAN_LY");
+  btnDanhMucTheLoai.Enabled=btnGanTheLoai.Enabled=phim;btnThemPhim.Enabled=btnSuaPhim.Enabled=btnNgungChieu.Enabled=edit;
   btnTimKiemPhim.Enabled=btnLamMoiPhim.Enabled=cboLocTrangThai.Enabled=txtTimKiemPhim.Enabled=phim;
   lblUserName.Text=PhienDangNhap.TaiKhoan?.TenDangNhap??"";
   var role=Db.Query("SELECT v.TenHienThi FROM dbo.TaiKhoanVaiTro tv JOIN dbo.VaiTro v ON v.MaVaiTro=tv.MaVaiTro WHERE tv.MaTaiKhoan=@A AND v.DangHoatDong=1",("@A",Db.Actor));

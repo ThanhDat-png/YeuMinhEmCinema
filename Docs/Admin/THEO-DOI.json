@@ -1,4 +1,4 @@
-{
+﻿{
   "date": "2026-10-28",
   "timezone": "Asia/Bangkok",
   "baseline_commit": "5a0ee37c406746b2a23c0db6e2b5f17b46d8f6d6",
@@ -78,6 +78,11 @@
       "id": "D11",
       "title": "Giới hạn phiên6 được người dùng duyệt",
       "decision": "Chỉ T06, giữ .NET10/ADO.NET/schema giao dịch/Web; chỉ Test. Không tự commit/push và không chuyển T07. Sau test cập nhật nhật ký, kết quả, mục cần sửa Word và tồn tại."
+    },
+    {
+      "id": "D12",
+      "title": "T07 thể loại cộng thêm",
+      "decision": "Người dùng duyệt riêng T07; tạo2 bảng và5 procedure mới, dùng quyền phim hiện có. Giữ hợp đồng Web/phim cũ/schema giao dịch; chỉ Test. Không sửa DOCX hoặc commit/push/chuyển T08."
     }
   ],
   "requirements": [
@@ -187,17 +192,20 @@
       "id": "ADM-07",
       "title": "Thể loại phim",
       "report_locator": "4.1.1; 5.2 bảng Genres/MovieGenres",
-      "current": "Chưa có bảng thể loại, quan hệ phim-thể loại hoặc UI quản lý thể loại trong mã hiện tại.",
+      "current": "Đã thêm TheLoai/PhimTheLoai,5 procedure SQL30 và UI danh mục/gán nhiều thể loại; phim cũ không bắt buộc có thể loại. 37 ca SQL đạt nâng cấp/cài mới; GUI admin tạo/sửa/ngừng/gán2 loại đã kiểm; Web giữ nguyên hợp đồng.",
       "evidence": [
-        "Database/Scripts/00_TaoDatabase_Phim.sql",
-        "src/YeuMinhEmCinema.Admin/PhimDAL.cs",
-        "src/YeuMinhEmCinema.Admin/FormThemSuaPhim.cs"
+        "Database/Scripts/30_Admin_TheLoaiPhim.sql",
+        "Database/Tests/10_Admin_TheLoaiPhim.sql",
+        "src/YeuMinhEmCinema.Admin/FormTheLoai.cs",
+        "src/YeuMinhEmCinema.Admin/Form1.TheLoai.cs",
+        "Docs/Admin/PHIEN-07-KET-QUA.md"
       ],
-      "disposition": "THIEU_CO_DIEU_KIEN",
+      "disposition": "BO_SUNG_ADDITIVE",
       "priority": "P2",
       "acceptance": "Nếu bổ sung: migration cộng thêm, không đổi cột/hợp đồng cũ và không bắt Web sửa theo. Nếu chưa làm trong ngày: ghi rõ chưa có, không đánh dấu đạt và bỏ khẳng định đã triển khai trong báo cáo.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "DONE",
+      "product_completed": true,
+      "completed_session": 7
     },
     {
       "id": "ADM-08",
@@ -603,11 +611,12 @@
       "id": "ADM-32",
       "title": "Minh chứng, thiết kế dữ liệu và phần đóng góp",
       "report_locator": "5.1–5.3; 6.3–6.5; phụ lục",
-      "current": "Sơ đồ còn dùng API/EF/schema tiếng Anh dự kiến; báo cáo để chưa kiểm chứng. Có bằng chứng chạy tự động nhưng chưa đủ ảnh GUI.",
+      "current": "Sơ đồ còn dùng API/EF/schema tiếng Anh dự kiến; báo cáo để chưa kiểm chứng. Có bằng chứng chạy tự động nhưng chưa đủ ảnh GUI. T07 đã bổ sung bản đồ TheLoai/PhimTheLoai và checklist chỉnh Word; chưa sửa DOCX/sơ đồ tổng, vẫn OPEN tại T09.",
       "evidence": [
         "YeuMinhEmCinema.slnx",
         "src/YeuMinhEmCinema.Admin/Db.cs",
-        "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+        "Database/Scripts/12_DonHang_Ve_ThanhToan.sql",
+        "Docs/Admin/PHIEN-07-DIEU-CHINH-BAO-CAO.md"
       ],
       "disposition": "SUA_BAO_CAO",
       "priority": "P1",
@@ -714,7 +723,9 @@
       ],
       "session": 7,
       "acceptance": "Ước lượng thay đổi schema additive sau P1; chỉ thực hiện nếu không làm Web đổi. Nếu chưa làm ghi thiếu rõ ràng.",
-      "state": "OPEN"
+      "state": "DONE",
+      "completed_session": 7,
+      "evidence": "Docs/Admin/PHIEN-07-KET-QUA.md"
     },
     {
       "id": "T08",
@@ -788,8 +799,8 @@
     },
     {
       "number": 7,
-      "status": "NOT_STARTED",
-      "scope": "T07: còn mở, chỉ bắt đầu khi người dùng yêu cầu riêng"
+      "status": "COMPLETE",
+      "scope": "Chỉ T07: thể loại cộng thêm,37 ca SQL nâng cấp/cài mới,hồi quy và GUI admin; Word chưa sửa, không T08/commit/push"
     },
     {
       "number": 8,
@@ -797,5 +808,27 @@
       "scope": "T08–T09: demo, hồi quy tổng và cập nhật DOCX Admin khi được yêu cầu"
     }
   ],
-  "git_policy": "Luôn đọc/đối chiếu báo cáo trước triển khai. Chỉ commit và push khi có lệnh rõ ràng của người dùng; test đạt không tự cấp quyền commit/push."
+  "git_policy": "Luôn đọc/đối chiếu báo cáo trước triển khai. Chỉ commit/push khi có lệnh rõ ràng; test đạt không tự cấp quyền. Thông điệp commit bằng tiếng Việt, chỉ nội dung văn bản, không thêm tiền tố feat/fix. Người dùng đã duyệt commit T07 và push toàn bộ ngày 28/10/2026; không tự chuyển T08.",
+  "commit_aliases": [
+    {
+      "old": "ed8b4a241de9744356ad5502b80f8398779f317c",
+      "new": "69e1fcbe0e886c5f2ab8c706b95999c2170ecd6f"
+    },
+    {
+      "old": "834ab9558415a1fb9d3e855c0f379fbd898b08c0",
+      "new": "a45af770e23a73afff3b70fc412587669c53f1ae"
+    },
+    {
+      "old": "47a3f9a335573840e1473d4143b8905ee9672c88",
+      "new": "c196163e58d967102aac35cbc8e727add2bd5b34"
+    },
+    {
+      "old": "c6db703855d81c19162968be27e3a1f5f8a458c7",
+      "new": "df0e724d332a120dd505f217ef51edfb37c0804a"
+    },
+    {
+      "old": "a4e3ae6ee3abfbf0cfbf6accbb4dcdf8de6c5999",
+      "new": "94838a7eff2dee925d8a44ba95f90f092f047dd2"
+    }
+  ]
 }

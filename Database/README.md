@@ -1,4 +1,4 @@
-# YeuMinhEmCinema — bộ SQL cho Admin WinForms và Web C#
+﻿# YeuMinhEmCinema — bộ SQL cho Admin WinForms và Web C#
 
 Đây là bộ database và stored procedure, không chứa mã C# và không thay thế ứng dụng hiện tại.
 Nền tảng: SQL Server 2017 trở lên, compatibility level tối thiểu 140; SQL Server Express dùng được.
@@ -166,3 +166,13 @@ Chạy Scripts/28_Admin_TimKiem.sql trên database đã có SQL 23/25/26/27 rồ
 Chi tiết vé và F&B được tổng hợp riêng từng đơn trước khi join với giao dịch duy nhất mỗi đơn, tránh nhân nhiều vé×nhiều F&B. Không dùng bảng giá hiện tại hoặc thành phần combo để tính lại tiền đã thu. Khoản hoàn là toàn đơn gồm vé/F&B, không tự phân bổ thành hai khoản hoàn giả. Thuần ở đây là thu trừ hoàn, chưa phải lợi nhuận sau chi phí.
 
 Không cộng chéo kết quả theo ngày thu với kết quả theo ngày chiếu. Từng suất là số lũy kế hiện tại cho tập suất đã chọn, không phải báo cáo đóng sổ theo thời điểm quá khứ. Tên phim/phòng và sức chứa báo cáo cũ vẫn theo danh mục hiện tại; tiền dùng snapshot/giao dịch đã chốt. Chưa đo hiệu năng trên dữ liệu lớn.
+
+## SQL30 — thể loại phim cho Admin
+
+Sau các script hiện có đến29, áp dụng `Scripts/30_Admin_TheLoaiPhim.sql`; đổi USE thành database Test khi thử. Hai bộ cài tổng đã kèm30. Chỉ Test local đã nâng cấp trong T07; không tự chạy trên dữ liệu thật.
+
+Tạo thêm TheLoai (tên UNIQUE không phân biệt hoa/thường, mô tả, DangSuDung), PhimTheLoai (PK ghép,FK không cascade), YMC_DanhSachTheLoai và5 proc mới: LayTheLoaiAdmin/LuuTheLoai/LayTheLoaiCuaPhim/GanTheLoaiPhim/LayPhimKemTheLoaiAdmin (đều tiền tố sp_YMC_). Đọc kiểm PHIM_XEM, ghi kiểm PHIM_QUAN_LY; không cấp quyền mới. Danh mục chung như phim, không theo rạp.
+
+Tên trim, tối đa100 ký tự; mô tả1000; không trùng kể cả đã ngừng. Phim cũ để trống hợp lệ. Ngừng giữ liên kết cũ, không cho gán mới; sử dụng lại được. Gán tập thể loại bằng TVP trong transaction và khóa YMC_Genre_Write. Không có UI xóa vật lý; không có rowversion chống ghi đè danh mục. Không đổi bảng Phim/giao dịch hoặc hợp đồng procedure Web/lưu phim cũ.
+
+Test10 có37 ca rollback; trước/sau upgrade giữ nguyên đối tượng/dữ liệu được audit. Chi tiết Docs/Admin/PHIEN-07-KET-QUA.md.

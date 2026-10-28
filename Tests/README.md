@@ -1,4 +1,4 @@
-# Kiểm thử
+﻿# Kiểm thử
 
 ## Không cần SQL Server
 
@@ -85,3 +85,9 @@ sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/09_Admin_BaoCaoP
 Fixture mẫu rạp A: thu vé320000 + F&B140000 = thu460000, hoàn230000, thuần230000. Phim A thu340000/hoàn230000/thuần110000; phim B thu120000. Báo cáo cũ còn tiền vé160000 và F&B70000 từ đơn chưa hoàn. Không so sánh các cơ sở ngày khác nhau nếu không cùng tập giao dịch/suất.
 
 Đã kiểm nâng cấp/cài mới, SQL01/02/07, AdminSmoke và GUI bản cuối. Kết quả: Docs/Admin/PHIEN-06-KET-QUA.md; checklist Word và các mục còn mở đi kèm. Chưa kiểm GUI với mọi vai trò/CSV dialog hoặc benchmark dữ liệu lớn.
+
+## T07 — thể loại Admin (chỉ Test)
+
+Cài SQL30 lên Test sau29 hoặc cài bộ CAI-DAT-TEST mới. Chạy `sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/10_Admin_TheLoaiPhim.sql`.
+
+37 ca riêng có rollback: CRUD mềm/tên/mô tả/trạng thái, nhiều thể loại/thay/bỏ tập gán, inactive/stale form, dữ liệu sai/trùng, đọc/ghi/thu hồi quyền, khóa/ngừng nhân viên, caller phim/Web. SQL30 không thay procedure cũ. Đã chạy nâng cấp2 lần/cài mới riêng; hồi quy SQL01/02/04/09 và SqlIntegration/AdminSmoke/WebSmoke/CatalogSmoke. Xem Docs/Admin/PHIEN-07-KET-QUA.md và evidence/2026-10-28/session-07; không suy từ SQL/smoke giả sang nghiệm thu GUI đầy đủ.

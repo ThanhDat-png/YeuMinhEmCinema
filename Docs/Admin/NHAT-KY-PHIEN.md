@@ -1,4 +1,4 @@
-# Nhật ký các phiên Admin
+﻿# Nhật ký các phiên Admin
 
 ## Phiên 1 ngày 28/10/2026
 
@@ -95,3 +95,19 @@ Trạng thái: HOÀN THÀNH hai đầu việc sửa đã chốt; xem `PHIEN-02-K
 - Dọn đúng fixture GUI gồm thu/hoàn/đơn giữ, xóa database cài mới tạm. Chỉ Test local được nâng cấp. Không lưu PNG GUI/log.NET giả.
 - Kết quả PHIEN-06-KET-QUA.md; checklist chỉnh Word PHIEN-06-DIEU-CHINH-BAO-CAO.md; mọi yêu cầu còn mở ở PHIEN-06-CON-TON-TAI.md. DOCX chưa sửa.
 - T06 đóng; T07 chưa bắt đầu. Chưa commit/push phiên 6.
+
+## Phiên7 — 28/10/2026: chỉ T07
+
+- Người dùng đã chốt/cho commit T06: a4e3ae6, chưa push. Duyệt riêng T07; không sửa Word/commit/push/T08.
+- Đọc lại DOCX hash329d4cf1…;4.1.1/5.2 Genres/MovieGenres. Chọn2 bảng TheLoai/PhimTheLoai và5 procedure mới, không đổi schema cũ hoặc quyền mặc định.
+- UI quản lý danh mục tên/mô tả/trạng thái và hộp gán nhiều thể loại cho phim đang chọn. Phim cũ không bắt buộc gán; ngừng thể loại giữ liên kết cũ và chặn gán mới tại SQL.
+-37/37 SQL đạt trên Test nâng cấp và Test cài mới; migration áp dụng2 lần; audit đối tượng/dữ liệu được kiểm trước/sau giống nhau. Test cài mới riêng đã dọn.
+- Build0 lỗi/0 cảnh báo; SQL01/02/04/09, SqlIntegration, AdminSmoke, WebSmoke và CatalogSmoke đạt. SQL01 bản chạy thêm2 thể loại trước bán, kiểm lịch Web không nhân dòng.
+- GUI admin thật: gán80+81 cho phim591, tạo82, sửa mô tả80/ngừng80 vẫn giữ liên kết. Có SQL đối chứng, đã dọn đúng fixture; không lưu PNG hoặc khẳng định GUI mọi vai trò.
+- Kết quả PHIEN-07-KET-QUA.md; checklist Word PHIEN-07-DIEU-CHINH-BAO-CAO.md; tồn tại PHIEN-07-CON-TON-TAI.md. T07/ADM-07 DONE; ADM-32 còn OPEN cho T09. Word nguyên hash; không commit/push hoặc chuyển T08.
+
+## Chốt Git sau T07 — 28/10/2026
+
+- Người dùng yêu cầu commit T07 và push toàn bộ; thông điệp tiếng Việt, không tiền tố feat/fix, đổi thông điệp tiếng Anh của các phiên Admin trước.
+- Đã fetch: remote main ở47a3f9a, không có commit mới của nhóm. Đổi5 commit Admin sau5a0ee37, giữ cây nội dung từng commit; tạo ref dự phòng local. Bảng đối chiếu mã cũ/mới ở DOI-CHIEU-COMMIT.md.
+- T07 được đưa vào commit mới với thông điệp tiếng Việt. Dùng force-with-lease gắn mã remote đã kiểm tra; kết quả đồng bộ được xác nhận trong phản hồi cuối phiên. Không triển khai T08.

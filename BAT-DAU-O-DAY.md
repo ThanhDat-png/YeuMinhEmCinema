@@ -1,4 +1,4 @@
-# Cập nhật WinForms YeuMinhEm Cinema
+﻿# Cập nhật WinForms YeuMinhEm Cinema
 
 Bản này sửa trực tiếp source bạn gửi YeuMinhEmCinema(4).zip. Không chứa mật khẩu Admin, không chứa database .bak/.mdf.
 
@@ -80,3 +80,9 @@ Database đã có SQL 23/25/26/27: áp dụng `Database/Scripts/28_Admin_TimKiem
 Database đang có SQL 23/25/26/27/28: chạy `Database/Scripts/29_Admin_BaoCaoPhimSuat.sql` trên đúng database rồi dùng Admin mới. Với Test đổi USE; không seed/schema mới/SQL 24 Web. Hai bộ cài tổng đã kèm29. Không tự chạy lên database chính khi chỉ kiểm thử.
 
 Trong Tổng quan/Báo cáo: chọn rạp, phim hoặc Tất cả phim, khoảng ngày Việt Nam rồi chọn chế độ. Thu/hoàn dùng ngày giao dịch; Từng suất dùng ngày bắt đầu chiếu và tiền lũy kế của suất. Các cột thu vé/F&B là trước hoàn; tổng thu lấy ThanhToan, hoàn lấy HoanTien; thuần=thu−hoàn. Hiệu quả phim và Bắp nước bán giữ nghĩa chỉ đơn đã trả chưa hoàn, có nhãn giải thích riêng.
+
+## Cập nhật T07 (28/10/2026)
+
+Admin có danh mục thể loại và gán nhiều thể loại/phim. Nâng cấp SQL30 trước khi chạy Admin mới, chọn đúng database Test khi kiểm thử. T06 đã commit a4e3ae6; T07 chưa commit/push. Kết quả và tồn tại: Docs/Admin/PHIEN-07-KET-QUA.md, PHIEN-07-CON-TON-TAI.md. Không sửa DOCX/triển khai T08 trong T07.
+
+Cập nhật Git 28/10/2026: người dùng đã duyệt commit/push T07 và đổi thông điệp5 commit Admin trước sang tiếng Việt. Mã commit lịch sử đối chiếu tại Docs/Admin/DOI-CHIEU-COMMIT.md; không chuyển T08.

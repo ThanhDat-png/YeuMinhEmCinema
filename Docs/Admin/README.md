@@ -1,4 +1,4 @@
-# Hoàn thiện WinForms Admin
+﻿# Hoàn thiện WinForms Admin
 
 Đây là điểm bắt đầu cho các phiên tiếp theo. Người phụ trách Admin là người dùng trong cuộc trò chuyện; không gán quyền tác giả đối với code nhóm đã có.
 
@@ -44,3 +44,7 @@ Phiên 4 hoàn tất T04: xem `PHIEN-04-KET-QUA.md`. ADM-18/ADM-20 DONE. Nền c
 Phiên 5 hoàn tất T05, xem `PHIEN-05-KET-QUA.md`; ADM-04/09/16 DONE, menu khác tại ADM-02 vẫn còn rà. Nền commit 47a3f9a; phiên 5 chưa commit/push. Kế tiếp T06 báo cáo theo phim/suất rồi T07 thể loại, demo/tài liệu sau.
 
 Phiên 6 hoàn tất T06: `PHIEN-06-KET-QUA.md`. Công thức/các mục cần chỉnh Word: `PHIEN-06-DIEU-CHINH-BAO-CAO.md`; tồn tại: `PHIEN-06-CON-TON-TAI.md`. Nền commit c6db703, chưa commit/push phiên 6, không tự làm T07.
+
+Phiên7 hoàn tất T07/ADM-07. Xem `PHIEN-07-KET-QUA.md`, `PHIEN-07-DIEU-CHINH-BAO-CAO.md` và `PHIEN-07-CON-TON-TAI.md`. T06 đã commit a4e3ae6; T07 chưa commit/push. ADM-32/T08/T09 còn mở; DOCX chưa sửa.
+
+Cập nhật Git 28/10/2026: người dùng đã duyệt commit/push T07 và đổi thông điệp5 commit Admin trước sang tiếng Việt. Mã commit lịch sử đối chiếu tại Docs/Admin/DOI-CHIEU-COMMIT.md; không chuyển T08.
