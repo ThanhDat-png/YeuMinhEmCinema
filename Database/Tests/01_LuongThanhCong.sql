@@ -1,6 +1,7 @@
 ﻿-- CHỈ CHẠY TRÊN BẢN SAO DATABASE. Hash X chỉ là fixture, không phải tài khoản dùng thực tế.
-USE YeuMinhEmCinema;
+USE YeuMinhEmCinema_Test;
 GO
+IF DB_NAME() NOT LIKE N'%[_]Test' THROW 50980,N'Chỉ chạy kiểm thử trên database có hậu tố _Test.',1;
 SET XACT_ABORT ON;
 BEGIN TRY
  BEGIN TRAN;

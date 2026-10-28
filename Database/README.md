@@ -1,76 +1,80 @@
-﻿# YeuMinhEmCinema — bộ SQL cho Admin WinForms và Web C#
+﻿# YeuMinhEmCinema — SQL Server cho Admin WinForms và Web
 
-Đây là bộ database và stored procedure, không chứa mã C# và không thay thế ứng dụng hiện tại.
-Nền tảng: SQL Server 2017 trở lên, compatibility level tối thiểu 140; SQL Server Express dùng được.
-Tất cả SQL dùng UTF-8 BOM và N'...' cho văn bản tiếng Việt.
+Giữ nguyên cấu trúc Scripts/Seed/Tests và các đường dẫn hiện có. SQL Server 2017 trở lên, compatibility level tối thiểu140; văn bản SQL UTF-8, dùng N'...' cho tiếng Việt.
 
-## Chạy trên máy bạn
+## 1. Cài đặt database mới
 
-1. Giải nén ZIP. Chép thư mục này vào `Database` của dự án, hoặc giữ riêng để đọc.
-2. Đóng ứng dụng Admin/Web đang kết nối database.
-3. Trong SSMS kết nối `.\SQLEXPRESS` bằng Windows Authentication.
-4. Mở `CAI-DAT-TAT-CA.sql` bằng File → Open → File.
-5. Nhấn F5 chạy TOÀN BỘ file. Không cần SQLCMD Mode, không cần chọn đoạn code.
-6. Kết quả cuối phải có: `HOÀN TẤT CẤU TRÚC SQL. Dữ liệu mẫu chưa được thêm.`
-7. Chạy `KIEM-TRA-CAI-DAT.sql`. Cột thiếu bảng/procedure phải không có dòng; các cột đếm là số thực tế trên máy.
-8. Chạy `Scripts/20_KiemThu_NghiepVu.sql`: các truy vấn lỗi trả về 0 dòng là kết quả mong đợi.
+1. Trong SSMS, kết nối đúng SQL Server; chọn một bộ cài: `CAI-DAT-TAT-CA.sql` cho YeuMinhEmCinema, hoặc `CAI-DAT-TEST.sql` cho YeuMinhEmCinema_Test.
+2. Đọc tên database trong các dòng USE/CREATE DATABASE trước khi chạy. Chạy toàn bộ file bằng F5, không cần SQLCMD Mode. Không chạy đồng thời với ứng dụng hoặc một lần cài khác.
+3. Đợi hết file, kiểm tra lỗi ở Messages. Thông báo “HOÀN TẤT CẤU TRÚC SQL” nằm trước các phần nối thêm; chỉ thấy dòng đó chưa chứng minh toàn bộ file đã thành công.
+4. Chạy `KIEM-TRA-CAI-DAT.sql` sau khi chọn đúng USE (với Test đổi thành YeuMinhEmCinema_Test). Các tập thiếu bảng/procedure/function/view/kiểu bảng phải rỗng. Script chỉ kiểm sự tồn tại, không chứng minh đủ hành vi/tham số nghiệp vụ.
+5. Seed là tùy chọn, thực hiện riêng theo mục3. Không có tài khoản/mật khẩu Admin mặc định; khởi tạo qua ứng dụng theo hướng dẫn hiện có.
 
-File tổng tạo database nếu chưa tồn tại; nếu đã có thì giữ lại ID và dữ liệu.
-Nó tạo bảng còn thiếu và cập nhật định nghĩa procedure/view/function. Nó không tự sửa cấu trúc bảng cùng tên có schema khác.
-Nếu báo lỗi, gửi NGUYÊN THÔNG BÁO để kiểm tra; đừng xóa database đang dùng.
-Các thay đổi cấu trúc trong một lần cài được đặt trong transaction; nếu thất bại sẽ rollback phần cài đặt.
-Database mới được tạo trước transaction; nếu cài lỗi, database rỗng có thể vẫn tồn tại.
-Việc tạo database và cập nhật cấu trúc cần tài khoản SQL có quyền tương ứng.
+Hai bộ cài tổng chứa phần nền00–22 cần thiết, SQL23 và25–30. Không tự chạy seed hoặc các bài thử ghi dữ liệu. SQL24 thanh toán mô phỏng Web được cài riêng, không mặc định nằm trong hai bộ cài tổng.
 
-Không chạy riêng script 05 sau khi cài đủ rồi bỏ qua 22: file 22 nâng cấp kiểm tra liên quan đến đơn hàng.
-Để áp dụng lại phiên bản này, chạy file tổng thay vì chọn ngẫu nhiên các file cũ.
-Các cặp quyền mặc định chỉ gán ở lần đầu tạo VaiTro; cài lại không tự cấp lại quyền đã thu hồi.
+Giới hạn transaction: phần nền có transaction riêng và COMMIT trước các phần nối thêm từ SQL23; database được tạo trước transaction đó. Lỗi ở phần sau không bảo đảm rollback mọi phần đã thành công trước đó. Kiểm tra toàn bộ Messages và các đối tượng còn thiếu; không xóa database để thử lại.
 
-## Database hiện tại đã có dữ liệu
+## 2. Nâng cấp database hiện có
 
-Chỉ chạy file tổng và các câu kiểm tra. KHÔNG chạy lại seed chỉ để sửa font.
-Không xóa rạp/phòng/loại ghế cũ, không đổi ID và không reset identity.
-Các sửa lỗi tiếng Việt trước đây của bạn được giữ nguyên.
-Nếu đã tạo file 10 từ nội dung chat trước đó, cấu trúc tương ứng được tái sử dụng.
+Xác định mức SQL đang có trước khi chọn bản nâng cấp; sao lưu theo quy trình của nhóm và đóng ứng dụng khi triển khai. Trong phiên kiểm thử chỉ dùng Test. Không chạy seed để sửa font hoặc nâng cấp; không xóa/reset ID hay ghi đè dữ liệu hiện có.
 
-## Database mới muốn có dữ liệu mẫu
+Với database đã có nền00–22, thứ tự nâng cấp Admin thống nhất là:
 
-Sau khi cài cấu trúc thành công, tùy chọn chạy lần lượt:
+`23 → 25 → 26 → 27 → 28 → 29 → 30`
+
+- SQL23: hoàn thiện WinForms, phạm vi rạp, thao tác khách/ghế/quyền và guard phân quyền.
+- SQL25: vá quyền/phạm vi các thao tác ghi danh mục, kể cả lô ghế.
+- SQL26: soát vé theo suất/phòng và danh sách suất soát.
+- SQL27: mở rộng tra cứu đơn; tiền khách đưa được kiểm trong C#, không tạo schema tiền mặt mới.
+- SQL28: tìm kiếm nhân viên, phòng và suất tại quầy.
+- SQL29: báo cáo thu/hoàn chi tiết, phim và từng suất.
+- SQL30: thể loại phim, quan hệ gán nhiều thể loại và procedure Admin; phim cũ không bắt buộc gán.
+
+Chỉ áp dụng phần còn thiếu sau mức đã xác nhận. SQL24 (`Scripts/24_Web_MoPhongThanhToan.sql`) là phần Web cài riêng sau nền/phân quyền cần thiết, không phải điều kiện của chuỗi25–30; tham khảo hướng dẫn Web hiện có. Không tự bổ sung SQL24 vào bộ cài trong lần chuẩn hóa này.
+
+Không chạy lại riêng các file cũ rồi bỏ qua bản vá mới:17 có thủ tục được25 cập nhật,16 được26 cập nhật,19 được27 cập nhật,18 được29 cập nhật;11/15/22 cũng liên quan tích hợp23. Không chạy hàng loạt mọi file trong Scripts theo tên. Nếu cần áp dụng lại bộ cài tổng theo hướng dẫn hiện có, phải đọc toàn bộ lỗi và kiểm tra các phần nối thêm như mục1; bộ cài không tự sửa mọi schema cùng tên nhưng khác cấu trúc.
+
+Các script nâng cấp mặc định USE YeuMinhEmCinema; khi thử phải đổi bản chạy sang đúng Test trước khi thực thi. Vai trò/quyền mặc định không được tự cấp lại chỉ vì cài lại. Không đưa mật khẩu, SQL Login hoặc dữ liệu mẫu tài khoản vào luồng nâng cấp.
+
+## 3. Dữ liệu mẫu — chỉ dùng khi chủ động chọn
+
+Nguồn seed chính thức nằm trong `Seed/`, không thuộc luồng nâng cấp. Sau khi cấu trúc đã cài thành công, có thể chạy theo thứ tự:
 
 1. `Seed/01_DuLieuMau_Phim.sql`.
 2. `Seed/02_DuLieuMau_Rap_Phong_Ghe.sql`.
-3. `Seed/03_GiaVe_Fnb_Mau.sql`.
+3. `Seed/03_GiaVe_Fnb_Mau.sql` (cần phần giá/menu SQL09 và dữ liệu loại ghế/phòng phù hợp).
+4. `Seed/25_PhimDemo_Web.sql` là lựa chọn bổ sung16 phim hư cấu phục vụ giao diện Web; số25 không phải bản vá Admin SQL25.
 
-Seed là dữ liệu minh họa, không phải dữ liệu thật. Seed 03 chỉ có mẫu giá cho ghế thường và định dạng tìm được, chưa phủ toàn bộ VIP/Sweetbox/định dạng.
-Hãy tạo bảng giá đủ các tổ hợp trước khi bán; hệ thống sẽ báo lỗi nếu thiếu giá.
-Không có mật khẩu/admin mặc định. Khi làm C#, dùng PasswordHasher tạo chuỗi băm rồi gọi `sp_YMC_KhoiTaoAdmin` một lần.
-Script không tự tạo SQL Login và không lưu mật khẩu gốc. Không dùng chuỗi hash X trong file kiểm thử để đăng nhập thực tế.
+Các seed mặc định USE database chính: phải kiểm tên đích, và chỉ dùng bản trỏ Test khi thử. Giá mẫu chưa phủ hết mọi loại ghế/định dạng; cần đủ bảng giá trước khi bán. Không chạy seed trên dữ liệu thật trong phiên kiểm thử.
 
-## Các file chức năng
+`Scripts/02_DuLieuMau_Rap_Phong_Ghe.sql` là bản trùng nội dung với Seed/02, đang giữ để tương thích. Chọn Seed/02, không chạy thêm bản Scripts/02 trong cùng quy trình.
 
-| File Scripts | Chức năng |
-|---|---|
-| 00 | Database, phim |
-| 01 | Rạp, phòng, loại ghế, ghế |
-| 03 | Tra cứu dữ liệu rạp/phòng/ghế |
-| 04–08 | Suất chiếu, xung đột, dọn phòng, sửa, đổi trạng thái, sao chép |
-| 09 | Giá vé, menu bắp nước, combo, tra giá |
-| 10 | Tài khoản, vai trò, quyền, kết quả đăng nhập |
-| 11 | Khách hàng, nhân viên, phạm vi rạp, đăng ký, bootstrap admin |
-| 12 | Đơn, chi tiết, giữ ghế, thanh toán, vé, hoàn tiền; kiểu TVP |
-| 13 | Tạo đơn giữ ghế, dọn hết hạn, sơ đồ ghế |
-| 14 | Ghi nhận thanh toán và xem chi tiết đơn |
-| 15 | Hủy đơn chưa trả tiền, ghi nhận hoàn toàn bộ đơn |
-| 16 | Xem/kiểm vé, ngăn kiểm hai lần |
-| 17 | Thêm/sửa danh mục, đổi trạng thái tài khoản, đổi mật khẩu |
-| 18 | Báo cáo thu/hoàn, doanh số phim, bắp nước |
-| 19 | Danh sách phim/chi tiết/lịch Web, đơn cá nhân, danh sách đơn Admin |
-| 20 | Truy vấn phát hiện vi phạm nghiệp vụ |
-| 21 | Gán vai trò, sửa quyền, nhân viên, phân công rạp |
-| 22 | Wrapper kiểm quyền cho lịch chiếu/giá/menu và tích hợp bảo vệ đơn |
+## 4. Kiểm tra chỉ đọc
 
-Không có Scripts/02: dữ liệu mẫu được đặt duy nhất trong Seed để tránh chạy nhầm.
-File tổng không chạy seed, không chạy các bài kiểm thử ghi dữ liệu và không tự bán vé.
+- `KIEM-TRA-CAI-DAT.sql`: bảng/procedure/function/view/TVP còn thiếu; thống kê vai trò, quyền, tài khoản. SQL24 được hiển thị riêng như thành phần Web tùy chọn.
+- `KIEM-TRA-WINFORMS.sql`: kiểm một số đối tượng hỗ trợ WinForms/SQL23, không thay thế kiểm tra cài đặt đầy đủ.
+- `KIEM-TRA-LOI-TONG-QUAN.sql`: chẩn đoán truy vấn Tổng quan.
+- `Scripts/03_KiemTraDuLieu.sql`: tra cứu dữ liệu rạp/phòng/ghế.
+- `Scripts/20_KiemThu_NghiepVu.sql`: truy vấn phát hiện vi phạm; tập lỗi rỗng là kết quả mong đợi.
+
+Các file trên không ghi dữ liệu nghiệp vụ, nhưng vẫn phải kiểm dòng USE. Kiểm đối tượng tồn tại không đồng nghĩa đã nghiệm thu giao diện hoặc toàn bộ nghiệp vụ.
+
+## 5. Kiểm thử có tạo dữ liệu tạm
+
+`Tests/01_LuongThanhCong.sql`, `02_TuChoiNghiepVu.sql` và04–10 tạo fixture/thay đổi trạng thái hoặc quyền trong kiểm thử; chỉ chạy trên database có hậu tố `_Test`. Mặc định là YeuMinhEmCinema_Test. Từng ca dùng rollback/dọn fixture theo cơ chế sẵn có. Rollback không hoàn lại số identity đã cấp.
+
+Tests01/02 kiểm hậu tố database trước khi ghi; riêng02 kiểm từng batch vì SSMS có thể tiếp tục sau lỗi ở một batch GO. Với sqlcmd dùng `-I -b -f 65001` để giữ QUOTED_IDENTIFIER, dừng khi lỗi và đọc UTF-8. Không đổi USE sang database thật hoặc bỏ guard. `Tests/03_KiemThuDongThoi.md` là hướng dẫn kiểm nhiều phiên, cũng chỉ trên bản Test.
+
+Chạy đúng bài liên quan thay đổi; không tự chạy toàn bộ chỉ vì sắp xếp hướng dẫn. Hash X trong fixture không phải tài khoản đăng nhập thực tế. Kết quả cũ ở `KET-QUA-KIEM-TRA.md` và các nhật ký hiện có chỉ chứng minh phạm vi đã ghi nhận.
+
+## 6. Script lịch sử và nguồn SQL hiện hành
+
+- `Scripts/00_Full_Setup_Rap_Phong_Ghe.sql`: file gộp cũ cho rạp/phòng/ghế, kèm seed; không phải bộ cài đầy đủ hiện tại. Giữ nguyên file, không dùng thay CAI-DAT-TAT-CA/CAI-DAT-TEST hoặc chạy kèm bộ cài mới.
+- Scripts02 là bản seed trùng, dùng nguồn chính thức trong Seed như mục3.
+- Các script nền00/01/04–19/21–22 vẫn cần để dựng nền hoặc đối chiếu, không xóa vì procedure được định nghĩa lại ở bản nâng cấp. Scripts03/20 thuộc nhóm chỉ đọc.
+- Hai bộ cài nhúng SQL, không đọc các script con bằng đường dẫn lúc chạy. Khi có thay đổi SQL được duyệt sau này phải giữ đồng bộ nguồn và cả hai bộ cài; phiên này không đổi nội dung bộ cài hay đối tượng nghiệp vụ.
+
+Giữ SQL Server, ADO.NET và các hợp đồng dùng chung Admin/Web. Chi tiết nghiệp vụ và từng bản nâng cấp đã có ở các mục dưới.
 
 ## Quy tắc nghiệp vụ của phiên bản này
 

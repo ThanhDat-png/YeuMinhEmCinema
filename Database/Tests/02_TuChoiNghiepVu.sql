@@ -1,5 +1,6 @@
-﻿USE YeuMinhEmCinema;
+﻿USE YeuMinhEmCinema_Test;
 GO
+IF DB_NAME() NOT LIKE N'%[_]Test' THROW 50980,N'Chỉ chạy kiểm thử trên database có hậu tố _Test.',1;
 -- Giữ trùng ghế; lỗi mong đợi 50310. Mỗi ca có fixture và rollback riêng.
 SET XACT_ABORT ON;
 BEGIN TRY
@@ -32,6 +33,7 @@ IF ERROR_NUMBER()<>50310 THROW;
 PRINT N'PASS: Giữ trùng ghế';
 END CATCH;
 GO
+IF DB_NAME() NOT LIKE N'%[_]Test' THROW 50980,N'Chỉ chạy kiểm thử trên database có hậu tố _Test.',1;
 -- Thanh toán sai số tiền; lỗi mong đợi 50322. Mỗi ca có fixture và rollback riêng.
 SET XACT_ABORT ON;
 BEGIN TRY
@@ -64,6 +66,7 @@ IF ERROR_NUMBER()<>50322 THROW;
 PRINT N'PASS: Thanh toán sai số tiền';
 END CATCH;
 GO
+IF DB_NAME() NOT LIKE N'%[_]Test' THROW 50980,N'Chỉ chạy kiểm thử trên database có hậu tố _Test.',1;
 -- Sửa lịch khi có đơn giữ; lỗi mong đợi 50013. Mỗi ca có fixture và rollback riêng.
 SET XACT_ABORT ON;
 BEGIN TRY
@@ -96,6 +99,7 @@ IF ERROR_NUMBER()<>50013 THROW;
 PRINT N'PASS: Sửa lịch khi có đơn giữ';
 END CATCH;
 GO
+IF DB_NAME() NOT LIKE N'%[_]Test' THROW 50980,N'Chỉ chạy kiểm thử trên database có hậu tố _Test.',1;
 -- Kiểm vé lần hai; lỗi mong đợi 50341. Mỗi ca có fixture và rollback riêng.
 SET XACT_ABORT ON;
 BEGIN TRY
@@ -128,6 +132,7 @@ IF ERROR_NUMBER()<>50341 THROW;
 PRINT N'PASS: Kiểm vé lần hai';
 END CATCH;
 GO
+IF DB_NAME() NOT LIKE N'%[_]Test' THROW 50980,N'Chỉ chạy kiểm thử trên database có hậu tố _Test.',1;
 -- Thanh toán hết hạn; lỗi mong đợi 50324. Mỗi ca có fixture và rollback riêng.
 SET XACT_ABORT ON;
 BEGIN TRY
@@ -160,6 +165,7 @@ IF ERROR_NUMBER()<>50324 THROW;
 PRINT N'PASS: Thanh toán hết hạn';
 END CATCH;
 GO
+IF DB_NAME() NOT LIKE N'%[_]Test' THROW 50980,N'Chỉ chạy kiểm thử trên database có hậu tố _Test.',1;
 -- Truy cập đơn người khác; lỗi mong đợi 50403. Mỗi ca có fixture và rollback riêng.
 SET XACT_ABORT ON;
 BEGIN TRY
