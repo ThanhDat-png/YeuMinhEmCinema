@@ -66,3 +66,11 @@ Tại Kiểm tra vé: chọn ngày → Tải suất → chọn suất có rạp/
 Database đang có SQL 23/25/26: áp dụng `Database/Scripts/27_Admin_ThuTien_TraCuuDon.sql` trước khi dùng bản Admin mới. Đổi USE khi dùng Test; không seed hoặc đổi schema. Hai bộ cài tổng đã kèm27. SQL 24 Web không phải điều kiện.
 
 Tiền mặt: giữ ghế để chốt tổng đơn rồi nhập tiền khách đưa (100000 hoặc 100.000); form báo thiếu/thừa, chặn tiền thiếu hoặc sai định dạng. Chỉ tổng đơn được ghi thu. Tra cứu: nhập mã đơn/mã giao dịch thu/GUID vé, bấm Lọc / tìm; mã kết hợp rạp/ngày tạo/trạng thái đang chọn. Nút Trước/Sau khóa ở biên.
+
+## Tìm kiếm Admin — SQL 28
+
+Database đã có SQL 23/25/26/27: áp dụng `Database/Scripts/28_Admin_TimKiem.sql` trước khi chạy Admin mới. Đổi USE khi dùng Test; không seed hoặc đổi schema. Hai bộ cài tổng đã kèm SQL 28. Không cần SQL 24 Web.
+
+- Nhân viên: tên đăng nhập/họ tên, mã nhân viên/mã tài khoản hoặc một phần SĐT. Mã hồ sơ và mã tài khoản có thể trùng số nên có thể trả nhiều dòng phù hợp; nhìn rõ hai cột mã.
+- Rạp/Phòng: người có RAP_XEM mở được màn hình, tìm theo mã/tên phòng; không có RAP_QUAN_LY thì nút ghi và menu chuột phải bị khóa. Chỉ trả phòng trong rạp được phân công.
+- Quầy: nhập tên phim rồi bấm Tải suất / tìm phim hoặc Enter. Lọc cùng rạp/ngày và điều kiện còn được bán. Đổi bộ lọc xóa ghế/tổng tạm cũ; đơn đã có yêu cầu giữ vẫn khóa giỏ.

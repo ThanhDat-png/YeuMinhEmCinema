@@ -1,0 +1,40 @@
+﻿Changed database context to 'YMC_SearchInstall_cc16a298_Test'.
+PASS: Nhân viên theo mã hồ sơ
+PASS: Nhân viên theo SĐT đầy đủ
+PASS: Nhân viên theo một phần SĐT
+PASS: Nhân viên theo tên Unicode
+PASS: Nhân viên theo tên đăng nhập
+PASS: Mã tài khoản không có hồ sơ vẫn tìm được
+PASS: Ký tự wildcard không mở rộng tìm nhân viên
+PASS: Nhân viên số vượt INT trả rỗng
+PASS: Nhân viên thiếu quyền bị chặn
+PASS: Nhân viên khóa actor bị chặn
+Warning: Null value is eliminated by an aggregate or other SET operation.
+PASS: Chỉ xem tìm phòng theo mã
+Warning: Null value is eliminated by an aggregate or other SET operation.
+PASS: Chỉ xem tìm tên Unicode
+PASS: Phòng ngoài phạm vi không trả kết quả
+PASS: Phòng từ khóa rỗng vẫn lọc phạm vi
+Warning: Null value is eliminated by an aggregate or other SET operation.
+PASS: Admin tìm được phòng ngoài phân công
+Warning: Null value is eliminated by an aggregate or other SET operation.
+PASS: Phòng ngừng hoạt động vẫn tra cứu được
+PASS: Thu hồi rạp thì danh sách phòng rỗng
+PASS: Chọn rạp ngoài phân công bị chặn
+PASS: Chỉ xem không được ghi phòng
+PASS: Chỉ xem không được tạo ghế
+PASS: Thu hồi RAP_XEM bị chặn
+PASS: Quầy tìm phim Unicode đúng rạp/ngày
+PASS: Quầy tìm literal ký tự phần trăm ngoặc
+PASS: Quầy không có phim phù hợp
+PASS: Quầy đổi ngày không giữ suất cũ
+PASS: Quầy không trả suất ngừng bán
+PASS: Quầy không trả suất hủy
+PASS: Quầy không trả phòng ngừng hoạt động
+PASS: Quầy không trả phim ngừng chiếu
+PASS: Quầy không trả rạp ngừng hoạt động
+PASS: Quầy không trả suất đã bắt đầu
+PASS: Quầy bỏ từ khóa lấy mọi suất hợp lệ
+PASS: Quầy ngoài rạp bị chặn
+PASS: Thu hồi quyền bán vé bị chặn
+Hoàn tất 34 ca tìm kiếm; fixture và mọi thay đổi quyền đã rollback.

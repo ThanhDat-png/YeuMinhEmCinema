@@ -12,6 +12,8 @@ Admin có phạm vi toàn rạp. Nhân viên khác chỉ được phân công c�
 
 ## Rạp/phòng/ghế và phim
 
+SQL 28: người có RAP_XEM được mở Rạp/Phòng, nhập mã hoặc một phần tên phòng có dấu rồi bấm Tìm phòng/Enter; Xóa lọc để xem lại các rạp được phân công. Cây hiển thị mã phòng để phân biệt tên trùng. Không có RAP_QUAN_LY thì các nút thêm/sửa/ngừng/tạo ghế/đổi ghế và menu chuột phải bị khóa, kể cả sau khi chọn ghế. SQL vẫn chặn lời gọi ghi trái quyền.
+
 Dùng các form hiện có. Tạo sơ đồ tối đa 26 hàng × 50 ghế; chạy lại cùng phạm vi bỏ qua ghế đã tồn tại. Thay loại/trạng thái ghế theo lô là một transaction, có một ghế đang giữ/đã bán chưa kết thúc sẽ từ chối cả lô. Không xóa ghế/lịch sử.
 
 Danh mục có lịch tương lai hoặc đơn/vé đang hiệu lực sẽ chặn thay đổi quan trọng. Không đổi ID để vượt kiểm tra. Định dạng phòng phải khớp chuỗi định dạng trong bảng giá. Các trạng thái rạp/phòng mới dùng Đang hoạt động / Ngừng hoạt động.
@@ -24,7 +26,7 @@ Giá theo ngày CHIẾU, loại ghế, định dạng; Thứ Hai–Thứ Năm th
 
 ## Bán vé tại quầy
 
-1. Chọn rạp, ngày → Tải suất. Chọn suất → Tải ghế / menu.
+1. Chọn rạp, ngày và tùy chọn tên phim → Tải suất / tìm phim (hoặc Enter). Chọn suất → Tải ghế / menu. Đổi tên phim/rạp/ngày hoặc suất sẽ xóa ghế/tổng tạm cũ, cần tải lại trước khi chọn; khi đã giữ đơn thì bộ lọc bị khóa. Xóa tên phim và tải lại để xem mọi suất được phép bán.
 2. Ghế trắng còn trống và có giá; xanh đang chọn; xám đã giữ/bán/hỏng/thiếu giá. Tooltip giải thích từng ghế. Tối đa 8 ghế.
 3. Nhập số lượng bắp nước 0–99 trong cột cuối, tên liên hệ bắt buộc, điện thoại tùy chọn.
 4. Bấm **1. Giữ ghế / thử lại**. SQL chốt giá, tạo một đơn cùng suất và giữ tối đa 10 phút (không vượt giờ chiếu). Giỏ bị khóa để tránh đổi nội dung cùng mã yêu cầu.
@@ -53,6 +55,8 @@ QR chứa GUID MaVe. Máy quét USB kiểu bàn phím có thể điền vào ô 
 Đổi suất/ngày, tải lại hoặc nhập mã mới sẽ xóa kết quả cũ để tránh nhầm vé. Khi thu hồi phân công/quyền trong lúc form mở, SQL kiểm lại lúc thao tác; bấm Tải suất để lấy danh sách mới. Caller cũ không truyền ngữ cảnh vẫn giữ tương thích; quy tắc bắt chọn suất áp dụng cho Admin mới.
 
 ## Khách hàng / nhân viên
+
+SQL 28: tìm nhân viên theo tên đăng nhập/họ tên, mã nhân viên/mã tài khoản hoặc SĐT (cả một phần). Bấm Tìm/Enter. Mã nhân viên và mã tài khoản là hai cột khác nhau; một con số có thể khớp cả hai hồ sơ. Quyền quản trị nhân sự và menu nhân sự giữ như trước; phiên này chỉ nới menu Rạp/Phòng cho RAP_XEM.
 
 Khách tại quầy có hồ sơ không tài khoản. Ngừng hồ sơ khách và khóa tài khoản là hai trạng thái riêng. Chưa có CRM điểm thưởng, khuyến mãi hay gửi SMS/email.
 

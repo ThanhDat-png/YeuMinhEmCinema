@@ -142,3 +142,13 @@ Hai tham số cuối mới: `@TuKhoa NVARCHAR(100)=NULL,@TongKetQua INT=NULL OUT
 Tập đơn phù hợp được chụp vào bảng tạm một lần, trả output tổng ngay cả trang rỗng và sắp theo MaDonHang DESC. Admin dùng output để hiện tổng/trang, khóa biên và điều chỉnh khi tải lại trang vượt cuối. Đây không phải snapshot cố định xuyên nhiều lần bấm trang.
 
 Tiền khách đưa/tiền thừa được tính trong WinForms, không lưu vào ThanhToan. SoTien ghi thu vẫn là tổng đơn; thiếu tiền chặn ở UI, SQL tiếp tục kiểm đúng tổng/hạn/quyền/retry như trước. Tests/07_Admin_TraCuuDon.sql có 24 ca rollback trên Test.
+
+## Nâng cấp Admin SQL 28 — tìm kiếm
+
+Chạy Scripts/28_Admin_TimKiem.sql trên database đã có SQL 23/25/26/27 rồi chạy Admin mới; đổi USE cho Test. Không seed/schema mới/SQL 24. Hai bộ cài tổng đã kèm cùng định nghĩa SQL 28.
+
+- sp_YMC_TimNhanVienAdmin: kiểm NHAN_VIEN_QUAN_LY; tìm tên đăng nhập/họ tên/SĐT bằng CHARINDEX hoặc mã nhân viên/mã tài khoản chính xác bằng TRY_CONVERT. Giữ phạm vi quản trị nhân sự toàn cục của màn hình cũ; không tự cấp quyền này cho quản lý rạp. Hồ sơ/tài khoản và rowversion vẫn riêng.
+- sp_YMC_TraCuuPhongAdmin: kiểm RAP_XEM; lọc fn_YMC_CoPhamViRap, mã/tên phòng, rạp tùy chọn; gồm cả phòng ngừng hoạt động để tra lịch sử. Cột/sức chứa tương đương truy vấn DAL trước.
+- sp_YMC_TimSuatTaiQuay: kiểm BAN_VE và rạp, lọc tên phim theo chuỗi literal, ngày, suất Mở bán/chưa bắt đầu, phim Đang chiếu, rạp/phòng hoạt động. Không tự thay quy tắc giá hoặc giữ ghế.
+
+Đây là ba procedure đọc mới, không đổi hợp đồng procedure cũ, không sửa quyền mặc định hoặc thủ tục ghi. Nút bị khóa chỉ hỗ trợ UI; các procedure ghi vẫn kiểm quyền/phạm vi tại SQL. Test08 có 34 ca riêng lẻ tự rollback dữ liệu và thay đổi quyền.

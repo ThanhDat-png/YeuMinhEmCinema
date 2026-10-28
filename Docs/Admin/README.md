@@ -40,3 +40,5 @@ Phiên 1 trong hồ sơ là chuẩn bị đối chiếu; Phiên 2 là lượt tr
 Phiên 3 đã hoàn tất T03. Xem `PHIEN-03-KET-QUA.md`; ADM-24 DONE, ADM-23 còn chỉnh DOCX ở T09. Kế tiếp T04 tiền khách đưa/tra cứu; P2 khác chưa làm. Commit nền sau phiên 2: ed8b4a2. Phiên 3 chưa commit/push; vẫn cần lệnh mới của người dùng.
 
 Phiên 4 hoàn tất T04: xem `PHIEN-04-KET-QUA.md`. ADM-18/ADM-20 DONE. Nền commit834ab95, phiên 4 chưa commit/push. Tiếp theo T05 tìm kiếm khác; T06/T07 còn mở. Báo cáo Word chưa chỉnh trong phiên code này.
+
+Phiên 5 hoàn tất T05, xem `PHIEN-05-KET-QUA.md`; ADM-04/09/16 DONE, menu khác tại ADM-02 vẫn còn rà. Nền commit 47a3f9a; phiên 5 chưa commit/push. Kế tiếp T06 báo cáo theo phim/suất rồi T07 thể loại, demo/tài liệu sau.

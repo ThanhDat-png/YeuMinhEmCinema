@@ -72,4 +72,15 @@ Trạng thái: HOÀN THÀNH hai đầu việc sửa đã chốt; xem `PHIEN-02-K
 - SQL 27 mở rộng tùy chọn từ khóa/output tổng, caller cũ giữ nguyên; source19 và bộ cài đồng bộ. UI tìm mã đơn/thu/vé, reset trang, khóa biên.
 -24/24 ca SQL đạt trên nâng cấp/cài mới; SQL01/02/04/05/06 và AdminSmoke đạt, build0 lỗi/0 cảnh báo. GUI tiền thiếu/thừa, đổi phương thức, thu thành công/thu lại, tìm3 loại mã,57 đơn chia50/7, chi tiết và rỗng đều đạt. DB ghi80000 dù khách đưa100000,1 thu/1 vé.
 - Đã rollback fixture test, dọn đúng fixture GUI và database cài mới tạm. Chỉ Test local được nâng cấp. Không lưu PNG GUI; ảnh xem qua công cụ. Kết quả .NET ở output công cụ, không tạo log giả.
-- T04/ADM-18/ADM-20 đóng. T05–T07 chưa làm, dự kiến phiên5; T08–T09 phiên6. Chưa sửa DOCX hoặc commit/push phiên 4.
+- T04/ADM-18/ADM-20 đóng. T05–T07 chưa làm, dự kiến phiên 5; T08–T09 phiên6. Chưa sửa DOCX hoặc commit/push phiên 4.
+
+## Phiên 5 — 28/10/2026: T05 tìm kiếm và phòng chỉ xem
+
+- Trước triển khai đọc lại báo cáo đúng hash329d4cf1…:4.1.1/4.3.2/4.5/5.4.2 yêu cầu tìm kiếm và quyền theo rạp. Giữ .NET10/ADO/SQL, không sửa Web/schema.
+- SQL28 có ba procedure đọc: nhân viên (mã/tên/SĐT), phòng (mã/tên/phạm vi), suất tại quầy (tên phim/rạp/ngày/còn bán). DAL/UI dùng chính các procedure được test, bộ cài mới đồng bộ.
+- Mở menu RAP_XEM, khóa mọi control/menu ghi khi thiếu RAP_QUAN_LY. Đổi bộ lọc quầy xóa giỏ tạm tránh dùng ghế/tổng cũ; giữ khóa giỏ khi đã yêu cầu giữ.
+- Build 0 lỗi/0 cảnh báo;34/34 ca SQL đạt trên nâng cấp/cài mới, SQL01/02/05/06/07 và AdminSmoke đạt. Kỳ vọng test đã chỉnh cho mã hồ sơ trùng mã tài khoản và nhiều hồ sơ trùng SĐT/tên; không sửa nghiệp vụ để ép dữ liệu duy nhất.
+- GUI Admin tìm mã/SĐT; GUI BAN_VE xác nhận menu phòng chỉ xem, tìm mã/tên có dấu, ngoài phạm vi trả rỗng, nút/menu ghi khóa sau chọn ghế; POS lọc phim/xóa giỏ tạm/kết quả rỗng đạt. Quan sát thường1172×850 và POS phóng to1536×816.
+- Đã dọn đúng fixture GUI/tài khoản tạm và database cài mới tạm; không lưu mật khẩu tạm hoặc hash thực tế vào repo. Chỉ Test local nâng cấp.
+- Kết quả chi tiết PHIEN-05-KET-QUA.md; ảnh đã xem trong công cụ, không có PNG lưu. Log.NET ở output công cụ; bằng chứng SQL thật ở evidence/2026-10-28/session-05.
+- T05 đóng; T06/T07 và các phần menu khác/tài liệu còn mở. Chưa commit/push phiên 5.

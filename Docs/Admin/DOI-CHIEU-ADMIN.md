@@ -90,10 +90,12 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 ### ADM-04 Hồ sơ và tìm nhân viên
 
 - Báo cáo: 4.1.1; 4.3.2; 5.4.2.
-- Hiện trạng: Có tạo/sửa nhân viên, ngừng làm việc và khóa tài khoản. Tìm mới theo tên đăng nhập/họ tên; chưa theo mã và SĐT.
-- Xử lý: **BO_SUNG_ADMIN — P2 — OPEN**.
+- Hiện trạng: Đã bổ sung tìm mã nhân viên/mã tài khoản/SĐT cùng tên đăng nhập/họ tên tại SQL có kiểm quyền. GUI Admin tìm SĐT và mã ra đúng hồ sơ; giữ riêng hồ sơ/tài khoản và lịch sử. Không thay CRUD, tình trạng nhân sự hoặc quyền quản trị mặc định.
+- Xử lý: **BO_SUNG_ADMIN — P2 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcNhanVienPhanQuyen.cs`, `Database/Scripts/11_KhachHang_NhanVien.sql`, `Database/Scripts/21_QuanTriTaiKhoan.sql`.
 - Điều kiện đóng mục: Tìm theo tên, mã, SĐT trên dữ liệu hiện có; hồ sơ/tài khoản được phân biệt; dùng ngừng hoạt động để giữ lịch sử.
+
+- Kết quả phiên5: xem `PHIEN-05-KET-QUA.md`.
 
 ### ADM-05 Vai trò và phân công nhân viên
 
@@ -130,10 +132,12 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 ### ADM-09 Tra cứu phòng cho vai trò chỉ xem
 
 - Báo cáo: 4.5; đề bài CRUD/xem/tìm.
-- Hiện trạng: Có cây rạp/phòng; chưa có bộ tìm phòng riêng. Menu hiện đòi cả RAP_XEM và RAP_QUAN_LY.
-- Xử lý: **BO_SUNG_ADMIN — P2 — OPEN**.
+- Hiện trạng: Đã mở menu Rạp/Phòng bằng RAP_XEM và tìm mã/tên phòng theo phạm vi tại SQL. GUI BAN_VE thấy đúng một rạp được giao, tìm phòng ngoài phạm vi trả rỗng; mọi nút ghi và menu chuột phải ghế vẫn bị khóa cả sau chọn ghế. SQL từ chối ghi bởi người chỉ xem.
+- Xử lý: **BO_SUNG_ADMIN — P2 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcRapPhongChieu.cs`, `src/YeuMinhEmCinema.Admin/Form1.PhanQuyen.cs`, `src/YeuMinhEmCinema.Admin/PhongChieuDAL.cs`.
 - Điều kiện đóng mục: Tìm phòng theo mã/tên trong phạm vi; nhân viên chỉ xem mở được tra cứu; các nút ghi bị khóa và SQL vẫn kiểm quyền.
+
+- Kết quả phiên5: xem `PHIEN-05-KET-QUA.md`.
 
 ### ADM-10 Sơ đồ ghế
 
@@ -186,10 +190,12 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 ### ADM-16 Tìm suất trong bán vé tại quầy
 
 - Báo cáo: 4.1.1; 5.4.2.
-- Hiện trạng: Có chọn rạp/ngày rồi chọn suất, chưa có ô lọc tên phim trong màn hình quầy.
-- Xử lý: **BO_SUNG_ADMIN — P2 — OPEN**.
+- Hiện trạng: Đã thêm tên phim tại quầy và procedure tìm suất theo rạp/ngày/quyền/điều kiện còn bán. Đổi bộ lọc xóa suất/ghế/tổng tạm cũ. GUI chọn ghế80000 rồi đổi tên phim về0; lọc Mặt Trăng ra đúng suất, tên không khớp trả rỗng.
+- Xử lý: **BO_SUNG_ADMIN — P2 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcBanVeTaiQuay.cs`, `src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs`.
 - Điều kiện đóng mục: Lọc tên phim trên suất được phép bán trong rạp/ngày hiện tại; không thay API hoặc hợp đồng Web.
+
+- Kết quả phiên5: xem `PHIEN-05-KET-QUA.md`.
 
 ### ADM-17 Giữ ghế và hết hạn
 
@@ -409,3 +415,7 @@ T01/T02 hoàn thành trong phạm vi sửa lỗi đã chốt. ADM-03 đóng; ADM
 ## Cập nhật phiên 4
 
 T04, ADM-18 và ADM-20 DONE theo phạm vi. Tiền mặt không đổi số tiền chốt/schema; tra cứu không thay hợp đồng caller cũ. Test24 ca SQL,28 ca tiền mặt và GUI đã đạt; xem PHIEN-04-KET-QUA.md. T05–T07 còn mở cho phiên5, demo/báo cáo chuyển phiên6. Các phần kế hoạch cũ ở trên là mốc lịch sử; trạng thái hiện hành ở THEO-DOI.json. Chưa sửa DOCX và chưa commit/push phiên4.
+
+## Cập nhật phiên 5
+
+T05, ADM-04/ADM-09/ADM-16 DONE đúng phạm vi tìm kiếm và phòng chỉ xem. Menu khác tại ADM-02 vẫn còn rà; T06/T07 chưa làm, chuyển phiên6; demo/báo cáo T08/T09 phiên7. Xem trạng thái hiện hành trong THEO-DOI.json và PHIEN-05-KET-QUA.md. Chưa sửa DOCX hoặc commit/push phiên5.

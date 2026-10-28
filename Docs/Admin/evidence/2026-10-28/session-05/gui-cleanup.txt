@@ -1,0 +1,2 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+PASS: đã dọn đúng fixture tìm kiếm, giữ tài khoản/dữ liệu người dùng và quyền mặc định.

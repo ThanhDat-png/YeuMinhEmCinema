@@ -2,6 +2,8 @@
 namespace YeuMinhEmCinema.Admin;
 public partial class UcBanVeTaiQuay:DataPage
 {
+ private readonly TextBox filmSearch=AdminUi.Text(200);
+ private bool loadingShows;
  private readonly ComboBox rap=AdminUi.Combo(),suat=AdminUi.Combo(),payment=AdminUi.Combo();
  private readonly DateTimePicker day=new(){Format=DateTimePickerFormat.Short,Width=135};
  private readonly TextBox name=AdminUi.Text(),phone=AdminUi.Text(20),txn=AdminUi.Text(100);
@@ -19,7 +21,12 @@ public partial class UcBanVeTaiQuay:DataPage
  public UcBanVeTaiQuay():base("Bán vé tại quầy — giữ ghế → thu tiền → phát vé")
  {
   suat.Width=520;name.PlaceholderText="Tên liên hệ (bắt buộc)";phone.PlaceholderText="Điện thoại";txn.PlaceholderText="Mã giao dịch / biên nhận";
-  Bar.Controls.AddRange(new Control[]{AdminUi.Label("Rạp"),rap,day});Action("Tải suất",LoadShows);
+  filmSearch.Width=250;filmSearch.PlaceholderText="Tên phim cần tìm";filmSearch.AccessibleName="Tìm phim tại quầy";
+  Bar.Controls.AddRange(new Control[]{AdminUi.Label("Rạp"),rap,day,filmSearch});Action("Tải suất / tìm phim",LoadShows);
+  filmSearch.KeyDown+=(_,e)=>{if(e.KeyCode==Keys.Enter){e.SuppressKeyPress=true;Run(LoadShows);}};
+  void FilterChanged(){if(pending!=null||order.HasValue)return;suat.DataSource=null;ClearPreview("Bộ lọc đã đổi. Bấm Tải suất / tìm phim.");}
+  filmSearch.TextChanged+=(_,_)=>FilterChanged();rap.SelectedIndexChanged+=(_,_)=>FilterChanged();day.ValueChanged+=(_,_)=>FilterChanged();
+  suat.SelectedIndexChanged+=(_,_)=>{if(!loadingShows&&pending==null&&!order.HasValue)ClearPreview("Suất đã đổi. Bấm Tải ghế / menu trước khi chọn ghế.");};
   Bar.Controls.Add(suat);Action("Tải ghế / menu",LoadSeats);Bar.Controls.AddRange(new Control[]{name,phone,payment,txn});
   payment.Items.AddRange(new object[]{"TIEN_MAT","CHUYEN_KHOAN"});payment.SelectedIndex=0;
   cash.Width=220;cash.PlaceholderText="VD: 100000 hoặc 100.000";cash.AccessibleName="Tiền khách đưa";
@@ -35,7 +42,25 @@ public partial class UcBanVeTaiQuay:DataPage
   timer.Tick+=(_,_)=>UpdateSummary();Load+=(_,_)=>Run(()=>{AdminUi.Bind(rap,Db.Raps(),"MaRap","TenRap");LoadShows();timer.Start();});Disposed+=(_,_)=>{timer.Dispose();seatTip.Dispose();};
  }
  private void EnsureEditable(){if(pending!=null||order!=null)throw new ArgumentException("Đơn đã có yêu cầu giữ. Hoàn tất hoặc bấm Hủy giữ / đơn mới trước khi đổi giỏ.");}
- private void LoadShows(){EnsureEditable();AdminUi.Bind(suat,GiaoDichDAL.Suat(AdminUi.Id(rap),day.Value),"MaSuatChieu","TenHienThi");if(suat.Items.Count==0){seats.Controls.Clear();message="Không có suất mở bán trong ngày/rạp này.";UpdateSummary();}else LoadSeats();}
+ private void ClearPreview(string text)
+ {
+  selected.Clear();seatTable=new DataTable();
+  foreach(Control c in seats.Controls.Cast<Control>().ToArray())c.Dispose();
+  seats.Controls.Clear();menu.DataSource=null;total=0;cash.Clear();message=text;UpdateSummary();UpdateCash();
+ }
+ private void LoadShows()
+ {
+  EnsureEditable();ClearPreview("Đang tìm suất…");suat.DataSource=null;
+  try
+  {
+   loadingShows=true;
+   AdminUi.Bind(suat,GiaoDichDAL.Suat(AdminUi.Id(rap),day.Value,filmSearch.Text.Trim()),"MaSuatChieu","TenHienThi");
+   if(suat.Items.Count==0){message="Không có suất mở bán phù hợp tên phim/ngày/rạp. Xóa tên phim để xem tất cả.";UpdateSummary();}
+   else LoadSeats();
+  }
+  catch{message="Không tải được suất. Kiểm tra bộ lọc hoặc quyền rồi thử lại.";UpdateSummary();throw;}
+  finally{loadingShows=false;}
+ }
  private void LoadSeats()
  {
   EnsureEditable();cash.Clear();int id=AdminUi.Id(suat);seatTable=GiaoDichDAL.Ghe(id);
@@ -59,7 +84,7 @@ public partial class UcBanVeTaiQuay:DataPage
   if(menu.DataSource is DataTable t)v+=t.AsEnumerable().Sum(r=>(decimal)r["DonGia"]*Convert.ToInt32(r["SoLuong"]));total=v;UpdateSummary();UpdateCash();}
  private void UpdateSummary(){string time=expires.HasValue?$" | Hạn giữ VN: {expires.Value.AddHours(7):HH:mm:ss} | Còn {Math.Max(0,(int)(expires.Value-DateTime.UtcNow).TotalSeconds)} giây":"";
   summary.Text=$"{message}\nGhế: {selected.Count} — Tổng {(order.HasValue?"đơn":"tạm tính")}: {total:N0} đ{time}\n{(order.HasValue?$"Mã đơn: {order}":"")}";}
- private void LockInputs(bool yes){rap.Enabled=day.Enabled=suat.Enabled=name.Enabled=phone.Enabled=menu.Enabled=seats.Enabled=!yes;}
+ private void LockInputs(bool yes){filmSearch.Enabled=rap.Enabled=day.Enabled=suat.Enabled=name.Enabled=phone.Enabled=menu.Enabled=seats.Enabled=!yes;}
  private void Reserve()
  {
   if(order.HasValue){MessageBox.Show("Đã giữ đơn này. Bấm xác nhận thu tiền hoặc hủy giữ.");return;}

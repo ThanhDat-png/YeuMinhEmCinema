@@ -30,6 +30,9 @@ namespace YeuMinhEmCinema.Admin
             public Button? NutGhe { get; set; }
         }
 
+        private readonly TextBox _timPhong = new() { Dock = DockStyle.Fill, MaxLength = 100, PlaceholderText = "Mã hoặc tên phòng", AccessibleName = "Tìm phòng" };
+        private readonly Label _soPhong = new() { AutoSize = true, Padding = new Padding(2) };
+        private bool CoQuyenSua => Db.Has("RAP_XEM") && Db.Has("RAP_QUAN_LY");
         private NodeInfo? _nodeDangChon;
         private GheInfo? _gheDangChon;
         private DataTable? _bangLoaiGhe;
@@ -37,9 +40,43 @@ namespace YeuMinhEmCinema.Admin
         public UcRapPhongChieu()
         {
             InitializeComponent();
+            KhoiTaoTimPhong();
+            cmsRapPhong.Opening += (_, _) => CapNhatQuyenThaoTac();
+            cmsGhe.Opening += (_, _) => CapNhatQuyenThaoTac();
 
             NapDanhSachLoaiGheVaoCombo();
             NapCayRapVaPhong();
+        }
+
+        private void KhoiTaoTimPhong()
+        {
+            var layout = pnlLeft.Controls.OfType<TableLayoutPanel>().Single();
+            layout.RowCount = 4;
+            layout.RowStyles.Insert(1, new RowStyle(SizeType.AutoSize));
+            layout.SetRow(trvRapPhong, 2);
+            layout.SetRow(pnlLeftButtons, 3);
+            var filter = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 1, RowCount = 3, Margin = Padding.Empty };
+            filter.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+            var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, WrapContents = true };
+            buttons.Controls.Add(AdminUi.Button("Tìm phòng", () => NapCayRapVaPhong()));
+            buttons.Controls.Add(AdminUi.Button("Xóa lọc", () => { _timPhong.Clear(); NapCayRapVaPhong(); }));
+            filter.Controls.Add(_timPhong, 0, 0); filter.Controls.Add(buttons, 0, 1); filter.Controls.Add(_soPhong, 0, 2);
+            layout.Controls.Add(filter, 0, 1);
+            _timPhong.KeyDown += (_, e) => { if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; NapCayRapVaPhong(); } };
+            _timPhong.TextChanged += (_, _) => _soPhong.Text = "Bấm Tìm phòng để áp dụng.";
+        }
+
+        private void CapNhatQuyenThaoTac()
+        {
+            bool edit = CoQuyenSua, room = _nodeDangChon?.Loai == "PHONG", selected = _nodeDangChon != null;
+            btnThemRap.Enabled = edit;
+            btnThemPhong.Enabled = tsmThemPhong.Enabled = edit && selected;
+            btnSuaRapPhong.Enabled = btnDoiTrangThai.Enabled = tsmSua.Enabled = tsmDoiTrangThai.Enabled = edit && selected;
+            btnSuaPhong.Enabled = btnDoiTrangThaiPhong.Enabled = btnTaoSoDoGhe.Enabled = tsmTaoSoDo.Enabled = edit && room;
+            bool seat = edit && _gheDangChon != null;
+            btnDoiLoaiGhe.Enabled = btnDoiTrangThaiGhe.Enabled = seat;
+            cboDoiLoaiGhe.Enabled = edit;
+            tsmGheThuong.Enabled = tsmGheVip.Enabled = tsmGheSweetbox.Enabled = tsmDanhDauHong.Enabled = tsmDanhDauHoatDong.Enabled = seat;
         }
 
         private void NapDanhSachLoaiGheVaoCombo()
@@ -65,13 +102,20 @@ namespace YeuMinhEmCinema.Admin
         {
             trvRapPhong.BeginUpdate();
             trvRapPhong.Nodes.Clear();
+            _nodeDangChon = null; _gheDangChon = null;
+            while (flpGhe.Controls.Count > 0) flpGhe.Controls[0].Dispose();
+            lblGheDangChon.Text = "Ghế đang chọn: [Chưa chọn]";
+            lblThongTinPhong.Text = "Chọn phòng để xem sơ đồ ghế.";
+            _soPhong.Text = "Đang tải…";
+            CapNhatQuyenThaoTac();
 
             TreeNode? nodeCanChon = null;
 
             try
             {
                 DataTable dtRap = RapDAL.LayDanhSachRap();
-                DataTable dtPhong = PhongChieuDAL.LayDanhSachTatCaPhong();
+                DataTable dtPhong = PhongChieuDAL.LayDanhSachTatCaPhong(_timPhong.Text.Trim());
+                _soPhong.Text = $"{dtPhong.Rows.Count} phòng phù hợp";
 
                 foreach (DataRow rowRap in dtRap.Rows)
                 {
@@ -79,6 +123,7 @@ namespace YeuMinhEmCinema.Admin
                     string tenRap = rowRap["TenRap"]?.ToString() ?? "";
                     string trangThaiRap = rowRap["TrangThai"]?.ToString() ?? "Đang hoạt động";
 
+                    if (!string.IsNullOrWhiteSpace(_timPhong.Text) && !dtPhong.AsEnumerable().Any(p => (int)p["MaRap"] == maRap)) continue;
                     TreeNode nodeRap = new TreeNode($"📍 {tenRap} [{trangThaiRap}]")
                     {
                         Tag = new NodeInfo
@@ -105,7 +150,7 @@ namespace YeuMinhEmCinema.Admin
                         string trangThaiPhong = rowPhong["TrangThai"]?.ToString() ?? "Đang hoạt động";
                         int sucChua = Convert.ToInt32(rowPhong["SucChua"]);
 
-                        TreeNode nodePhong = new TreeNode($"🎬 {tenPhong} ({dinhDang} - {sucChua} ghế)")
+                        TreeNode nodePhong = new TreeNode($"🎬 #{maPhong} {tenPhong} ({dinhDang} - {sucChua} ghế)")
                         {
                             Tag = new NodeInfo
                             {
@@ -141,6 +186,7 @@ namespace YeuMinhEmCinema.Admin
                 }
 
                 trvRapPhong.ExpandAll();
+                if (dtPhong.Rows.Count == 0) lblThongTinPhong.Text = "Không có phòng phù hợp trong phạm vi của bạn.";
 
                 // Tự động chọn phòng đầu tiên hoặc phòng vừa cập nhật
                 if (nodeCanChon != null)
@@ -159,6 +205,7 @@ namespace YeuMinhEmCinema.Admin
             finally
             {
                 trvRapPhong.EndUpdate();
+                CapNhatQuyenThaoTac();
             }
         }
 
@@ -202,7 +249,7 @@ namespace YeuMinhEmCinema.Admin
                 {
                     Label lblTrong = new Label
                     {
-                        Text = "Phòng chiếu này hiện chưa có ghế nào trong sơ đồ.\n\nBấm nút [🪑 Tạo sơ đồ ghế] ở góc trên bên phải để tạo tự động.",
+                        Text = CoQuyenSua ? "Phòng chưa có ghế. Bấm Tạo sơ đồ ghế để bổ sung." : "Phòng chiếu này hiện chưa có ghế nào trong sơ đồ.",
                         Font = new Font("Segoe UI", 10F, FontStyle.Italic),
                         ForeColor = Color.FromArgb(100, 116, 139),
                         TextAlign = ContentAlignment.MiddleCenter,
@@ -368,9 +415,10 @@ namespace YeuMinhEmCinema.Admin
                 cboDoiLoaiGhe.SelectedValue = info.MaLoaiGhe;
             }
 
-            btnDoiLoaiGhe.Enabled = true;
-            btnDoiTrangThaiGhe.Enabled = true;
+            btnDoiLoaiGhe.Enabled = CoQuyenSua;
+            btnDoiTrangThaiGhe.Enabled = CoQuyenSua;
 
+            CapNhatQuyenThaoTac();
             btnDoiTrangThaiGhe.Text = info.TrangThai == "Hoạt động"
                 ? "⛔ Báo hỏng ghế"
                 : "✅ Kích hoạt ghế";
@@ -386,9 +434,9 @@ namespace YeuMinhEmCinema.Admin
 
             if (tag.Loai == "PHONG")
             {
-                btnTaoSoDoGhe.Enabled = true;
-                btnSuaPhong.Enabled = true;
-                btnDoiTrangThaiPhong.Enabled = true;
+                btnTaoSoDoGhe.Enabled = CoQuyenSua;
+                btnSuaPhong.Enabled = CoQuyenSua;
+                btnDoiTrangThaiPhong.Enabled = CoQuyenSua;
 
                 btnDoiTrangThai.Text = tag.TrangThai == "Đang hoạt động" ? "🔄 Ngừng phòng" : "🔄 Mở phòng";
                 btnDoiTrangThaiPhong.Text = tag.TrangThai == "Đang hoạt động" ? "⛔ Ngừng hoạt động" : "✅ Hoạt động lại";
@@ -420,6 +468,7 @@ namespace YeuMinhEmCinema.Admin
                 btnDoiLoaiGhe.Enabled = false;
                 btnDoiTrangThaiGhe.Enabled = false;
             }
+            CapNhatQuyenThaoTac();
         }
 
         private void trvRapPhong_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

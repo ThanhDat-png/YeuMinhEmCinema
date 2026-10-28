@@ -1,10 +1,10 @@
-namespace YeuMinhEmCinema.Admin;
+﻿namespace YeuMinhEmCinema.Admin;
 public partial class Form1
 {
  private bool rightsReady;
  internal bool YeuCauDangXuat {get;private set;}
  private readonly Dictionary<string,string[]> screenRights=new(){
- ["TongQuan"]=new[]{"BAO_CAO_XEM"},["QuanLyPhim"]=new[]{"PHIM_XEM"},["RapPhong"]=new[]{"RAP_XEM","RAP_QUAN_LY"},
+ ["TongQuan"]=new[]{"BAO_CAO_XEM"},["QuanLyPhim"]=new[]{"PHIM_XEM"},["RapPhong"]=new[]{"RAP_XEM"},
  ["LichChieu"]=new[]{"LICH_CHIEU_XEM","LICH_CHIEU_QUAN_LY"},["GiaVeFnb"]=new[]{"GIA_VE_XEM","GIA_VE_QUAN_LY","FNB_XEM","FNB_QUAN_LY"},
  ["DonDatVe"]=new[]{"DON_HANG_XEM"},["BanVe"]=new[]{"BAN_VE"},["KiemTraVe"]=new[]{"VE_KIEM_TRA"},["KhachHang"]=new[]{"KHACH_HANG_XEM"},
  ["NhanVien"]=new[]{"NHAN_VIEN_QUAN_LY","TAI_KHOAN_QUAN_LY","PHAN_QUYEN_QUAN_LY"},["BaoCao"]=new[]{"BAO_CAO_XEM"}};

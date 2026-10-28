@@ -59,3 +59,15 @@ sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/07_Admin_TraCuuD
 24 ca tra cứu mã đơn/mã thu/GUID vé/GUID tham chiếu; bộ lọc ngày/trạng thái; không có/ngoài phạm vi/thu hồi quyền; exact match, GUID có đuôi, số vượt BIGINT; trang đầu/cuối/vượt cuối, output tổng ở trang rỗng và caller cũ. Mỗi fixture rollback. Các đơn phân trang được dựng trực tiếp với trạng thái DA_HUY, không coi là kiểm luồng tạo/hủy đơn.
 
 Đã chạy nâng cấp/cài mới, hồi quy SQL01/02/04/05/06 và GUI tiền mặt/tra cứu. Chi tiết: Docs/Admin/PHIEN-04-KET-QUA.md.
+
+## Phiên 5: tìm nhân viên/phòng/phim và phòng chỉ xem
+
+Sau SQL 28 trên Test, chạy từ gốc repo:
+
+```powershell
+sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/08_Admin_TimKiem.sql
+```
+
+34 ca: mã/tên/SĐT nhân viên và thiếu quyền; mã/tên phòng Unicode, phạm vi/thu hồi, phòng ngừng, chỉ xem không ghi; tên phim literal, rạp/ngày, suất/phim/phòng/rạp ngừng/hủy/đã bắt đầu, thu hồi BAN_VE. Fixture và quyền tạm rollback mỗi ca. Tên/SĐT/mã hồ sơ có thể khớp nhiều tài khoản, nên ca dương kiểm có đúng hồ sơ mục tiêu; không giả định duy nhất. Mã tài khoản và mã hồ sơ là hai miền ID riêng.
+
+SQL01/02/05/06/07, AdminSmoke, cài mới và GUI hai vai trò đã được chạy; kết quả/giới hạn tại Docs/Admin/PHIEN-05-KET-QUA.md.

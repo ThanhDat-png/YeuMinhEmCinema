@@ -5,16 +5,13 @@ public partial class UcNhanVienPhanQuyen:DataPage
  private readonly TextBox search=AdminUi.Text();
  public UcNhanVienPhanQuyen():base("Nhân viên, tài khoản và phân quyền")
  {
+  search.Width=360;search.PlaceholderText="Tên / mã nhân viên / mã tài khoản / SĐT";search.AccessibleName="Tìm nhân viên";
+  search.KeyDown+=(_,e)=>{if(e.KeyCode==Keys.Enter){e.SuppressKeyPress=true;Run(Reload);}};
   Bar.Controls.Add(search);Action("Tìm",Reload);Action("Tạo nhân viên",Create,"NHAN_VIEN_QUAN_LY");Action("Sửa hồ sơ",Edit,"NHAN_VIEN_QUAN_LY");
   Action("Phân công rạp",Assign,"NHAN_VIEN_QUAN_LY");Action("Vai trò tài khoản",Roles,"PHAN_QUYEN_QUAN_LY");Action("Quyền theo vai trò",Permissions,"PHAN_QUYEN_QUAN_LY");
   Action("Bật / khóa tài khoản",AccountStatus,"TAI_KHOAN_QUAN_LY");Action("Đặt lại mật khẩu",ResetPassword,"TAI_KHOAN_QUAN_LY");StandardActions(Reload);Load+=(_,_)=>Run(Reload);
  }
- private void Reload(){Db.Require("NHAN_VIEN_QUAN_LY");AdminUi.Bind(Grid,Db.Query(@"SELECT t.MaTaiKhoan,t.TenDangNhap,t.Email,t.DangHoatDong,t.KhoaDenLuc,t.PhienBan TaiKhoanPhienBan,
- n.MaNhanVien,n.HoTen,n.DienThoai,n.DangLamViec,n.PhienBan NhanVienPhienBan,
- (SELECT STRING_AGG(v.TenHienThi,N', ') FROM dbo.TaiKhoanVaiTro tv JOIN dbo.VaiTro v ON v.MaVaiTro=tv.MaVaiTro WHERE tv.MaTaiKhoan=t.MaTaiKhoan) VaiTro,
- (SELECT STRING_AGG(r.TenRap,N', ') FROM dbo.NhanVienRap nr JOIN dbo.Rap r ON r.MaRap=nr.MaRap WHERE nr.MaNhanVien=n.MaNhanVien) RapLamViec
- FROM dbo.TaiKhoan t LEFT JOIN dbo.NhanVien n ON n.MaTaiKhoan=t.MaTaiKhoan
- WHERE @K=N'' OR CHARINDEX(@K,t.TenDangNhap)>0 OR CHARINDEX(@K,n.HoTen)>0 ORDER BY t.MaTaiKhoan",("@K",search.Text.Trim())));}
+ private void Reload(){AdminUi.Bind(Grid,Db.Table("dbo.sp_YMC_TimNhanVienAdmin",("@NguoiThucHien",Db.Actor),("@TuKhoa",search.Text.Trim())));}
  private void Create(){Db.Require("TAI_KHOAN_QUAN_LY");Db.Require("PHAN_QUYEN_QUAN_LY");using var f=new EditDialog("Tạo nhân viên và tài khoản");var name=f.TextField("Họ tên");var user=f.TextField("Tên đăng nhập (3–50 ký tự không dấu)",max:50);var pass=f.TextField("Mật khẩu từ 12 ký tự",max:256);pass.UseSystemPasswordChar=true;
   var confirm=f.TextField("Nhập lại mật khẩu",max:256);confirm.UseSystemPasswordChar=true;var role=f.Field("Vai trò",AdminUi.Combo());role.Items.AddRange(new object[]{"QUAN_LY","BAN_VE","SOAT_VE"});role.SelectedIndex=1;
   var rap=f.Field("Rạp làm việc",AdminUi.Combo());AdminUi.Bind(rap,Db.Raps(),"MaRap","TenRap");f.Save(()=>{if(pass.Text!=confirm.Text)throw new ArgumentException("Mật khẩu nhập lại không khớp.");Db.Call("dbo.sp_YMC_TaoNhanVien",("@NguoiThucHien",Db.Actor),("@TenDangNhap",user.Text.Trim()),("@MatKhauHash",BaoMatMatKhau.TaoHash(pass.Text)),("@HoTen",name.Text.Trim()),("@MaRap",AdminUi.Id(rap)),("@TenVaiTro",role.Text));});if(f.ShowDialog(this)==DialogResult.OK)Reload();}
