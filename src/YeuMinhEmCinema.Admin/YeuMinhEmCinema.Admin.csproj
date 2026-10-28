@@ -14,4 +14,36 @@
       <PackageReference Include="QRCoder" Version="1.6.0" />
   </ItemGroup>
 
+
+  <!-- Giữ liên kết Designer và tên resource khi tổ chức lại thư mục. -->
+  <ItemGroup>
+    <Compile Update="Forms/Form1.Designer.cs"><DependentUpon>Form1.cs</DependentUpon></Compile>
+    <Compile Update="Forms/FormDangNhap.Designer.cs"><DependentUpon>FormDangNhap.cs</DependentUpon></Compile>
+    <Compile Update="Forms/FormSuaSuatChieu.Designer.cs"><DependentUpon>FormSuaSuatChieu.cs</DependentUpon></Compile>
+    <Compile Update="Forms/FormTaoSoDoGhe.Designer.cs"><DependentUpon>FormTaoSoDoGhe.cs</DependentUpon></Compile>
+    <Compile Update="Forms/FormThemSuaPhim.Designer.cs"><DependentUpon>FormThemSuaPhim.cs</DependentUpon></Compile>
+    <Compile Update="Forms/FormThemSuaPhongChieu.Designer.cs"><DependentUpon>FormThemSuaPhongChieu.cs</DependentUpon></Compile>
+    <Compile Update="Forms/FormThemSuaRap.Designer.cs"><DependentUpon>FormThemSuaRap.cs</DependentUpon></Compile>
+    <Compile Update="Forms/FormThemSuatChieu.Designer.cs"><DependentUpon>FormThemSuatChieu.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcBanVeTaiQuay.Designer.cs"><DependentUpon>UcBanVeTaiQuay.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcBaoCaoThongKe.Designer.cs"><DependentUpon>UcBaoCaoThongKe.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcDonDatVe.Designer.cs"><DependentUpon>UcDonDatVe.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcGiaVeVaFnb.Designer.cs"><DependentUpon>UcGiaVeVaFnb.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcKhachHang.Designer.cs"><DependentUpon>UcKhachHang.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcKiemTraVe.Designer.cs"><DependentUpon>UcKiemTraVe.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcLichChieu.Designer.cs"><DependentUpon>UcLichChieu.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcNhanVienPhanQuyen.Designer.cs"><DependentUpon>UcNhanVienPhanQuyen.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcRapPhongChieu.Designer.cs"><DependentUpon>UcRapPhongChieu.cs</DependentUpon></Compile>
+    <Compile Update="UserControls/UcTongQuan.Designer.cs"><DependentUpon>UcTongQuan.cs</DependentUpon></Compile>
+    <Compile Update="Forms/Form1.PhanQuyen.cs"><DependentUpon>Form1.cs</DependentUpon></Compile>
+    <Compile Update="Forms/Form1.TheLoai.cs"><DependentUpon>Form1.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Forms/Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <LogicalName>YeuMinhEmCinema.Admin.Form1.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms/FormDangNhap.resx">
+      <DependentUpon>FormDangNhap.cs</DependentUpon>
+      <LogicalName>YeuMinhEmCinema.Admin.FormDangNhap.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
