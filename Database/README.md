@@ -1,4 +1,4 @@
-﻿# YeuMinhEmCinema — bộ SQL cho Admin WinForms và Web C#
+# YeuMinhEmCinema — bộ SQL cho Admin WinForms và Web C#
 
 Đây là bộ database và stored procedure, không chứa mã C# và không thay thế ứng dụng hiện tại.
 Nền tảng: SQL Server 2017 trở lên, compatibility level tối thiểu 140; SQL Server Express dùng được.
@@ -114,3 +114,11 @@ Các test ghi dữ liệu chỉ chạy trên BẢN SAO database, từng file m�
 - `Tests/03_KiemThuDongThoi.md`: hướng dẫn hai cửa sổ để kiểm tranh chấp ghế/callback.
 
 Nếu test lỗi, gửi cả Messages. Không coi kiểm cú pháp là đã chạy thành công SQL Server.
+
+## Nâng cấp Admin SQL 25
+
+Sau khi đã cài SQL 23, chạy `Scripts/25_Admin_PhamViRap.sql` trên đúng database. Script chỉ cập nhật 6 thủ tục ghi danh mục, giữ nguyên tham số/result set; kiểm quyền rạp nguồn/đích và cả lô ghế. Tạo rạp mới và quản lý loại ghế dùng chung dành cho Admin. Không seed, không đổi mật khẩu, không đổi bảng dữ liệu. Có thể chạy lại.
+
+`CAI-DAT-TAT-CA.sql` và `CAI-DAT-TEST.sql` đã kèm bản vá cuối file. Nếu chạy lại 17 hoặc 23 từ bản source cũ, phải áp dụng lại 25 sau cùng. Không cần SQL 24 của Web để áp dụng 25.
+
+Hồi quy chỉ chạy trên database hậu tố `_Test`: `Tests/05_Admin_PhamViRap.sql` (25 ca, fixture rollback). Dùng `sqlcmd -I -b -f 65001` khi chạy từ terminal để bật QUOTED_IDENTIFIER và giữ Unicode.

@@ -1,4 +1,4 @@
-﻿namespace YeuMinhEmCinema.Admin;
+namespace YeuMinhEmCinema.Admin;
 public partial class Form1
 {
  private bool rightsReady;
@@ -26,7 +26,8 @@ public partial class Form1
   tools.Controls.Add(AdminUi.Button("Đăng xuất",()=>{if(AdminUi.Confirm("Đăng xuất tài khoản hiện tại?")){YeuCauDangXuat=true;Close();}}));
   tools.Controls.Add(AdminUi.Button("Đổi mật khẩu",DoiMatKhau));
   tools.Controls.Add(AdminUi.Button("Cập nhật quyền",()=>{Db.RefreshRights();foreach(var u in _danhSachManHinhPhu.Values)u.Dispose();_danhSachManHinhPhu.Clear();pnlQuanLyPhim.Visible=false;ApplyRights();OpenFirst();}));
-  Controls.Add(tools);tools.Dock=DockStyle.Bottom;tools.BringToFront();
+  // Đặt thanh đáy sau cùng trong Z-order để Dock giữ chỗ trước vùng nội dung Fill.
+  Controls.Add(tools);tools.Dock=DockStyle.Bottom;tools.SendToBack();
   Shown+=(_,_)=>AdminUi.Guard(OpenFirst);
  }
  private void OpenFirst()

@@ -1,0 +1,14 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+ScopeAfterRevocation
+--------------------
+                   0
+MaRap      
+-----------
+         25
+FOUND: manager can update cinema after its assignment was revoked
+MaPhong    
+-----------
+         31
+FOUND: manager can update room after its assignment was revoked
+FOUND: manager can update seat after its assignment was revoked
+All audit fixtures rolled back

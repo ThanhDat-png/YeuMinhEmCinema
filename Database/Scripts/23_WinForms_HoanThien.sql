@@ -47,7 +47,10 @@ BEGIN
  BEGIN TRY
  BEGIN TRAN;
  EXEC dbo.sp_YMC_KhoaLich;
- EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY';
+ DECLARE @RapPhong INT;
+ SELECT @RapPhong=MaRap FROM dbo.PhongChieu WITH(UPDLOCK,HOLDLOCK) WHERE MaPhong=@MaPhong;
+ IF @RapPhong IS NULL THROW 50707,N'Phòng không tồn tại.',1;
+ EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY',@RapPhong;
  IF @SoHang IS NULL OR @SoHang NOT BETWEEN 1 AND 26 OR @SoGheMoiHang IS NULL OR @SoGheMoiHang NOT BETWEEN 1 AND 50 THROW 50706,N'Giới hạn 1–26 hàng, 1–50 ghế/hàng.',1;
  IF NOT EXISTS(SELECT 1 FROM dbo.PhongChieu WHERE MaPhong=@MaPhong) OR NOT EXISTS(SELECT 1 FROM dbo.LoaiGhe WHERE MaLoai=@MaLoaiGhe) THROW 50707,N'Phòng/loại ghế không tồn tại.',1;
  IF EXISTS(SELECT 1 FROM dbo.DonHang d JOIN dbo.SuatChieu s ON s.MaSuatChieu=d.MaSuatChieu WHERE s.MaPhong=@MaPhong AND s.GioKetThuc>dbo.fn_YMC_GioVietNam()
@@ -69,6 +72,11 @@ BEGIN
  EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY';
  IF NOT EXISTS(SELECT 1 FROM @Ghe) OR(@MaLoaiGhe IS NULL AND @TrangThai IS NULL) THROW 50709,N'Chọn ghế và thông tin cần cập nhật.',1;
  IF EXISTS(SELECT 1 FROM @Ghe x LEFT JOIN dbo.Ghe g ON g.MaGhe=x.MaGhe WHERE g.MaGhe IS NULL) THROW 50710,N'Ghế không tồn tại.',1;
+ -- Từ chối nguyên lô nếu có một ghế ngoài phạm vi; không chỉ kiểm ghế đầu tiên.
+ IF EXISTS(SELECT 1 FROM @Ghe x JOIN dbo.Ghe g ON g.MaGhe=x.MaGhe
+ JOIN dbo.PhongChieu p ON p.MaPhong=g.MaPhong
+ WHERE dbo.fn_YMC_CoPhamViRap(@NguoiThucHien,p.MaRap)<>1)
+ THROW 50404,N'Có ghế thuộc rạp chưa được phân công. Không cập nhật cả lô.',1;
  IF @TrangThai IS NOT NULL AND @TrangThai NOT IN(N'Hoạt động',N'Hỏng/Ngừng sử dụng') THROW 50711,N'Trạng thái ghế không hợp lệ.',1;
  IF @MaLoaiGhe IS NOT NULL AND NOT EXISTS(SELECT 1 FROM dbo.LoaiGhe WHERE MaLoai=@MaLoaiGhe) THROW 50707,N'Loại ghế không tồn tại.',1;
  IF EXISTS(SELECT 1 FROM @Ghe x JOIN dbo.GiuGhe g ON g.MaGhe=x.MaGhe JOIN dbo.DonHang d ON d.MaDonHang=g.MaDonHang JOIN dbo.SuatChieu s ON s.MaSuatChieu=g.MaSuatChieu

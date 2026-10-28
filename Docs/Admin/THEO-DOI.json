@@ -1,0 +1,741 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Bangkok",
+  "baseline_commit": "5a0ee37c406746b2a23c0db6e2b5f17b46d8f6d6",
+  "scope": "WinForms Admin và SQL cần cho Admin; không triển khai Web/người dùng",
+  "sources": [
+    {
+      "path": "C:\\Users\\Admin\\OneDrive\\Documents\\C_SHARP\\C#_Nhóm1.docx",
+      "sha256": "329d4cf19788d45e77011816e5215c8e4f400f2f0f5e06288a17266fd0c8a853",
+      "text_blocks": 632,
+      "inline_images": 11
+    },
+    {
+      "path": "C:\\Users\\Admin\\OneDrive\\Documents\\C_SHARP\\De tai mon Ngon ngu lap trinh CSharp - 2026.docx",
+      "sha256": "e6c3597ca806dd8c11628351470b601c8cf0063b49780feb825c2b7546c61365",
+      "text_blocks": 117,
+      "inline_images": 0
+    }
+  ],
+  "superseded_source": {
+    "filename": "C#_Nhom1.docx",
+    "sha256": "77eac46e2b73da79f9a1d614d9fb7a3550e970496293897900ee72b7a7764376",
+    "reason": "Người dùng xác nhận gửi nhầm; loại khỏi mốc yêu cầu"
+  },
+  "status_note": "OPEN là còn cần xử lý/nghiệm thu. Có code hoặc test tự động đạt không đồng nghĩa đã nghiệm thu GUI. Không có phần trăm hoàn thiện sản phẩm.",
+  "decisions": [
+    {
+      "id": "D01",
+      "title": "Giữ nền tảng hiện tại",
+      "decision": ".NET 10, WinForms, Microsoft.Data.SqlClient/ADO.NET, SQL Server và stored procedure. Không hạ .NET hoặc viết lại EF/API/JWT."
+    },
+    {
+      "id": "D02",
+      "title": "Giới hạn trách nhiệm",
+      "decision": "Phạm vi hôm nay là WinForms Admin và SQL phục vụ Admin. Web/tài khoản/đặt vé phía khách do người khác đảm nhận; chỉ ghi nhận điểm tích hợp cần phối hợp."
+    },
+    {
+      "id": "D03",
+      "title": "Giữ cấu trúc dữ liệu dùng chung",
+      "decision": "Không đổi tên bảng/cột tiếng Việt thành schema tiếng Anh trong báo cáo; không chuyển sang ShowtimeSeats/EF để khớp ERD. Vẽ lại tài liệu theo bảng hiện có."
+    },
+    {
+      "id": "D04",
+      "title": "Giữ hạn giữ ghế",
+      "decision": "Tối đa 10 phút và không vượt giờ chiếu theo SQL hiện tại; chỉnh mô tả 5 phút trong báo cáo. Không đổi quy tắc chung chỉ cho riêng Admin."
+    },
+    {
+      "id": "D05",
+      "title": "Giữ thời gian cho vào rạp",
+      "decision": "Từ 30 phút trước giờ bắt đầu đến trước giờ kết thúc như SQL hiện tại. Điểm cần bổ sung là kiểm đúng suất/phòng được chọn, không đổi mốc chung sang +15 phút hôm nay."
+    },
+    {
+      "id": "D06",
+      "title": "Giữ danh mục và giá dùng chung",
+      "decision": "Phim, bảng giá/F&B hiện có dữ liệu dùng chung. Không cấp quyền sửa toàn cục cho QUAN_LY để giả lập quản lý theo rạp; ghi đúng ma trận thực tế, tách chỉ xem khi phù hợp."
+    },
+    {
+      "id": "D07",
+      "title": "Giữ nguyên lịch sử và tiền đã chốt",
+      "decision": "Dùng ngừng hoạt động/đóng bán, không xóa dữ liệu đã tham chiếu. Thanh toán/hoàn chỉ ghi nhận và phải rõ là không tích hợp ngân hàng."
+    },
+    {
+      "id": "D08",
+      "title": "Bổ sung nhỏ phải tương thích",
+      "decision": "Ưu tiên UI, bộ lọc, truy vấn chỉ đọc và kiểm quyền. SQL mới/mở rộng phải có script áp dụng, ca rollback và kiểm lời gọi cũ; không tự đổi hợp đồng Web."
+    },
+    {
+      "id": "D09",
+      "title": "Thể loại chưa được coi là đã có",
+      "decision": "Đây là thiếu thật trong bản đúng. Giữ ở backlog P2, chỉ bổ sung additive không làm Web phải đổi. Nếu chưa làm trong ngày, báo cáo phải ghi rõ giới hạn; không xóa dấu vết thiếu để đánh đạt."
+    },
+    {
+      "id": "D10",
+      "title": "Loại bỏ bản gửi nhầm",
+      "decision": "Không lấy 45 UC, tồn kho, Web cho nhân viên hoặc doanh thu theo nhân viên của C#_Nhom1.docx gửi nhầm làm yêu cầu hôm nay. Chỉ dùng C#_Nhóm1.docx hash 329d4cf1… và đề bài hash e6c3597c…."
+    }
+  ],
+  "requirements": [
+    {
+      "id": "ADM-01",
+      "title": "Đăng nhập và mật khẩu",
+      "report_locator": "4.1.1; 4.3.2; 6.2.3 ca 8",
+      "current": "Có hash/salt, khởi tạo Admin đầu tiên, khóa tạm, đăng xuất và đổi mật khẩu. Kiểm thử hash đã đạt; chưa nghiệm thu GUI mọi vai trò.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/TaiKhoanDAL.cs",
+        "src/YeuMinhEmCinema.Admin/BaoMatMatKhau.cs",
+        "src/YeuMinhEmCinema.Admin/FormDangNhap.cs"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Đúng/sai/khóa tài khoản cho kết quả đúng; không lộ hash; không đổi mật khẩu người dùng để làm test.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-02",
+      "title": "Quyền menu và quyền thao tác",
+      "report_locator": "4.5; ma trận quyền",
+      "current": "Có kiểm quyền menu và SQL. Màn hình rạp, lịch, giá hiện gộp quyền xem và sửa nên một số vai trò chỉ xem chưa mở được màn hình.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/Form1.PhanQuyen.cs",
+        "Database/Scripts/10_TaiKhoan_PhanQuyen.sql"
+      ],
+      "disposition": "SUA_ADMIN",
+      "priority": "P1",
+      "acceptance": "Tách xem/sửa hợp lý; người chỉ xem tra cứu được nhưng không ghi được; ghi vẫn kiểm quyền hiện tại ở SQL.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-03",
+      "title": "Phạm vi rạp khi sửa danh mục",
+      "report_locator": "4.3.2; 4.5",
+      "current": "Đã sửa 6 thủ tục danh mục, kiểm rạp cũ/đích và nguyên lô; SQL 25 áp dụng tương thích. 25 ca hồi quy đạt trên database nâng cấp và cài mới; fixture rollback.",
+      "evidence": [
+        "Database/Scripts/17_QuanLyDanhMuc.sql",
+        "Database/Scripts/23_WinForms_HoanThien.sql",
+        "Database/Scripts/25_Admin_PhamViRap.sql",
+        "Database/Tests/05_Admin_PhamViRap.sql",
+        "Docs/Admin/evidence/2026-10-28/session-02/upgrade-scope.txt"
+      ],
+      "disposition": "SUA_ADMIN",
+      "priority": "P1",
+      "acceptance": "Phạm vi bằng 0 phải bị từ chối; kiểm cả rạp cũ/mới và mọi ghế trong lô; Admin hợp lệ vẫn thao tác được; rollback nguyên lô.",
+      "state": "DONE",
+      "product_completed": true,
+      "completion_note": "Hoàn thành lỗi phạm vi đã tái hiện; không đồng nghĩa đã nghiệm thu toàn bộ vai trò trên GUI."
+    },
+    {
+      "id": "ADM-04",
+      "title": "Hồ sơ và tìm nhân viên",
+      "report_locator": "4.1.1; 4.3.2; 5.4.2",
+      "current": "Có tạo/sửa nhân viên, ngừng làm việc và khóa tài khoản. Tìm mới theo tên đăng nhập/họ tên; chưa theo mã và SĐT.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcNhanVienPhanQuyen.cs",
+        "Database/Scripts/11_KhachHang_NhanVien.sql",
+        "Database/Scripts/21_QuanTriTaiKhoan.sql"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P2",
+      "acceptance": "Tìm theo tên, mã, SĐT trên dữ liệu hiện có; hồ sơ/tài khoản được phân biệt; dùng ngừng hoạt động để giữ lịch sử.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-05",
+      "title": "Vai trò và phân công nhân viên",
+      "report_locator": "4.3.2; 4.5",
+      "current": "Có gán/thu hồi rạp, vai trò và thay bộ quyền. QUAN_LY mặc định không có quyền quản lý phim/rạp/giá như báo cáo mô tả rộng.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcNhanVienPhanQuyen.cs",
+        "Database/Scripts/10_TaiKhoan_PhanQuyen.sql",
+        "Database/Scripts/21_QuanTriTaiKhoan.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Có ma trận quyền thực tế; thử thu hồi khi đang mở form. Không cấp thêm quyền toàn cục cho quản lý chỉ để khớp báo cáo.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-06",
+      "title": "Quản lý phim",
+      "report_locator": "4.1.1; 4.3.2; 5.4.2",
+      "current": "Có thêm/sửa/ngừng chiếu, tìm tên và lọc trạng thái. Tìm tên qua GUI đã đạt; chưa chạy toàn bộ CRUD qua GUI.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/Form1.cs",
+        "src/YeuMinhEmCinema.Admin/FormThemSuaPhim.cs",
+        "src/YeuMinhEmCinema.Admin/PhimDAL.cs",
+        "Database/Scripts/17_QuanLyDanhMuc.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "CRUD/trạng thái, dữ liệu sai và phim có lịch tương lai được kiểm; dữ liệu liên quan không mất; Web vẫn đọc được hợp đồng hiện tại.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-07",
+      "title": "Thể loại phim",
+      "report_locator": "4.1.1; 5.2 bảng Genres/MovieGenres",
+      "current": "Chưa có bảng thể loại, quan hệ phim-thể loại hoặc UI quản lý thể loại trong mã hiện tại.",
+      "evidence": [
+        "Database/Scripts/00_TaoDatabase_Phim.sql",
+        "src/YeuMinhEmCinema.Admin/PhimDAL.cs",
+        "src/YeuMinhEmCinema.Admin/FormThemSuaPhim.cs"
+      ],
+      "disposition": "THIEU_CO_DIEU_KIEN",
+      "priority": "P2",
+      "acceptance": "Nếu bổ sung: migration cộng thêm, không đổi cột/hợp đồng cũ và không bắt Web sửa theo. Nếu chưa làm trong ngày: ghi rõ chưa có, không đánh dấu đạt và bỏ khẳng định đã triển khai trong báo cáo.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-08",
+      "title": "Rạp và phòng chiếu",
+      "report_locator": "4.1.1; 4.3.2; 5.4.2",
+      "current": "Có thêm/sửa/trạng thái rạp/phòng, sức chứa tính từ ghế. Trạng thái thực tế gồm Đang hoạt động/Ngừng hoạt động.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/RapDAL.cs",
+        "src/YeuMinhEmCinema.Admin/PhongChieuDAL.cs",
+        "src/YeuMinhEmCinema.Admin/UcRapPhongChieu.cs",
+        "Database/Scripts/17_QuanLyDanhMuc.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Tên trùng, dữ liệu sai, phòng chưa có ghế và phòng có lịch được xử lý đúng; không đổi schema chỉ để thêm tên trạng thái trong sơ đồ.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-09",
+      "title": "Tra cứu phòng cho vai trò chỉ xem",
+      "report_locator": "4.5; đề bài CRUD/xem/tìm",
+      "current": "Có cây rạp/phòng; chưa có bộ tìm phòng riêng. Menu hiện đòi cả RAP_XEM và RAP_QUAN_LY.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcRapPhongChieu.cs",
+        "src/YeuMinhEmCinema.Admin/Form1.PhanQuyen.cs",
+        "src/YeuMinhEmCinema.Admin/PhongChieuDAL.cs"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P2",
+      "acceptance": "Tìm phòng theo mã/tên trong phạm vi; nhân viên chỉ xem mở được tra cứu; các nút ghi bị khóa và SQL vẫn kiểm quyền.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-10",
+      "title": "Sơ đồ ghế",
+      "report_locator": "4.1.1; 4.3.2; 5.4.2",
+      "current": "Có tạo theo lô, đổi loại/trạng thái và sơ đồ lấy SQL. Đã kiểm tạo lặp không trùng; cần kiểm GUI với ghế đang giữ/đã bán.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/GheDAL.cs",
+        "src/YeuMinhEmCinema.Admin/FormTaoSoDoGhe.cs",
+        "Database/Scripts/23_WinForms_HoanThien.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Không tạo trùng; ghế hỏng không bán; có ghế bị bảo vệ thì cả lô bị từ chối; không làm sai thông tin vé cũ.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-11",
+      "title": "Tạo và sửa suất chiếu",
+      "report_locator": "UC04; 4.1.1; 5.4.2",
+      "current": "Có form chung sửa phim/phòng/ngày/giờ và trạng thái; không cần tách một form cho mỗi thao tác mô tả trong báo cáo.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/FormSuatChieuBase.cs",
+        "src/YeuMinhEmCinema.Admin/SuatChieuDAL.cs",
+        "Database/Scripts/22_TichHop_PhanQuyen_Lich_Gia.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Thời lượng/kết thúc/dọn phòng hợp lệ; chỉ phim/phòng đủ điều kiện; đúng phạm vi rạp.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-12",
+      "title": "Chống trùng lịch và bảo vệ lịch có đơn",
+      "report_locator": "UC04; 6.2.3 ca 7",
+      "current": "Các test lịch trùng, qua đêm, đồng thời và đơn giữ đã đạt ở lớp SQL. Chưa thao tác đầy đủ GUI.",
+      "evidence": [
+        "Database/Scripts/05_ThemSuatChieu.sql",
+        "Database/Scripts/06_SuaSuatChieu.sql",
+        "Database/Scripts/22_TichHop_PhanQuyen_Lich_Gia.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Thử biên dọn phòng, qua đêm, sửa chính nó; đơn đang giữ/đã trả chặn đổi/hủy; ngừng bán vẫn chiếm phòng.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-13",
+      "title": "Sao chép lịch và xuất lịch",
+      "report_locator": "5.4.2; phần mở rộng đang có",
+      "current": "Có xem trước, chữ ký nguồn, sao chép nguyên nhóm và CSV; test SQL đã đạt.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/FormSaoChepLich.cs",
+        "src/YeuMinhEmCinema.Admin/UcLichChieu.cs",
+        "Database/Scripts/08_SaoChepLich.sql"
+      ],
+      "disposition": "GIU_VA_KIEM_THU",
+      "priority": "P2",
+      "acceptance": "Nguồn/đích đổi phải xem trước lại; một suất lỗi không ghi dở nhóm; CSV đúng danh sách đang xem.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-14",
+      "title": "Giá vé và chốt giá giao dịch",
+      "report_locator": "4.1.1; 5.5.1; 5.2.3",
+      "current": "Có giá theo loại ghế/định dạng/ngày thường-cuối tuần, khoảng hiệu lực, rowversion; giá giao dịch được chụp. Giá hiện dùng chung, không có MaRap.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/GiaVeFnbDAL.cs",
+        "src/YeuMinhEmCinema.Admin/FormGiaVe.cs",
+        "Database/Scripts/09_GiaVe_Fnb.sql",
+        "Database/Scripts/13_DatVe_GiuGhe.sql"
+      ],
+      "disposition": "GIU_VA_KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Giá chồng bị chặn; thay bảng giá không đổi đơn đã chốt; không tự thêm mô hình giá riêng từng rạp hoặc ngày lễ hôm nay.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-15",
+      "title": "F&B và combo",
+      "report_locator": "4.1.1; 7.2",
+      "current": "Đã có sản phẩm, giá và combo; báo cáo còn đặt việc này ở hướng phát triển. Không có tồn kho; đúng bản báo cáo hiện tại cũng không yêu cầu triển khai kho.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcGiaVeVaFnb.cs",
+        "src/YeuMinhEmCinema.Admin/FormFnb.cs",
+        "Database/Scripts/09_GiaVe_Fnb.sql"
+      ],
+      "disposition": "SUA_BAO_CAO",
+      "priority": "P2",
+      "acceptance": "Chuyển danh mục/giá/combo vào kết quả đã có sau khi kiểm GUI; giữ giới hạn chưa có tồn kho; không lấy yêu cầu kho từ bản báo cáo gửi nhầm.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-16",
+      "title": "Tìm suất trong bán vé tại quầy",
+      "report_locator": "4.1.1; 5.4.2",
+      "current": "Có chọn rạp/ngày rồi chọn suất, chưa có ô lọc tên phim trong màn hình quầy.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcBanVeTaiQuay.cs",
+        "src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P2",
+      "acceptance": "Lọc tên phim trên suất được phép bán trong rạp/ngày hiện tại; không thay API hoặc hợp đồng Web.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-17",
+      "title": "Giữ ghế và hết hạn",
+      "report_locator": "5.5.1; 6.2.3 ca 2/4",
+      "current": "SQL giữ tối đa 10 phút, không vượt giờ chiếu; UI chỉ hiển thị đếm ngược. Báo cáo ghi 5 phút.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcBanVeTaiQuay.cs",
+        "Database/Scripts/13_DatVe_GiuGhe.sql"
+      ],
+      "disposition": "SUA_BAO_CAO",
+      "priority": "P1",
+      "acceptance": "Giữ hành vi SQL hiện có; mô tả đúng hết hạn theo server, retry cùng mã và tranh ghế; kiểm GUI không thu được đơn hết hạn.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-18",
+      "title": "Tiền khách đưa và tiền thừa",
+      "report_locator": "5.4.2; 6.2.3 ca 5",
+      "current": "Hiện chỉ xác nhận đã nhận đủ tổng đơn; chưa có trường tiền khách đưa/tính tiền thừa.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcBanVeTaiQuay.cs",
+        "src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P2",
+      "acceptance": "Bổ sung hỗ trợ tiền mặt ở UI, chặn thiếu tiền và hiện tiền thừa; số tiền ghi ThanhToan vẫn đúng tổng đơn, không thay schema tài chính hay luồng Web.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-19",
+      "title": "Ghi nhận thu và phát hành vé",
+      "report_locator": "5.5.2; 6.2.3 ca 5",
+      "current": "SQL ghi tiền, đổi đơn và tạo vé trong cùng transaction; test thu lặp/thiếu tiền đã đạt. Không tích hợp ngân hàng thật.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs",
+        "Database/Scripts/14_BanVe_ThanhToan.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Retry không tạo trùng ThanhToan/Ve; lỗi không báo thành công; chỉ ghi nhận thu sau khi người thao tác xác nhận.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-20",
+      "title": "Tra cứu đơn và giao dịch",
+      "report_locator": "4.1.1; 4.3.2; 5.4.2",
+      "current": "Có lọc rạp/ngày/trạng thái, phân trang và chi tiết. Chưa có tìm trực tiếp theo mã đơn/giao dịch/vé; nút Sau chưa dựa trên tổng trang.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcDonDatVe.cs",
+        "src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs",
+        "Database/Scripts/19_TruyVan_Web.sql"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P2",
+      "acceptance": "Tra cứu nhanh theo mã trên đúng phạm vi; giới hạn trang; vẫn giữ tương thích lời gọi proc cũ nếu bổ sung tham số tùy chọn.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-21",
+      "title": "Hủy và hoàn đơn",
+      "report_locator": "4.3.2; giới hạn/hướng phát triển",
+      "current": "Có hủy chưa trả, hoàn toàn bộ có xác nhận và giữ lịch sử; test SQL đã đạt. Không hoàn ngân hàng tự động.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcDonDatVe.cs",
+        "Database/Scripts/15_HuyDon_HoanTien.sql",
+        "Database/Scripts/23_WinForms_HoanThien.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Chặn hoàn đơn đã dùng vé/không đủ điều kiện; không hoàn hai lần; hủy giải phóng ghế; GUI thể hiện đúng trạng thái.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-22",
+      "title": "Xuất và in vé QR",
+      "report_locator": "5.4.2; 6.4",
+      "current": "Có xuất phiếu HTML tự chứa QR, dùng trình duyệt In/lưu PDF; chưa phải máy in nhiệt hay xuất PDF trực tiếp.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/HoaDonExporter.cs",
+        "src/YeuMinhEmCinema.Admin/TicketQr.cs"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P1",
+      "acceptance": "QR giải mã đúng GUID; chỉ có vé sau thanh toán; in lại không tạo giao dịch; thử tên có ký tự HTML; mô tả đúng phương thức in.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-23",
+      "title": "Kiểm tra vé và chống dùng lặp",
+      "report_locator": "UC05; 5.5.3; 6.2.3 ca 6",
+      "current": "Có nhập GUID/USB dạng bàn phím, tra và xác nhận; thời gian cho vào từ trước 30 phút đến trước kết thúc. Test soát lặp đạt.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcKiemTraVe.cs",
+        "Database/Scripts/16_KiemTraVe.sql"
+      ],
+      "disposition": "GIU_VA_KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Giữ khung thời gian SQL hiện tại; chỉnh báo cáo mốc +15 phút; thử vé đã dùng/hủy/chưa trả, đúng phạm vi; không thêm camera hôm nay.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-24",
+      "title": "Đúng suất/phòng đang soát",
+      "report_locator": "UC05; 5.5.3",
+      "current": "Form chỉ có ô mã vé, không có ngữ cảnh suất/phòng đang kiểm soát. SQL kiểm thông tin suất của vé, chưa so với một suất được nhân viên chọn.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcKiemTraVe.cs",
+        "Database/Scripts/16_KiemTraVe.sql"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P1",
+      "acceptance": "Chọn suất/phòng soát và kiểm tại server; sai suất phải bị từ chối. Bổ sung theo cách tương thích lời gọi cũ, không phá Web hoặc tự thay toàn bộ hợp đồng proc.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-25",
+      "title": "Doanh thu theo thời gian",
+      "report_locator": "4.1.1; 5.4.2",
+      "current": "Có thu/hoàn/thuần theo ngày thu/hoàn Việt Nam. Tổng tiền có cả vé và F&B; cần phân biệt với báo cáo chỉ doanh thu vé.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcBaoCaoThongKe.cs",
+        "Database/Scripts/18_BaoCao_ThongKe.sql"
+      ],
+      "disposition": "GIU_VA_KIEM_THU",
+      "priority": "P1",
+      "acceptance": "Số liệu đối chiếu SQL; không nhân dòng join; ngày thu khác ngày chiếu được giải thích; nhãn thu/hoàn/thuần rõ ràng.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-26",
+      "title": "Báo cáo phim và suất chiếu",
+      "report_locator": "4.1.1; 5.4.2",
+      "current": "Có tổng theo phim và số vé theo ngày chiếu; chưa có bộ lọc phim riêng/bảng tách từng suất như phạm vi báo cáo mô tả.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcBaoCaoThongKe.cs",
+        "Database/Scripts/18_BaoCao_ThongKe.sql"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P2",
+      "acceptance": "Bổ sung truy vấn chỉ đọc theo phim/suất, dùng giá vé đã chốt; không đổi bảng giao dịch; các báo cáo cũ không đổi nghĩa.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-27",
+      "title": "Khách hàng trong Admin",
+      "report_locator": "4.1.1; 4.3.2",
+      "current": "Có tìm/thêm/sửa/ngừng hồ sơ khách và xem đơn. Đây là màn hình Admin, không phải luồng tài khoản Web.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcKhachHang.cs",
+        "Database/Scripts/11_KhachHang_NhanVien.sql",
+        "Database/Scripts/23_WinForms_HoanThien.sql"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P2",
+      "acceptance": "Kiểm phạm vi khách gắn với đơn trong rạp, phiên bản dữ liệu và lịch sử; không sửa đăng ký/đăng nhập Web.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-28",
+      "title": "Bố cục và nhãn giao diện",
+      "report_locator": "4.4.2; 5.4.2; tiêu chí giao diện",
+      "current": "Đã sửa nhãn che tiêu đề phim, nhóm nút che cây rạp và thanh đáy che nội dung. Đã xem GUI cửa sổ thường/phóng to. Chuẩn hóa toàn bộ nhãn/ngày/cột và DPI khác vẫn còn.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/UcRapPhongChieu.Designer.cs",
+        "src/YeuMinhEmCinema.Admin/Form1.Designer.cs",
+        "src/YeuMinhEmCinema.Admin/AdminUi.cs",
+        "src/YeuMinhEmCinema.Admin/Form1.PhanQuyen.cs"
+      ],
+      "disposition": "SUA_ADMIN",
+      "priority": "P1",
+      "acceptance": "Không che nội dung/nút ở cửa sổ thực tế; thử 1366x768 và DPI phổ biến nếu môi trường cho phép; nhãn tiếng Việt và ngày giờ rõ ràng.",
+      "state": "PARTIAL",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-29",
+      "title": "Tải lại dữ liệu và lỗi kết nối",
+      "report_locator": "4.1.2; 6.2",
+      "current": "Nhiều SQL call đồng bộ, UserControl có cache. Chưa đo độ trễ hay thử timeout GUI.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/Db.cs",
+        "src/YeuMinhEmCinema.Admin/Form1.cs",
+        "src/YeuMinhEmCinema.Admin/AdminUi.cs"
+      ],
+      "disposition": "KIEM_THU",
+      "priority": "P2",
+      "acceptance": "Lỗi không làm mất giỏ hoặc báo thành công giả; phục hồi/kết nối lại được; chỉ chuyển async chỗ thật sự gây chờ, không viết lại toàn app.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-30",
+      "title": "CSV và lịch sử dữ liệu",
+      "report_locator": "4.5; phần mở rộng",
+      "current": "Có CSV BOM/escape/chống công thức, trạng thái thay xóa vật lý dữ liệu giao dịch; test CSV đã đạt.",
+      "evidence": [
+        "src/YeuMinhEmCinema.Admin/CsvUtility.cs",
+        "src/YeuMinhEmCinema.Admin/AdminUi.cs",
+        "src/YeuMinhEmCinema.Admin/UcLichChieu.cs"
+      ],
+      "disposition": "GIU_VA_KIEM_THU",
+      "priority": "P2",
+      "acceptance": "Xuất đúng tập dữ liệu, tiếng Việt đọc được; giữ nguyên lịch sử đơn/vé; không lộ hash và cột concurrency trong giao diện.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-31",
+      "title": "Bộ dữ liệu và demo Admin xuyên suốt",
+      "report_locator": "6.2.3; 6.5",
+      "current": "Có dữ liệu danh mục Test và test fixture rollback; chưa có bộ demo nghiệp vụ bền vững để thao tác GUI toàn luồng.",
+      "evidence": [
+        "Database/CAI-DAT-TEST.sql",
+        "Docs/HuongDan/KIEM-THU-WINDOWS.md"
+      ],
+      "disposition": "BO_SUNG_ADMIN",
+      "priority": "P1",
+      "acceptance": "Script Test riêng, chạy lại được, không reset database khác; có lịch/giá/ghế/F&B, ca bán-soát-hoàn và nhật ký kết quả.",
+      "state": "OPEN",
+      "product_completed": false
+    },
+    {
+      "id": "ADM-32",
+      "title": "Minh chứng, thiết kế dữ liệu và phần đóng góp",
+      "report_locator": "5.1–5.3; 6.3–6.5; phụ lục",
+      "current": "Sơ đồ còn dùng API/EF/schema tiếng Anh dự kiến; báo cáo để chưa kiểm chứng. Có bằng chứng chạy tự động nhưng chưa đủ ảnh GUI.",
+      "evidence": [
+        "YeuMinhEmCinema.slnx",
+        "src/YeuMinhEmCinema.Admin/Db.cs",
+        "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+      ],
+      "disposition": "SUA_BAO_CAO",
+      "priority": "P1",
+      "acceptance": "Lập bản đồ bảng/khóa/lớp thật, phân biệt SQL test với GUI test; cập nhật phần Admin và đóng góp thực tế; phần Web giao người phụ trách xác nhận.",
+      "state": "OPEN",
+      "product_completed": false
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T01",
+      "title": "Khóa quyền theo phạm vi và rà menu chỉ xem",
+      "priority": "P1",
+      "requirements": [
+        "ADM-02",
+        "ADM-03",
+        "ADM-05"
+      ],
+      "session": 2,
+      "acceptance": "Sửa rạp/phòng/ghế sau thu hồi phải bị từ chối; rà TaoGheTheoLo và thao tác tương tự; có regression trên Test.",
+      "state": "DONE",
+      "completed_session": 2,
+      "evidence": "Docs/Admin/PHIEN-02-KET-QUA.md",
+      "completion_note": "Đã sửa phạm vi danh mục và rà menu; chưa thay thiết kế menu chỉ xem, ADM-02/ADM-09 vẫn mở cho phiên sau."
+    },
+    {
+      "id": "T02",
+      "title": "Sửa hai lỗi bố cục đã thấy",
+      "priority": "P1",
+      "requirements": [
+        "ADM-28"
+      ],
+      "session": 2,
+      "acceptance": "Cây rạp không bị nút đè; tiêu đề phim không bị banner đè; chụp/kiểm GUI sau sửa.",
+      "state": "DONE",
+      "completed_session": 2,
+      "evidence": "Docs/Admin/PHIEN-02-KET-QUA.md"
+    },
+    {
+      "id": "T03",
+      "title": "Soát vé theo suất hoặc phòng đang kiểm soát",
+      "priority": "P1",
+      "requirements": [
+        "ADM-23",
+        "ADM-24"
+      ],
+      "session": 3,
+      "acceptance": "Vé cùng rạp nhưng sai suất/phòng không được xác nhận; không soát trùng; caller cũ vẫn chạy.",
+      "state": "OPEN"
+    },
+    {
+      "id": "T04",
+      "title": "Tiền khách đưa và tra cứu giao dịch",
+      "priority": "P2",
+      "requirements": [
+        "ADM-18",
+        "ADM-20"
+      ],
+      "session": 3,
+      "acceptance": "Tiền thiếu/thừa xử lý đúng ở UI; tìm nhanh mã và phân trang đúng, số tiền lưu không đổi hợp đồng tài chính.",
+      "state": "OPEN"
+    },
+    {
+      "id": "T05",
+      "title": "Tìm kiếm phục vụ thao tác Admin",
+      "priority": "P2",
+      "requirements": [
+        "ADM-04",
+        "ADM-09",
+        "ADM-16"
+      ],
+      "session": 3,
+      "acceptance": "Tìm mã/SĐT nhân viên, phòng và phim trong quầy; đúng phạm vi, không cần sửa Web.",
+      "state": "OPEN"
+    },
+    {
+      "id": "T06",
+      "title": "Báo cáo theo phim và suất",
+      "priority": "P2",
+      "requirements": [
+        "ADM-25",
+        "ADM-26"
+      ],
+      "session": 3,
+      "acceptance": "Bổ sung bằng dữ liệu đọc; chốt rõ ngày chiếu/ngày thu, doanh thu vé/tổng thu và cách tính hoàn.",
+      "state": "OPEN"
+    },
+    {
+      "id": "T07",
+      "title": "Thể loại và phần mô tả còn thiếu",
+      "priority": "P2",
+      "requirements": [
+        "ADM-07",
+        "ADM-32"
+      ],
+      "session": 3,
+      "acceptance": "Ước lượng thay đổi schema additive sau P1; chỉ thực hiện nếu không làm Web đổi. Nếu chưa làm ghi thiếu rõ ràng.",
+      "state": "OPEN"
+    },
+    {
+      "id": "T08",
+      "title": "Bộ demo và nghiệm thu Admin",
+      "priority": "P1",
+      "requirements": [
+        "ADM-01",
+        "ADM-06",
+        "ADM-08",
+        "ADM-10",
+        "ADM-11",
+        "ADM-12",
+        "ADM-14",
+        "ADM-19",
+        "ADM-21",
+        "ADM-22",
+        "ADM-27",
+        "ADM-29",
+        "ADM-30",
+        "ADM-31"
+      ],
+      "session": 4,
+      "acceptance": "Dữ liệu Test riêng; chạy đủ bán-soát-hoàn; thử vai trò; ghi đạt/không đạt/chưa thử, không suy diễn từ build.",
+      "state": "OPEN"
+    },
+    {
+      "id": "T09",
+      "title": "Đồng bộ phần Admin trong báo cáo và nhật ký",
+      "priority": "P1",
+      "requirements": [
+        "ADM-15",
+        "ADM-17",
+        "ADM-23",
+        "ADM-32"
+      ],
+      "session": 4,
+      "acceptance": "Mô tả đúng .NET10/ADO/SQL, schema/lớp thật, khung giờ và F&B; ghi nguồn bằng chứng, phần đóng góp và các giới hạn còn lại.",
+      "state": "OPEN"
+    }
+  ],
+  "sessions": [
+    {
+      "number": 1,
+      "status": "COMPLETE",
+      "scope": "Chốt nguồn, đối chiếu và ưu tiên; chưa sửa sản phẩm"
+    },
+    {
+      "number": 2,
+      "status": "COMPLETE",
+      "scope": "T01–T02: vá quyền danh mục, nâng cấp/cài mới, sửa 3 điểm bố cục và xem GUI thực tế"
+    },
+    {
+      "number": 3,
+      "status": "NOT_STARTED",
+      "scope": "T03–T07: P1 soát vé trước, sau đó bổ sung P2 trong giới hạn thời gian"
+    },
+    {
+      "number": 4,
+      "status": "NOT_STARTED",
+      "scope": "T08–T09: demo, hồi quy và cập nhật phần Admin trong báo cáo"
+    }
+  ],
+  "git_policy": "Luôn đọc/đối chiếu báo cáo trước triển khai. Chỉ commit và push khi có lệnh rõ ràng của người dùng; test đạt không tự cấp quyền commit/push."
+}

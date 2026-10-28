@@ -1,4 +1,4 @@
-﻿namespace YeuMinhEmCinema.Admin
+namespace YeuMinhEmCinema.Admin
 {
     partial class Form1
     {
@@ -692,8 +692,17 @@
             // 
             pnlDatabaseBanner.BackColor = Color.FromArgb(240, 253, 244);
             pnlDatabaseBanner.BorderStyle = BorderStyle.FixedSingle;
-            pnlDatabaseBanner.Controls.Add(lblDbStatus);
-            pnlDatabaseBanner.Controls.Add(lblPhimBannerTitle);
+            var filmBannerLayout = new TableLayoutPanel
+            {
+                Name = "pnlPhimBannerLayout", Dock = DockStyle.Fill,
+                ColumnCount = 2, RowCount = 1, Padding = new Padding(10, 0, 10, 0)
+            };
+            filmBannerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            filmBannerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            filmBannerLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            filmBannerLayout.Controls.Add(lblPhimBannerTitle, 0, 0);
+            filmBannerLayout.Controls.Add(lblDbStatus, 1, 0);
+            pnlDatabaseBanner.Controls.Add(filmBannerLayout);
             pnlDatabaseBanner.Dock = DockStyle.Top;
             pnlDatabaseBanner.Location = new Point(15, 15);
             pnlDatabaseBanner.Name = "pnlDatabaseBanner";
@@ -702,7 +711,8 @@
             // 
             // lblDbStatus
             // 
-            lblDbStatus.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblDbStatus.Anchor = AnchorStyles.Right;
+            lblDbStatus.Margin = new Padding(10, 0, 0, 0);
             lblDbStatus.AutoSize = true;
             lblDbStatus.BackColor = Color.FromArgb(16, 185, 129);
             lblDbStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -712,11 +722,15 @@
             lblDbStatus.Name = "lblDbStatus";
             lblDbStatus.Size = new Size(393, 19);
             lblDbStatus.TabIndex = 1;
-            lblDbStatus.Text = "🟢 CƠ SỞ DỮ LIỆU HOẠT ĐỘNG THẬT: dbo.Phim (SQL Server: .\\SQLEXPRESS)";
+            lblDbStatus.Text = "Dữ liệu SQL Server";
             // 
             // lblPhimBannerTitle
             // 
-            lblPhimBannerTitle.AutoSize = true;
+            lblPhimBannerTitle.AutoSize = false;
+            lblPhimBannerTitle.AutoEllipsis = true;
+            lblPhimBannerTitle.Dock = DockStyle.Fill;
+            lblPhimBannerTitle.TextAlign = ContentAlignment.MiddleLeft;
+            lblPhimBannerTitle.Margin = Padding.Empty;
             lblPhimBannerTitle.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblPhimBannerTitle.ForeColor = Color.FromArgb(22, 101, 52);
             lblPhimBannerTitle.Location = new Point(12, 13);

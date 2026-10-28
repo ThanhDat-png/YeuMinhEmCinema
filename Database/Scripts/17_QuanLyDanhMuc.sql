@@ -60,7 +60,10 @@ EXEC dbo.sp_YMC_KhoaLich;
 EXEC @lockResult=sys.sp_getapplock @Resource=N'YMC_Booking_Write',@LockMode='Exclusive',@LockOwner='Transaction',@LockTimeout=10000;
 IF @lockResult<0 THROW 50300,N'Hệ thống đặt vé đang bận. Vui lòng thử lại.',1;
 
-EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY';
+-- Tạo rạp là thao tác danh mục toàn hệ thống; sửa rạp phải còn được phân công.
+EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY',@MaRap;
+IF @MaRap IS NULL AND NOT EXISTS(SELECT 1 FROM dbo.TaiKhoanVaiTro tv JOIN dbo.VaiTro v ON v.MaVaiTro=tv.MaVaiTro WHERE tv.MaTaiKhoan=@NguoiThucHien AND v.TenVaiTro='ADMIN' AND v.DangHoatDong=1)
+ THROW 50404,N'Chỉ Admin được tạo rạp mới.',1;
 IF @TenRap IS NULL OR LEN(LTRIM(RTRIM(@TenRap)))=0 OR @TrangThai IS NULL OR @TrangThai NOT IN(N'Đang hoạt động',N'Ngừng hoạt động') THROW 50505,N'Tên rạp hoặc trạng thái không hợp lệ.',1;
 IF @MaRap IS NULL
 BEGIN INSERT dbo.Rap(TenRap,DiaChi,TrangThai) VALUES(@TenRap,@DiaChi,@TrangThai);SET @MaRap=CONVERT(INT,SCOPE_IDENTITY());END
@@ -93,7 +96,16 @@ EXEC dbo.sp_YMC_KhoaLich;
 EXEC @lockResult=sys.sp_getapplock @Resource=N'YMC_Booking_Write',@LockMode='Exclusive',@LockOwner='Transaction',@LockTimeout=10000;
 IF @lockResult<0 THROW 50300,N'Hệ thống đặt vé đang bận. Vui lòng thử lại.',1;
 
-EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY';
+-- Kiểm tra cả rạp hiện tại và rạp đích, kể cả khi form đã mở trước lúc thu hồi rạp.
+IF @MaRap IS NULL THROW 50507,N'Không tìm thấy rạp.',1;
+IF @MaPhong IS NOT NULL
+BEGIN
+ DECLARE @RapCu INT;
+ SELECT @RapCu=MaRap FROM dbo.PhongChieu WITH(UPDLOCK,HOLDLOCK) WHERE MaPhong=@MaPhong;
+ IF @RapCu IS NULL THROW 50510,N'Không tìm thấy phòng.',1;
+ EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY',@RapCu;
+END;
+EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY',@MaRap;
 IF @TenPhong IS NULL OR LEN(LTRIM(RTRIM(@TenPhong)))=0 OR @DinhDang IS NULL OR LEN(LTRIM(RTRIM(@DinhDang)))=0
  OR @TrangThai IS NULL OR @TrangThai NOT IN(N'Đang hoạt động',N'Ngừng hoạt động') THROW 50508,N'Thông tin phòng không hợp lệ.',1;
 IF NOT EXISTS(SELECT 1 FROM dbo.Rap WHERE MaRap=@MaRap AND TrangThai=N'Đang hoạt động') THROW 50507,N'Rạp không hoạt động.',1;
@@ -129,7 +141,17 @@ EXEC dbo.sp_YMC_KhoaLich;
 EXEC @lockResult=sys.sp_getapplock @Resource=N'YMC_Booking_Write',@LockMode='Exclusive',@LockOwner='Transaction',@LockTimeout=10000;
 IF @lockResult<0 THROW 50300,N'Hệ thống đặt vé đang bận. Vui lòng thử lại.',1;
 
-EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY';
+DECLARE @RapDich INT,@RapCu INT;
+SELECT @RapDich=MaRap FROM dbo.PhongChieu WITH(UPDLOCK,HOLDLOCK) WHERE MaPhong=@MaPhong;
+IF @RapDich IS NULL THROW 50512,N'Phòng không tồn tại.',1;
+IF @MaGhe IS NOT NULL
+BEGIN
+ SELECT @RapCu=p.MaRap FROM dbo.Ghe g WITH(UPDLOCK,HOLDLOCK)
+ JOIN dbo.PhongChieu p ON p.MaPhong=g.MaPhong WHERE g.MaGhe=@MaGhe;
+ IF @RapCu IS NULL THROW 50515,N'Không tìm thấy ghế.',1;
+ EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY',@RapCu;
+END;
+EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY',@RapDich;
 IF @HangGhe IS NULL OR LEN(LTRIM(RTRIM(@HangGhe)))=0 OR @SoGhe IS NULL OR @SoGhe<1 OR @TrangThai IS NULL
  OR @TrangThai NOT IN(N'Hoạt động',N'Hỏng/Ngừng sử dụng') THROW 50511,N'Thông tin ghế không hợp lệ.',1;
 IF NOT EXISTS(SELECT 1 FROM dbo.PhongChieu WHERE MaPhong=@MaPhong) OR NOT EXISTS(SELECT 1 FROM dbo.LoaiGhe WHERE MaLoai=@MaLoaiGhe) THROW 50512,N'Phòng hoặc loại ghế không tồn tại.',1;
@@ -163,6 +185,9 @@ BEGIN TRY
 BEGIN TRAN;
 
 EXEC dbo.sp_YMC_YeuCauQuyen @NguoiThucHien,'RAP_QUAN_LY';
+-- Loại ghế dùng chung mọi rạp, không thuộc riêng một phân công.
+IF NOT EXISTS(SELECT 1 FROM dbo.TaiKhoanVaiTro tv JOIN dbo.VaiTro v ON v.MaVaiTro=tv.MaVaiTro WHERE tv.MaTaiKhoan=@NguoiThucHien AND v.TenVaiTro='ADMIN' AND v.DangHoatDong=1)
+ THROW 50404,N'Chỉ Admin được quản lý loại ghế dùng chung.',1;
 IF @TenLoai IS NULL OR LEN(LTRIM(RTRIM(@TenLoai)))=0 THROW 50516,N'Nhập tên loại ghế.',1;
 IF @MaLoai IS NULL BEGIN INSERT dbo.LoaiGhe(TenLoai) VALUES(@TenLoai);SET @MaLoai=CONVERT(INT,SCOPE_IDENTITY());END
 ELSE BEGIN UPDATE dbo.LoaiGhe SET TenLoai=@TenLoai WHERE MaLoai=@MaLoai;IF @@ROWCOUNT<>1 THROW 50517,N'Không tìm thấy loại ghế.',1;END;

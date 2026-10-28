@@ -1,4 +1,4 @@
-﻿namespace YeuMinhEmCinema.Admin
+namespace YeuMinhEmCinema.Admin
 {
     partial class UcRapPhongChieu
     {
@@ -140,9 +140,19 @@
             // 
             pnlLeft.BackColor = Color.White;
             pnlLeft.BorderStyle = BorderStyle.FixedSingle;
-            pnlLeft.Controls.Add(pnlLeftButtons);
-            pnlLeft.Controls.Add(trvRapPhong);
-            pnlLeft.Controls.Add(lblDanhSachRap);
+            var leftLayout = new TableLayoutPanel
+            {
+                Name = "pnlRapPhongLayout", Dock = DockStyle.Fill,
+                ColumnCount = 1, RowCount = 3, Margin = Padding.Empty
+            };
+            leftLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            leftLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            leftLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            leftLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 78F));
+            leftLayout.Controls.Add(lblDanhSachRap, 0, 0);
+            leftLayout.Controls.Add(trvRapPhong, 0, 1);
+            leftLayout.Controls.Add(pnlLeftButtons, 0, 2);
+            pnlLeft.Controls.Add(leftLayout);
             pnlLeft.Dock = DockStyle.Fill;
             pnlLeft.Location = new Point(0, 10);
             pnlLeft.Name = "pnlLeft";
@@ -152,7 +162,8 @@
             // 
             // pnlLeftButtons
             // 
-            pnlLeftButtons.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlLeftButtons.Dock = DockStyle.Fill;
+            pnlLeftButtons.Margin = new Padding(0, 8, 0, 0);
             pnlLeftButtons.ColumnCount = 2;
             pnlLeftButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             pnlLeftButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
@@ -242,7 +253,8 @@
             // 
             // trvRapPhong
             // 
-            trvRapPhong.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            trvRapPhong.Dock = DockStyle.Fill;
+            trvRapPhong.Margin = Padding.Empty;
             trvRapPhong.ContextMenuStrip = cmsRapPhong;
             trvRapPhong.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             trvRapPhong.FullRowSelect = true;
@@ -303,7 +315,9 @@
             // 
             // lblDanhSachRap
             // 
-            lblDanhSachRap.AutoSize = true;
+            lblDanhSachRap.AutoSize = false;
+            lblDanhSachRap.Dock = DockStyle.Fill;
+            lblDanhSachRap.Margin = Padding.Empty;
             lblDanhSachRap.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             lblDanhSachRap.ForeColor = Color.FromArgb(24, 24, 27);
             lblDanhSachRap.Location = new Point(12, 12);

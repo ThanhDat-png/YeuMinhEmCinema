@@ -1,0 +1,69 @@
+﻿Changed database context to 'YMC_AdminInstall_1e251dfe_Test'.
+PASS: Thu hồi rạp chặn sửa rạp
+PASS: Thu hồi rạp chặn sửa phòng
+PASS: Thu hồi rạp chặn tạo phòng
+PASS: Chuyển phòng phải kiểm rạp cũ
+PASS: Chuyển phòng phải kiểm rạp đích
+PASS: Thu hồi rạp chặn sửa ghế đơn
+PASS: Thu hồi rạp chặn thêm ghế đơn
+PASS: Chuyển ghế phải kiểm rạp cũ
+PASS: Chuyển ghế phải kiểm rạp đích
+PASS: Thu hồi rạp chặn tạo sơ đồ lô
+PASS: Lô ghế ngoài phạm vi bị từ chối
+PASS: Lô trộn hai rạp bị từ chối toàn bộ
+PASS: Quản lý không tạo rạp toàn cục
+PASS: Quản lý không sửa loại ghế dùng chung
+PASS: Quản lý không tạo loại ghế dùng chung
+PASS: Chỉ có quyền xem không được sửa
+PASS: Tài khoản bị khóa không được ghi
+PASS: Nhân viên ngừng làm việc không được ghi
+PASS: Lô có ghế không tồn tại bị từ chối
+MaRap      
+-----------
+         58
+MaPhong    
+-----------
+         58
+MaGhe      
+-----------
+         39
+PASS: Quản lý vẫn sửa được dữ liệu rạp được phân công
+MaPhong    
+-----------
+         64
+MaGhe      
+-----------
+         43
+PASS: Quản lý thêm phòng và ghế trong phạm vi
+MaPhong    
+-----------
+         65
+PASS: Chuyển phòng giữa hai rạp đều được phân công
+MaGhe      
+-----------
+         46
+PASS: Chuyển ghế giữa hai rạp đều được phân công
+PASS: Tạo sơ đồ trong phạm vi chạy lặp không trùng
+MaRap      
+-----------
+         74
+MaRap      
+-----------
+         76
+MaPhong    
+-----------
+         75
+MaGhe      
+-----------
+         56
+SoGheDaTao  SoGheBoQua 
+----------- -----------
+          5           1
+MaLoai     
+-----------
+         25
+MaLoai     
+-----------
+         26
+PASS: Admin giữ quyền toàn hệ thống và danh mục dùng chung
+PASS: toàn bộ kiểm thử Admin phạm vi rạp; fixture đã rollback.
