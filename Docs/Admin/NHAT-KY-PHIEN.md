@@ -72,7 +72,7 @@ Trạng thái: HOÀN THÀNH hai đầu việc sửa đã chốt; xem `PHIEN-02-K
 - SQL 27 mở rộng tùy chọn từ khóa/output tổng, caller cũ giữ nguyên; source19 và bộ cài đồng bộ. UI tìm mã đơn/thu/vé, reset trang, khóa biên.
 -24/24 ca SQL đạt trên nâng cấp/cài mới; SQL01/02/04/05/06 và AdminSmoke đạt, build0 lỗi/0 cảnh báo. GUI tiền thiếu/thừa, đổi phương thức, thu thành công/thu lại, tìm3 loại mã,57 đơn chia50/7, chi tiết và rỗng đều đạt. DB ghi80000 dù khách đưa100000,1 thu/1 vé.
 - Đã rollback fixture test, dọn đúng fixture GUI và database cài mới tạm. Chỉ Test local được nâng cấp. Không lưu PNG GUI; ảnh xem qua công cụ. Kết quả .NET ở output công cụ, không tạo log giả.
-- T04/ADM-18/ADM-20 đóng. T05–T07 chưa làm, dự kiến phiên 5; T08–T09 phiên6. Chưa sửa DOCX hoặc commit/push phiên 4.
+- T04/ADM-18/ADM-20 đóng. T05–T07 chưa làm, dự kiến phiên 5; T08–T09 phiên 6. Chưa sửa DOCX hoặc commit/push phiên 4.
 
 ## Phiên 5 — 28/10/2026: T05 tìm kiếm và phòng chỉ xem
 
@@ -84,3 +84,14 @@ Trạng thái: HOÀN THÀNH hai đầu việc sửa đã chốt; xem `PHIEN-02-K
 - Đã dọn đúng fixture GUI/tài khoản tạm và database cài mới tạm; không lưu mật khẩu tạm hoặc hash thực tế vào repo. Chỉ Test local nâng cấp.
 - Kết quả chi tiết PHIEN-05-KET-QUA.md; ảnh đã xem trong công cụ, không có PNG lưu. Log.NET ở output công cụ; bằng chứng SQL thật ở evidence/2026-10-28/session-05.
 - T05 đóng; T06/T07 và các phần menu khác/tài liệu còn mở. Chưa commit/push phiên 5.
+
+## Phiên 6 — 28/10/2026: chỉ T06 báo cáo
+
+- Đọc lại DOCX đúng hash329d4cf1… và chốt công thức trước sửa. Người dùng duyệt T06 với tám ràng buộc, không tự chuyển T07/commit/push.
+- Mở rộng UcBaoCaoThongKe (Tổng quan cũng dùng lớp này), SQL 18 thêm filter tùy chọn giữ nghĩa cũ; SQL 29 có thu chi tiết, từng suất và danh sách phim có kiểm quyền/phạm vi tại SQL. Không đổi schema/Web/runtime.
+- Thu vé/F&B cộng snapshot riêng từng đơn, tổng/hoàn lấy giao dịch; thuần thu−hoàn. Chia ngày giao dịch VN và ngày chiếu; báo cáo cũ chỉ đơn chưa hoàn được giữ và giải thích nhãn.
+-32/32 SQL test đạt nâng cấp/cài mới; SQL01/02/07, AdminSmoke 37 kiểm và build0 lỗi/0 cảnh báo đạt. GUI Admin trên bản cuối đã kiểm thu/hoàn/lọc phim/từng suất/Hiệu quả phim/F&B/rỗng, chart âm và bố cục thường/phóng to.
+- Sửa thêm UseMnemonic=false cho nhãn F&B và cột ngày chỉ hiện ngày; bản cuối bin/AdminReportFinal đã mở lại/kiểm thật sau người dùng đăng nhập.
+- Dọn đúng fixture GUI gồm thu/hoàn/đơn giữ, xóa database cài mới tạm. Chỉ Test local được nâng cấp. Không lưu PNG GUI/log.NET giả.
+- Kết quả PHIEN-06-KET-QUA.md; checklist chỉnh Word PHIEN-06-DIEU-CHINH-BAO-CAO.md; mọi yêu cầu còn mở ở PHIEN-06-CON-TON-TAI.md. DOCX chưa sửa.
+- T06 đóng; T07 chưa bắt đầu. Chưa commit/push phiên 6.

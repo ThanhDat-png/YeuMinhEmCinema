@@ -42,3 +42,5 @@ Phiên 3 đã hoàn tất T03. Xem `PHIEN-03-KET-QUA.md`; ADM-24 DONE, ADM-23 c�
 Phiên 4 hoàn tất T04: xem `PHIEN-04-KET-QUA.md`. ADM-18/ADM-20 DONE. Nền commit834ab95, phiên 4 chưa commit/push. Tiếp theo T05 tìm kiếm khác; T06/T07 còn mở. Báo cáo Word chưa chỉnh trong phiên code này.
 
 Phiên 5 hoàn tất T05, xem `PHIEN-05-KET-QUA.md`; ADM-04/09/16 DONE, menu khác tại ADM-02 vẫn còn rà. Nền commit 47a3f9a; phiên 5 chưa commit/push. Kế tiếp T06 báo cáo theo phim/suất rồi T07 thể loại, demo/tài liệu sau.
+
+Phiên 6 hoàn tất T06: `PHIEN-06-KET-QUA.md`. Công thức/các mục cần chỉnh Word: `PHIEN-06-DIEU-CHINH-BAO-CAO.md`; tồn tại: `PHIEN-06-CON-TON-TAI.md`. Nền commit c6db703, chưa commit/push phiên 6, không tự làm T07.

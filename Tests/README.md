@@ -71,3 +71,17 @@ sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/08_Admin_TimKiem
 34 ca: mã/tên/SĐT nhân viên và thiếu quyền; mã/tên phòng Unicode, phạm vi/thu hồi, phòng ngừng, chỉ xem không ghi; tên phim literal, rạp/ngày, suất/phim/phòng/rạp ngừng/hủy/đã bắt đầu, thu hồi BAN_VE. Fixture và quyền tạm rollback mỗi ca. Tên/SĐT/mã hồ sơ có thể khớp nhiều tài khoản, nên ca dương kiểm có đúng hồ sơ mục tiêu; không giả định duy nhất. Mã tài khoản và mã hồ sơ là hai miền ID riêng.
 
 SQL01/02/05/06/07, AdminSmoke, cài mới và GUI hai vai trò đã được chạy; kết quả/giới hạn tại Docs/Admin/PHIEN-05-KET-QUA.md.
+
+## T06 — báo cáo phim/suất và phân loại thu
+
+Sau SQL 29 trên Test, chạy:
+
+```powershell
+sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/09_Admin_BaoCaoPhimSuat.sql
+```
+
+32 ca, mỗi ca có fixture rollback qua luồng giữ/thu/hoàn thật. Timestamp thu/hoàn được điều chỉnh trong fixture để kiểm ranh giới ngày VN, không phải dữ liệu thật. Hai vé và hai dòng F&B ở cùng đơn, nhiều đơn cùng suất, đơn chờ, suất hủy/ngoài rạp; bảng giá/menu đổi sau bán. Đối chiếu tiền với báo cáo cũ, bộ lọc phim và hai cơ sở ngày; kiểm trực tiếp sáu procedure với tài khoản ngoài phạm vi/thiếu quyền, thu hồi rạp và khóa actor.
+
+Fixture mẫu rạp A: thu vé320000 + F&B140000 = thu460000, hoàn230000, thuần230000. Phim A thu340000/hoàn230000/thuần110000; phim B thu120000. Báo cáo cũ còn tiền vé160000 và F&B70000 từ đơn chưa hoàn. Không so sánh các cơ sở ngày khác nhau nếu không cùng tập giao dịch/suất.
+
+Đã kiểm nâng cấp/cài mới, SQL01/02/07, AdminSmoke và GUI bản cuối. Kết quả: Docs/Admin/PHIEN-06-KET-QUA.md; checklist Word và các mục còn mở đi kèm. Chưa kiểm GUI với mọi vai trò/CSV dialog hoặc benchmark dữ liệu lớn.

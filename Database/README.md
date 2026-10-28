@@ -152,3 +152,17 @@ Chạy Scripts/28_Admin_TimKiem.sql trên database đã có SQL 23/25/26/27 rồ
 - sp_YMC_TimSuatTaiQuay: kiểm BAN_VE và rạp, lọc tên phim theo chuỗi literal, ngày, suất Mở bán/chưa bắt đầu, phim Đang chiếu, rạp/phòng hoạt động. Không tự thay quy tắc giá hoặc giữ ghế.
 
 Đây là ba procedure đọc mới, không đổi hợp đồng procedure cũ, không sửa quyền mặc định hoặc thủ tục ghi. Nút bị khóa chỉ hỗ trợ UI; các procedure ghi vẫn kiểm quyền/phạm vi tại SQL. Test08 có 34 ca riêng lẻ tự rollback dữ liệu và thay đổi quyền.
+
+## Nâng cấp SQL 29 — báo cáo trong module hiện có
+
+Áp dụng Scripts/29_Admin_BaoCaoPhimSuat.sql sau SQL 23/25/26/27/28; đổi USE khi dùng Test. Không seed/đổi schema giao dịch/SQL 24. Hai bộ cài mới đã đồng bộ29. Chỉ database Test local được nâng cấp trong phiên T06.
+
+- Ba procedure cũ trong SQL 18 thêm tham số cuối @MaPhim INT=NULL. Caller bốn tham số, các cột và ý nghĩa không đổi. Hiệu quả phim vẫn dùng ngày chiếu, đơn DA_THANH_TOAN và bỏ suất hủy; F&B vẫn theo ngày thu và loại đơn hiện đã hoàn, kể cả hoàn sau kỳ xem.
+- sp_YMC_BaoCaoThuChiTiet: nhóm theo ngày thu/hoàn UTC+7. ThuVe=SUM(ChiTietVe.DonGia), ThuFnb=SUM(SoLuong*DonGia) của chi tiết đã chốt thuộc các đơn có giao dịch thu trong ngày. TienDaThu lấy ThanhToan.SoTien; TienDaHoan lấy HoanTien.SoTien theo ngày hoàn; DoanhThuThuan=thu−hoàn. Thu đã có vẫn được ghi nhận dù đơn được hoàn sau này. Ngày chỉ hoàn có thể âm.
+- sp_YMC_BaoCaoTheoSuat: lọc ngày bắt đầu chiếu VN, một dòng/suất kể cả suất hủy, cộng lũy kế thu/hoàn của các đơn thuộc suất. Đơn chưa trả không tính. Vé phát hành/hoàn/chưa hoàn dựa các dòng vé của đơn đã thu và hoàn toàn đơn hiện có; không có hoàn từng vé/phần lẻ trong phiên này.
+- sp_YMC_LayPhimBaoCao: danh sách phim có suất trong rạp đã được kiểm quyền; gồm phim cũ/ngừng để tra cứu lịch sử.
+- Cả sáu procedure đều kiểm BAO_CAO_XEM và MaRap tại SQL trước khi trả dữ liệu. Lọc phim không nới phạm vi rạp. Không ghi dữ liệu nghiệp vụ khi xem báo cáo.
+
+Chi tiết vé và F&B được tổng hợp riêng từng đơn trước khi join với giao dịch duy nhất mỗi đơn, tránh nhân nhiều vé×nhiều F&B. Không dùng bảng giá hiện tại hoặc thành phần combo để tính lại tiền đã thu. Khoản hoàn là toàn đơn gồm vé/F&B, không tự phân bổ thành hai khoản hoàn giả. Thuần ở đây là thu trừ hoàn, chưa phải lợi nhuận sau chi phí.
+
+Không cộng chéo kết quả theo ngày thu với kết quả theo ngày chiếu. Từng suất là số lũy kế hiện tại cho tập suất đã chọn, không phải báo cáo đóng sổ theo thời điểm quá khứ. Tên phim/phòng và sức chứa báo cáo cũ vẫn theo danh mục hiện tại; tiền dùng snapshot/giao dịch đã chốt. Chưa đo hiệu năng trên dữ liệu lớn.

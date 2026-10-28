@@ -1,6 +1,6 @@
 # Kế hoạch phiên 6 — báo cáo theo phim và suất
 
-Trạng thái: CHỜ NGƯỜI DÙNG DUYỆT, chưa triển khai T06.
+Trạng thái: ĐÃ ĐƯỢC DUYỆT, T06 ĐÃ TRIỂN KHAI VÀ KIỂM THỬ. Xem PHIEN-06-KET-QUA.md.
 Phạm vi: T06, ADM-25 và ADM-26. Chuẩn bị ngày 28/10/2026.
 
 1. Đọc lại báo cáo đúng (4.1.1, 5.4.2), rà UcBaoCaoThongKe.cs và SQL18; chốt ý nghĩa từng số liệu trước sửa.
@@ -11,3 +11,5 @@ Phạm vi: T06, ADM-25 và ADM-26. Chuẩn bị ngày 28/10/2026.
 6. Cập nhật nhật ký, đối chiếu báo cáo và kết quả đã làm/còn thiếu. Chỉ commit/push khi có lệnh mới của người dùng.
 
 Chưa làm thể loại T07 hoặc sửa toàn bộ Word trong T06. Các con số chưa thống nhất sẽ được ghi rõ và chốt trước khi triển khai phần phụ thuộc.
+
+Giới hạn được xác nhận thêm: chỉ Test; phân loại rõ các khoản và cơ sở ngày; kiểm quyền tại SQL; không nhân dòng/tính lại giá; không commit/push hoặc làm T07 khi chưa có lệnh riêng.

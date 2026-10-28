@@ -272,18 +272,22 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 ### ADM-25 Doanh thu theo thời gian
 
 - Báo cáo: 4.1.1; 5.4.2.
-- Hiện trạng: Có thu/hoàn/thuần theo ngày thu/hoàn Việt Nam. Tổng tiền có cả vé và F&B; cần phân biệt với báo cáo chỉ doanh thu vé.
-- Xử lý: **GIU_VA_KIEM_THU — P1 — OPEN**.
+- Hiện trạng: Đã tách thu vé/F&B trước hoàn, tổng thu/hoàn giao dịch và thuần theo ngày giao dịch VN; đối chiếu báo cáo cũ khớp, ngày chỉ hoàn âm, không nhân dòng hoặc lấy giá hiện tại. GUI mẫu thu460000/hoàn230000/thuần230000, SQL32 ca và hồi quy đạt.
+- Xử lý: **GIU_VA_KIEM_THU — P1 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcBaoCaoThongKe.cs`, `Database/Scripts/18_BaoCao_ThongKe.sql`.
 - Điều kiện đóng mục: Số liệu đối chiếu SQL; không nhân dòng join; ngày thu khác ngày chiếu được giải thích; nhãn thu/hoàn/thuần rõ ràng.
+
+- Kết quả phiên6: xem `PHIEN-06-KET-QUA.md`; công thức/chỉnh Word ở `PHIEN-06-DIEU-CHINH-BAO-CAO.md`.
 
 ### ADM-26 Báo cáo phim và suất chiếu
 
 - Báo cáo: 4.1.1; 5.4.2.
-- Hiện trạng: Có tổng theo phim và số vé theo ngày chiếu; chưa có bộ lọc phim riêng/bảng tách từng suất như phạm vi báo cáo mô tả.
-- Xử lý: **BO_SUNG_ADMIN — P2 — OPEN**.
+- Hiện trạng: Đã thêm lọc phim tại SQL/UI và bảng từng suất theo ngày chiếu, gồm vé/thu vé/F&B/thu/hoàn/thuần và suất hủy. Mở rộng module hiện có, báo cáo phim/F&B cũ giữ nghĩa với nhãn rõ. GUI ba suất, lọc phim, giá snapshot và tổng đều khớp test.
+- Xử lý: **BO_SUNG_ADMIN — P2 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcBaoCaoThongKe.cs`, `Database/Scripts/18_BaoCao_ThongKe.sql`.
 - Điều kiện đóng mục: Bổ sung truy vấn chỉ đọc theo phim/suất, dùng giá vé đã chốt; không đổi bảng giao dịch; các báo cáo cũ không đổi nghĩa.
+
+- Kết quả phiên6: xem `PHIEN-06-KET-QUA.md`; công thức/chỉnh Word ở `PHIEN-06-DIEU-CHINH-BAO-CAO.md`.
 
 ### ADM-27 Khách hàng trong Admin
 
@@ -419,3 +423,7 @@ T04, ADM-18 và ADM-20 DONE theo phạm vi. Tiền mặt không đổi số ti�
 ## Cập nhật phiên 5
 
 T05, ADM-04/ADM-09/ADM-16 DONE đúng phạm vi tìm kiếm và phòng chỉ xem. Menu khác tại ADM-02 vẫn còn rà; T06/T07 chưa làm, chuyển phiên6; demo/báo cáo T08/T09 phiên7. Xem trạng thái hiện hành trong THEO-DOI.json và PHIEN-05-KET-QUA.md. Chưa sửa DOCX hoặc commit/push phiên5.
+
+## Cập nhật phiên 6
+
+T06, ADM-25/ADM-26 DONE theo phạm vi đã duyệt; chỉ mở rộng báo cáo hiện có. Không đổi schema/Web/.NET10, chỉ Test. T07 chưa làm theo yêu cầu rõ của người dùng. Checklist chỉnh Word và toàn bộ yêu cầu OPEN/PARTIAL đã lưu riêng, không tuyên bố DOCX được cập nhật. Chưa commit/push phiên6.

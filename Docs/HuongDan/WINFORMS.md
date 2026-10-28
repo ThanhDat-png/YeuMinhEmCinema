@@ -66,7 +66,14 @@ Quyền theo vai trò được thay cả bộ trong transaction, không sửa b�
 
 ## Báo cáo
 
-Thu/hoàn/thuần theo ngày giao dịch Việt Nam, có thể âm khi ngày đó hoàn nhiều hơn thu. Hiệu quả phim theo ngày chiếu, doanh số bắp nước theo ngày thu của đơn chưa hoàn. Tỷ lệ lấp đầy dùng số ghế hoạt động hiện tại, chưa snapshot sức chứa cả phòng cho lịch sử. Tổng quan dùng chung dữ liệu báo cáo, không bịa KPI khi không có đơn.
+Cần SQL 29 trước khi dùng bản Admin này. Dùng module Tổng quan/Báo cáo hiện có: chọn rạp/phim/khoảng ngày VN rồi bấm loại báo cáo hoặc Tải lại. Đổi bộ lọc xóa bảng/biểu đồ cũ để tránh đọc nhầm. Không có rạp/không có kết quả thì hiện trạng thái rõ ràng.
+
+- Thu / hoàn tiền: ngày lọc là ngày giao dịch thu hoặc hoàn, không phải ngày chiếu. Thu vé/F&B hiển thị trước hoàn, dùng giá chi tiết đơn đã chốt; tổng thu/hoàn lấy giao dịch, thuần=thu−hoàn, có thể âm vào ngày chỉ hoàn. Hoàn toàn đơn bao gồm vé và F&B.
+- Từng suất chiếu: ngày lọc là ngày bắt đầu suất ở Việt Nam. Mỗi suất có vé phát hành/đã hoàn/chưa hoàn và lũy kế thu vé/F&B/tổng thu/hoàn/thuần, gồm cả suất hủy để giữ lịch sử. Các cột nhiều có thanh cuộn ngang. Không lấy bảng này thay cho sổ thu theo ngày giao dịch.
+- Hiệu quả phim: giữ cách tính cũ, theo ngày chiếu, chỉ đơn đã trả chưa hoàn và bỏ suất hủy. Tiền vé không gồm F&B. Tỷ lệ lấp đầy vẫn dùng sức chứa ghế hiện tại, chưa snapshot cả phòng.
+- Bắp nước bán: giữ cách tính cũ, theo ngày thu, chỉ đơn hiện còn DA_THANH_TOAN; đơn đã hoàn bị loại dù hoàn sau khoảng lọc. Dùng Thu / hoàn tiền để xem thu F&B trước hoàn và hoàn đúng ngày phát sinh.
+
+Biểu đồ phim/suất/F&B hiển thị tối đa15 mục đầu của bảng, không phải tuyên bố xếp hạng doanh thu. Bảng/CSV vẫn có toàn bộ dòng kết quả. Biểu đồ ngày thể hiện thuần và hỗ trợ số âm. Thực thi SQL kiểm BAO_CAO_XEM/phạm vi rạp, không chỉ ẩn bộ lọc tại UI.
 
 Giao dịch lưu UTC; nhãn ngày giờ *_Utc trong bảng và file chi tiết thể hiện UTC. Suất chiếu lưu giờ Việt Nam. CSV UTF-8 BOM hỗ trợ Excel, chặn ô bắt đầu bằng dấu công thức.
 

@@ -74,3 +74,9 @@ Database đã có SQL 23/25/26/27: áp dụng `Database/Scripts/28_Admin_TimKiem
 - Nhân viên: tên đăng nhập/họ tên, mã nhân viên/mã tài khoản hoặc một phần SĐT. Mã hồ sơ và mã tài khoản có thể trùng số nên có thể trả nhiều dòng phù hợp; nhìn rõ hai cột mã.
 - Rạp/Phòng: người có RAP_XEM mở được màn hình, tìm theo mã/tên phòng; không có RAP_QUAN_LY thì nút ghi và menu chuột phải bị khóa. Chỉ trả phòng trong rạp được phân công.
 - Quầy: nhập tên phim rồi bấm Tải suất / tìm phim hoặc Enter. Lọc cùng rạp/ngày và điều kiện còn được bán. Đổi bộ lọc xóa ghế/tổng tạm cũ; đơn đã có yêu cầu giữ vẫn khóa giỏ.
+
+## Báo cáo phim/suất — SQL 29
+
+Database đang có SQL 23/25/26/27/28: chạy `Database/Scripts/29_Admin_BaoCaoPhimSuat.sql` trên đúng database rồi dùng Admin mới. Với Test đổi USE; không seed/schema mới/SQL 24 Web. Hai bộ cài tổng đã kèm29. Không tự chạy lên database chính khi chỉ kiểm thử.
+
+Trong Tổng quan/Báo cáo: chọn rạp, phim hoặc Tất cả phim, khoảng ngày Việt Nam rồi chọn chế độ. Thu/hoàn dùng ngày giao dịch; Từng suất dùng ngày bắt đầu chiếu và tiền lũy kế của suất. Các cột thu vé/F&B là trước hoàn; tổng thu lấy ThanhToan, hoàn lấy HoanTien; thuần=thu−hoàn. Hiệu quả phim và Bắp nước bán giữ nghĩa chỉ đơn đã trả chưa hoàn, có nhãn giải thích riêng.
