@@ -242,18 +242,22 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 ### ADM-23 Kiểm tra vé và chống dùng lặp
 
 - Báo cáo: UC05; 5.5.3; 6.2.3 ca 6.
-- Hiện trạng: Có nhập GUID/USB dạng bàn phím, tra và xác nhận; thời gian cho vào từ trước 30 phút đến trước kết thúc. Test soát lặp đạt.
-- Xử lý: **GIU_VA_KIEM_THU — P1 — OPEN**.
+- Hiện trạng: Đã kiểm SQL vé dùng/hủy/chưa trả/hoàn, quyền/phạm vi và khung -30 phút đến trước kết thúc; GUI đúng/sai suất, xác nhận và quét lại đạt. Còn chỉnh mốc +15 phút trong DOCX ở T09, chưa thử máy quét USB vật lý/camera.
+- Xử lý: **GIU_VA_KIEM_THU — P1 — PARTIAL**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcKiemTraVe.cs`, `Database/Scripts/16_KiemTraVe.sql`.
 - Điều kiện đóng mục: Giữ khung thời gian SQL hiện tại; chỉnh báo cáo mốc +15 phút; thử vé đã dùng/hủy/chưa trả, đúng phạm vi; không thêm camera hôm nay.
+
+- Kết quả phiên 3: xem `PHIEN-03-KET-QUA.md`; SQL06 đạt 31/31 ca và đã xem GUI thực tế.
 
 ### ADM-24 Đúng suất/phòng đang soát
 
 - Báo cáo: UC05; 5.5.3.
-- Hiện trạng: Form chỉ có ô mã vé, không có ngữ cảnh suất/phòng đang kiểm soát. SQL kiểm thông tin suất của vé, chưa so với một suất được nhân viên chọn.
-- Xử lý: **BO_SUNG_ADMIN — P1 — OPEN**.
+- Hiện trạng: Admin bắt chọn suất có rạp/phòng/giờ; SQL đối chiếu suất/phòng trên cả tra và xác nhận. Đã kiểm GUI đúng/sai suất và soát lặp, 31 ca SQL đạt trên nâng cấp và cài mới.
+- Xử lý: **BO_SUNG_ADMIN — P1 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcKiemTraVe.cs`, `Database/Scripts/16_KiemTraVe.sql`.
 - Điều kiện đóng mục: Chọn suất/phòng soát và kiểm tại server; sai suất phải bị từ chối. Bổ sung theo cách tương thích lời gọi cũ, không phá Web hoặc tự thay toàn bộ hợp đồng proc.
+
+- Kết quả phiên 3: xem `PHIEN-03-KET-QUA.md`; SQL06 đạt 31/31 ca và đã xem GUI thực tế.
 
 ### ADM-25 Doanh thu theo thời gian
 
@@ -390,3 +394,10 @@ Ngoài phạm vi hôm nay: đổi runtime/ORM/kiến trúc, tồn kho, ngân hà
 ## Cập nhật sau Phiên 2
 
 T01/T02 hoàn thành trong phạm vi sửa lỗi đã chốt. ADM-03 đóng; ADM-28 còn một phần, ADM-02/ADM-09 và các chức năng chưa làm vẫn mở. Không commit hoặc push khi chưa có lệnh người dùng.
+
+## Cập nhật sau phiên 3 — ngữ cảnh soát vé
+
+- ADM-24: DONE. Form bắt chọn suất, truyền suất/phòng; server từ chối sai ngữ cảnh. SQL06 31 ca đạt trên Test nâng cấp và cài mới; GUI đã xác nhận sai suất cùng phòng, đúng suất, ghi sử dụng, quét lại bị chặn.
+- ADM-23: PARTIAL, phần sản phẩm/guard đã kiểm. DOCX chưa sửa mốc +15 phút; chuyển việc chỉnh tài liệu về T09. Không khẳng định đã thử máy quét USB vật lý.
+- T03: DONE. Trạng thái chi tiết xem THEO-DOI.json và PHIEN-03-KET-QUA.md.
+- T04–T07 chưa triển khai, chuyển phiên 4; T08–T09 chuyển phiên 5. Tách phiên 3 đúng phạm vi T03 đã chốt với người dùng.

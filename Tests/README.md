@@ -33,3 +33,15 @@ sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/05_Admin_PhamViR
 ```
 
 Script chỉ nhận database hậu tố `_Test`; mặc định `YeuMinhEmCinema_Test`. Có 19 ca từ chối và 6 ca cho phép, tự rollback quyền và fixture mỗi ca. Kiểm thu hồi rạp, rạp nguồn/đích khi chuyển phòng/ghế, lô trộn phạm vi, tạo sơ đồ, tài khoản bị khóa/ngừng việc, Admin toàn hệ thống và quản lý có phân công hợp lệ.
+
+## Hồi quy soát vé đúng suất/phòng
+
+Cài SQL 26 sau SQL 23/25 trên Test, rồi chạy từ gốc repo:
+
+```powershell
+sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/06_Admin_SoatVeTheoSuat.sql
+```
+
+31 ca: tra cứu/xác nhận đúng suất/phòng; sai suất cùng phòng, sai phòng cùng rạp, ID không có; caller cũ và tham số tùy chọn; vé không tồn tại/đã dùng/hủy, đơn chưa trả/hoàn, suất hủy; ngoài/ trong khung giờ; thu hồi rạp/quyền, khóa tài khoản/ngừng việc; danh sách quyền SOAT_VE, Admin toàn cục, bỏ suất hủy và gồm suất qua đêm. Các trạng thái từ chối được dựng trong transaction để kiểm guard; không thay thế toàn bộ kiểm thử luồng tạo trạng thái. Fixture từng ca rollback. File chỉ nhận database `_Test`.
+
+Kết quả đã chạy và kiểm GUI: `Docs/Admin/PHIEN-03-KET-QUA.md`.

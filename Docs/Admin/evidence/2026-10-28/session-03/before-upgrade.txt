@@ -1,0 +1,9 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                  25 FCAB7A6C-9026-4B5F-8DAB-75F33D58B6A1 CHO_THANH_TOAN                      80000                    2026-10-28 08:32:01
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+94EC073B-2D5F-4BE7-926C-7C03482C3041                   25        1293 HIEU_LUC                                2026-10-28 08:22:01                                   NULL        NULL
+HResult 0x1FD0, Level 16, State 2
+Procedure or function sp_YMC_KiemTraVe has too many arguments specified.

@@ -432,31 +432,36 @@
       "id": "ADM-23",
       "title": "Kiểm tra vé và chống dùng lặp",
       "report_locator": "UC05; 5.5.3; 6.2.3 ca 6",
-      "current": "Có nhập GUID/USB dạng bàn phím, tra và xác nhận; thời gian cho vào từ trước 30 phút đến trước kết thúc. Test soát lặp đạt.",
+      "current": "Đã kiểm SQL vé dùng/hủy/chưa trả/hoàn, quyền/phạm vi và khung -30 phút đến trước kết thúc; GUI đúng/sai suất, xác nhận và quét lại đạt. Còn chỉnh mốc +15 phút trong DOCX ở T09, chưa thử máy quét USB vật lý/camera.",
       "evidence": [
         "src/YeuMinhEmCinema.Admin/UcKiemTraVe.cs",
-        "Database/Scripts/16_KiemTraVe.sql"
+        "Database/Scripts/16_KiemTraVe.sql",
+        "Database/Tests/06_Admin_SoatVeTheoSuat.sql",
+        "Docs/Admin/PHIEN-03-KET-QUA.md"
       ],
       "disposition": "GIU_VA_KIEM_THU",
       "priority": "P1",
       "acceptance": "Giữ khung thời gian SQL hiện tại; chỉnh báo cáo mốc +15 phút; thử vé đã dùng/hủy/chưa trả, đúng phạm vi; không thêm camera hôm nay.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": true
     },
     {
       "id": "ADM-24",
       "title": "Đúng suất/phòng đang soát",
       "report_locator": "UC05; 5.5.3",
-      "current": "Form chỉ có ô mã vé, không có ngữ cảnh suất/phòng đang kiểm soát. SQL kiểm thông tin suất của vé, chưa so với một suất được nhân viên chọn.",
+      "current": "Admin bắt chọn suất có rạp/phòng/giờ; SQL đối chiếu suất/phòng trên cả tra và xác nhận. Đã kiểm GUI đúng/sai suất và soát lặp, 31 ca SQL đạt trên nâng cấp và cài mới.",
       "evidence": [
         "src/YeuMinhEmCinema.Admin/UcKiemTraVe.cs",
-        "Database/Scripts/16_KiemTraVe.sql"
+        "Database/Scripts/16_KiemTraVe.sql",
+        "Database/Scripts/26_Admin_SoatVeTheoSuat.sql",
+        "Database/Tests/06_Admin_SoatVeTheoSuat.sql",
+        "Docs/Admin/PHIEN-03-KET-QUA.md"
       ],
       "disposition": "BO_SUNG_ADMIN",
       "priority": "P1",
       "acceptance": "Chọn suất/phòng soát và kiểm tại server; sai suất phải bị từ chối. Bổ sung theo cách tương thích lời gọi cũ, không phá Web hoặc tự thay toàn bộ hợp đồng proc.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "DONE",
+      "product_completed": true
     },
     {
       "id": "ADM-25",
@@ -625,7 +630,10 @@
       ],
       "session": 3,
       "acceptance": "Vé cùng rạp nhưng sai suất/phòng không được xác nhận; không soát trùng; caller cũ vẫn chạy.",
-      "state": "OPEN"
+      "state": "DONE",
+      "completed_session": 3,
+      "evidence": "Docs/Admin/PHIEN-03-KET-QUA.md",
+      "completion_note": "Hoàn tất code và kiểm thử ngữ cảnh soát vé; chỉnh DOCX mốc giờ để T09, không đánh báo cáo đã sửa."
     },
     {
       "id": "T04",
@@ -635,7 +643,7 @@
         "ADM-18",
         "ADM-20"
       ],
-      "session": 3,
+      "session": 4,
       "acceptance": "Tiền thiếu/thừa xử lý đúng ở UI; tìm nhanh mã và phân trang đúng, số tiền lưu không đổi hợp đồng tài chính.",
       "state": "OPEN"
     },
@@ -648,7 +656,7 @@
         "ADM-09",
         "ADM-16"
       ],
-      "session": 3,
+      "session": 4,
       "acceptance": "Tìm mã/SĐT nhân viên, phòng và phim trong quầy; đúng phạm vi, không cần sửa Web.",
       "state": "OPEN"
     },
@@ -660,7 +668,7 @@
         "ADM-25",
         "ADM-26"
       ],
-      "session": 3,
+      "session": 4,
       "acceptance": "Bổ sung bằng dữ liệu đọc; chốt rõ ngày chiếu/ngày thu, doanh thu vé/tổng thu và cách tính hoàn.",
       "state": "OPEN"
     },
@@ -672,7 +680,7 @@
         "ADM-07",
         "ADM-32"
       ],
-      "session": 3,
+      "session": 4,
       "acceptance": "Ước lượng thay đổi schema additive sau P1; chỉ thực hiện nếu không làm Web đổi. Nếu chưa làm ghi thiếu rõ ràng.",
       "state": "OPEN"
     },
@@ -696,7 +704,7 @@
         "ADM-30",
         "ADM-31"
       ],
-      "session": 4,
+      "session": 5,
       "acceptance": "Dữ liệu Test riêng; chạy đủ bán-soát-hoàn; thử vai trò; ghi đạt/không đạt/chưa thử, không suy diễn từ build.",
       "state": "OPEN"
     },
@@ -710,7 +718,7 @@
         "ADM-23",
         "ADM-32"
       ],
-      "session": 4,
+      "session": 5,
       "acceptance": "Mô tả đúng .NET10/ADO/SQL, schema/lớp thật, khung giờ và F&B; ghi nguồn bằng chứng, phần đóng góp và các giới hạn còn lại.",
       "state": "OPEN"
     }
@@ -728,13 +736,18 @@
     },
     {
       "number": 3,
-      "status": "NOT_STARTED",
-      "scope": "T03–T07: P1 soát vé trước, sau đó bổ sung P2 trong giới hạn thời gian"
+      "status": "COMPLETE",
+      "scope": "T03: soát vé theo suất/phòng, 31 ca SQL, GUI thực tế; chưa làm P2"
     },
     {
       "number": 4,
       "status": "NOT_STARTED",
-      "scope": "T08–T09: demo, hồi quy và cập nhật phần Admin trong báo cáo"
+      "scope": "T04–T07: tiền khách đưa/tra cứu, tìm kiếm, báo cáo, thể loại theo thứ tự ưu tiên"
+    },
+    {
+      "number": 5,
+      "status": "NOT_STARTED",
+      "scope": "T08–T09: demo, hồi quy và cập nhật báo cáo Admin"
     }
   ],
   "git_policy": "Luôn đọc/đối chiếu báo cáo trước triển khai. Chỉ commit và push khi có lệnh rõ ràng của người dùng; test đạt không tự cấp quyền commit/push."

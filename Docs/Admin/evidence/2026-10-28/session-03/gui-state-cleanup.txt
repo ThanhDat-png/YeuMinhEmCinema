@@ -1,0 +1,41 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+PASS: GUI đã ghi vé DA_SU_DUNG và thời gian soát vào database Test.
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(2 rows affected)
+
+(1 rows affected)
+
+(2 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+PASS: đã dọn đúng fixture GUI, giữ dữ liệu người dùng.

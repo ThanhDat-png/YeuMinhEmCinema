@@ -1,4 +1,4 @@
-﻿# Sử dụng Admin
+# Sử dụng Admin
 
 ## Đăng nhập và quyền
 
@@ -46,7 +46,11 @@ Một giao dịch thu thành công/đơn và một giao dịch hoàn toàn bộ/
 
 ## Kiểm vé
 
-QR chứa GUID MaVe. Máy quét USB kiểu bàn phím có thể điền vào ô rồi Enter để tra; cũng có thể dán GUID. Không tích hợp camera đọc QR trực tiếp trong WinForms. Sau khi tra, bấm Xác nhận vào rạp. Chỉ từ 30 phút trước giờ chiếu đến trước giờ kết thúc; kiểm lần hai bị chặn. Tra thông tin không tự đánh dấu đã sử dụng.
+Cần SQL 26 trước khi chạy Admin mới. Chọn ngày, bấm Tải suất và chọn suất đang soát (hiển thị rạp, phòng, giờ, phim). Không tự chọn sẵn suất đầu tiên. Danh sách chỉ chứa suất thuộc phạm vi có quyền soát, bỏ suất hủy; gồm suất hôm trước còn chiếu sang ngày chọn. Chưa chọn suất thì không thể tra hoặc xác nhận.
+
+QR chứa GUID MaVe. Máy quét USB kiểu bàn phím có thể điền vào ô rồi Enter để tra; cũng có thể dán GUID. Không tích hợp camera đọc QR trực tiếp. Tra cứu không tự đánh dấu sử dụng. Xác nhận hiển thị lại suất/phòng; SQL kiểm cả suất và phòng trước cập nhật. Chỉ cho vào từ 30 phút trước giờ chiếu đến trước giờ kết thúc; vé đã dùng, hủy, chưa thanh toán, sai ngữ cảnh hoặc ngoài phạm vi đều bị chặn theo nghiệp vụ.
+
+Đổi suất/ngày, tải lại hoặc nhập mã mới sẽ xóa kết quả cũ để tránh nhầm vé. Khi thu hồi phân công/quyền trong lúc form mở, SQL kiểm lại lúc thao tác; bấm Tải suất để lấy danh sách mới. Caller cũ không truyền ngữ cảnh vẫn giữ tương thích; quy tắc bắt chọn suất áp dụng cho Admin mới.
 
 ## Khách hàng / nhân viên
 

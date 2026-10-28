@@ -55,3 +55,12 @@ Trạng thái: HOÀN THÀNH hai đầu việc sửa đã chốt; xem `PHIEN-02-K
 - Chỉ áp dụng SQL trên Test; database cài mới tạm đã dọn. File Word báo cáo giữ nguyên, phần chỉnh mô tả được ghi lại trong hồ sơ.
 - Người dùng yêu cầu luôn rà báo cáo trước triển khai, chỉ commit/push khi có lệnh. Phiên này chưa stage/commit/push.
 - Tiếp theo T03 kiểm ngữ cảnh soát vé; các P2 theo kế hoạch nếu còn thời gian.
+
+## Phiên 3 — 28/10/2026: T03 soát vé đúng suất/phòng
+
+- Trước sửa đọc lại DOCX đúng hash 329d4cf1…: UC05, 5.5.3 và nhánh thay thế hình 5.8 yêu cầu chọn suất, đúng suất, không dùng lặp. Giữ quyết định khung giờ -30 phút đến trước kết thúc thay vì đổi quy tắc toàn hệ thống.
+- Thêm SQL26, list suất theo VE_KIEM_TRA và phạm vi; tham số ngữ cảnh optional để caller cũ giữ hợp đồng. Admin mới bắt chọn suất và truyền cả suất/phòng.
+- Build 0 lỗi/0 cảnh báo. SQL06 31/31 đạt trên nâng cấp và cài mới; SQL01/02/04/05 và AdminSmoke đạt. GUI sau người dùng đăng nhập: chưa chọn bị khóa, sai suất bị chặn, đúng suất tra/xác nhận thành công, quét lại bị chặn; bố cục thường/phóng to đã xem.
+- Đã dọn fixture GUI đúng ID/nhãn, rollback các fixture hồi quy và xóa database cài mới tạm. Chỉ Test được nâng cấp; không sửa Web/.NET10/schema.
+- Chi tiết và log: PHIEN-03-KET-QUA.md, evidence/2026-10-28/session-03. Không lưu PNG GUI; ảnh xem trực tiếp trong công cụ. Không tạo log .NET giả.
+- T03/ADM-24 đóng; ADM-23 còn phần sửa DOCX ở T09. Chưa làm T04–T07; chuyển phiên 4. Phiên 3 không commit/push, chờ lệnh riêng.

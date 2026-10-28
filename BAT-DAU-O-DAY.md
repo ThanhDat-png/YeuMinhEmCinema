@@ -54,3 +54,9 @@ Mở Database/CAI-DAT-TAT-CA.sql và chạy toàn bộ (đã kèm 23 và bản v
 ## Bản vá phạm vi Admin SQL 25
 
 Database đang dùng đã có SQL 23 chỉ cần chạy `Database/Scripts/25_Admin_PhamViRap.sql` sau khi chọn đúng database. Không chạy lại seed. Khi dùng database Test, đổi dòng `USE YeuMinhEmCinema;` thành `USE YeuMinhEmCinema_Test;`. Hai file tổng cài mới đã kèm SQL 25. SQL 24 là phần thanh toán mô phỏng Web riêng, không phải điều kiện để áp dụng SQL 25.
+
+## Soát vé theo suất — SQL 26
+
+Admin mới cần `Database/Scripts/26_Admin_SoatVeTheoSuat.sql` để chọn suất và kiểm đúng suất/phòng. Database đã có SQL 23: áp dụng bản vá 25 rồi 26; không seed lại. Đổi dòng USE nếu dùng Test. Hai bộ cài tổng đã kèm 26. Không cần chạy SQL 24 của Web để dùng 26.
+
+Tại Kiểm tra vé: chọn ngày → Tải suất → chọn suất có rạp/phòng/giờ chiếu → nhập GUID/QR → Tra cứu hoặc Xác nhận vào rạp. Chưa chọn suất thì hai nút bị khóa. Danh sách gồm cả suất qua đêm còn chiếu trong ngày chọn, bỏ suất hủy và lọc phạm vi người soát. Khung vào vẫn từ trước 30 phút đến trước giờ kết thúc.

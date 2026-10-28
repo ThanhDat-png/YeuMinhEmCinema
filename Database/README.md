@@ -122,3 +122,13 @@ Sau khi đã cài SQL 23, chạy `Scripts/25_Admin_PhamViRap.sql` trên đúng d
 `CAI-DAT-TAT-CA.sql` và `CAI-DAT-TEST.sql` đã kèm bản vá cuối file. Nếu chạy lại 17 hoặc 23 từ bản source cũ, phải áp dụng lại 25 sau cùng. Không cần SQL 24 của Web để áp dụng 25.
 
 Hồi quy chỉ chạy trên database hậu tố `_Test`: `Tests/05_Admin_PhamViRap.sql` (25 ca, fixture rollback). Dùng `sqlcmd -I -b -f 65001` khi chạy từ terminal để bật QUOTED_IDENTIFIER và giữ Unicode.
+
+## Nâng cấp Admin SQL 26 — soát đúng suất/phòng
+
+Chạy `Scripts/26_Admin_SoatVeTheoSuat.sql` trên database đã có SQL 23 (và giữ bản vá danh mục 25). Không cần schema/seed mới hoặc SQL 24. Hai bộ cài tổng đã kèm 26 ở cuối. Mặc định USE database chính; với Test đổi USE cho đúng trước khi chạy.
+
+- `sp_YMC_KiemTraVe` giữ ba tham số cũ và result set; thêm `@MaSuatChieu INT=NULL,@MaPhong INT=NULL` ở cuối. Nếu truyền, cả tra cứu lẫn xác nhận đều đối chiếu; sai suất trả 50343, sai phòng trả 50344, không cập nhật vé.
+- Caller cũ bỏ hai tham số vẫn chạy theo hành vi cũ. Admin mới luôn bắt chọn suất rồi truyền cả suất/phòng; không tự suy ra suất đang soát từ vé.
+- `sp_YMC_LaySuatSoatVe @NguoiThucHien,@Ngay=NULL` chỉ cần VE_KIEM_TRA, lọc quyền theo rạp, bỏ suất hủy và gồm suất qua đêm giao với ngày chọn. Không cần LICH_CHIEU_XEM. NULL ngày dùng ngày Việt Nam hiện tại.
+- Giữ khóa giao dịch và khung vào -30 phút đến trước kết thúc; UPDATE chỉ nhận vé HIEU_LUC và kiểm số dòng. Tra cứu không đổi trạng thái, chưa áp khung thời gian xác nhận cho thao tác tra cứu.
+- `Tests/06_Admin_SoatVeTheoSuat.sql`: 31 ca tự tạo/rollback fixture trên `_Test`, kiểm đúng/sai suất/phòng, caller cũ, vé hủy/chưa trả/hoàn, khung giờ, soát lặp, thu hồi quyền và danh sách suất.
