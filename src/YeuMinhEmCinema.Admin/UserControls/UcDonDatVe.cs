@@ -3,7 +3,7 @@ namespace YeuMinhEmCinema.Admin;
 public partial class UcDonDatVe:DataPage
 {
  private readonly ComboBox rap=AdminUi.Combo(),tt=AdminUi.Combo();
- private readonly DateTimePicker tu=new(){Value=DateTime.Today.AddDays(-7),Width=140,Format=DateTimePickerFormat.Short},den=new(){Width=140,Format=DateTimePickerFormat.Short};
+ private readonly DateTimePicker tu=new(){Value=DateTime.Today.AddDays(-7),Width=140,Format=DateTimePickerFormat.Custom,CustomFormat="dd/MM/yyyy"},den=new(){Width=140,Format=DateTimePickerFormat.Custom,CustomFormat="dd/MM/yyyy"};
  private readonly TextBox search=AdminUi.Text(100);
  private readonly Button before,after;
  private bool loading;

@@ -1,5 +1,5 @@
 ﻿{
-  "date": "2026-10-28",
+  "date": "2026-10-29",
   "timezone": "Asia/Bangkok",
   "baseline_commit": "5a0ee37c406746b2a23c0db6e2b5f17b46d8f6d6",
   "scope": "WinForms Admin và SQL cần cho Admin; không triển khai Web/người dùng",
@@ -99,8 +99,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Đúng/sai/khóa tài khoản cho kết quả đúng; không lộ hash; không đổi mật khẩu người dùng để làm test.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-02",
@@ -114,8 +115,9 @@
       "disposition": "SUA_ADMIN",
       "priority": "P1",
       "acceptance": "Tách xem/sửa hợp lý; người chỉ xem tra cứu được nhưng không ghi được; ghi vẫn kiểm quyền hiện tại ở SQL.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-03",
@@ -168,8 +170,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Có ma trận quyền thực tế; thử thu hồi khi đang mở form. Không cấp thêm quyền toàn cục cho quản lý chỉ để khớp báo cáo.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-06",
@@ -185,8 +188,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "CRUD/trạng thái, dữ liệu sai và phim có lịch tương lai được kiểm; dữ liệu liên quan không mất; Web vẫn đọc được hợp đồng hiện tại.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-07",
@@ -221,8 +225,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Tên trùng, dữ liệu sai, phòng chưa có ghế và phòng có lịch được xử lý đúng; không đổi schema chỉ để thêm tên trạng thái trong sơ đồ.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-09",
@@ -256,8 +261,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Không tạo trùng; ghế hỏng không bán; có ghế bị bảo vệ thì cả lô bị từ chối; không làm sai thông tin vé cũ.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-11",
@@ -272,8 +278,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Thời lượng/kết thúc/dọn phòng hợp lệ; chỉ phim/phòng đủ điều kiện; đúng phạm vi rạp.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-12",
@@ -288,8 +295,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Thử biên dọn phòng, qua đêm, sửa chính nó; đơn đang giữ/đã trả chặn đổi/hủy; ngừng bán vẫn chiếm phòng.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-13",
@@ -304,8 +312,9 @@
       "disposition": "GIU_VA_KIEM_THU",
       "priority": "P2",
       "acceptance": "Nguồn/đích đổi phải xem trước lại; một suất lỗi không ghi dở nhóm; CSV đúng danh sách đang xem.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-14",
@@ -321,8 +330,9 @@
       "disposition": "GIU_VA_KIEM_THU",
       "priority": "P1",
       "acceptance": "Giá chồng bị chặn; thay bảng giá không đổi đơn đã chốt; không tự thêm mô hình giá riêng từng rạp hoặc ngày lễ hôm nay.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-15",
@@ -337,8 +347,9 @@
       "disposition": "SUA_BAO_CAO",
       "priority": "P2",
       "acceptance": "Chuyển danh mục/giá/combo vào kết quả đã có sau khi kiểm GUI; giữ giới hạn chưa có tồn kho; không lấy yêu cầu kho từ bản báo cáo gửi nhầm.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-16",
@@ -370,8 +381,9 @@
       "disposition": "SUA_BAO_CAO",
       "priority": "P1",
       "acceptance": "Giữ hành vi SQL hiện có; mô tả đúng hết hạn theo server, retry cùng mã và tranh ghế; kiểm GUI không thu được đơn hết hạn.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-18",
@@ -403,8 +415,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Retry không tạo trùng ThanhToan/Ve; lỗi không báo thành công; chỉ ghi nhận thu sau khi người thao tác xác nhận.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "DONE",
+      "product_completed": true,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-20",
@@ -438,8 +451,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "Chặn hoàn đơn đã dùng vé/không đủ điều kiện; không hoàn hai lần; hủy giải phóng ghế; GUI thể hiện đúng trạng thái.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-22",
@@ -453,8 +467,9 @@
       "disposition": "KIEM_THU",
       "priority": "P1",
       "acceptance": "QR giải mã đúng GUID; chỉ có vé sau thanh toán; in lại không tạo giao dịch; thử tên có ký tự HTML; mô tả đúng phương thức in.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-23",
@@ -471,7 +486,8 @@
       "priority": "P1",
       "acceptance": "Giữ khung thời gian SQL hiện tại; chỉnh báo cáo mốc +15 phút; thử vé đã dùng/hủy/chưa trả, đúng phạm vi; không thêm camera hôm nay.",
       "state": "PARTIAL",
-      "product_completed": true
+      "product_completed": true,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-24",
@@ -540,8 +556,9 @@
       "disposition": "KIEM_THU",
       "priority": "P2",
       "acceptance": "Kiểm phạm vi khách gắn với đơn trong rạp, phiên bản dữ liệu và lịch sử; không sửa đăng ký/đăng nhập Web.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-28",
@@ -558,7 +575,8 @@
       "priority": "P1",
       "acceptance": "Không che nội dung/nút ở cửa sổ thực tế; thử 1366x768 và DPI phổ biến nếu môi trường cho phép; nhãn tiếng Việt và ngày giờ rõ ràng.",
       "state": "PARTIAL",
-      "product_completed": false
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-29",
@@ -589,8 +607,9 @@
       "disposition": "GIU_VA_KIEM_THU",
       "priority": "P2",
       "acceptance": "Xuất đúng tập dữ liệu, tiếng Việt đọc được; giữ nguyên lịch sử đơn/vé; không lộ hash và cột concurrency trong giao diện.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-31",
@@ -604,8 +623,9 @@
       "disposition": "BO_SUNG_ADMIN",
       "priority": "P1",
       "acceptance": "Script Test riêng, chạy lại được, không reset database khác; có lịch/giá/ghế/F&B, ca bán-soát-hoàn và nhật ký kết quả.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "PARTIAL",
+      "product_completed": false,
+      "t08_evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     },
     {
       "id": "ADM-32",
@@ -749,7 +769,9 @@
       ],
       "session": 8,
       "acceptance": "Dữ liệu Test riêng; chạy đủ bán-soát-hoàn; thử vai trò; ghi đạt/không đạt/chưa thử, không suy diễn từ build.",
-      "state": "OPEN"
+      "state": "PARTIAL",
+      "evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md",
+      "result": "ĐẠT CÓ GIỚI HẠN; chờ duyệt, còn 2 lỗi P2 và ca NOT RUN; không T09/commit/push"
     },
     {
       "id": "T09",
@@ -804,8 +826,9 @@
     },
     {
       "number": 8,
-      "status": "NOT_STARTED",
-      "scope": "T08–T09: demo, hồi quy tổng và cập nhật DOCX Admin khi được yêu cầu"
+      "status": "REVIEW_PENDING",
+      "scope": "T08 nghiệm thu SQL/DAL/HTTP/GUI; ĐẠT CÓ GIỚI HẠN, chờ duyệt; T09 chưa thực hiện",
+      "evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md"
     }
   ],
   "git_policy": "Luôn đọc/đối chiếu báo cáo trước triển khai. Chỉ commit/push khi có lệnh rõ ràng; test đạt không tự cấp quyền. Thông điệp commit bằng tiếng Việt, chỉ nội dung văn bản, không thêm tiền tố feat/fix. Người dùng đã duyệt commit T07 và push toàn bộ ngày 28/10/2026; không tự chuyển T08.",
@@ -830,5 +853,18 @@
       "old": "a4e3ae6ee3abfbf0cfbf6accbb4dcdf8de6c5999",
       "new": "94838a7eff2dee925d8a44ba95f90f092f047dd2"
     }
-  ]
+  ],
+  "t08_acceptance": {
+    "date": "2026-10-29",
+    "baseline_commit": "ade6414",
+    "result": "ĐẠT CÓ GIỚI HẠN",
+    "evidence": "Docs/Admin/T08-KET-QUA-NGHIEM-THU.md",
+    "criteria_counts": {
+      "PASS": 72,
+      "NOT RUN": 9,
+      "FAIL": 2
+    },
+    "unit": "Tiêu chí A01–E09 trong báo cáo; không cộng assertion vào ca GUI",
+    "git_policy": "Không commit/push khi chưa có lệnh mới; không T09"
+  }
 }

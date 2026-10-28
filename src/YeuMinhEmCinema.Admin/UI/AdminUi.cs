@@ -42,7 +42,12 @@ internal static class AdminUi
  internal static int Id(ComboBox c)=>c.SelectedValue is int n?n:throw new ArgumentException("Chọn đủ thông tin từ danh sách.");
  internal static Label Label(string s)=>new(){Text=s,AutoSize=true,Margin=new Padding(6,10,2,2)};
  internal static TextBox Text(int max=150)=>new(){Width=230,MaxLength=max,Margin=new Padding(5)};
- internal static void Export(DataGridView g){if(g.DataSource is not DataTable t)throw new ArgumentException("Chưa có dữ liệu để xuất.");using var d=new SaveFileDialog{Filter="CSV UTF-8|*.csv",FileName=$"Cinema-{DateTime.Now:yyyyMMdd-HHmm}.csv"};if(d.ShowDialog()==DialogResult.OK)CsvUtility.Ghi(d.FileName,t);}
+ internal static void Export(DataGridView g){if(g.DataSource is not DataTable t)throw new ArgumentException("Chưa có dữ liệu để xuất.");using var d=new SaveFileDialog{Filter="CSV UTF-8|*.csv",FileName=$"Cinema-{DateTime.Now:yyyyMMdd-HHmm}.csv"};if(d.ShowDialog()==DialogResult.OK)
+  {
+   var columns=g.Columns.Cast<DataGridViewColumn>().Where(c=>c.Visible&&t.Columns.Contains(c.DataPropertyName)).OrderBy(c=>c.DisplayIndex).Select(c=>c.DataPropertyName).Distinct().ToArray();
+   if(columns.Length==0)throw new ArgumentException("Không có cột dữ liệu đang hiển thị để xuất.");
+   CsvUtility.Ghi(d.FileName,t.DefaultView.ToTable(false,columns));
+  }}
  internal static Form Dialog(string title)=>new(){Text=title,StartPosition=FormStartPosition.CenterParent,ClientSize=new Size(600,540),MinimumSize=new Size(500,400),Font=new Font("Segoe UI",10),AutoScroll=true};
 }
 internal sealed class EditDialog:Form

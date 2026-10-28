@@ -5,7 +5,7 @@ public partial class UcBanVeTaiQuay:DataPage
  private readonly TextBox filmSearch=AdminUi.Text(200);
  private bool loadingShows;
  private readonly ComboBox rap=AdminUi.Combo(),suat=AdminUi.Combo(),payment=AdminUi.Combo();
- private readonly DateTimePicker day=new(){Format=DateTimePickerFormat.Short,Width=135};
+ private readonly DateTimePicker day=new(){Format=DateTimePickerFormat.Custom,CustomFormat="dd/MM/yyyy",Width=135};
  private readonly TextBox name=AdminUi.Text(),phone=AdminUi.Text(20),txn=AdminUi.Text(100);
  private readonly FlowLayoutPanel seats=new(){Dock=DockStyle.Fill,AutoScroll=true,BackColor=Color.WhiteSmoke};
  private readonly DataGridView menu=AdminUi.Grid();
