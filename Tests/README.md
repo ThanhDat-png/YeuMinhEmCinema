@@ -45,3 +45,17 @@ sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/06_Admin_SoatVeT
 31 ca: tra cứu/xác nhận đúng suất/phòng; sai suất cùng phòng, sai phòng cùng rạp, ID không có; caller cũ và tham số tùy chọn; vé không tồn tại/đã dùng/hủy, đơn chưa trả/hoàn, suất hủy; ngoài/ trong khung giờ; thu hồi rạp/quyền, khóa tài khoản/ngừng việc; danh sách quyền SOAT_VE, Admin toàn cục, bỏ suất hủy và gồm suất qua đêm. Các trạng thái từ chối được dựng trong transaction để kiểm guard; không thay thế toàn bộ kiểm thử luồng tạo trạng thái. Fixture từng ca rollback. File chỉ nhận database `_Test`.
 
 Kết quả đã chạy và kiểm GUI: `Docs/Admin/PHIEN-03-KET-QUA.md`.
+
+## Phiên 4: tiền mặt và tra cứu đơn
+
+AdminSmoke liên kết TienMat.cs production, bổ sung 28 kiểm tra tiền vừa đủ/thừa/thiếu, định dạng và giới hạn18 chữ số dưới vi-VN/en-US. Nhập số nguyên đồng hoặc dấu chấm ngăn nghìn Việt Nam (100000 hoặc 100.000); không nhận phần lẻ, số âm, chữ hoặc định dạng100,000 gây nhập nhầm.
+
+Sau SQL 27 trên Test, chạy:
+
+```powershell
+sqlcmd -S ".\SQLEXPRESS" -E -C -I -b -f 65001 -i Database/Tests/07_Admin_TraCuuDon.sql
+```
+
+24 ca tra cứu mã đơn/mã thu/GUID vé/GUID tham chiếu; bộ lọc ngày/trạng thái; không có/ngoài phạm vi/thu hồi quyền; exact match, GUID có đuôi, số vượt BIGINT; trang đầu/cuối/vượt cuối, output tổng ở trang rỗng và caller cũ. Mỗi fixture rollback. Các đơn phân trang được dựng trực tiếp với trạng thái DA_HUY, không coi là kiểm luồng tạo/hủy đơn.
+
+Đã chạy nâng cấp/cài mới, hồi quy SQL01/02/04/05/06 và GUI tiền mặt/tra cứu. Chi tiết: Docs/Admin/PHIEN-04-KET-QUA.md.

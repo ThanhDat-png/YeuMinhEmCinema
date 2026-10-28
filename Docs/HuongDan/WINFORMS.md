@@ -28,7 +28,7 @@ Giá theo ngày CHIẾU, loại ghế, định dạng; Thứ Hai–Thứ Năm th
 2. Ghế trắng còn trống và có giá; xanh đang chọn; xám đã giữ/bán/hỏng/thiếu giá. Tooltip giải thích từng ghế. Tối đa 8 ghế.
 3. Nhập số lượng bắp nước 0–99 trong cột cuối, tên liên hệ bắt buộc, điện thoại tùy chọn.
 4. Bấm **1. Giữ ghế / thử lại**. SQL chốt giá, tạo một đơn cùng suất và giữ tối đa 10 phút (không vượt giờ chiếu). Giỏ bị khóa để tránh đổi nội dung cùng mã yêu cầu.
-5. Thu tiền thực tế. Chọn tiền mặt hoặc chuyển khoản đã đối soát, điền mã chứng từ (tiền mặt có thể tự sinh mã biên nhận), bấm **2. Xác nhận đã thu tiền** và xác nhận số tiền.
+5. Thu tiền thực tế. Với tiền mặt: sau giữ ghế nhập tiền khách đưa (100000 hoặc 100.000), kiểm tiền thừa; thiếu hoặc nhập sai thì không xác nhận được. Chuyển khoản cần mã đã đối soát; đổi phương thức sẽ xóa tiền mặt. Bấm **2. Xác nhận đã thu tiền** và đối chiếu tổng đơn/tiền khách đưa/tiền trả lại. Tiền mặt có thể tự sinh mã biên nhận. Chỉ tổng đơn được lưu vào ThanhToan, tiền khách đưa/thừa là hỗ trợ UI; đã trả thì khóa sửa phương thức/mã/tiền mặt. Giỏ mới xóa giá trị cũ.
 6. Bấm xuất vé/phiếu QR: lưu HTML tự chứa QR, mở trình duyệt rồi In/lưu PDF. Phiếu chờ thanh toán không có vé có hiệu lực.
 7. Hủy giữ / đơn mới sẽ tra mã yêu cầu cũ trước khi hủy đơn chưa trả; không hủy đơn đã thanh toán. Tài khoản bán vé được hủy đơn quầy do chính mình tạo.
 
@@ -38,7 +38,7 @@ Giá được snapshot lúc giữ và giữ nguyên trong hạn. Bảng giá/men
 
 ## Đơn và hoàn
 
-Lọc rạp/ngày tạo đơn/trạng thái, 50 đơn/trang. Chi tiết có đơn, vé, bắp nước, thu, hoàn, thành phần combo đã chụp. Xuất QR từ dữ liệu SQL.
+Cần SQL 27 cho Admin mới. Lọc rạp/ngày tạo đơn/trạng thái,50 đơn/trang. Có tìm chính xác theo mã đơn, mã giao dịch thu hoặc GUID vé (SQL cũng nhận GUID tham chiếu đơn); nhấn Lọc / tìm hoặc Enter. Tìm mã vẫn kết hợp bộ lọc, nên kiểm lại ngày/rạp/trạng thái nếu không có kết quả. Hiển thị tổng số đơn/trang, khóa Trước/Sau ở biên; đổi bộ lọc/từ khóa xóa kết quả cũ và đặt về trang đầu. Chi tiết có đơn, vé, bắp nước, thu, hoàn, thành phần combo đã chụp. Xuất QR từ dữ liệu SQL.
 
 Hủy trực tiếp đơn chưa trả. Hoàn toàn bộ đơn đã trả trước giờ chiếu và chưa dùng vé nào; người có HOAN_TIEN phải nhập mã giao dịch hoàn, lý do, tích đã hoàn tiền thực tế. SQL không tự hoàn ngân hàng. Hoàn gồm bắp nước và vé; chưa có hoàn một phần/chính sách phí.
 

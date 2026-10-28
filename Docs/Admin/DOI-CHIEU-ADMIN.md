@@ -202,10 +202,12 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 ### ADM-18 Tiền khách đưa và tiền thừa
 
 - Báo cáo: 5.4.2; 6.2.3 ca 5.
-- Hiện trạng: Hiện chỉ xác nhận đã nhận đủ tổng đơn; chưa có trường tiền khách đưa/tính tiền thừa.
-- Xử lý: **BO_SUNG_ADMIN — P2 — OPEN**.
+- Hiện trạng: Đã thêm tiền khách đưa sau giữ ghế, hiển thị thiếu/thừa và chặn thiếu/sai định dạng. GUI 79000 bị chặn,100000 trả lại20000 cho đơn80000; DB xác nhận chỉ ghi80000. Đổi phương thức xóa tiền mặt; đã trả khóa sửa và chặn thu lại. 28 kiểm tra tiền mặt đạt dưới vi-VN/en-US.
+- Xử lý: **BO_SUNG_ADMIN — P2 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcBanVeTaiQuay.cs`, `src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs`.
 - Điều kiện đóng mục: Bổ sung hỗ trợ tiền mặt ở UI, chặn thiếu tiền và hiện tiền thừa; số tiền ghi ThanhToan vẫn đúng tổng đơn, không thay schema tài chính hay luồng Web.
+
+- Kết quả phiên4: xem `PHIEN-04-KET-QUA.md`.
 
 ### ADM-19 Ghi nhận thu và phát hành vé
 
@@ -218,10 +220,12 @@ P1 là phải ưu tiên trước demo; P2 làm sau khi P1 ổn định. Không h
 ### ADM-20 Tra cứu đơn và giao dịch
 
 - Báo cáo: 4.1.1; 4.3.2; 5.4.2.
-- Hiện trạng: Có lọc rạp/ngày/trạng thái, phân trang và chi tiết. Chưa có tìm trực tiếp theo mã đơn/giao dịch/vé; nút Sau chưa dựa trên tổng trang.
-- Xử lý: **BO_SUNG_ADMIN — P2 — OPEN**.
+- Hiện trạng: Đã thêm tìm chính xác mã đơn/mã giao dịch thu/GUID vé (kèm GUID tham chiếu tại SQL), kết hợp bộ lọc/phạm vi. Output tổng hỗ trợ trang rỗng; UI hiển thị tổng/trang, khóa biên và reset trang khi đổi bộ lọc.24 ca SQL và GUI57 đơn phân50/7, tìm3 loại mã, chi tiết và rỗng đạt.
+- Xử lý: **BO_SUNG_ADMIN — P2 — DONE**.
 - Vị trí: `src/YeuMinhEmCinema.Admin/UcDonDatVe.cs`, `src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs`, `Database/Scripts/19_TruyVan_Web.sql`.
 - Điều kiện đóng mục: Tra cứu nhanh theo mã trên đúng phạm vi; giới hạn trang; vẫn giữ tương thích lời gọi proc cũ nếu bổ sung tham số tùy chọn.
+
+- Kết quả phiên4: xem `PHIEN-04-KET-QUA.md`.
 
 ### ADM-21 Hủy và hoàn đơn
 
@@ -401,3 +405,7 @@ T01/T02 hoàn thành trong phạm vi sửa lỗi đã chốt. ADM-03 đóng; ADM
 - ADM-23: PARTIAL, phần sản phẩm/guard đã kiểm. DOCX chưa sửa mốc +15 phút; chuyển việc chỉnh tài liệu về T09. Không khẳng định đã thử máy quét USB vật lý.
 - T03: DONE. Trạng thái chi tiết xem THEO-DOI.json và PHIEN-03-KET-QUA.md.
 - T04–T07 chưa triển khai, chuyển phiên 4; T08–T09 chuyển phiên 5. Tách phiên 3 đúng phạm vi T03 đã chốt với người dùng.
+
+## Cập nhật phiên 4
+
+T04, ADM-18 và ADM-20 DONE theo phạm vi. Tiền mặt không đổi số tiền chốt/schema; tra cứu không thay hợp đồng caller cũ. Test24 ca SQL,28 ca tiền mặt và GUI đã đạt; xem PHIEN-04-KET-QUA.md. T05–T07 còn mở cho phiên5, demo/báo cáo chuyển phiên6. Các phần kế hoạch cũ ở trên là mốc lịch sử; trạng thái hiện hành ở THEO-DOI.json. Chưa sửa DOCX và chưa commit/push phiên4.

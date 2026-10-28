@@ -60,3 +60,9 @@ Database đang dùng đã có SQL 23 chỉ cần chạy `Database/Scripts/25_Adm
 Admin mới cần `Database/Scripts/26_Admin_SoatVeTheoSuat.sql` để chọn suất và kiểm đúng suất/phòng. Database đã có SQL 23: áp dụng bản vá 25 rồi 26; không seed lại. Đổi dòng USE nếu dùng Test. Hai bộ cài tổng đã kèm 26. Không cần chạy SQL 24 của Web để dùng 26.
 
 Tại Kiểm tra vé: chọn ngày → Tải suất → chọn suất có rạp/phòng/giờ chiếu → nhập GUID/QR → Tra cứu hoặc Xác nhận vào rạp. Chưa chọn suất thì hai nút bị khóa. Danh sách gồm cả suất qua đêm còn chiếu trong ngày chọn, bỏ suất hủy và lọc phạm vi người soát. Khung vào vẫn từ trước 30 phút đến trước giờ kết thúc.
+
+## Tiền khách đưa và tra cứu — SQL 27
+
+Database đang có SQL 23/25/26: áp dụng `Database/Scripts/27_Admin_ThuTien_TraCuuDon.sql` trước khi dùng bản Admin mới. Đổi USE khi dùng Test; không seed hoặc đổi schema. Hai bộ cài tổng đã kèm27. SQL 24 Web không phải điều kiện.
+
+Tiền mặt: giữ ghế để chốt tổng đơn rồi nhập tiền khách đưa (100000 hoặc 100.000); form báo thiếu/thừa, chặn tiền thiếu hoặc sai định dạng. Chỉ tổng đơn được ghi thu. Tra cứu: nhập mã đơn/mã giao dịch thu/GUID vé, bấm Lọc / tìm; mã kết hợp rạp/ngày tạo/trạng thái đang chọn. Nút Trước/Sau khóa ở biên.

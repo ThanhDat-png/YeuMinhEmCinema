@@ -10,6 +10,9 @@ public partial class UcBanVeTaiQuay:DataPage
  private readonly Label summary=new(){Dock=DockStyle.Fill,AutoSize=false,Padding=new Padding(8),ForeColor=Color.FromArgb(211, 47, 47)};
  private readonly ToolTip seatTip=new();
  private readonly HashSet<int> selected=new();private DataTable seatTable=new();
+ private readonly TextBox cash = AdminUi.Text(30);
+ private readonly Label change = new(){AutoSize=true,Margin=new Padding(6,10,2,2)};
+ private bool paid;
  private Pending? pending;private long? order;private decimal total;
  private sealed record Pending(Guid Request,int Suat,DataTable Ghe,DataTable Fnb,string Ten,string Phone);
  private readonly System.Windows.Forms.Timer timer=new(){Interval=1000};private DateTime? expires;private string message="Chọn suất và ghế; giá thực tế được SQL chốt khi giữ chỗ.";
@@ -19,6 +22,9 @@ public partial class UcBanVeTaiQuay:DataPage
   Bar.Controls.AddRange(new Control[]{AdminUi.Label("Rạp"),rap,day});Action("Tải suất",LoadShows);
   Bar.Controls.Add(suat);Action("Tải ghế / menu",LoadSeats);Bar.Controls.AddRange(new Control[]{name,phone,payment,txn});
   payment.Items.AddRange(new object[]{"TIEN_MAT","CHUYEN_KHOAN"});payment.SelectedIndex=0;
+  cash.Width=220;cash.PlaceholderText="VD: 100000 hoặc 100.000";cash.AccessibleName="Tiền khách đưa";
+  Bar.Controls.AddRange(new Control[]{AdminUi.Label("Khách đưa (tiền mặt)"),cash,change});
+  cash.TextChanged+=(_,_)=>UpdateCash();payment.SelectedIndexChanged+=(_,_)=>{cash.Clear();UpdateCash();};UpdateCash();
   Action("1. Giữ ghế / thử lại",Reserve,"BAN_VE");Action("2. Xác nhận đã thu tiền",Pay,"BAN_VE");Action("Xuất vé / phiếu QR",()=>HoaDonExporter.Xuat(order??throw new ArgumentException("Chưa có đơn.")));
   Action("Hủy giữ / đơn mới",NewCart);
   var body=new TableLayoutPanel{Dock=DockStyle.Fill,ColumnCount=2,RowCount=2};body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent,60));body.ColumnStyles.Add(new ColumnStyle(SizeType.Percent,40));
@@ -32,7 +38,7 @@ public partial class UcBanVeTaiQuay:DataPage
  private void LoadShows(){EnsureEditable();AdminUi.Bind(suat,GiaoDichDAL.Suat(AdminUi.Id(rap),day.Value),"MaSuatChieu","TenHienThi");if(suat.Items.Count==0){seats.Controls.Clear();message="Không có suất mở bán trong ngày/rạp này.";UpdateSummary();}else LoadSeats();}
  private void LoadSeats()
  {
-  EnsureEditable();int id=AdminUi.Id(suat);seatTable=GiaoDichDAL.Ghe(id);
+  EnsureEditable();cash.Clear();int id=AdminUi.Id(suat);seatTable=GiaoDichDAL.Ghe(id);
   var prices=Db.Query(@"SELECT g.MaGhe,MIN(v.DonGia) DonGia,COUNT(v.MaGiaVe) SoGia FROM dbo.SuatChieu s JOIN dbo.PhongChieu p ON p.MaPhong=s.MaPhong JOIN dbo.Ghe g ON g.MaPhong=p.MaPhong
   LEFT JOIN dbo.GiaVe v ON v.MaLoaiGhe=g.MaLoaiGhe AND v.DinhDang=p.DinhDang AND v.DangApDung=1 AND v.TuNgay<=CONVERT(DATE,s.GioBatDau) AND(v.DenNgay IS NULL OR v.DenNgay>=CONVERT(DATE,s.GioBatDau))
   AND v.LoaiNgay=CASE WHEN(DATEDIFF(DAY,CONVERT(DATE,'19000101'),CONVERT(DATE,s.GioBatDau))%7+7)%7>=4 THEN N'Cuối tuần' ELSE N'Ngày thường' END
@@ -50,7 +56,7 @@ public partial class UcBanVeTaiQuay:DataPage
   message="Trắng: trống có giá; xanh: đang chọn; xám: không chọn được. Tối đa 8 ghế. Bắp nước nhập số lượng ở cột cuối.";UpdateQuote();
  }
  private void UpdateQuote(){if(order.HasValue)return;decimal v=seatTable.AsEnumerable().Where(r=>selected.Contains((int)r["MaGhe"])).Sum(r=>r["DonGia"]==DBNull.Value?0:(decimal)r["DonGia"]);
-  if(menu.DataSource is DataTable t)v+=t.AsEnumerable().Sum(r=>(decimal)r["DonGia"]*Convert.ToInt32(r["SoLuong"]));total=v;UpdateSummary();}
+  if(menu.DataSource is DataTable t)v+=t.AsEnumerable().Sum(r=>(decimal)r["DonGia"]*Convert.ToInt32(r["SoLuong"]));total=v;UpdateSummary();UpdateCash();}
  private void UpdateSummary(){string time=expires.HasValue?$" | Hạn giữ VN: {expires.Value.AddHours(7):HH:mm:ss} | Còn {Math.Max(0,(int)(expires.Value-DateTime.UtcNow).TotalSeconds)} giây":"";
   summary.Text=$"{message}\nGhế: {selected.Count} — Tổng {(order.HasValue?"đơn":"tạm tính")}: {total:N0} đ{time}\n{(order.HasValue?$"Mã đơn: {order}":"")}";}
  private void LockInputs(bool yes){rap.Enabled=day.Enabled=suat.Enabled=name.Enabled=phone.Enabled=menu.Enabled=seats.Enabled=!yes;}
@@ -65,14 +71,32 @@ public partial class UcBanVeTaiQuay:DataPage
   try{var p=pending;var r=GiaoDichDAL.Tao(p.Request,p.Suat,p.Ghe,p.Fnb,p.Ten,p.Phone);SetOrder(r);}
   catch{message="Yêu cầu giữ chưa được xác nhận. Bấm Giữ ghế / thử lại dùng cùng mã; muốn bỏ yêu cầu bấm Hủy giữ / đơn mới.";UpdateSummary();throw;}
  }
- private void SetOrder(DataRow r){order=Convert.ToInt64(r["MaDonHang"]);total=Convert.ToDecimal(r["TongTien"]);expires=DateTime.SpecifyKind((DateTime)r["HanThanhToanUtc"],DateTimeKind.Utc);
-  message=$"Đơn {r["TrangThai"]}. Chỉ xác nhận thanh toán sau khi thực sự nhận tiền.";LockInputs(true);UpdateSummary();}
+ private void SetOrder(DataRow r){cash.Clear();paid=(string)r["TrangThai"]=="DA_THANH_TOAN";order=Convert.ToInt64(r["MaDonHang"]);total=Convert.ToDecimal(r["TongTien"]);expires=DateTime.SpecifyKind((DateTime)r["HanThanhToanUtc"],DateTimeKind.Utc);
+  message=$"Đơn {r["TrangThai"]}. Chỉ xác nhận thanh toán sau khi thực sự nhận tiền.";LockInputs(true);UpdateSummary();UpdateCash();}
+ private void UpdateCash()
+ {
+  bool isCash=payment.Text=="TIEN_MAT";
+  cash.Enabled=isCash&&order.HasValue&&!paid;
+  payment.Enabled=txn.Enabled=!paid;
+  if(paid){change.Text="Đã thanh toán. Bắt đầu đơn mới để thu tiếp.";return;}
+  if(!isCash){change.Text="Chuyển khoản: đối chiếu mã và đúng tổng đơn.";return;}
+  if(!order.HasValue){change.Text="Giữ ghế để chốt tổng tiền trước khi nhập tiền khách đưa.";return;}
+  if(string.IsNullOrWhiteSpace(cash.Text)){change.Text=$"Cần thu: {total:N0} đ — nhập tiền khách đưa.";return;}
+  try{decimal tendered=TienMat.Doc(cash.Text);change.Text=tendered<total?$"Còn thiếu: {total-tendered:N0} đ":$"Tiền thừa: {tendered-total:N0} đ";}
+  catch(ArgumentException){change.Text="Số tiền chưa hợp lệ (VD: 100000 hoặc 100.000).";}
+ }
  private void Pay()
  {
-  if(!order.HasValue)throw new ArgumentException("Giữ ghế trước khi thu tiền.");if(payment.Text=="CHUYEN_KHOAN"&&string.IsNullOrWhiteSpace(txn.Text))throw new ArgumentException("Nhập mã giao dịch đã đối soát. SQL không kiểm ngân hàng tự động.");
+  if(!order.HasValue)throw new ArgumentException("Giữ ghế trước khi thu tiền.");
+  if(paid){MessageBox.Show("Đơn này đã thanh toán. Xuất vé hoặc bắt đầu đơn mới.");return;}
+  decimal cashChange=payment.Text=="TIEN_MAT"?TienMat.TienThua(total,cash.Text):0;
+  if(payment.Text=="CHUYEN_KHOAN"&&string.IsNullOrWhiteSpace(txn.Text))throw new ArgumentException("Nhập mã giao dịch đã đối soát. SQL không kiểm ngân hàng tự động.");
   if(string.IsNullOrWhiteSpace(txn.Text))txn.Text="QUAY_"+Guid.NewGuid().ToString("N");
-  if(!AdminUi.Confirm($"Xác nhận đã nhận đủ {total:N0} đ bằng {payment.Text}?\nMã: {txn.Text}\nGiữ nguyên mã này nếu thao tác cần thử lại."))return;
-  GiaoDichDAL.Thu(order.Value,txn.Text.Trim(),payment.Text,total);expires=null;message="Đã thanh toán, vé đã phát hành. Xuất vé / phiếu QR hoặc bắt đầu đơn mới.";UpdateSummary();MessageBox.Show("Thanh toán đã được ghi nhận. Có thể xuất vé QR.");
+  string cashInfo=payment.Text=="TIEN_MAT"?$"\nKhách đưa: {TienMat.Doc(cash.Text):N0} đ — Trả lại: {cashChange:N0} đ":"";
+  if(!AdminUi.Confirm($"Xác nhận đã nhận đủ {total:N0} đ bằng {payment.Text}?{cashInfo}\nMã: {txn.Text}\nGiữ nguyên mã này nếu thao tác cần thử lại."))return;
+  // Chỉ tổng đơn được ghi nhận thu; tiền khách đưa/tiền thừa là hỗ trợ thao tác tại quầy.
+  GiaoDichDAL.Thu(order.Value,txn.Text.Trim(),payment.Text,total);
+  paid=true;expires=null;message="Đã thanh toán, vé đã phát hành. Xuất vé / phiếu QR hoặc bắt đầu đơn mới.";UpdateSummary();UpdateCash();MessageBox.Show("Thanh toán đã được ghi nhận. Có thể xuất vé QR.");
  }
  private void NewCart()
  {
@@ -81,6 +105,6 @@ public partial class UcBanVeTaiQuay:DataPage
   {Db.Require("BAN_VE");var t=Db.Query(@"SELECT d.* FROM dbo.DonHang d JOIN dbo.SuatChieu s ON s.MaSuatChieu=d.MaSuatChieu JOIN dbo.PhongChieu p ON p.MaPhong=s.MaPhong
    WHERE d.MaYeuCau=@Q AND d.NguoiTao=@A AND dbo.fn_YMC_CoPhamViRap(@A,p.MaRap)=1",("@Q",pending.Request),("@A",Db.Actor));
    if(t.Rows.Count>0){var r=t.Rows[0];if((string)r["TrangThai"]=="CHO_THANH_TOAN")GiaoDichDAL.Huy(Convert.ToInt64(r["MaDonHang"]),"Khách đổi giỏ tại quầy");}}
-  pending=null;order=null;expires=null;selected.Clear();txn.Clear();LockInputs(false);LoadShows();
+  pending=null;order=null;expires=null;paid=false;cash.Clear();selected.Clear();txn.Clear();UpdateCash();LockInputs(false);LoadShows();
  }
 }

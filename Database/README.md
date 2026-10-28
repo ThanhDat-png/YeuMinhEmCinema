@@ -132,3 +132,13 @@ Chạy `Scripts/26_Admin_SoatVeTheoSuat.sql` trên database đã có SQL 23 (và
 - `sp_YMC_LaySuatSoatVe @NguoiThucHien,@Ngay=NULL` chỉ cần VE_KIEM_TRA, lọc quyền theo rạp, bỏ suất hủy và gồm suất qua đêm giao với ngày chọn. Không cần LICH_CHIEU_XEM. NULL ngày dùng ngày Việt Nam hiện tại.
 - Giữ khóa giao dịch và khung vào -30 phút đến trước kết thúc; UPDATE chỉ nhận vé HIEU_LUC và kiểm số dòng. Tra cứu không đổi trạng thái, chưa áp khung thời gian xác nhận cho thao tác tra cứu.
 - `Tests/06_Admin_SoatVeTheoSuat.sql`: 31 ca tự tạo/rollback fixture trên `_Test`, kiểm đúng/sai suất/phòng, caller cũ, vé hủy/chưa trả/hoàn, khung giờ, soát lặp, thu hồi quyền và danh sách suất.
+
+## Nâng cấp Admin SQL 27 — tra cứu theo mã
+
+`Scripts/27_Admin_ThuTien_TraCuuDon.sql` chỉ mở rộng sp_YMC_DanhSachDonAdmin; không đổi schema hoặc hợp đồng thanh toán. Cài trên database có SQL 23/25/26, không cần SQL 24 hoặc seed. Hai bộ cài mới đã kèm27; source19 đồng bộ riêng procedure Admin, các procedure Web trong file19 giữ nguyên.
+
+Hai tham số cuối mới: `@TuKhoa NVARCHAR(100)=NULL,@TongKetQua INT=NULL OUTPUT`. Caller cũ không truyền vẫn dùng được; giữ một result set các cột đơn và TongKetQua. Từ khóa rỗng bỏ tìm; mã đơn BIGINT, GUID tham chiếu hoặc GUID vé và mã thu tiền được tìm chính xác (theo collation SQL cho chuỗi), không dùng wildcard. GUID chỉ chuyển khi đủ36 ký tự tránh cắt đuôi. Luôn kết hợp rạp, ngày tạo theo Việt Nam, trạng thái và quyền DON_HANG_XEM.
+
+Tập đơn phù hợp được chụp vào bảng tạm một lần, trả output tổng ngay cả trang rỗng và sắp theo MaDonHang DESC. Admin dùng output để hiện tổng/trang, khóa biên và điều chỉnh khi tải lại trang vượt cuối. Đây không phải snapshot cố định xuyên nhiều lần bấm trang.
+
+Tiền khách đưa/tiền thừa được tính trong WinForms, không lưu vào ThanhToan. SoTien ghi thu vẫn là tổng đơn; thiếu tiền chặn ở UI, SQL tiếp tục kiểm đúng tổng/hạn/quyền/retry như trước. Tests/07_Admin_TraCuuDon.sql có 24 ca rollback trên Test.

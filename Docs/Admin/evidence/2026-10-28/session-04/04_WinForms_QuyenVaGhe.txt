@@ -1,0 +1,40 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+SoGheDaTao  SoGheBoQua 
+----------- -----------
+          6           0
+SoGheDaTao  SoGheBoQua 
+----------- -----------
+          0           6
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 307 571BF69F-AA35-4BD1-AA0F-773082EEB62D CHO_THANH_TOAN                      80000                    2026-10-28 09:02:21
+PASS: phạm vi rạp, tạo ghế lặp, nhân viên tự hủy đơn quầy chưa trả.
+PASS: chặn thao tác rạp khác; toàn bộ fixture đã rollback.

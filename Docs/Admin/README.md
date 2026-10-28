@@ -38,3 +38,5 @@ Trước mỗi lượt triển khai phải đọc lại phần báo cáo liên q
 Phiên 1 trong hồ sơ là chuẩn bị đối chiếu; Phiên 2 là lượt triển khai T01/T02 đầu tiên. Đã hoàn thành T01/T02, chưa commit/push. Đọc `PHIEN-02-KET-QUA.md` trước khi bắt đầu phiên tiếp theo. SQL 25 đã áp dụng trên database Test cục bộ; database chính/máy khác cần nâng cấp riêng theo hướng dẫn.
 
 Phiên 3 đã hoàn tất T03. Xem `PHIEN-03-KET-QUA.md`; ADM-24 DONE, ADM-23 còn chỉnh DOCX ở T09. Kế tiếp T04 tiền khách đưa/tra cứu; P2 khác chưa làm. Commit nền sau phiên 2: ed8b4a2. Phiên 3 chưa commit/push; vẫn cần lệnh mới của người dùng.
+
+Phiên 4 hoàn tất T04: xem `PHIEN-04-KET-QUA.md`. ADM-18/ADM-20 DONE. Nền commit834ab95, phiên 4 chưa commit/push. Tiếp theo T05 tìm kiếm khác; T06/T07 còn mở. Báo cáo Word chưa chỉnh trong phiên code này.

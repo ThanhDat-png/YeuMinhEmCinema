@@ -64,3 +64,12 @@ Trạng thái: HOÀN THÀNH hai đầu việc sửa đã chốt; xem `PHIEN-02-K
 - Đã dọn fixture GUI đúng ID/nhãn, rollback các fixture hồi quy và xóa database cài mới tạm. Chỉ Test được nâng cấp; không sửa Web/.NET10/schema.
 - Chi tiết và log: PHIEN-03-KET-QUA.md, evidence/2026-10-28/session-03. Không lưu PNG GUI; ảnh xem trực tiếp trong công cụ. Không tạo log .NET giả.
 - T03/ADM-24 đóng; ADM-23 còn phần sửa DOCX ở T09. Chưa làm T04–T07; chuyển phiên 4. Phiên 3 không commit/push, chờ lệnh riêng.
+
+## Phiên 4 — 28/10/2026: T04 tiền mặt và tra cứu
+
+- Trước sửa đọc lại DOCX đúng hash329d4cf1…:5.4.2/6.2.3 ca5 về tiền khách đưa;4.1.1/4.3.2 về tra cứu. Giữ .NET10/ADO.NET/SQL, Web và schema tài chính.
+- Thêm TienMat production +28 ca dưới 2 culture; UI tiền khách đưa/thừa, chặn thiếu, reset phương thức/giỏ và khóa đã trả.
+- SQL 27 mở rộng tùy chọn từ khóa/output tổng, caller cũ giữ nguyên; source19 và bộ cài đồng bộ. UI tìm mã đơn/thu/vé, reset trang, khóa biên.
+-24/24 ca SQL đạt trên nâng cấp/cài mới; SQL01/02/04/05/06 và AdminSmoke đạt, build0 lỗi/0 cảnh báo. GUI tiền thiếu/thừa, đổi phương thức, thu thành công/thu lại, tìm3 loại mã,57 đơn chia50/7, chi tiết và rỗng đều đạt. DB ghi80000 dù khách đưa100000,1 thu/1 vé.
+- Đã rollback fixture test, dọn đúng fixture GUI và database cài mới tạm. Chỉ Test local được nâng cấp. Không lưu PNG GUI; ảnh xem qua công cụ. Kết quả .NET ở output công cụ, không tạo log giả.
+- T04/ADM-18/ADM-20 đóng. T05–T07 chưa làm, dự kiến phiên5; T08–T09 phiên6. Chưa sửa DOCX hoặc commit/push phiên 4.

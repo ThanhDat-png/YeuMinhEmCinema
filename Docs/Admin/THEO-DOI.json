@@ -355,16 +355,19 @@
       "id": "ADM-18",
       "title": "Tiền khách đưa và tiền thừa",
       "report_locator": "5.4.2; 6.2.3 ca 5",
-      "current": "Hiện chỉ xác nhận đã nhận đủ tổng đơn; chưa có trường tiền khách đưa/tính tiền thừa.",
+      "current": "Đã thêm tiền khách đưa sau giữ ghế, hiển thị thiếu/thừa và chặn thiếu/sai định dạng. GUI 79000 bị chặn,100000 trả lại20000 cho đơn80000; DB xác nhận chỉ ghi80000. Đổi phương thức xóa tiền mặt; đã trả khóa sửa và chặn thu lại. 28 kiểm tra tiền mặt đạt dưới vi-VN/en-US.",
       "evidence": [
         "src/YeuMinhEmCinema.Admin/UcBanVeTaiQuay.cs",
-        "src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs"
+        "src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs",
+        "Database/Scripts/27_Admin_ThuTien_TraCuuDon.sql",
+        "Database/Tests/07_Admin_TraCuuDon.sql",
+        "Docs/Admin/PHIEN-04-KET-QUA.md"
       ],
       "disposition": "BO_SUNG_ADMIN",
       "priority": "P2",
       "acceptance": "Bổ sung hỗ trợ tiền mặt ở UI, chặn thiếu tiền và hiện tiền thừa; số tiền ghi ThanhToan vẫn đúng tổng đơn, không thay schema tài chính hay luồng Web.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "DONE",
+      "product_completed": true
     },
     {
       "id": "ADM-19",
@@ -385,17 +388,20 @@
       "id": "ADM-20",
       "title": "Tra cứu đơn và giao dịch",
       "report_locator": "4.1.1; 4.3.2; 5.4.2",
-      "current": "Có lọc rạp/ngày/trạng thái, phân trang và chi tiết. Chưa có tìm trực tiếp theo mã đơn/giao dịch/vé; nút Sau chưa dựa trên tổng trang.",
+      "current": "Đã thêm tìm chính xác mã đơn/mã giao dịch thu/GUID vé (kèm GUID tham chiếu tại SQL), kết hợp bộ lọc/phạm vi. Output tổng hỗ trợ trang rỗng; UI hiển thị tổng/trang, khóa biên và reset trang khi đổi bộ lọc.24 ca SQL và GUI57 đơn phân50/7, tìm3 loại mã, chi tiết và rỗng đạt.",
       "evidence": [
         "src/YeuMinhEmCinema.Admin/UcDonDatVe.cs",
         "src/YeuMinhEmCinema.Admin/GiaoDichDAL.cs",
-        "Database/Scripts/19_TruyVan_Web.sql"
+        "Database/Scripts/19_TruyVan_Web.sql",
+        "Database/Scripts/27_Admin_ThuTien_TraCuuDon.sql",
+        "Database/Tests/07_Admin_TraCuuDon.sql",
+        "Docs/Admin/PHIEN-04-KET-QUA.md"
       ],
       "disposition": "BO_SUNG_ADMIN",
       "priority": "P2",
       "acceptance": "Tra cứu nhanh theo mã trên đúng phạm vi; giới hạn trang; vẫn giữ tương thích lời gọi proc cũ nếu bổ sung tham số tùy chọn.",
-      "state": "OPEN",
-      "product_completed": false
+      "state": "DONE",
+      "product_completed": true
     },
     {
       "id": "ADM-21",
@@ -645,7 +651,9 @@
       ],
       "session": 4,
       "acceptance": "Tiền thiếu/thừa xử lý đúng ở UI; tìm nhanh mã và phân trang đúng, số tiền lưu không đổi hợp đồng tài chính.",
-      "state": "OPEN"
+      "state": "DONE",
+      "completed_session": 4,
+      "evidence": "Docs/Admin/PHIEN-04-KET-QUA.md"
     },
     {
       "id": "T05",
@@ -656,7 +664,7 @@
         "ADM-09",
         "ADM-16"
       ],
-      "session": 4,
+      "session": 5,
       "acceptance": "Tìm mã/SĐT nhân viên, phòng và phim trong quầy; đúng phạm vi, không cần sửa Web.",
       "state": "OPEN"
     },
@@ -668,7 +676,7 @@
         "ADM-25",
         "ADM-26"
       ],
-      "session": 4,
+      "session": 5,
       "acceptance": "Bổ sung bằng dữ liệu đọc; chốt rõ ngày chiếu/ngày thu, doanh thu vé/tổng thu và cách tính hoàn.",
       "state": "OPEN"
     },
@@ -680,7 +688,7 @@
         "ADM-07",
         "ADM-32"
       ],
-      "session": 4,
+      "session": 5,
       "acceptance": "Ước lượng thay đổi schema additive sau P1; chỉ thực hiện nếu không làm Web đổi. Nếu chưa làm ghi thiếu rõ ràng.",
       "state": "OPEN"
     },
@@ -704,7 +712,7 @@
         "ADM-30",
         "ADM-31"
       ],
-      "session": 5,
+      "session": 6,
       "acceptance": "Dữ liệu Test riêng; chạy đủ bán-soát-hoàn; thử vai trò; ghi đạt/không đạt/chưa thử, không suy diễn từ build.",
       "state": "OPEN"
     },
@@ -718,7 +726,7 @@
         "ADM-23",
         "ADM-32"
       ],
-      "session": 5,
+      "session": 6,
       "acceptance": "Mô tả đúng .NET10/ADO/SQL, schema/lớp thật, khung giờ và F&B; ghi nguồn bằng chứng, phần đóng góp và các giới hạn còn lại.",
       "state": "OPEN"
     }
@@ -741,13 +749,18 @@
     },
     {
       "number": 4,
-      "status": "NOT_STARTED",
-      "scope": "T04–T07: tiền khách đưa/tra cứu, tìm kiếm, báo cáo, thể loại theo thứ tự ưu tiên"
+      "status": "COMPLETE",
+      "scope": "T04: tiền khách đưa/thừa, tìm đơn theo mã và biên phân trang; GUI và SQL đạt"
     },
     {
       "number": 5,
       "status": "NOT_STARTED",
-      "scope": "T08–T09: demo, hồi quy và cập nhật báo cáo Admin"
+      "scope": "T05–T07: tìm kiếm khác, báo cáo và thể loại theo ưu tiên"
+    },
+    {
+      "number": 6,
+      "status": "NOT_STARTED",
+      "scope": "T08–T09: demo, hồi quy tổng và cập nhật báo cáo Admin"
     }
   ],
   "git_policy": "Luôn đọc/đối chiếu báo cáo trước triển khai. Chỉ commit và push khi có lệnh rõ ràng của người dùng; test đạt không tự cấp quyền commit/push."

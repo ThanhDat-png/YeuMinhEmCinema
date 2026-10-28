@@ -1,7 +1,7 @@
 # Kế hoạch phiên 4 — tiền khách đưa và tra cứu giao dịch
 
-Trạng thái: CHỜ LỆNH TRIỂN KHAI. Ngày chuẩn bị: 28/10/2026.
-Phạm vi T04 (ADM-18, ADM-20), chưa sửa code tính năng trong bước chuẩn bị này.
+Trạng thái: ĐÃ TRIỂN KHAI VÀ KIỂM THỬ T04. Ngày chuẩn bị: 28/10/2026.
+Phạm vi T04 (ADM-18, ADM-20). Kế hoạch được người dùng duyệt và đã thực hiện; kết quả tại PHIEN-04-KET-QUA.md.
 
 ## Đối chiếu trước khi triển khai
 
@@ -30,4 +30,4 @@ Phạm vi T04 (ADM-18, ADM-20), chưa sửa code tính năng trong bước chu�
 - Nếu sửa SQL: có migration riêng và đồng bộ bộ cài mới, kèm ca hồi quy.
 - Cập nhật THEO-DOI.json, nhật ký và kết quả phiên: đã làm/còn thiếu/khác báo cáo; không đánh đạt phần chưa thử.
 - Chưa làm T05 tìm kiếm khác, T06 báo cáo hoặc T07 thể loại trong phạm vi T04 này.
-- Sau kiểm thử chờ lệnh riêng mới commit/push. Hiện tại chỉ chuẩn bị kế hoạch và chờ lệnh triển khai.
+- Sau kiểm thử chờ lệnh riêng mới commit/push. Phiên đã hoàn tất, chờ lệnh riêng để commit/push.

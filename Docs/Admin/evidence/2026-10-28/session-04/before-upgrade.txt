@@ -1,0 +1,17 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                  66 24839B9F-818D-4FC3-8DEA-8CBD19A0CF2F CHO_THANH_TOAN                      80000                    2026-10-28 08:51:45
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+D694F8C0-4AAD-4A28-8969-AE3A3F2EBA40                   66        1406 HIEU_LUC                                2026-10-28 08:41:46                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+HResult 0x1FD0, Level 16, State 2
+Procedure or function sp_YMC_DanhSachDonAdmin has too many arguments specified.
