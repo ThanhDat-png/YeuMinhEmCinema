@@ -51,9 +51,20 @@ public class PhimData
                 AND f.TrangThai=N'Đang chiếu' AND p.TrangThai=N'Đang hoạt động'
                 AND r.TrangThai=N'Đang hoạt động'
             ORDER BY s.GioBatDau,r.MaRap,s.MaSuatChieu
-            """, false, new SqlParameter("@Phim", SqlDbType.Int) { Value = (object?)phim ?? DBNull.Value },
-            new SqlParameter("@Rap", SqlDbType.Int) { Value = (object?)rap ?? DBNull.Value },
-            new SqlParameter("@Ngay", SqlDbType.DateTime2) { Value = (object?)ngay?.Date ?? DBNull.Value });
+            """,
+            false,
+            new SqlParameter("@Phim", SqlDbType.Int)
+            {
+                Value = (object?)phim ?? DBNull.Value
+            },
+            new SqlParameter("@Rap", SqlDbType.Int)
+            {
+                Value = (object?)rap ?? DBNull.Value
+            },
+            new SqlParameter("@Ngay", SqlDbType.DateTime2)
+            {
+                Value = (object?)ngay?.Date ?? DBNull.Value
+            });
     }
 
     /// <summary>Mỗi phim xuất hiện một lần nếu có suất tương lai đang mở bán tại rạp.</summary>
@@ -72,12 +83,14 @@ public class PhimData
                 AND s.GioBatDau>dbo.fn_YMC_GioVietNam()
             GROUP BY f.MaPhim,f.TenPhim,f.Poster,f.ThoiLuong,f.GioiHanTuoi
             ORDER BY MIN(s.GioBatDau),f.MaPhim
-            """, false, P("@Rap", rap));
+            """,
+            false,
+            P("@Rap", rap));
     }
 
     public virtual DataTable Lich(int phim, int? rap, DateTime ngay)
     {
         return db.Table("dbo.sp_YMC_WebLichChieu", true,
-            P("@MaPhim", phim), P("@Ngay", ngay.Date), P("@MaRap", rap));
+        P("@MaPhim", phim), P("@Ngay", ngay.Date), P("@MaRap", rap));
     }
 }

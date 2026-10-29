@@ -23,7 +23,9 @@ public class DatVeData
             JOIN dbo.PhongChieu p ON p.MaPhong=s.MaPhong JOIN dbo.Rap r ON r.MaRap=p.MaRap
             WHERE s.MaSuatChieu=@Id AND s.TrangThai=N'Mở bán' AND s.GioBatDau>dbo.fn_YMC_GioVietNam()
                 AND f.TrangThai=N'Đang chiếu' AND p.TrangThai=N'Đang hoạt động' AND r.TrangThai=N'Đang hoạt động'
-            """, false, P("@Id", id));
+            """,
+            false,
+            P("@Id", id));
         return table.Rows.Count == 0 ? null : table.Rows[0];
     }
 
@@ -41,7 +43,9 @@ public class DatVeData
                 AND v.DangApDung=1 AND v.TuNgay<=CONVERT(DATE,s.GioBatDau)
                 AND (v.DenNgay IS NULL OR v.DenNgay>=CONVERT(DATE,s.GioBatDau))
             WHERE s.MaSuatChieu=@Id GROUP BY g.MaGhe
-            """, false, P("@Id", suat));
+            """,
+            false,
+            P("@Id", suat));
         var dictionary = gia.AsEnumerable().ToDictionary(r => (int)r["MaGhe"], r => r["Gia"]);
         foreach (DataRow row in table.Rows)
         {
@@ -70,11 +74,24 @@ public class DatVeData
         {
             fnb.Rows.Add(item.MaSanPham, item.SoLuong);
         }
-        var result = db.Table("dbo.sp_YMC_TaoDonGiuGhe", true,
-            P("@NguoiThucHien", id), P("@MaYeuCau", model.MaYeuCau), P("@MaSuatChieu", model.MaSuatChieu),
-            P("@Kenh", "WEB"), P("@HoTenLienHe", model.HoTen.Trim()), P("@DienThoaiLienHe", model.DienThoai),
-            new SqlParameter("@DanhSachGhe", SqlDbType.Structured) { TypeName = "dbo.YMC_DanhSachGhe", Value = ghe },
-            new SqlParameter("@DanhSachFnb", SqlDbType.Structured) { TypeName = "dbo.YMC_DanhSachFnb", Value = fnb });
+        var result = db.Table("dbo.sp_YMC_TaoDonGiuGhe",
+            true,
+            P("@NguoiThucHien", id),
+            P("@MaYeuCau", model.MaYeuCau),
+            P("@MaSuatChieu", model.MaSuatChieu),
+            P("@Kenh", "WEB"),
+            P("@HoTenLienHe", model.HoTen.Trim()),
+            P("@DienThoaiLienHe", model.DienThoai),
+            new SqlParameter("@DanhSachGhe", SqlDbType.Structured)
+            {
+                TypeName = "dbo.YMC_DanhSachGhe",
+                Value = ghe
+            },
+            new SqlParameter("@DanhSachFnb", SqlDbType.Structured)
+            {
+                TypeName = "dbo.YMC_DanhSachFnb",
+                Value = fnb
+            });
         return (long)result.Rows[0]["MaDonHang"];
     }
 
@@ -84,23 +101,32 @@ public class DatVeData
         return db.Table("""
             SELECT d.MaDonHang FROM dbo.DonHang d JOIN dbo.KhachHang k ON k.MaKhachHang=d.MaKhachHang
             WHERE d.MaDonHang=@Don AND k.MaTaiKhoan=@Id AND k.DangHoatDong=1
-            """, false, P("@Don", don), P("@Id", id)).Rows.Count == 1;
+            """,
+            false,
+            P("@Don", don),
+            P("@Id", id)).Rows.Count == 1;
     }
 
     public DataSet ChiTiet(int id, long don)
     {
-        return db.Read("dbo.sp_YMC_XemChiTietDon", true, P("@NguoiThucHien", id), P("@MaDonHang", don));
+        return db.Read("dbo.sp_YMC_XemChiTietDon",
+            true,
+            P("@NguoiThucHien", id),
+            P("@MaDonHang", don));
     }
 
     public void Huy(int id, long don)
     {
         db.Read("dbo.sp_YMC_HuyDonChuaThanhToan", true, P("@NguoiThucHien", id),
-            P("@MaDonHang", don), P("@LyDo", "Khách hủy đơn trên Web."));
+        P("@MaDonHang", don), P("@LyDo", "Khách hủy đơn trên Web."));
     }
 
     public void MoPhong(int id, long don)
     {
-        db.Read("dbo.sp_YMC_WebMoPhongThanhToan", true, P("@MaTaiKhoan", id), P("@MaDonHang", don));
+        db.Read("dbo.sp_YMC_WebMoPhongThanhToan",
+            true,
+            P("@MaTaiKhoan", id),
+            P("@MaDonHang", don));
     }
 
     public byte[]? Ve(int id, Guid ve)
@@ -110,7 +136,10 @@ public class DatVeData
             JOIN dbo.KhachHang k ON k.MaKhachHang=d.MaKhachHang
             WHERE v.MaVe=@Ve AND k.MaTaiKhoan=@Id AND k.DangHoatDong=1
                 AND d.TrangThai='DA_THANH_TOAN' AND v.TrangThai IN('HIEU_LUC','DA_SU_DUNG')
-            """, false, P("@Ve", ve), P("@Id", id));
+            """,
+            false,
+            P("@Ve", ve),
+            P("@Id", id));
         if (table.Rows.Count == 0)
         {
             return null;
@@ -133,7 +162,11 @@ public class DatVeData
             SELECT COUNT(*) AS Tong FROM #Don WHERE @TT IS NULL OR TrangThai=@TT;
             SELECT * FROM #Don WHERE @TT IS NULL OR TrangThai=@TT ORDER BY MaDonHang DESC
                 OFFSET (@Trang-1)*10 ROWS FETCH NEXT 10 ROWS ONLY;
-            """, false, P("@Id", id), P("@TT", trangThai), P("@Trang", trang));
+            """,
+            false,
+            P("@Id", id),
+            P("@TT", trangThai),
+            P("@Trang", trang));
         return new LichSuModel
         {
             Tong = (int)result.Tables[0].Rows[0]["Tong"],

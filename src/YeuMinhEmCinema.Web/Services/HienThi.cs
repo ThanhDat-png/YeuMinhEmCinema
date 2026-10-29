@@ -34,7 +34,8 @@ public static class HienThi
     public static string? Trailer(object value)
     {
         if (Uri.TryCreate(value as string, UriKind.Absolute, out var uri)
-            && uri.Scheme == "https" && string.IsNullOrEmpty(uri.UserInfo)
+            && uri.Scheme == "https"
+            && string.IsNullOrEmpty(uri.UserInfo)
             && uri.Host is "youtube.com" or "www.youtube.com" or "youtu.be" or "vimeo.com" or "www.vimeo.com")
         {
             return uri.AbsoluteUri;

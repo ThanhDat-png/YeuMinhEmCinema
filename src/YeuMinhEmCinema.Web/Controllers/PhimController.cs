@@ -81,8 +81,8 @@ public class PhimController : Controller
         };
         // Không chọn phim vẫn có suất gợi ý; mọi bộ lọc khách chọn đều được giữ.
         model.Lich = phim.HasValue && ngay.HasValue
-            ? data.Lich(phim.Value, rap, model.Ngay)
-            : data.GanNhat(phim, rap, ngay);
+        ? data.Lich(phim.Value, rap, model.Ngay)
+        : data.GanNhat(phim, rap, ngay);
         return model;
     }
 }

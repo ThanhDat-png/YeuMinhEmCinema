@@ -16,7 +16,7 @@ namespace YeuMinhEmCinema.Admin
             if (matKhau.Length < 12)
             {
                 throw new ArgumentException(
-                    "Mật khẩu phải có ít nhất 12 ký tự.");
+                "Mật khẩu phải có ít nhất 12 ký tự.");
             }
 
             return BoBam.HashPassword(NguoiDung, matKhau);
@@ -27,7 +27,7 @@ namespace YeuMinhEmCinema.Admin
             string matKhauNhap)
         {
             if (string.IsNullOrEmpty(matKhauHash) ||
-                string.IsNullOrEmpty(matKhauNhap))
+            string.IsNullOrEmpty(matKhauNhap))
             {
                 return PasswordVerificationResult.Failed;
             }
@@ -35,9 +35,9 @@ namespace YeuMinhEmCinema.Admin
             try
             {
                 return BoBam.VerifyHashedPassword(
-                    NguoiDung,
-                    matKhauHash,
-                    matKhauNhap);
+                NguoiDung,
+                matKhauHash,
+                matKhauNhap);
             }
             catch (Exception ex) when (ex is FormatException or ArgumentException or IndexOutOfRangeException)
             {

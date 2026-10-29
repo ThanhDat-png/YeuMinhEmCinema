@@ -43,7 +43,10 @@ namespace YeuMinhEmCinema.Admin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi nạp danh sách loại ghế:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi nạp danh sách loại ghế:\n" + ex.Message,
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -67,7 +70,10 @@ namespace YeuMinhEmCinema.Admin
 
             if (cboLoaiGheMacDinh.SelectedValue == null)
             {
-                MessageBox.Show("Vui lòng chọn loại ghế mặc định.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn loại ghế mặc định.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -79,19 +85,26 @@ namespace YeuMinhEmCinema.Admin
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
-            if (xacNhan != DialogResult.Yes) return;
+            if (xacNhan != DialogResult.Yes)
+                return;
 
             var (thanhCong, thongBao, soGheDaTao, soGheBoQua) = GheDAL.TaoSoDoGhe(_maPhong, soHang, soGheMoiHang, maLoaiGhe);
 
             if (thanhCong)
             {
-                MessageBox.Show(thongBao, "Thông báo thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(thongBao,
+                    "Thông báo thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }
             else
             {
-                MessageBox.Show(thongBao, "Lỗi tạo sơ đồ ghế", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(thongBao,
+                    "Lỗi tạo sơ đồ ghế",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

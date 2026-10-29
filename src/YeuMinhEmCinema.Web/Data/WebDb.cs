@@ -16,7 +16,7 @@ public class WebDb
     public SqlConnection Open()
     {
         var value = configuration.GetConnectionString("Cinema")
-            ?? Environment.GetEnvironmentVariable("YMC_CONNECTION");
+        ?? Environment.GetEnvironmentVariable("YMC_CONNECTION");
         if (string.IsNullOrWhiteSpace(value))
         {
             throw new InvalidOperationException("Chưa cấu hình kết nối Cinema.");
@@ -35,7 +35,9 @@ public class WebDb
     }
 
     /// <summary>Chỉ nội dung SQL cố định trong DAL được truyền vào đây.</summary>
-    public DataSet Read(string sql, bool procedure = false, params SqlParameter[] parameters)
+    public DataSet Read(string sql,
+        bool procedure = false,
+        params SqlParameter[] parameters)
     {
         using var connection = Open();
         using var command = new SqlCommand(sql, connection);
@@ -50,7 +52,9 @@ public class WebDb
         return result;
     }
 
-    public DataTable Table(string sql, bool procedure = false, params SqlParameter[] parameters)
+    public DataTable Table(string sql,
+        bool procedure = false,
+        params SqlParameter[] parameters)
     {
         var result = Read(sql, procedure, parameters);
         if (result.Tables.Count == 0)
@@ -74,6 +78,9 @@ public class WebDb
             decimal => SqlDbType.Decimal,
             _ => SqlDbType.NVarChar
         };
-        return new SqlParameter(name, type) { Value = value ?? DBNull.Value };
+        return new SqlParameter(name, type)
+        {
+            Value = value ?? DBNull.Value
+        };
     }
 }

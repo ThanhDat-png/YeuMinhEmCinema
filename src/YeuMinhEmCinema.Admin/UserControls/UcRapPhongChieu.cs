@@ -7,27 +7,104 @@ namespace YeuMinhEmCinema.Admin
         // Lưu thông tin mục đang chọn trên TreeView
         private class NodeInfo
         {
-            public string Loai { get; set; } = ""; // "RAP" hoặc "PHONG"
-            public int Ma { get; set; }
-            public string Ten { get; set; } = "";
-            public string TrangThai { get; set; } = "";
-            public int MaRap { get; set; }
-            public string TenRap { get; set; } = "";
-            public string DinhDang { get; set; } = "";
-            public int SucChua { get; set; }
+            public string Loai
+            {
+                get;
+                set;
+            } = ""; // "RAP" hoặc "PHONG"
+            public int Ma
+            {
+                get;
+                set;
+            }
+
+            public string Ten
+            {
+                get;
+                set;
+            } = "";
+
+            public string TrangThai
+            {
+                get;
+                set;
+            } = "";
+
+            public int MaRap
+            {
+                get;
+                set;
+            }
+
+            public string TenRap
+            {
+                get;
+                set;
+            } = "";
+
+            public string DinhDang
+            {
+                get;
+                set;
+            } = "";
+
+            public int SucChua
+            {
+                get;
+                set;
+            }
         }
 
         // Lưu thông tin ghế đang được chọn trên sơ đồ
         private class GheInfo
         {
-            public int MaGhe { get; set; }
-            public int MaPhong { get; set; }
-            public string HangGhe { get; set; } = "";
-            public int SoGhe { get; set; }
-            public int MaLoaiGhe { get; set; }
-            public string TenLoaiGhe { get; set; } = "";
-            public string TrangThai { get; set; } = "";
-            public Button? NutGhe { get; set; }
+            public int MaGhe
+            {
+                get;
+                set;
+            }
+
+            public int MaPhong
+            {
+                get;
+                set;
+            }
+
+            public string HangGhe
+            {
+                get;
+                set;
+            } = "";
+
+            public int SoGhe
+            {
+                get;
+                set;
+            }
+
+            public int MaLoaiGhe
+            {
+                get;
+                set;
+            }
+
+            public string TenLoaiGhe
+            {
+                get;
+                set;
+            } = "";
+
+            public string TrangThai
+            {
+                get;
+                set;
+            } = "";
+
+            public Button? NutGhe
+            {
+                get;
+                set;
+            }
         }
 
         private readonly TextBox _timPhong = new() { Dock = DockStyle.Fill, MaxLength = 100, PlaceholderText = "Mã hoặc tên phòng", AccessibleName = "Tìm phòng" };
@@ -90,7 +167,10 @@ namespace YeuMinhEmCinema.Admin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không tải được danh mục loại ghế:\n" + ex.Message, "Lỗi nạp dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Không tải được danh mục loại ghế:\n" + ex.Message,
+                    "Lỗi nạp dữ liệu",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -174,10 +254,11 @@ namespace YeuMinhEmCinema.Admin
                         {
                             nodeCanChon = nodePhong;
                         }
-                        else if (nodeCanChon == null)
-                        {
-                            nodeCanChon = nodePhong;
-                        }
+                        else
+                            if (nodeCanChon == null)
+                            {
+                                nodeCanChon = nodePhong;
+                            }
 
                         nodeRap.Nodes.Add(nodePhong);
                     }
@@ -213,7 +294,11 @@ namespace YeuMinhEmCinema.Admin
         /// Vẽ sơ đồ ghế đúng với số lượng và trạng thái ghế thực tế của phòng chiếu đang chọn.
         /// TUYỆT ĐỐI KHÔNG hiển thị ghế đã bán vì trạng thái bán vé thuộc từng suất chiếu cụ thể.
         /// </summary>
-        private void VeSoDoGhe(int maPhong, string tenPhong, string dinhDang, string tenRap, string trangThaiPhong)
+        private void VeSoDoGhe(int maPhong,
+            string tenPhong,
+            string dinhDang,
+            string tenRap,
+            string trangThaiPhong)
         {
             _gheDangChon = null;
             lblGheDangChon.Text = "Ghế đang chọn: [Chưa chọn]";
@@ -237,13 +322,15 @@ namespace YeuMinhEmCinema.Admin
                 foreach (DataRow r in dtGhe.Rows)
                 {
                     string tt = r["TrangThai"]?.ToString() ?? "Hoạt động";
-                    if (tt == "Hoạt động") soGheHoatDong++;
-                    else soGheHong++;
+                    if (tt == "Hoạt động")
+                        soGheHoatDong++;
+                    else
+                        soGheHong++;
                 }
 
                 lblThongTinPhong.Text =
-                    $"🎬 {tenPhong} ({dinhDang}) — {tenRap} [{trangThaiPhong}]\n" +
-                    $"• Sức chứa: {tongSoGhe} ghế ({soGheHoatDong} hoạt động, {soGheHong} hỏng/ngừng)";
+                $"🎬 {tenPhong} ({dinhDang}) — {tenRap} [{trangThaiPhong}]\n" +
+                $"• Sức chứa: {tongSoGhe} ghế ({soGheHoatDong} hoạt động, {soGheHong} hỏng/ngừng)";
 
                 if (tongSoGhe == 0)
                 {
@@ -263,9 +350,9 @@ namespace YeuMinhEmCinema.Admin
 
                 // Gom nhóm các ghế theo từng Hàng ghế (A, B, C...)
                 var danhSachHang = dtGhe.AsEnumerable()
-                    .GroupBy(r => r.Field<string>("HangGhe")?.Trim() ?? "")
-                    .OrderBy(g => g.Key.Length)
-                    .ThenBy(g => g.Key);
+                .GroupBy(r => r.Field<string>("HangGhe")?.Trim() ?? "")
+                .OrderBy(g => g.Key.Length)
+                .ThenBy(g => g.Key);
 
                 foreach (var nhomHang in danhSachHang)
                 {
@@ -348,7 +435,10 @@ namespace YeuMinhEmCinema.Admin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải sơ đồ ghế từ cơ sở dữ liệu:\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi tải sơ đồ ghế từ cơ sở dữ liệu:\n" + ex.Message,
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
             finally
             {
@@ -376,15 +466,17 @@ namespace YeuMinhEmCinema.Admin
                 {
                     btnGhe.BackColor = Color.FromArgb(245, 158, 11); // Cam hổ phách
                 }
-                else if (info.TenLoaiGhe.Contains("Sweetbox", StringComparison.OrdinalIgnoreCase) ||
-                         info.TenLoaiGhe.Contains("Đôi", StringComparison.OrdinalIgnoreCase))
-                {
-                    btnGhe.BackColor = Color.FromArgb(139, 92, 246); // Tím
-                }
                 else
-                {
-                    btnGhe.BackColor = Color.FromArgb(16, 185, 129); // Xanh lá
-                }
+                    if (info.TenLoaiGhe.Contains("Sweetbox", StringComparison.OrdinalIgnoreCase)
+                        ||
+                        info.TenLoaiGhe.Contains("Đôi", StringComparison.OrdinalIgnoreCase))
+                    {
+                        btnGhe.BackColor = Color.FromArgb(139, 92, 246); // Tím
+                    }
+                    else
+                    {
+                        btnGhe.BackColor = Color.FromArgb(16, 185, 129); // Xanh lá
+                    }
             }
         }
 
@@ -395,7 +487,7 @@ namespace YeuMinhEmCinema.Admin
             {
                 _gheDangChon.NutGhe.FlatAppearance.BorderSize = 1;
                 _gheDangChon.NutGhe.FlatAppearance.BorderColor =
-                    _gheDangChon.TrangThai != "Hoạt động" ? Color.FromArgb(239, 68, 68) : Color.FromArgb(203, 213, 225);
+                _gheDangChon.TrangThai != "Hoạt động" ? Color.FromArgb(239, 68, 68) : Color.FromArgb(203, 213, 225);
             }
 
             _gheDangChon = info;
@@ -420,15 +512,16 @@ namespace YeuMinhEmCinema.Admin
 
             CapNhatQuyenThaoTac();
             btnDoiTrangThaiGhe.Text = info.TrangThai == "Hoạt động"
-                ? "⛔ Báo hỏng ghế"
-                : "✅ Kích hoạt ghế";
+            ? "⛔ Báo hỏng ghế"
+            : "✅ Kích hoạt ghế";
         }
 
         #region XỬ LÝ SỰ KIỆN TREEVIEW
 
         private void trvRapPhong_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node?.Tag is not NodeInfo tag) return;
+            if (e.Node?.Tag is not NodeInfo tag)
+                return;
 
             _nodeDangChon = tag;
 
@@ -452,15 +545,15 @@ namespace YeuMinhEmCinema.Admin
                 btnDoiTrangThai.Text = tag.TrangThai == "Đang hoạt động" ? "🔄 Ngừng rạp" : "🔄 Mở rạp";
 
                 lblThongTinPhong.Text =
-                    $"🏛️ CỤM RẠP: {tag.Ten} [{tag.TrangThai}]\n" +
-                    $"• Chọn một phòng chiếu trong cây danh mục bên trái để xem sơ đồ ghế.";
+                $"🏛️ CỤM RẠP: {tag.Ten} [{tag.TrangThai}]\n" +
+                $"• Chọn một phòng chiếu trong cây danh mục bên trái để xem sơ đồ ghế.";
 
                 flpGhe.SuspendLayout();
                 while (flpGhe.Controls.Count > 0)
-                flpGhe.Controls[0].Dispose();
-            flpGhe.FlowDirection = FlowDirection.TopDown;
-            flpGhe.WrapContents = false;
-            flpGhe.AutoScrollPosition = Point.Empty;
+                    flpGhe.Controls[0].Dispose();
+                flpGhe.FlowDirection = FlowDirection.TopDown;
+                flpGhe.WrapContents = false;
+                flpGhe.AutoScrollPosition = Point.Empty;
                 flpGhe.ResumeLayout(true);
 
                 _gheDangChon = null;
@@ -511,7 +604,10 @@ namespace YeuMinhEmCinema.Admin
         {
             if (_nodeDangChon == null)
             {
-                MessageBox.Show("Vui lòng chọn một cụm rạp hoặc phòng chiếu trong cây danh mục để sửa.", "Chưa chọn mục", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một cụm rạp hoặc phòng chiếu trong cây danh mục để sửa.",
+                    "Chưa chọn mục",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -537,7 +633,10 @@ namespace YeuMinhEmCinema.Admin
         {
             if (_nodeDangChon == null)
             {
-                MessageBox.Show("Vui lòng chọn cụm rạp hoặc phòng chiếu để đổi trạng thái.", "Chưa chọn mục", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn cụm rạp hoặc phòng chiếu để đổi trạng thái.",
+                    "Chưa chọn mục",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -556,7 +655,10 @@ namespace YeuMinhEmCinema.Admin
                     var (thanhCong, thongBao) = RapDAL.DoiTrangThaiRap(_nodeDangChon.Ma, trangThaiMoi);
                     if (thanhCong)
                     {
-                        MessageBox.Show(thongBao, "Thông báo thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(thongBao,
+                            "Thông báo thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                         NapCayRapVaPhong();
                     }
                     else
@@ -578,7 +680,10 @@ namespace YeuMinhEmCinema.Admin
                     var (thanhCong, thongBao) = PhongChieuDAL.DoiTrangThaiPhong(_nodeDangChon.Ma, trangThaiMoi);
                     if (thanhCong)
                     {
-                        MessageBox.Show(thongBao, "Thông báo thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(thongBao,
+                            "Thông báo thành công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                         NapCayRapVaPhong(_nodeDangChon.Ma);
                     }
                     else
@@ -593,7 +698,10 @@ namespace YeuMinhEmCinema.Admin
         {
             if (_nodeDangChon == null || _nodeDangChon.Loai != "PHONG")
             {
-                MessageBox.Show("Vui lòng chọn một phòng chiếu để tạo sơ đồ ghế.", "Chưa chọn phòng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một phòng chiếu để tạo sơ đồ ghế.",
+                    "Chưa chọn phòng",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -623,11 +731,15 @@ namespace YeuMinhEmCinema.Admin
         {
             if (_gheDangChon == null)
             {
-                MessageBox.Show("Vui lòng click chọn một ghế trên sơ đồ trước.", "Chưa chọn ghế", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng click chọn một ghế trên sơ đồ trước.",
+                    "Chưa chọn ghế",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
-            if (cboDoiLoaiGhe.SelectedValue == null) return;
+            if (cboDoiLoaiGhe.SelectedValue == null)
+                return;
 
             int maLoaiMoi = Convert.ToInt32(cboDoiLoaiGhe.SelectedValue);
             string tenLoaiMoi = cboDoiLoaiGhe.Text;
@@ -644,11 +756,17 @@ namespace YeuMinhEmCinema.Admin
                 }
 
                 ChonGhe(_gheDangChon);
-                MessageBox.Show($"Đã đổi ghế {_gheDangChon.HangGhe}{_gheDangChon.SoGhe} sang '{tenLoaiMoi}'.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Đã đổi ghế {_gheDangChon.HangGhe}{_gheDangChon.SoGhe} sang '{tenLoaiMoi}'.",
+                    "Thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show(thongBao, "Lỗi cập nhật ghế", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(thongBao,
+                    "Lỗi cập nhật ghế",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -656,13 +774,16 @@ namespace YeuMinhEmCinema.Admin
         {
             if (_gheDangChon == null)
             {
-                MessageBox.Show("Vui lòng click chọn một ghế trên sơ đồ trước.", "Chưa chọn ghế", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng click chọn một ghế trên sơ đồ trước.",
+                    "Chưa chọn ghế",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
             string trangThaiMoi = _gheDangChon.TrangThai == "Hoạt động"
-                ? "Hỏng/Ngừng sử dụng"
-                : "Hoạt động";
+            ? "Hỏng/Ngừng sử dụng"
+            : "Hoạt động";
 
             var (thanhCong, thongBao) = GheDAL.DoiTrangThaiGhe(_gheDangChon.MaGhe, trangThaiMoi);
             if (thanhCong)
@@ -679,12 +800,19 @@ namespace YeuMinhEmCinema.Admin
                 // Cập nhật lại số liệu thống kê trên nhãn phòng
                 if (_nodeDangChon != null && _nodeDangChon.Loai == "PHONG")
                 {
-                    VeSoDoGhe(_nodeDangChon.Ma, _nodeDangChon.Ten, _nodeDangChon.DinhDang, _nodeDangChon.TenRap, _nodeDangChon.TrangThai);
+                    VeSoDoGhe(_nodeDangChon.Ma,
+                        _nodeDangChon.Ten,
+                        _nodeDangChon.DinhDang,
+                        _nodeDangChon.TenRap,
+                        _nodeDangChon.TrangThai);
                 }
             }
             else
             {
-                MessageBox.Show(thongBao, "Lỗi cập nhật trạng thái ghế", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(thongBao,
+                    "Lỗi cập nhật trạng thái ghế",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -693,14 +821,19 @@ namespace YeuMinhEmCinema.Admin
         #region MENU NGỮ CẢNH (CONTEXT MENU)
 
         private void tsmThemPhong_Click(object sender, EventArgs e) => btnThemPhong_Click(sender, e);
+
         private void tsmSua_Click(object sender, EventArgs e) => btnSuaRapPhong_Click(sender, e);
+
         private void tsmDoiTrangThai_Click(object sender, EventArgs e) => btnDoiTrangThai_Click(sender, e);
+
         private void tsmTaoSoDo_Click(object sender, EventArgs e) => btnTaoSoDoGhe_Click(sender, e);
+
         private void tsmLamMoi_Click(object sender, EventArgs e) => NapCayRapVaPhong(_nodeDangChon?.Ma);
 
         private void DoiLoaiGheTheoTen(string tenLoai)
         {
-            if (_gheDangChon == null || _bangLoaiGhe == null) return;
+            if (_gheDangChon == null || _bangLoaiGhe == null)
+                return;
 
             DataRow[] rows = _bangLoaiGhe.Select($"TenLoai = '{tenLoai.Replace("'", "''")}'");
             if (rows.Length > 0)
@@ -725,41 +858,57 @@ namespace YeuMinhEmCinema.Admin
         }
 
         private void tsmGheThuong_Click(object sender, EventArgs e) => DoiLoaiGheTheoTen("Ghế thường");
+
         private void tsmGheVip_Click(object sender, EventArgs e) => DoiLoaiGheTheoTen("Ghế VIP");
+
         private void tsmGheSweetbox_Click(object sender, EventArgs e) => DoiLoaiGheTheoTen("Ghế Sweetbox");
 
         private void tsmDanhDauHong_Click(object sender, EventArgs e)
         {
-            if (_gheDangChon == null) return;
+            if (_gheDangChon == null)
+                return;
             var (thanhCong, thongBao) = GheDAL.DoiTrangThaiGhe(_gheDangChon.MaGhe, "Hỏng/Ngừng sử dụng");
             if (thanhCong)
             {
                 _gheDangChon.TrangThai = "Hỏng/Ngừng sử dụng";
-                if (_gheDangChon.NutGhe != null) DinhDangMauSacGhe(_gheDangChon.NutGhe, _gheDangChon);
+                if (_gheDangChon.NutGhe != null)
+                    DinhDangMauSacGhe(_gheDangChon.NutGhe, _gheDangChon);
                 ChonGhe(_gheDangChon);
                 if (_nodeDangChon != null && _nodeDangChon.Loai == "PHONG")
                 {
-                    VeSoDoGhe(_nodeDangChon.Ma, _nodeDangChon.Ten, _nodeDangChon.DinhDang, _nodeDangChon.TenRap, _nodeDangChon.TrangThai);
+                    VeSoDoGhe(_nodeDangChon.Ma,
+                        _nodeDangChon.Ten,
+                        _nodeDangChon.DinhDang,
+                        _nodeDangChon.TenRap,
+                        _nodeDangChon.TrangThai);
                 }
             }
-            else MessageBox.Show(thongBao, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show(thongBao, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void tsmDanhDauHoatDong_Click(object sender, EventArgs e)
         {
-            if (_gheDangChon == null) return;
+            if (_gheDangChon == null)
+                return;
             var (thanhCong, thongBao) = GheDAL.DoiTrangThaiGhe(_gheDangChon.MaGhe, "Hoạt động");
             if (thanhCong)
             {
                 _gheDangChon.TrangThai = "Hoạt động";
-                if (_gheDangChon.NutGhe != null) DinhDangMauSacGhe(_gheDangChon.NutGhe, _gheDangChon);
+                if (_gheDangChon.NutGhe != null)
+                    DinhDangMauSacGhe(_gheDangChon.NutGhe, _gheDangChon);
                 ChonGhe(_gheDangChon);
                 if (_nodeDangChon != null && _nodeDangChon.Loai == "PHONG")
                 {
-                    VeSoDoGhe(_nodeDangChon.Ma, _nodeDangChon.Ten, _nodeDangChon.DinhDang, _nodeDangChon.TenRap, _nodeDangChon.TrangThai);
+                    VeSoDoGhe(_nodeDangChon.Ma,
+                        _nodeDangChon.Ten,
+                        _nodeDangChon.DinhDang,
+                        _nodeDangChon.TenRap,
+                        _nodeDangChon.TrangThai);
                 }
             }
-            else MessageBox.Show(thongBao, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show(thongBao, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         #endregion

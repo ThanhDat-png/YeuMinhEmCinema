@@ -104,14 +104,20 @@ namespace YeuMinhEmCinema.Admin
             // Kiểm tra tính hợp lệ cơ bản
             if (string.IsNullOrWhiteSpace(tenPhim))
             {
-                MessageBox.Show("Vui lòng nhập tên phim.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập tên phim.",
+                    "Thiếu thông tin",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 txtTenPhim.Focus();
                 return;
             }
 
             if (thoiLuong <= 0)
             {
-                MessageBox.Show("Thời lượng phim phải lớn hơn 0 phút.", "Thông tin không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Thời lượng phim phải lớn hơn 0 phút.",
+                    "Thông tin không hợp lệ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 numThoiLuong.Focus();
                 return;
             }
@@ -147,7 +153,10 @@ namespace YeuMinhEmCinema.Admin
 
             if (thanhCong)
             {
-                MessageBox.Show(thongBao, "Thông báo thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(thongBao,
+                    "Thông báo thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }

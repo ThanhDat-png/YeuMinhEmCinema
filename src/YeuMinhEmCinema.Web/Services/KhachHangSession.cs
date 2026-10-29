@@ -28,8 +28,9 @@ public class KhachHangSession : CookieAuthenticationEvents
         catch (Exception exception) when (exception is SqlException or InvalidOperationException)
         {
             context.HttpContext.RequestServices.GetRequiredService<ILogger<KhachHangSession>>()
-                .LogError("Không kiểm tra được phiên khách. Loại lỗi: {Loai}; mã SQL: {Ma}",
-                    exception.GetType().Name, (exception as SqlException)?.Number);
+            .LogError("Không kiểm tra được phiên khách. Loại lỗi: {Loai}; mã SQL: {Ma}",
+                exception.GetType().Name,
+                (exception as SqlException)?.Number);
         }
         if (!hopLe)
         {
@@ -41,27 +42,28 @@ public class KhachHangSession : CookieAuthenticationEvents
     /// <summary>Cookie mã hóa không chứa hash hay mật khẩu; rowversion giúp thu hồi phiên sau đổi mật khẩu.</summary>
     public static ClaimsPrincipal TaoDanhTinh(int id, string ten, byte[] phienBan)
     {
-        var identity = new ClaimsIdentity(new[]
-        {
-            new Claim(ClaimTypes.NameIdentifier, id.ToString()),
-            new Claim(ClaimTypes.Name, ten),
-            new Claim(ClaimTypes.Role, "KhachHang"),
-            new Claim("PhienBan", Convert.ToBase64String(phienBan))
-        }, CookieAuthenticationDefaults.AuthenticationScheme);
+        var identity = new ClaimsIdentity(new []
+            {
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+                new Claim(ClaimTypes.Name, ten),
+                new Claim(ClaimTypes.Role, "KhachHang"),
+                new Claim("PhienBan", Convert.ToBase64String(phienBan))
+            },
+            CookieAuthenticationDefaults.AuthenticationScheme);
         return new ClaimsPrincipal(identity);
     }
 
     public static string Bam(string matKhau)
     {
-        return new PasswordHasher<object>().HashPassword(new object(), matKhau);
+        return new PasswordHasher<object>().HashPassword(new object (), matKhau);
     }
 
     public static bool KiemTra(string hash, string matKhau)
     {
         try
         {
-            return new PasswordHasher<object>().VerifyHashedPassword(new object(), hash, matKhau)
-                != PasswordVerificationResult.Failed;
+            return new PasswordHasher<object>().VerifyHashedPassword(new object (), hash, matKhau)
+            != PasswordVerificationResult.Failed;
         }
         catch (Exception exception) when (exception is FormatException or ArgumentException or IndexOutOfRangeException)
         {

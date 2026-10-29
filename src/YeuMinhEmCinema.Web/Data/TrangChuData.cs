@@ -19,7 +19,7 @@ public class TrangChuData
     private SqlConnection TaoKetNoi()
     {
         var chuoi = configuration.GetConnectionString("Cinema")
-            ?? Environment.GetEnvironmentVariable("YMC_CONNECTION");
+        ?? Environment.GetEnvironmentVariable("YMC_CONNECTION");
         if (string.IsNullOrWhiteSpace(chuoi))
         {
             throw new InvalidOperationException("Chưa cấu hình kết nối Cinema.");
@@ -29,7 +29,11 @@ public class TrangChuData
 
     /// <summary>Dùng phân trang tại SQL để không tải toàn bộ danh mục.</summary>
     public virtual async Task<(List<Phim> phim, int tong)> LayPhimAsync(
-        string? tuKhoa, string? trangThai, int trang, int kichThuoc, CancellationToken cancellationToken)
+        string? tuKhoa,
+        string? trangThai,
+        int trang,
+        int kichThuoc,
+        CancellationToken cancellationToken)
     {
         using var connection = TaoKetNoi();
         using var command = new SqlCommand("dbo.sp_YMC_WebDanhSachPhim", connection);
@@ -45,15 +49,15 @@ public class TrangChuData
         while (await reader.ReadAsync(cancellationToken))
         {
             phim.Add(new Phim
-            {
-                MaPhim = (int)reader["MaPhim"],
-                TenPhim = (string)reader["TenPhim"],
-                ThoiLuong = (int)reader["ThoiLuong"],
-                NgayKhoiChieu = (DateTime)reader["NgayKhoiChieu"],
-                GioiHanTuoi = (string)reader["GioiHanTuoi"],
-                TrangThai = (string)reader["TrangThai"],
-                Poster = reader["Poster"] as string
-            });
+                {
+                    MaPhim = (int)reader["MaPhim"],
+                    TenPhim = (string)reader["TenPhim"],
+                    ThoiLuong = (int)reader["ThoiLuong"],
+                    NgayKhoiChieu = (DateTime)reader["NgayKhoiChieu"],
+                    GioiHanTuoi = (string)reader["GioiHanTuoi"],
+                    TrangThai = (string)reader["TrangThai"],
+                    Poster = reader["Poster"] as string
+                });
             tong = (int)reader["TongKetQua"];
         }
         // COUNT OVER không có dòng mang tổng khi OFFSET vượt danh sách.
@@ -71,7 +75,7 @@ public class TrangChuData
     {
         using var connection = TaoKetNoi();
         using var command = new SqlCommand(
-            "SELECT TenRap, DiaChi FROM dbo.Rap WHERE TrangThai = @TrangThai ORDER BY MaRap", connection);
+        "SELECT TenRap, DiaChi FROM dbo.Rap WHERE TrangThai = @TrangThai ORDER BY MaRap", connection);
         command.Parameters.Add("@TrangThai", SqlDbType.NVarChar, 30).Value = "Đang hoạt động";
         await connection.OpenAsync(cancellationToken);
         using var reader = await command.ExecuteReaderAsync(cancellationToken);

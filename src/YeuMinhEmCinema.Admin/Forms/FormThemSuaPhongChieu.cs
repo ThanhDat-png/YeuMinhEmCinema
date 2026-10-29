@@ -89,8 +89,12 @@ namespace YeuMinhEmCinema.Admin
 
                 string dinhDang = row["DinhDang"]?.ToString() ?? "2D Digital";
                 int idxDinhDang = cboDinhDang.Items.IndexOf(dinhDang);
-                if(idxDinhDang<0){cboDinhDang.Items.Add(dinhDang);idxDinhDang=cboDinhDang.Items.Count-1;}
-                cboDinhDang.SelectedIndex=idxDinhDang;
+                if (idxDinhDang < 0)
+                {
+                    cboDinhDang.Items.Add(dinhDang);
+                    idxDinhDang = cboDinhDang.Items.Count - 1;
+                }
+                cboDinhDang.SelectedIndex = idxDinhDang;
 
                 string trangThai = row["TrangThai"]?.ToString() ?? "Đang hoạt động";
                 int idxTrangThai = cboTrangThai.Items.IndexOf(trangThai);
@@ -111,7 +115,10 @@ namespace YeuMinhEmCinema.Admin
         {
             if (cboRap.SelectedValue == null)
             {
-                MessageBox.Show("Vui lòng chọn cụm rạp cho phòng chiếu.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn cụm rạp cho phòng chiếu.",
+                    "Thiếu thông tin",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 cboRap.Focus();
                 return;
             }
@@ -123,7 +130,10 @@ namespace YeuMinhEmCinema.Admin
 
             if (string.IsNullOrWhiteSpace(tenPhong))
             {
-                MessageBox.Show("Vui lòng nhập tên phòng chiếu.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập tên phòng chiếu.",
+                    "Thiếu thông tin",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 txtTenPhong.Focus();
                 return;
             }
@@ -142,13 +152,19 @@ namespace YeuMinhEmCinema.Admin
 
             if (thanhCong)
             {
-                MessageBox.Show(thongBao, "Thông báo thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(thongBao,
+                    "Thông báo thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }
             else
             {
-                MessageBox.Show(thongBao, "Lỗi lưu phòng chiếu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(thongBao,
+                    "Lỗi lưu phòng chiếu",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

@@ -73,7 +73,8 @@ public class DatVeController : Controller
         }
         // Retry trước tiên để SQL trả đơn cũ theo MaYeuCau, không từ chối ghế do chính đơn đó đang giữ.
         if (model.Ghe.Count is < 1 or > 8 || model.Ghe.Distinct().Count() != model.Ghe.Count
-            || model.MaYeuCau == Guid.Empty || model.Fnb.Count > 1000
+            || model.MaYeuCau == Guid.Empty
+            || model.Fnb.Count > 1000
             || model.Fnb.Count(f => f.SoLuong > 0) > 20
             || model.Fnb.Select(f => f.MaSanPham).Distinct().Count() != model.Fnb.Count)
         {
@@ -84,14 +85,17 @@ public class DatVeController : Controller
             try
             {
                 var don = data.TaoDon(Id(), model);
-                return RedirectToAction("ChiTiet", "Don", new { id = don });
+                return RedirectToAction("ChiTiet", "Don", new
+                {
+                    id = don
+                });
             }
             catch (SqlException exception) when (exception.Number >= 50000 && exception.Number < 51000)
             {
                 ModelState.AddModelError("", WebErrors.ThongBao(exception));
                 Tai(model);
                 model.Ghe = model.Ghe.Where(ma => model.SoDo.AsEnumerable().Any(r =>
-                    (int)r["MaGhe"] == ma && (string)r["TinhTrang"] == "Trống" && r["Gia"] != DBNull.Value)).ToList();
+                (int)r["MaGhe"] == ma && (string)r["TinhTrang"] == "Trống" && r["Gia"] != DBNull.Value)).ToList();
                 TempData["ThongBao"] = "Trạng thái ghế đã được tải lại. Vui lòng kiểm tra lựa chọn.";
                 Tai(model);
                 return View("Ghe", model);
@@ -126,9 +130,10 @@ public class DatVeController : Controller
         foreach (var ma in model.Ghe)
         {
             if (!model.SoDo.AsEnumerable().Any(r => (int)r["MaGhe"] == ma
-                && (string)r["TinhTrang"] == "Trống" && r["Gia"] != DBNull.Value))
+            && (string)r["TinhTrang"] == "Trống" && r["Gia"] != DBNull.Value))
             {
-                ModelState.AddModelError("", "Một ghế đã được giữ, đã bán, hỏng hoặc chưa có giá. Hãy chọn lại.");
+                ModelState.AddModelError("",
+                    "Một ghế đã được giữ, đã bán, hỏng hoặc chưa có giá. Hãy chọn lại.");
                 break;
             }
         }

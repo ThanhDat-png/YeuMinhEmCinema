@@ -74,7 +74,10 @@ namespace YeuMinhEmCinema.Admin
 
             if (string.IsNullOrWhiteSpace(tenRap))
             {
-                MessageBox.Show("Vui lòng nhập tên cụm rạp.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập tên cụm rạp.",
+                    "Thiếu thông tin",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 txtTenRap.Focus();
                 return;
             }
@@ -93,7 +96,10 @@ namespace YeuMinhEmCinema.Admin
 
             if (thanhCong)
             {
-                MessageBox.Show(thongBao, "Thông báo thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(thongBao,
+                    "Thông báo thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }

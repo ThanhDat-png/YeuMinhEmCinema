@@ -30,7 +30,7 @@ public class WebErrors : IExceptionFilter
     public void OnException(ExceptionContext context)
     {
         logger.LogError("Lỗi Web: {Loai}; mã SQL: {Ma}", context.Exception.GetType().Name,
-            (context.Exception as SqlException)?.Number);
+        (context.Exception as SqlException)?.Number);
         context.Result = new ViewResult
         {
             ViewName = "~/Views/Home/Loi.cshtml",

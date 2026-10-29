@@ -63,13 +63,13 @@ namespace YeuMinhEmCinema.Admin
         }
 
         private async void FormDangNhap_Shown(
-            object? sender,
-            EventArgs e)
+        object? sender,
+        EventArgs e)
         {
             await ThucHienAsync(async () =>
             {
                 daCoAdmin = await Task.Run(
-                    TaiKhoanDAL.DaCoAdmin);
+                TaiKhoanDAL.DaCoAdmin);
 
                 if (!daCoAdmin)
                 {
@@ -88,8 +88,8 @@ namespace YeuMinhEmCinema.Admin
         }
 
         private async void BtnKhoiTaoAdmin_Click(
-            object? sender,
-            EventArgs e)
+        object? sender,
+        EventArgs e)
         {
             if (dangXuLy)
             {
@@ -104,8 +104,8 @@ namespace YeuMinhEmCinema.Admin
             if (tenDangNhap.Length < 3)
             {
                 MessageBox.Show(
-                    this,
-                    "Tên đăng nhập phải có ít nhất 3 ký tự.");
+                this,
+                "Tên đăng nhập phải có ít nhất 3 ký tự.");
 
                 txtTenDangNhap.Focus();
                 return;
@@ -114,8 +114,8 @@ namespace YeuMinhEmCinema.Admin
             if (matKhau.Length < 12)
             {
                 MessageBox.Show(
-                    this,
-                    "Mật khẩu phải có ít nhất 12 ký tự.");
+                this,
+                "Mật khẩu phải có ít nhất 12 ký tự.");
 
                 txtMatKhau.Focus();
                 return;
@@ -129,9 +129,9 @@ namespace YeuMinhEmCinema.Admin
             await ThucHienAsync(async () =>
             {
                 await Task.Run(() =>
-                    TaiKhoanDAL.KhoiTaoAdmin(
-                        tenDangNhap,
-                        matKhau));
+                TaiKhoanDAL.KhoiTaoAdmin(
+                tenDangNhap,
+                matKhau));
 
                 daCoAdmin = true;
                 txtMatKhau.Clear();
@@ -149,8 +149,8 @@ namespace YeuMinhEmCinema.Admin
         }
 
         private async void BtnDangNhap_Click(
-            object? sender,
-            EventArgs e)
+        object? sender,
+        EventArgs e)
         {
             if (dangXuLy)
             {
@@ -161,11 +161,11 @@ namespace YeuMinhEmCinema.Admin
             string matKhau = txtMatKhau.Text;
 
             if (tenDangNhap.Length == 0 ||
-                matKhau.Length == 0)
+            matKhau.Length == 0)
             {
                 MessageBox.Show(
-                    this,
-                    "Nhập đầy đủ tên đăng nhập và mật khẩu.");
+                this,
+                "Nhập đầy đủ tên đăng nhập và mật khẩu.");
 
                 return;
             }
@@ -175,9 +175,9 @@ namespace YeuMinhEmCinema.Admin
             await ThucHienAsync(async () =>
             {
                 var ketQua = await Task.Run(() =>
-                    TaiKhoanDAL.DangNhap(
-                        tenDangNhap,
-                        matKhau));
+                TaiKhoanDAL.DangNhap(
+                tenDangNhap,
+                matKhau));
 
                 txtMatKhau.Clear();
 
@@ -320,7 +320,12 @@ namespace YeuMinhEmCinema.Admin
             };
 
             hopThoai.Controls.AddRange(
-                new Control[] { oNhapLai, nutDongY, nutHuy });
+            new Control[]
+            {
+                oNhapLai,
+                nutDongY,
+                nutHuy
+            });
 
             hopThoai.AcceptButton = nutDongY;
             hopThoai.CancelButton = nutHuy;
@@ -333,8 +338,8 @@ namespace YeuMinhEmCinema.Admin
             if (oNhapLai.Text != matKhau)
             {
                 MessageBox.Show(
-                    this,
-                    "Hai lần nhập mật khẩu không khớp.");
+                this,
+                "Hai lần nhập mật khẩu không khớp.");
 
                 return false;
             }

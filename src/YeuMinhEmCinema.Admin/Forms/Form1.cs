@@ -46,39 +46,67 @@ namespace YeuMinhEmCinema.Admin
         /// </summary>
         private void ChuyenManHinh(string maManHinh, string tieuDe, Button nutDangChon)
         {
-            try{Db.RefreshRights();ApplyRights();}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
-            if(!Allowed(maManHinh)){MessageBox.Show("Bạn không có quyền mở màn hình này.");return;}
-            UserControl? destination=null;
-            if(maManHinh!="QuanLyPhim" && !_danhSachManHinhPhu.TryGetValue(maManHinh,out destination))
+            try
+            {
+                Db.RefreshRights();
+                ApplyRights();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Db.Error(ex));
+                return;
+            }
+            if (!Allowed(maManHinh))
+            {
+                MessageBox.Show("Bạn không có quyền mở màn hình này.");
+                return;
+            }
+            UserControl? destination = null;
+            if (maManHinh != "QuanLyPhim" && !_danhSachManHinhPhu.TryGetValue(maManHinh, out destination))
             {
                 try
                 {
-                    destination=TaoManHinhPhu(maManHinh);
-                    if(destination==null)return;
-                    destination.Dock=DockStyle.Fill;
-                    destination.Visible=false;
+                    destination = TaoManHinhPhu(maManHinh);
+                    if (destination == null)
+                        return;
+                    destination.Dock = DockStyle.Fill;
+                    destination.Visible = false;
                     pnlContent.Controls.Add(destination);
-                    _danhSachManHinhPhu[maManHinh]=destination;
+                    _danhSachManHinhPhu[maManHinh] = destination;
                 }
-                catch(Exception ex){destination?.Dispose();MessageBox.Show(Db.Error(ex));return;}
+                catch (Exception ex)
+                {
+                    destination?.Dispose();
+                    MessageBox.Show(Db.Error(ex));
+                    return;
+                }
             }
             pnlContent.SuspendLayout();
             try
             {
-                foreach(var page in _danhSachManHinhPhu.Values)page.Visible=false;
-                pnlQuanLyPhim.Visible=maManHinh=="QuanLyPhim";
-                if(destination!=null){destination.Visible=true;destination.BringToFront();}
-                else pnlQuanLyPhim.BringToFront();
-                lblScreenTitle.Text=tieuDe;
-                foreach(Button btn in _danhSachNutMenu)
+                foreach (var page in _danhSachManHinhPhu.Values)
+                    page.Visible = false;
+                pnlQuanLyPhim.Visible = maManHinh == "QuanLyPhim";
+                if (destination != null)
                 {
-                    bool active=btn==nutDangChon;
-                    btn.BackColor=active?AdminUi.Primary:Color.FromArgb(20,20,26);
-                    btn.ForeColor=active?Color.White:Color.FromArgb(203,213,225);
-                    btn.Font=new Font("Segoe UI",9.75F,active?FontStyle.Bold:FontStyle.Regular);
+                    destination.Visible = true;
+                    destination.BringToFront();
+                }
+                else
+                    pnlQuanLyPhim.BringToFront();
+                lblScreenTitle.Text = tieuDe;
+                foreach (Button btn in _danhSachNutMenu)
+                {
+                    bool active = btn == nutDangChon;
+                    btn.BackColor = active ? AdminUi.Primary : Color.FromArgb(20, 20, 26);
+                    btn.ForeColor = active ? Color.White : Color.FromArgb(203, 213, 225);
+                    btn.Font = new Font("Segoe UI", 9.75F, active ? FontStyle.Bold : FontStyle.Regular);
                 }
             }
-            finally{pnlContent.ResumeLayout(true);}
+            finally
+            {
+                pnlContent.ResumeLayout(true);
+            }
         }
 
         private UserControl? TaoManHinhPhu(string maManHinh)
@@ -101,17 +129,23 @@ namespace YeuMinhEmCinema.Admin
 
         private void btnNavTongQuan_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("TongQuan", "📊 BÁO CÁO TỔNG QUAN HOẠT ĐỘNG RẠP PHIM", btnNavTongQuan);
+            ChuyenManHinh("TongQuan",
+                "📊 BÁO CÁO TỔNG QUAN HOẠT ĐỘNG RẠP PHIM",
+                btnNavTongQuan);
         }
 
         private void btnNavQuanLyPhim_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("QuanLyPhim", "🎬 QUẢN LÝ PHIM (KẾT NỐI DATABASE THẬT)", btnNavQuanLyPhim);
+            ChuyenManHinh("QuanLyPhim",
+                "🎬 QUẢN LÝ PHIM (KẾT NỐI DATABASE THẬT)",
+                btnNavQuanLyPhim);
         }
 
         private void btnNavRapPhong_Click(object sender, EventArgs e)
         {
-            ChuyenManHinh("RapPhong", "🏛️ CỤM RẠP, PHÒNG CHIẾU & SƠ ĐỒ GHẾ (KẾT NỐI DATABASE THẬT)", btnNavRapPhong);
+            ChuyenManHinh("RapPhong",
+                "🏛️ CỤM RẠP, PHÒNG CHIẾU & SƠ ĐỒ GHẾ (KẾT NỐI DATABASE THẬT)",
+                btnNavRapPhong);
         }
 
         private void btnNavLichChieu_Click(object sender, EventArgs e)
@@ -164,7 +198,8 @@ namespace YeuMinhEmCinema.Admin
         /// </summary>
         private void TaiDanhSachPhim()
         {
-            if(!rightsReady || !Db.Has("PHIM_XEM")) return;
+            if (!rightsReady || !Db.Has("PHIM_XEM"))
+                return;
             string tuKhoa = txtTimKiemPhim.Text.Trim();
             string trangThai = cboLocTrangThai.SelectedItem?.ToString() ?? "Tất cả trạng thái";
 
@@ -175,7 +210,10 @@ namespace YeuMinhEmCinema.Admin
                 dgvPhim.AutoGenerateColumns = true;
                 dgvPhim.DataSource = bangPhim;
 
-                void DatTieuDeCot(string tenCot, string tieuDe, float fillWeight = 100, bool an = false)
+                void DatTieuDeCot(string tenCot,
+                    string tieuDe,
+                    float fillWeight = 100,
+                    bool an = false)
                 {
                     if (dgvPhim.Columns[tenCot] is DataGridViewColumn col)
                     {
@@ -201,9 +239,9 @@ namespace YeuMinhEmCinema.Admin
                 }
 
                 // Ẩn bớt các cột nội dung dài trên bảng chính (đã có khung chi tiết xem bên dưới)
-                DatTieuDeCot("MoTa", "Mô tả", 100, an: true);
-                DatTieuDeCot("Poster", "Poster", 100, an: true);
-                DatTieuDeCot("Trailer", "Trailer", 100, an: true);
+                DatTieuDeCot("MoTa", "Mô tả", 100, an : true);
+                DatTieuDeCot("Poster", "Poster", 100, an : true);
+                DatTieuDeCot("Trailer", "Trailer", 100, an : true);
 
                 // Cập nhật khung chi tiết cho dòng đầu tiên nếu có dữ liệu
                 CapNhatChiTietPhimDangChon();
@@ -242,9 +280,9 @@ namespace YeuMinhEmCinema.Admin
             string trailer = row.Cells["Trailer"]?.Value != DBNull.Value ? row.Cells["Trailer"]?.Value?.ToString() ?? "" : "";
 
             lblChiTietPhim.Text =
-                $"🎬 [{maPhim}] {tenPhim} | Thời lượng: {thoiLuong} phút | Giới hạn: {tuoi} | Khởi chiếu: {ngayChieu} | Trạng thái: {trangThai}\n" +
-                $"• Poster: {(string.IsNullOrWhiteSpace(poster) ? "Chưa có" : poster)} | Trailer: {(string.IsNullOrWhiteSpace(trailer) ? "Chưa có" : trailer)}\n" +
-                $"• Tóm tắt mô tả: {(string.IsNullOrWhiteSpace(moTa) ? "(Chưa cập nhật mô tả cho phim này)" : moTa)}";
+            $"🎬 [{maPhim}] {tenPhim} | Thời lượng: {thoiLuong} phút | Giới hạn: {tuoi} | Khởi chiếu: {ngayChieu} | Trạng thái: {trangThai}\n" +
+            $"• Poster: {(string.IsNullOrWhiteSpace(poster) ? "Chưa có" : poster)} | Trailer: {(string.IsNullOrWhiteSpace(trailer) ? "Chưa có" : trailer)}\n" +
+            $"• Tóm tắt mô tả: {(string.IsNullOrWhiteSpace(moTa) ? "(Chưa cập nhật mô tả cho phim này)" : moTa)}";
         }
 
         private void dgvPhim_SelectionChanged(object? sender, EventArgs e)
@@ -255,7 +293,15 @@ namespace YeuMinhEmCinema.Admin
         // Sự kiện khi nhấn nút Thêm phim mới
         private void btnThemPhim_Click(object? sender, EventArgs e)
         {
-            try{Db.Require("PHIM_QUAN_LY");}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
+            try
+            {
+                Db.Require("PHIM_QUAN_LY");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Db.Error(ex));
+                return;
+            }
             using FormThemSuaPhim form = new FormThemSuaPhim();
             if (form.ShowDialog(this) == DialogResult.OK)
             {
@@ -267,10 +313,21 @@ namespace YeuMinhEmCinema.Admin
         // Sự kiện khi nhấn nút Sửa phim
         private void btnSuaPhim_Click(object? sender, EventArgs e)
         {
-            try{Db.Require("PHIM_QUAN_LY");}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
+            try
+            {
+                Db.Require("PHIM_QUAN_LY");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Db.Error(ex));
+                return;
+            }
             if (dgvPhim.CurrentRow == null || !dgvPhim.Columns.Contains("MaPhim"))
             {
-                MessageBox.Show("Vui lòng chọn một bộ phim trong bảng để chỉnh sửa.", "Chưa chọn phim", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một bộ phim trong bảng để chỉnh sửa.",
+                    "Chưa chọn phim",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -286,10 +343,21 @@ namespace YeuMinhEmCinema.Admin
         // Sự kiện khi nhấn nút Ngừng chiếu (không xóa vật lý theo yêu cầu nghiệp vụ)
         private void btnNgungChieu_Click(object? sender, EventArgs e)
         {
-            try{Db.Require("PHIM_QUAN_LY");}catch(Exception ex){MessageBox.Show(Db.Error(ex));return;}
+            try
+            {
+                Db.Require("PHIM_QUAN_LY");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Db.Error(ex));
+                return;
+            }
             if (dgvPhim.CurrentRow == null || !dgvPhim.Columns.Contains("MaPhim"))
             {
-                MessageBox.Show("Vui lòng chọn một bộ phim trong bảng để ngừng chiếu.", "Chưa chọn phim", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một bộ phim trong bảng để ngừng chiếu.",
+                    "Chưa chọn phim",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -299,7 +367,10 @@ namespace YeuMinhEmCinema.Admin
 
             if (trangThaiHienTai == "Ngừng chiếu")
             {
-                MessageBox.Show($"Bộ phim '{tenPhim}' hiện đã ở trạng thái 'Ngừng chiếu'.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Bộ phim '{tenPhim}' hiện đã ở trạng thái 'Ngừng chiếu'.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 return;
             }
 
@@ -314,7 +385,10 @@ namespace YeuMinhEmCinema.Admin
                 var (thanhCong, thongBao) = PhimDAL.NgungChieuPhim(maPhim);
                 if (thanhCong)
                 {
-                    MessageBox.Show(thongBao, "Thông báo thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(thongBao,
+                        "Thông báo thành công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                     TaiDanhSachPhim();
                 }
                 else

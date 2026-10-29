@@ -27,7 +27,9 @@ public class TaiKhoanData
                     WHERE q.MaTaiKhoan=t.MaTaiKhoan AND q.MaQuyen='DON_HANG_CA_NHAN')
                 AND EXISTS(SELECT 1 FROM dbo.TaiKhoanVaiTro tv JOIN dbo.VaiTro v ON v.MaVaiTro=tv.MaVaiTro
                     WHERE tv.MaTaiKhoan=t.MaTaiKhoan AND v.TenVaiTro='KHACH_HANG' AND v.DangHoatDong=1)
-            """, false, P("@Id", id));
+            """,
+            false,
+            P("@Id", id));
         return table.Rows.Count == 0 ? null : table.Rows[0];
     }
 
@@ -47,7 +49,7 @@ public class TaiKhoanData
         var row = table.Rows[0];
         var dung = KhachHangSession.KiemTra((string)row["MatKhauHash"], matKhau);
         db.Read("dbo.sp_YMC_GhiNhanDangNhap", true,
-            P("@MaTaiKhoan", row["MaTaiKhoan"]), P("@ThanhCong", dung), P("@PhienBan", row["PhienBan"]));
+        P("@MaTaiKhoan", row["MaTaiKhoan"]), P("@ThanhCong", dung), P("@PhienBan", row["PhienBan"]));
         if (!dung)
         {
             return null;
@@ -57,9 +59,13 @@ public class TaiKhoanData
 
     public void DangKy(DangKyModel model)
     {
-        db.Read("dbo.sp_YMC_DangKyKhachHang", true,
-            P("@TenDangNhap", model.TenDangNhap), P("@MatKhauHash", KhachHangSession.Bam(model.MatKhau)),
-            P("@HoTen", model.HoTen.Trim()), P("@Email", model.Email), P("@DienThoai", model.DienThoai));
+        db.Read("dbo.sp_YMC_DangKyKhachHang",
+            true,
+            P("@TenDangNhap", model.TenDangNhap),
+            P("@MatKhauHash", KhachHangSession.Bam(model.MatKhau)),
+            P("@HoTen", model.HoTen.Trim()),
+            P("@Email", model.Email),
+            P("@DienThoai", model.DienThoai));
     }
 
     public void CapNhat(int id, HoSoModel model)
@@ -81,29 +87,35 @@ public class TaiKhoanData
                 IF @@TRANCOUNT>0 ROLLBACK;
                 THROW;
             END CATCH;
-            """, false, P("@NguoiThucHien", id),
-            P("@MaKhachHang", row["MaKhachHang"]), P("@HoTen", model.HoTen.Trim()),
-            P("@DienThoai", model.DienThoai), P("@NgaySinh", model.NgaySinh), P("@PhienBan", row["PhienBan"]),
-            P("@PhienTaiKhoan", row["PhienTaiKhoan"]), P("@Email", model.Email));
+            """,
+            false,
+            P("@NguoiThucHien", id),
+            P("@MaKhachHang", row["MaKhachHang"]),
+            P("@HoTen", model.HoTen.Trim()),
+            P("@DienThoai", model.DienThoai),
+            P("@NgaySinh", model.NgaySinh),
+            P("@PhienBan", row["PhienBan"]),
+            P("@PhienTaiKhoan", row["PhienTaiKhoan"]),
+            P("@Email", model.Email));
     }
 
     public bool DoiMatKhau(int id, DoiMatKhauModel model)
     {
         var hoSo = HoSo(id) ?? throw new InvalidOperationException("Phiên khách hàng không còn hợp lệ.");
         var row = db.Table("dbo.sp_YMC_LayThongTinDangNhap", true,
-            P("@TenDangNhap", hoSo["TenDangNhap"])).Rows[0];
+        P("@TenDangNhap", hoSo["TenDangNhap"])).Rows[0];
         var dung = KhachHangSession.KiemTra((string)row["MatKhauHash"], model.MatKhauCu);
         // Ghi nhận sai mật khẩu cũ bằng cùng cơ chế khóa để tránh thử vô hạn qua trang đổi mật khẩu.
         db.Read("dbo.sp_YMC_GhiNhanDangNhap", true, P("@MaTaiKhoan", id),
-            P("@ThanhCong", dung), P("@PhienBan", row["PhienBan"]));
+        P("@ThanhCong", dung), P("@PhienBan", row["PhienBan"]));
         if (!dung)
         {
             return false;
         }
         var moi = db.Table("dbo.sp_YMC_LayThongTinDangNhap", true,
-            P("@TenDangNhap", hoSo["TenDangNhap"])).Rows[0];
+        P("@TenDangNhap", hoSo["TenDangNhap"])).Rows[0];
         db.Read("dbo.sp_YMC_DoiMatKhau", true, P("@MaTaiKhoan", id),
-            P("@MatKhauHashMoi", KhachHangSession.Bam(model.MatKhauMoi)), P("@PhienBan", moi["PhienBan"]));
+        P("@MatKhauHashMoi", KhachHangSession.Bam(model.MatKhauMoi)), P("@PhienBan", moi["PhienBan"]));
         return true;
     }
 }

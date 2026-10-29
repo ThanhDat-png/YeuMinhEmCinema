@@ -17,7 +17,9 @@ public class DonController : Controller
     private readonly IWebHostEnvironment environment;
     private readonly IConfiguration configuration;
 
-    public DonController(DatVeData data, IWebHostEnvironment environment, IConfiguration configuration)
+    public DonController(DatVeData data,
+        IWebHostEnvironment environment,
+        IConfiguration configuration)
     {
         this.data = data;
         this.environment = environment;
@@ -27,15 +29,28 @@ public class DonController : Controller
     public IActionResult Index(string? trangThai, int trang = 1)
     {
         trangThai = string.IsNullOrWhiteSpace(trangThai) ? null : trangThai;
-        if (!ModelState.IsValid || trang is < 1 or > 1000000 ||
-            (trangThai != null && !new[] { "CHO_THANH_TOAN", "DA_THANH_TOAN", "DA_HUY", "HET_HAN", "DA_HOAN_TIEN" }.Contains(trangThai)))
+        if (!ModelState.IsValid
+            || trang is < 1 or > 1000000
+            ||
+            (trangThai != null
+            && !new []
+            {
+                "CHO_THANH_TOAN",
+                "DA_THANH_TOAN",
+                "DA_HUY",
+                "HET_HAN",
+                "DA_HOAN_TIEN"
+            }.Contains(trangThai)))
         {
             return BadRequest("Bộ lọc đơn không hợp lệ.");
         }
         var model = data.LichSu(Id(), trangThai, trang);
         if (trang > Math.Max(1, model.TongTrang))
         {
-            return RedirectToAction(nameof(Index), new { trangThai, trang = Math.Max(1, model.TongTrang) });
+            return RedirectToAction(nameof(Index), new
+            {
+                trangThai, trang = Math.Max(1, model.TongTrang)
+            });
         }
         return View(model);
     }
@@ -46,7 +61,11 @@ public class DonController : Controller
         {
             return NotFound("Không tìm thấy đơn của bạn.");
         }
-        return View(new DonModel { ChiTiet = data.ChiTiet(Id(), id), ChoPhepMoPhong = MoPhongBat() });
+        return View(new DonModel
+            {
+                ChiTiet = data.ChiTiet(Id(), id),
+                ChoPhepMoPhong = MoPhongBat()
+            });
     }
 
     [HttpPost]
@@ -65,7 +84,10 @@ public class DonController : Controller
         {
             TempData["ThongBao"] = WebErrors.ThongBao(exception);
         }
-        return RedirectToAction(nameof(ChiTiet), new { id });
+        return RedirectToAction(nameof(ChiTiet), new
+        {
+            id
+        });
     }
 
     [HttpPost]
@@ -83,7 +105,10 @@ public class DonController : Controller
         if (ketQua == "that-bai")
         {
             TempData["ThongBao"] = "Mô phỏng giao dịch thất bại. Chưa thu tiền, chưa phát hành vé; bạn có thể thử lại trước hạn.";
-            return RedirectToAction(nameof(ChiTiet), new { id });
+            return RedirectToAction(nameof(ChiTiet), new
+            {
+                id
+            });
         }
         if (ketQua != "thanh-cong")
         {
@@ -98,7 +123,10 @@ public class DonController : Controller
         {
             TempData["ThongBao"] = WebErrors.ThongBao(exception);
         }
-        return RedirectToAction(nameof(ChiTiet), new { id });
+        return RedirectToAction(nameof(ChiTiet), new
+        {
+            id
+        });
     }
 
     public IActionResult Qr(Guid id)

@@ -19,7 +19,9 @@ public class HomeController : Controller
     }
 
     /// <summary>Chặn đầu vào sai trước SQL và đưa trang vượt phạm vi về trang cuối.</summary>
-    public async Task<IActionResult> Index(string? tuKhoa, string? trangThai, int trang = 1,
+    public async Task<IActionResult> Index(string? tuKhoa,
+        string? trangThai,
+        int trang = 1,
         CancellationToken cancellationToken = default)
     {
         if (!ModelState.IsValid)
@@ -52,12 +54,14 @@ public class HomeController : Controller
             if (model.Phim.Count == 0 && trang > 1)
             {
                 var trangHopLe = Math.Max(1, model.TongTrang);
-                return RedirectToAction(nameof(Index), "Home", new
-                {
-                    tuKhoa,
-                    trangThai,
-                    trang = trangHopLe
-                });
+                return RedirectToAction(nameof(Index),
+                    "Home",
+                    new
+                    {
+                        tuKhoa,
+                        trangThai,
+                        trang = trangHopLe
+                    });
             }
             // Chưa có tiêu chí độ hot trong SQL: dùng phim đang chiếu mới khởi chiếu làm nổi bật.
             (model.PhimNoiBat, _) = await data.LayPhimAsync(null, "Đang chiếu", 1, 4, cancellationToken);
@@ -66,7 +70,7 @@ public class HomeController : Controller
         catch (Exception exception) when (exception is SqlException or InvalidOperationException)
         {
             logger.LogError("Không tải được trang chủ. Loại lỗi: {LoaiLoi}; mã SQL: {MaLoi}",
-                exception.GetType().Name, (exception as SqlException)?.Number);
+            exception.GetType().Name, (exception as SqlException)?.Number);
             model = new TrangChuViewModel
             {
                 TuKhoa = tuKhoa,

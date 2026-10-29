@@ -8,12 +8,24 @@ namespace YeuMinhEmCinema.Admin
     // Không lưu mật khẩu hoặc chuỗi băm trong kết quả này.
     internal sealed class KetQuaDangNhap
     {
-        public int MaTaiKhoan { get; init; }
+        public int MaTaiKhoan
+        {
+            get;
+            init;
+        }
 
-        public string TenDangNhap { get; init; } = "";
+        public string TenDangNhap
+        {
+            get;
+            init;
+        } = "";
 
-        public IReadOnlyCollection<string> DanhSachQuyen { get; init; }
-            = Array.Empty<string>();
+        public IReadOnlyCollection<string> DanhSachQuyen
+        {
+            get;
+            init;
+        }
+        = Array.Empty<string>();
     }
 
     internal static class TaiKhoanDAL
@@ -34,7 +46,7 @@ namespace YeuMinhEmCinema.Admin
                 """;
 
             using var ketNoi =
-                new SqlConnection(CauHinh.ChuoiKetNoi);
+            new SqlConnection(CauHinh.ChuoiKetNoi);
 
             using var lenh = new SqlCommand(sql, ketNoi);
 
@@ -51,33 +63,33 @@ namespace YeuMinhEmCinema.Admin
             tenDangNhap = tenDangNhap.Trim();
 
             if (tenDangNhap.Length < 3 ||
-                tenDangNhap.Length > 50)
+            tenDangNhap.Length > 50)
             {
                 throw new ArgumentException(
-                    "Tên đăng nhập phải có từ 3 đến 50 ký tự.");
+                "Tên đăng nhập phải có từ 3 đến 50 ký tự.");
             }
 
             string matKhauHash =
-                BaoMatMatKhau.TaoHash(matKhau);
+            BaoMatMatKhau.TaoHash(matKhau);
 
             using var ketNoi =
-                new SqlConnection(CauHinh.ChuoiKetNoi);
+            new SqlConnection(CauHinh.ChuoiKetNoi);
 
             using var lenh = new SqlCommand(
-                "dbo.sp_YMC_KhoiTaoAdmin",
-                ketNoi);
+            "dbo.sp_YMC_KhoiTaoAdmin",
+            ketNoi);
 
             lenh.CommandType = CommandType.StoredProcedure;
 
             lenh.Parameters.Add(
-                "@TenDangNhap",
-                SqlDbType.VarChar,
-                50).Value = tenDangNhap;
+            "@TenDangNhap",
+            SqlDbType.VarChar,
+            50).Value = tenDangNhap;
 
             lenh.Parameters.Add(
-                "@MatKhauHash",
-                SqlDbType.VarChar,
-                1000).Value = matKhauHash;
+            "@MatKhauHash",
+            SqlDbType.VarChar,
+            1000).Value = matKhauHash;
 
             ketNoi.Open();
 
@@ -93,14 +105,15 @@ namespace YeuMinhEmCinema.Admin
             tenDangNhap = tenDangNhap.Trim();
 
             if (tenDangNhap.Length == 0 ||
-                tenDangNhap.Length > 50 ||
+                tenDangNhap.Length > 50
+                ||
                 string.IsNullOrEmpty(matKhau))
             {
                 return null;
             }
 
             using var ketNoi =
-                new SqlConnection(CauHinh.ChuoiKetNoi);
+            new SqlConnection(CauHinh.ChuoiKetNoi);
 
             ketNoi.Open();
 
@@ -111,15 +124,15 @@ namespace YeuMinhEmCinema.Admin
 
             // 1. Lấy thông tin phục vụ xác thực.
             using (var lenh = new SqlCommand(
-                "dbo.sp_YMC_LayThongTinDangNhap",
-                ketNoi))
+            "dbo.sp_YMC_LayThongTinDangNhap",
+            ketNoi))
             {
                 lenh.CommandType = CommandType.StoredProcedure;
 
                 lenh.Parameters.Add(
-                    "@TenDangNhap",
-                    SqlDbType.VarChar,
-                    50).Value = tenDangNhap;
+                "@TenDangNhap",
+                SqlDbType.VarChar,
+                50).Value = tenDangNhap;
 
                 using var boDoc = lenh.ExecuteReader();
 
@@ -136,43 +149,44 @@ namespace YeuMinhEmCinema.Admin
                 maTaiKhoan = (int)boDoc["MaTaiKhoan"];
 
                 tenTrongDatabase =
-                    (string)boDoc["TenDangNhap"];
+                (string)boDoc["TenDangNhap"];
 
                 matKhauHash =
-                    (string)boDoc["MatKhauHash"];
+                (string)boDoc["MatKhauHash"];
 
                 phienBan = (byte[])boDoc["PhienBan"];
             }
 
             // 2. Kiểm tra mật khẩu bằng PasswordHasher.
             var ketQua = BaoMatMatKhau.KiemTra(
-                matKhauHash,
-                matKhau);
+            matKhauHash,
+            matKhau);
 
             bool dungMatKhau =
-                ketQua == PasswordVerificationResult.Success ||
+                ketQua == PasswordVerificationResult.Success
+                ||
                 ketQua == PasswordVerificationResult.SuccessRehashNeeded;
 
             // 3. SQL kiểm tra khóa tài khoản và phiên bản dữ liệu.
             // Sai 5 lần sẽ khóa tạm theo quy tắc đã viết trong SQL.
             using (var lenh = new SqlCommand(
-                "dbo.sp_YMC_GhiNhanDangNhap",
-                ketNoi))
+            "dbo.sp_YMC_GhiNhanDangNhap",
+            ketNoi))
             {
                 lenh.CommandType = CommandType.StoredProcedure;
 
                 lenh.Parameters.Add(
-                    "@MaTaiKhoan",
-                    SqlDbType.Int).Value = maTaiKhoan;
+                "@MaTaiKhoan",
+                SqlDbType.Int).Value = maTaiKhoan;
 
                 lenh.Parameters.Add(
-                    "@ThanhCong",
-                    SqlDbType.Bit).Value = dungMatKhau;
+                "@ThanhCong",
+                SqlDbType.Bit).Value = dungMatKhau;
 
                 lenh.Parameters.Add(
-                    "@PhienBan",
-                    SqlDbType.Binary,
-                    8).Value = phienBan;
+                "@PhienBan",
+                SqlDbType.Binary,
+                8).Value = phienBan;
 
                 lenh.ExecuteNonQuery();
             }
@@ -214,12 +228,12 @@ namespace YeuMinhEmCinema.Admin
                 """;
 
             using (var lenh = new SqlCommand(
-                sqlKiemTraVaiTro,
-                ketNoi))
+            sqlKiemTraVaiTro,
+            ketNoi))
             {
                 lenh.Parameters.Add(
-                    "@MaTaiKhoan",
-                    SqlDbType.Int).Value = maTaiKhoan;
+                "@MaTaiKhoan",
+                SqlDbType.Int).Value = maTaiKhoan;
 
                 if (Convert.ToInt32(lenh.ExecuteScalar()) != 1)
                 {
@@ -231,21 +245,21 @@ namespace YeuMinhEmCinema.Admin
             var danhSachQuyen = new List<string>();
 
             using (var lenh = new SqlCommand(
-                "dbo.sp_YMC_LayQuyenTaiKhoan",
-                ketNoi))
+            "dbo.sp_YMC_LayQuyenTaiKhoan",
+            ketNoi))
             {
                 lenh.CommandType = CommandType.StoredProcedure;
 
                 lenh.Parameters.Add(
-                    "@MaTaiKhoan",
-                    SqlDbType.Int).Value = maTaiKhoan;
+                "@MaTaiKhoan",
+                SqlDbType.Int).Value = maTaiKhoan;
 
                 using var boDoc = lenh.ExecuteReader();
 
                 while (boDoc.Read())
                 {
                     danhSachQuyen.Add(
-                        (string)boDoc["MaQuyen"]);
+                    (string)boDoc["MaQuyen"]);
                 }
             }
 
