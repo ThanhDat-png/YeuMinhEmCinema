@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="32.6.1" type="device">
+  <diagram id="22-Class-Web-08" name="08 Hạ tầng Web và các dịch vụ hỗ trợ">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1045" pageHeight="956" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Hạ tầng Web và các dịch vụ hỗ trợ" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=24;fontStyle=1;fontColor=#172b46;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20" y="10" width="1005.0" height="45" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Data.WebDb" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;WebDb&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- configuration: IConfiguration&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ WebDb(IConfiguration configuration)&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Open(): SqlConnection&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Read(string sql, bool procedure = false, params&lt;br&gt;SqlParameter[] parameters): DataSet&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Table(string sql, bool procedure = false, params&lt;br&gt;SqlParameter[] parameters): DataTable&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;&lt;u&gt;+ P(string name, object? value): SqlParameter&lt;/u&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="80.0" width="440" height="286" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Services.WebErrors" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;WebErrors&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- logger: ILogger&amp;lt;WebErrors&amp;gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ WebErrors(ILogger&amp;lt;WebErrors&amp;gt; logger)&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;&lt;u&gt;+ ThongBao(SqlException exception): string&lt;/u&gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ OnException(ExceptionContext context): void&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="580.0" y="128.0" width="440" height="190" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Services.HienThi" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;«static»&lt;br&gt;&lt;b&gt;HienThi&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;&lt;u&gt;+ Tien(object value): string&lt;/u&gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;&lt;u&gt;+ TrangThai(object value): string&lt;/u&gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;&lt;u&gt;+ GioUtc(object value): string&lt;/u&gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;&lt;u&gt;+ Trailer(object value): string?&lt;/u&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="441.0" width="440" height="180" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Data.TaiKhoanData" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:58px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;TaiKhoanData&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="716.0" width="225" height="60" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Controllers.DatVeController" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:58px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;DatVeController&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="320.0" y="716.0" width="225" height="60" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Controllers.DonController" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:58px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;DonController&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="590.0" y="716.0" width="225" height="60" />
+        </mxCell>
+        <mxCell id="Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:56px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;«interface»&lt;br&gt;&lt;b&gt;IExceptionFilter&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="826.0" width="225" height="58" />
+        </mxCell>
+        <mxCell id="e0" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=block;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.01516;exitY=1.00158;exitPerimeter=0;entryX=1.00147;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Services.WebErrors" target="Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="586.67" y="494.86" />
+              <mxPoint x="586.67" y="855.0" />
+              <mxPoint x="586.67" y="855.0" />
+              <mxPoint x="586.67" y="855.0" />
+              <mxPoint x="400.99" y="855.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00178;exitY=0.50000;exitPerimeter=0;entryX=-0.00114;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Data.TaiKhoanData" target="YeuMinhEmCinema.Web.Data.WebDb">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="38.93" y="746.0" />
+              <mxPoint x="32.0" y="746.0" />
+              <mxPoint x="32.0" y="746.0" />
+              <mxPoint x="32.0" y="746.0" />
+              <mxPoint x="32.0" y="223.0" />
+              <mxPoint x="32.0" y="223.0" />
+              <mxPoint x="32.0" y="223.0" />
+              <mxPoint x="38.56" y="223.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00120;exitY=0.50000;exitPerimeter=0;entryX=0.00757;entryY=1.00168;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Controllers.DatVeController" target="YeuMinhEmCinema.Web.Services.WebErrors">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="567.09" y="746.0" />
+              <mxPoint x="583.33" y="746.0" />
+              <mxPoint x="583.33" y="746.0" />
+              <mxPoint x="583.33" y="746.0" />
+              <mxPoint x="583.33" y="469.17" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.50000;exitY=-0.00633;exitPerimeter=0;entryX=0.27841;entryY=1.00200;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Controllers.DonController" target="YeuMinhEmCinema.Web.Services.WebErrors">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="702.5" y="639.64" />
+              <mxPoint x="702.5" y="438.86" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

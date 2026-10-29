@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="32.6.1" type="device">
+  <diagram id="21-Class-WinForms-12" name="12 Nhân viên, khách hàng và báo cáo">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1045" pageHeight="1235" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Nhân viên, khách hàng và báo cáo" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=24;fontStyle=1;fontColor=#172b46;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20" y="10" width="1005.0" height="45" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;UcNhanVienPhanQuyen&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Create(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Employee(): DataRow&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Assign(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Roles(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Permissions(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- AccountStatus(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- ResetPassword(): void&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="80.0" width="440" height="252" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen.QuyenItem" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;«record»&lt;br&gt;&lt;b&gt;UcNhanVienPhanQuyen.QuyenItem&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ MaQuyen: string&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TenQuyen: string&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ ToString(): string&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="580.0" y="123.0" width="440" height="166" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.UcKhachHang" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;UcKhachHang&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ UcKhachHang()&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Reload(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Edit(DataRow? r): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Status(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Orders(): void&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="448.0" width="440" height="204" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.UcBaoCaoThongKe" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;UcBaoCaoThongKe&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- chart: DoanhThuChart&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- kind: string&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- loading: bool&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ UcBaoCaoThongKe()&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Clear(string text): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- LoadMovies(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Reload(): void&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- Headers(): void&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="580.0" y="407.0" width="440" height="286" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.UcTongQuan" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;UcTongQuan&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ UcTongQuan()&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="780.0" width="440" height="108" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.DoanhThuChart" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;DoanhThuChart&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;~ DoanhThuChart()&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;# OnPaint(PaintEventArgs e): void&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="580.0" y="768.0" width="440" height="132" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.Db" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:58px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;Db&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="995.0" width="225" height="60" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.EditDialog" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:58px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;EditDialog&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="320.0" y="995.0" width="225" height="60" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.AdminUi" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:58px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;AdminUi&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="590.0" y="995.0" width="225" height="60" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Admin.DataPage" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:58px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;DataPage&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="1105.0" width="225" height="60" />
+        </mxCell>
+        <mxCell id="System.Windows.Forms.Panel" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:56px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;«framework»&lt;br&gt;&lt;b&gt;Panel&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="320.0" y="1105.0" width="225" height="58" />
+        </mxCell>
+        <mxCell id="e0" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=block;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00084;exitY=0.88462;exitPerimeter=0;entryX=-0.00111;entryY=0.25000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcBaoCaoThongKe" target="YeuMinhEmCinema.Admin.DataPage">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="353.51" y="660.0" />
+              <mxPoint x="34.57" y="660.0" />
+              <mxPoint x="34.57" y="660.0" />
+              <mxPoint x="34.57" y="660.0" />
+              <mxPoint x="34.57" y="1120.0" />
+              <mxPoint x="34.57" y="1120.0" />
+              <mxPoint x="34.57" y="1120.0" />
+              <mxPoint x="40.48" y="1120.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=block;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.01136;exitY=1.00159;exitPerimeter=0;entryX=1.00147;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.DoanhThuChart" target="System.Windows.Forms.Panel">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="585.0" y="988.55" />
+              <mxPoint x="585.0" y="1134.0" />
+              <mxPoint x="585.0" y="1134.0" />
+              <mxPoint x="585.0" y="1134.0" />
+              <mxPoint x="567.99" y="1134.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=block;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00107;exitY=0.33333;exitPerimeter=0;entryX=-0.00160;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcKhachHang" target="YeuMinhEmCinema.Admin.DataPage">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="37.03" y="516.0" />
+              <mxPoint x="29.43" y="516.0" />
+              <mxPoint x="29.43" y="516.0" />
+              <mxPoint x="29.43" y="516.0" />
+              <mxPoint x="29.43" y="1135.0" />
+              <mxPoint x="29.43" y="1135.0" />
+              <mxPoint x="29.43" y="1135.0" />
+              <mxPoint x="37.49" y="1135.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=block;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00023;exitY=0.33333;exitPerimeter=0;entryX=-0.00200;entryY=0.75000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen" target="YeuMinhEmCinema.Admin.DataPage">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="31.15" y="164.0" />
+              <mxPoint x="19.14" y="164.0" />
+              <mxPoint x="19.14" y="164.0" />
+              <mxPoint x="19.14" y="164.0" />
+              <mxPoint x="19.14" y="1150.0" />
+              <mxPoint x="19.14" y="1150.0" />
+              <mxPoint x="19.14" y="1150.0" />
+              <mxPoint x="31.78" y="1150.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=block;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.50000;exitY=-0.00435;exitPerimeter=0;entryX=-0.00036;entryY=0.94406;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcTongQuan" target="YeuMinhEmCinema.Admin.UcBaoCaoThongKe">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="270.0" y="734.18" />
+              <mxPoint x="270.0" y="677.0" />
+              <mxPoint x="270.0" y="677.0" />
+              <mxPoint x="270.0" y="677.0" />
+              <mxPoint x="434.22" y="677.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.50000;exitY=1.00087;exitPerimeter=0;entryX=0.50000;entryY=-0.00205;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcBaoCaoThongKe" target="YeuMinhEmCinema.Admin.DoanhThuChart">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="800.0" y="719.3" />
+              <mxPoint x="800.0" y="745.3" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00077;exitY=0.97203;exitPerimeter=0;entryX=-0.00222;entryY=0.25000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcBaoCaoThongKe" target="YeuMinhEmCinema.Admin.AdminUi">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="574.29" y="685.0" />
+              <mxPoint x="571.25" y="685.0" />
+              <mxPoint x="571.25" y="685.0" />
+              <mxPoint x="571.25" y="685.0" />
+              <mxPoint x="571.25" y="1010.0" />
+              <mxPoint x="571.25" y="1010.0" />
+              <mxPoint x="571.25" y="1010.0" />
+              <mxPoint x="578.46" y="1010.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00102;exitY=0.91259;exitPerimeter=0;entryX=-0.00173;entryY=0.25000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcBaoCaoThongKe" target="YeuMinhEmCinema.Admin.Db">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="356.66" y="668.0" />
+              <mxPoint x="44.86" y="668.0" />
+              <mxPoint x="44.86" y="668.0" />
+              <mxPoint x="44.86" y="668.0" />
+              <mxPoint x="44.86" y="1010.0" />
+              <mxPoint x="44.86" y="1010.0" />
+              <mxPoint x="44.86" y="1010.0" />
+              <mxPoint x="46.58" y="1010.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00095;exitY=0.33333;exitPerimeter=0;entryX=-0.00107;entryY=0.75000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcKhachHang" target="YeuMinhEmCinema.Admin.AdminUi">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="527.24" y="516.0" />
+              <mxPoint x="553.75" y="516.0" />
+              <mxPoint x="553.75" y="516.0" />
+              <mxPoint x="553.75" y="516.0" />
+              <mxPoint x="553.75" y="1040.0" />
+              <mxPoint x="553.75" y="1040.0" />
+              <mxPoint x="553.75" y="1040.0" />
+              <mxPoint x="569.01" y="1040.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00089;exitY=0.66667;exitPerimeter=0;entryX=-0.00107;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcKhachHang" target="YeuMinhEmCinema.Admin.Db">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="43.31" y="584.0" />
+              <mxPoint x="39.71" y="584.0" />
+              <mxPoint x="39.71" y="584.0" />
+              <mxPoint x="39.71" y="584.0" />
+              <mxPoint x="39.71" y="1025.0" />
+              <mxPoint x="39.71" y="1025.0" />
+              <mxPoint x="39.71" y="1025.0" />
+              <mxPoint x="43.51" y="1025.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00095;exitY=0.66667;exitPerimeter=0;entryX=0.83702;entryY=-0.00517;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcKhachHang" target="YeuMinhEmCinema.Admin.EditDialog">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="501.61" y="584.0" />
+              <mxPoint x="508.33" y="584.0" />
+              <mxPoint x="508.33" y="584.0" />
+              <mxPoint x="508.33" y="584.0" />
+              <mxPoint x="508.33" y="895.05" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00045;exitY=0.88492;exitPerimeter=0;entryX=-0.00076;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen" target="YeuMinhEmCinema.Admin.AdminUi">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="531.75" y="303.0" />
+              <mxPoint x="562.5" y="303.0" />
+              <mxPoint x="562.5" y="303.0" />
+              <mxPoint x="562.5" y="303.0" />
+              <mxPoint x="562.5" y="1025.0" />
+              <mxPoint x="562.5" y="1025.0" />
+              <mxPoint x="562.5" y="1025.0" />
+              <mxPoint x="573.73" y="1025.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00077;exitY=0.66667;exitPerimeter=0;entryX=-0.00160;entryY=0.75000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen" target="YeuMinhEmCinema.Admin.Db">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="34.04" y="248.0" />
+              <mxPoint x="24.29" y="248.0" />
+              <mxPoint x="24.29" y="248.0" />
+              <mxPoint x="24.29" y="248.0" />
+              <mxPoint x="24.29" y="1040.0" />
+              <mxPoint x="24.29" y="1040.0" />
+              <mxPoint x="24.29" y="1040.0" />
+              <mxPoint x="34.62" y="1040.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00100;exitY=0.94444;exitPerimeter=0;entryX=0.91853;entryY=-0.00633;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen" target="YeuMinhEmCinema.Admin.EditDialog">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="512.33" y="318.0" />
+              <mxPoint x="526.67" y="318.0" />
+              <mxPoint x="526.67" y="318.0" />
+              <mxPoint x="526.67" y="318.0" />
+              <mxPoint x="526.67" y="859.3" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00036;exitY=0.50000;exitPerimeter=0;entryX=-0.00075;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen" target="YeuMinhEmCinema.Admin.UcNhanVienPhanQuyen.QuyenItem">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="519.74" y="206.0" />
+              <mxPoint x="550.09" y="206.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.27841;exitY=1.00205;exitPerimeter=0;entryX=0.50000;entryY=-0.00550;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Admin.DoanhThuChart" target="YeuMinhEmCinema.Admin.AdminUi">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="702.5" y="932.37" />
+              <mxPoint x="702.5" y="969.36" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -32,8 +32,14 @@ Tác nhân “Nhân sự có quyền tương ứng” biểu diễn tài khoản
 
 Khởi tạo Admin chỉ dành cho lần đầu. Khách Web chỉ quản lý hồ sơ/đơn của mình. Thanh toán Web là mô phỏng; không có ngân hàng ngoài hệ thống. WinForms và Web cùng truy cập SQL Server, WinForms không gọi API Web.
 
-Đây là sơ đồ tổng thể theo phiên bản triển khai. Sequence, Class và lược đồ quan hệ dữ liệu sẽ được thực hiện ở các phiên tiếp theo. Source ứng dụng và SQL không được sửa trong phiên vẽ sơ đồ.
+Các mục dưới đây ghi nhận tiến độ CSDL và Class Diagram. Sequence Diagram sẽ tiếp tục được triển khai theo phương thức trong source. Source ứng dụng và SQL không được sửa trong các phiên vẽ sơ đồ.
 
 ## Phiên 02 — Cơ sở dữ liệu
 
 Một lược đồ quan hệ gồm 27 bảng, 156 cột và 37 khóa ngoại. Mở [20-CSDL.drawio](20-CSDL.drawio) để sửa đủ 9 trang: một tổng thể và tám hình chi tiết. Có các bản draw.io từng trang và PNG cùng tên từ 20-CSDL-01 đến 20-CSDL-09. Xem [kết quả đối chiếu](20-CSDL-REVIEW.md), [schema](20-CSDL-schema.json) và [ánh xạ từng hình](20-CSDL-manifest.json). Không có khung ghi chú trong hình.
+
+## Phiên 03 — Class Diagram
+
+Hai bộ sơ đồ: [WinForms — 13 trang](21-Class-WinForms.drawio) và [Web — 8 trang](22-Class-Web.drawio). Gồm hai hình tổng quát và 19 hình chi tiết, bao phủ 82 kiểu khai báo thực tế: 57 ở WinForms và 25 ở Web. Hình thể hiện thuộc tính, phương thức chính và quan hệ có căn cứ trong source; không có khung ghi chú. Có từng trang draw.io và PNG cùng tên.
+
+Xem [đối chiếu và phạm vi thể hiện](Class-REVIEW.md), [inventory đầy đủ](Class-inventory.json), [ánh xạ từng hình](Class-manifest.json) và [kết quả kiểm tra](Class-QA.json). Báo cáo Google Docs dùng Hình 3.28–3.48 cho Class; kiến trúc đổi thành Hình 3.49. 66 mục Sequence giữ nguyên mã và tên.
