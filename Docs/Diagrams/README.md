@@ -33,3 +33,7 @@ Tác nhân “Nhân sự có quyền tương ứng” biểu diễn tài khoản
 Khởi tạo Admin chỉ dành cho lần đầu. Khách Web chỉ quản lý hồ sơ/đơn của mình. Thanh toán Web là mô phỏng; không có ngân hàng ngoài hệ thống. WinForms và Web cùng truy cập SQL Server, WinForms không gọi API Web.
 
 Đây là sơ đồ tổng thể theo phiên bản triển khai. Sequence, Class và lược đồ quan hệ dữ liệu sẽ được thực hiện ở các phiên tiếp theo. Source ứng dụng và SQL không được sửa trong phiên vẽ sơ đồ.
+
+## Phiên 02 — Cơ sở dữ liệu
+
+Một lược đồ quan hệ gồm 27 bảng, 156 cột và 37 khóa ngoại. Mở [20-CSDL.drawio](20-CSDL.drawio) để sửa đủ 9 trang: một tổng thể và tám hình chi tiết. Có các bản draw.io từng trang và PNG cùng tên từ 20-CSDL-01 đến 20-CSDL-09. Xem [kết quả đối chiếu](20-CSDL-REVIEW.md), [schema](20-CSDL-schema.json) và [ánh xạ từng hình](20-CSDL-manifest.json). Không có khung ghi chú trong hình.

@@ -1,0 +1,259 @@
+{
+  "source_commit": "a217f8216aa606aaf0029b84f0c6997f0447652b",
+  "tables": 27,
+  "columns": 156,
+  "foreign_keys": 37,
+  "views": [
+    {
+      "id": "20-CSDL-01",
+      "title": "Toàn bộ quan hệ cơ sở dữ liệu",
+      "full_tables": [
+        "Phim",
+        "LoaiGhe",
+        "Rap",
+        "PhongChieu",
+        "Ghe",
+        "SuatChieu",
+        "GiaVe",
+        "FnbSanPham",
+        "FnbComboChiTiet",
+        "VaiTro",
+        "Quyen",
+        "VaiTroQuyen",
+        "TaiKhoan",
+        "TaiKhoanVaiTro",
+        "KhachHang",
+        "NhanVien",
+        "NhanVienRap",
+        "DonHang",
+        "ChiTietVe",
+        "ChiTietDonFnb",
+        "ChiTietComboDaBan",
+        "GiuGhe",
+        "ThanhToan",
+        "Ve",
+        "HoanTien",
+        "TheLoai",
+        "PhimTheLoai"
+      ],
+      "reference_tables": [],
+      "foreign_keys": [
+        "fk1",
+        "fk2",
+        "fk3",
+        "fk4",
+        "fk5",
+        "fk6",
+        "fk7",
+        "fk8",
+        "fk9",
+        "fk10",
+        "fk11",
+        "fk12",
+        "fk13",
+        "fk14",
+        "fk15",
+        "fk16",
+        "fk17",
+        "fk18",
+        "fk19",
+        "fk20",
+        "fk21",
+        "fk22",
+        "fk23",
+        "fk24",
+        "fk25",
+        "fk26",
+        "fk27",
+        "fk28",
+        "fk29",
+        "fk30",
+        "fk31",
+        "fk32",
+        "fk33",
+        "fk34",
+        "fk35",
+        "fk36",
+        "fk37"
+      ],
+      "width": 1823,
+      "height": 836
+    },
+    {
+      "id": "20-CSDL-02",
+      "title": "Phim và thể loại",
+      "full_tables": [
+        "Phim",
+        "TheLoai",
+        "PhimTheLoai"
+      ],
+      "reference_tables": [
+        "SuatChieu"
+      ],
+      "foreign_keys": [
+        "fk4",
+        "fk36",
+        "fk37"
+      ],
+      "width": 732,
+      "height": 511
+    },
+    {
+      "id": "20-CSDL-03",
+      "title": "Rạp, phòng, ghế, lịch chiếu và giá vé",
+      "full_tables": [
+        "Rap",
+        "PhongChieu",
+        "Ghe",
+        "LoaiGhe",
+        "SuatChieu",
+        "GiaVe"
+      ],
+      "reference_tables": [
+        "Phim"
+      ],
+      "foreign_keys": [
+        "fk1",
+        "fk2",
+        "fk3",
+        "fk4",
+        "fk5",
+        "fk6"
+      ],
+      "width": 1094,
+      "height": 895
+    },
+    {
+      "id": "20-CSDL-04",
+      "title": "Tài khoản và hồ sơ",
+      "full_tables": [
+        "TaiKhoan",
+        "KhachHang",
+        "NhanVien"
+      ],
+      "reference_tables": [],
+      "foreign_keys": [
+        "fk13",
+        "fk14"
+      ],
+      "width": 732,
+      "height": 686
+    },
+    {
+      "id": "20-CSDL-05",
+      "title": "Vai trò, quyền và phạm vi rạp",
+      "full_tables": [
+        "VaiTro",
+        "Quyen",
+        "VaiTroQuyen",
+        "TaiKhoanVaiTro",
+        "NhanVienRap"
+      ],
+      "reference_tables": [
+        "TaiKhoan",
+        "NhanVien",
+        "Rap"
+      ],
+      "foreign_keys": [
+        "fk9",
+        "fk10",
+        "fk11",
+        "fk12",
+        "fk15",
+        "fk16"
+      ],
+      "width": 852,
+      "height": 887
+    },
+    {
+      "id": "20-CSDL-06",
+      "title": "Đơn hàng và chủ thể giao dịch",
+      "full_tables": [
+        "DonHang"
+      ],
+      "reference_tables": [
+        "SuatChieu",
+        "KhachHang",
+        "TaiKhoan"
+      ],
+      "foreign_keys": [
+        "fk17",
+        "fk18",
+        "fk19"
+      ],
+      "width": 764,
+      "height": 636
+    },
+    {
+      "id": "20-CSDL-07",
+      "title": "Chi tiết vé, giữ ghế và vé phát hành",
+      "full_tables": [
+        "ChiTietVe",
+        "GiuGhe",
+        "Ve"
+      ],
+      "reference_tables": [
+        "DonHang",
+        "SuatChieu",
+        "Ghe",
+        "GiaVe",
+        "TaiKhoan"
+      ],
+      "foreign_keys": [
+        "fk20",
+        "fk21",
+        "fk22",
+        "fk27",
+        "fk28",
+        "fk29",
+        "fk32",
+        "fk33"
+      ],
+      "width": 984,
+      "height": 870
+    },
+    {
+      "id": "20-CSDL-08",
+      "title": "Sản phẩm, combo và chi tiết F&B đã bán",
+      "full_tables": [
+        "FnbSanPham",
+        "FnbComboChiTiet",
+        "ChiTietDonFnb",
+        "ChiTietComboDaBan"
+      ],
+      "reference_tables": [
+        "DonHang"
+      ],
+      "foreign_keys": [
+        "fk7",
+        "fk8",
+        "fk23",
+        "fk24",
+        "fk25",
+        "fk26"
+      ],
+      "width": 881,
+      "height": 785
+    },
+    {
+      "id": "20-CSDL-09",
+      "title": "Thanh toán và hoàn tiền",
+      "full_tables": [
+        "ThanhToan",
+        "HoanTien"
+      ],
+      "reference_tables": [
+        "DonHang",
+        "TaiKhoan"
+      ],
+      "foreign_keys": [
+        "fk30",
+        "fk31",
+        "fk34",
+        "fk35"
+      ],
+      "width": 630,
+      "height": 710
+    }
+  ]
+}
