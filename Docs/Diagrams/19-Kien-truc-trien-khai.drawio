@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="32.6.1" type="device">
+  <diagram id="19-Kien-truc-trien-khai" name="Sơ đồ kiến trúc triển khai">
+    <mxGraphModel dx="1100" dy="1260" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1105" math="0" shadow="0" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Sơ đồ kiến trúc triển khai" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=26;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;shape=label;strokeColor=none;fillColor=none;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="15" width="1040" height="65" />
+        </mxCell>
+        <mxCell id="n3" value="«device» Máy khách Web&lt;br&gt;Trình duyệt khách hàng" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#e8eef4;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="340" y="110" width="420" height="105" />
+        </mxCell>
+        <mxCell id="n4" value="«executionEnvironment» Máy chạy Web&lt;br&gt;ASP.NET Core MVC · .NET 10&lt;br&gt;Program.cs · Cookie Authentication" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#eef3f7;spacing=10;align=center;verticalAlign=middle;verticalAlign=top;spacingTop=12;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="340" y="325" width="650" height="235" />
+        </mxCell>
+        <mxCell id="n5" value="Controllers → Data → WebDb&lt;br&gt;Razor Views · KhachHangSession&lt;br&gt;Microsoft.Data.SqlClient" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=21;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="380" y="445" width="570" height="90" />
+        </mxCell>
+        <mxCell id="n6" value="«device» Máy trạm nhân viên Windows&lt;br&gt;YeuMinhEmCinema.Admin · WinForms&lt;br&gt;.NET 10 Windows&lt;br&gt;Forms / UserControls → DAL → Db" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=24;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#eef3f7;spacing=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50" y="660" width="470" height="210" />
+        </mxCell>
+        <mxCell id="n7" value="«executionEnvironment» SQL Server&lt;br&gt;CSDL YeuMinhEmCinema dùng chung&lt;br&gt;27 bảng · view · function&lt;br&gt;Stored procedure · transaction · khóa" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=23;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#e8eef4;spacing=10;align=center;verticalAlign=middle;shape=cylinder3;size=20;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="600" y="660" width="450" height="210" />
+        </mxCell>
+        <mxCell id="n8" value="«artifact» Tệp riêng của Web&lt;br&gt;Ảnh đại diện ngoài wwwroot" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="660" y="970" width="380" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="«artifact» Tệp cục bộ nhân viên&lt;br&gt;Phiếu HTML · ảnh QR · CSV" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="70" y="970" width="430" height="100" />
+        </mxCell>
+        <mxCell id="e10" value="HTTP(S) · request / response" style="edgeStyle=none;html=1;endArrow=block;endFill=1;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="n3" target="n4">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" value="ADO.NET / TDS" style="edgeStyle=none;html=1;endArrow=block;endFill=1;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="n4" target="n7">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e12" value="ADO.NET / TDS" style="edgeStyle=none;html=1;endArrow=block;endFill=1;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="n6" target="n7">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e13" value="" style="edgeStyle=none;html=1;endArrow=block;endFill=1;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="n4" target="n8">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1090" y="530" />
+              <mxPoint x="1090" y="1020" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" value="Xuất tệp" style="edgeStyle=none;html=1;endArrow=block;endFill=1;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="n6" target="n9">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

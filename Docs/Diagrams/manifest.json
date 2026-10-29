@@ -1,0 +1,286 @@
+{
+  "source_commit": "a217f8216aa606aaf0029b84f0c6997f0447652b",
+  "diagrams": [
+    {
+      "id": "01-BFD",
+      "title": "Biểu đồ phân rã chức năng hệ thống",
+      "heading": "Biểu đồ phân rã chức năng hệ thống YeuMinhEm Cinema",
+      "width": 1120,
+      "height": 1320,
+      "source": [
+        "Forms/Form1.PhanQuyen.cs",
+        "Web/Controllers/*",
+        "Database/Scripts/10–30"
+      ],
+      "image_width": 2242,
+      "image_height": 2234
+    },
+    {
+      "id": "02-UC-Tong-quat",
+      "title": "Use Case tổng quát hệ thống",
+      "heading": "Use Case tổng quát hệ thống",
+      "width": 1380,
+      "height": 1580,
+      "source": [
+        "Forms/Form1.PhanQuyen.cs",
+        "SQL10/23",
+        "Web/Controllers/*"
+      ],
+      "image_width": 2778,
+      "image_height": 2844
+    },
+    {
+      "id": "03-UC01",
+      "title": "Use Case 01 — Đăng nhập và phiên làm việc",
+      "heading": "Use Case đăng nhập và phiên làm việc",
+      "width": 1200,
+      "height": 1040,
+      "source": [
+        "Forms/FormDangNhap.cs",
+        "Forms/Form1.PhanQuyen.cs",
+        "DataAccess/TaiKhoanDAL.cs",
+        "Web/Controllers/TaiKhoanController.cs",
+        "SQL10/11/23"
+      ],
+      "image_width": 2412,
+      "image_height": 1784
+    },
+    {
+      "id": "04-UC02",
+      "title": "Use Case 02 — Quản lý nhân viên tài khoản và quyền",
+      "heading": "Use Case quản lý nhân viên tài khoản và quyền",
+      "width": 1000,
+      "height": 1270,
+      "source": [
+        "UserControls/UcNhanVienPhanQuyen.cs",
+        "Forms/Form1.PhanQuyen.cs",
+        "SQL11/21/23/28"
+      ],
+      "image_width": 1998,
+      "image_height": 2244
+    },
+    {
+      "id": "05-UC03",
+      "title": "Use Case 03 — Quản lý phim và thể loại",
+      "heading": "Use Case quản lý phim và thể loại",
+      "width": 1000,
+      "height": 1040,
+      "source": [
+        "Forms/Form1.PhanQuyen.cs",
+        "Forms/FormThemSuaPhim.cs",
+        "Forms/FormTheLoai.cs",
+        "DataAccess/PhimDAL.cs",
+        "SQL17/30"
+      ],
+      "image_width": 1998,
+      "image_height": 1784
+    },
+    {
+      "id": "06-UC04",
+      "title": "Use Case 04 — Quản lý rạp phòng và ghế",
+      "heading": "Use Case quản lý rạp phòng và ghế",
+      "width": 1000,
+      "height": 925,
+      "source": [
+        "UserControls/UcRapPhongChieu.cs",
+        "DataAccess/RapDAL.cs",
+        "DataAccess/PhongChieuDAL.cs",
+        "DataAccess/GheDAL.cs",
+        "SQL25/28"
+      ],
+      "image_width": 1998,
+      "image_height": 1554
+    },
+    {
+      "id": "07-UC05",
+      "title": "Use Case 05 — Quản lý lịch chiếu",
+      "heading": "Use Case quản lý lịch chiếu",
+      "width": 1000,
+      "height": 925,
+      "source": [
+        "UserControls/UcLichChieu.cs",
+        "Forms/FormSuatChieuBase.cs",
+        "Forms/FormSaoChepLich.cs",
+        "SQL05/06/07/08/22"
+      ],
+      "image_width": 1998,
+      "image_height": 1554
+    },
+    {
+      "id": "08-UC06",
+      "title": "Use Case 06 — Quản lý giá vé",
+      "heading": "Use Case quản lý giá vé",
+      "width": 1000,
+      "height": 695,
+      "source": [
+        "UserControls/UcGiaVeVaFnb.cs",
+        "Forms/FormGiaVe.cs",
+        "Forms/FormTraGiaVe.cs",
+        "DataAccess/GiaVeFnbDAL.cs",
+        "SQL09/22"
+      ],
+      "image_width": 1998,
+      "image_height": 1094
+    },
+    {
+      "id": "09-UC07",
+      "title": "Use Case 07 — Quản lý sản phẩm và combo F&B",
+      "heading": "Use Case quản lý sản phẩm và combo f&b",
+      "width": 1000,
+      "height": 695,
+      "source": [
+        "UserControls/UcGiaVeVaFnb.cs",
+        "Forms/FormFnb.cs",
+        "DataAccess/GiaVeFnbDAL.cs",
+        "SQL09/22"
+      ],
+      "image_width": 1998,
+      "image_height": 1094
+    },
+    {
+      "id": "10-UC08",
+      "title": "Use Case 08 — Bán vé tại quầy",
+      "heading": "Use Case bán vé tại quầy",
+      "width": 1000,
+      "height": 925,
+      "source": [
+        "UserControls/UcBanVeTaiQuay.cs",
+        "DataAccess/GiaoDichDAL.cs",
+        "Helpers/HoaDonExporter.cs",
+        "SQL13/14/23"
+      ],
+      "image_width": 1998,
+      "image_height": 1554
+    },
+    {
+      "id": "11-UC09",
+      "title": "Use Case 09 — Quản lý đơn hàng và hoàn tiền",
+      "heading": "Use Case quản lý đơn hàng và hoàn tiền",
+      "width": 1200,
+      "height": 810,
+      "source": [
+        "UserControls/UcDonDatVe.cs",
+        "Web/Controllers/DonController.cs",
+        "SQL14/15/23/27"
+      ],
+      "image_width": 2396,
+      "image_height": 1324
+    },
+    {
+      "id": "12-UC10",
+      "title": "Use Case 10 — Kiểm tra và xác nhận vé",
+      "heading": "Use Case kiểm tra và xác nhận vé",
+      "width": 1000,
+      "height": 600,
+      "source": [
+        "UserControls/UcKiemTraVe.cs",
+        "SQL26"
+      ],
+      "image_width": 1998,
+      "image_height": 904
+    },
+    {
+      "id": "13-UC11",
+      "title": "Use Case 11 — Quản lý khách hàng",
+      "heading": "Use Case quản lý khách hàng",
+      "width": 1000,
+      "height": 695,
+      "source": [
+        "UserControls/UcKhachHang.cs",
+        "SQL11/23"
+      ],
+      "image_width": 1998,
+      "image_height": 1094
+    },
+    {
+      "id": "14-UC12",
+      "title": "Use Case 12 — Tổng quan và báo cáo",
+      "heading": "Use Case tổng quan và báo cáo",
+      "width": 1000,
+      "height": 810,
+      "source": [
+        "UserControls/UcBaoCaoThongKe.cs",
+        "UserControls/UcTongQuan.cs",
+        "SQL29"
+      ],
+      "image_width": 1998,
+      "image_height": 1324
+    },
+    {
+      "id": "15-UC13",
+      "title": "Use Case 13 — Tra cứu công khai trên Web",
+      "heading": "Use Case tra cứu công khai trên web",
+      "width": 1000,
+      "height": 695,
+      "source": [
+        "Web/Controllers/HomeController.cs",
+        "Web/Controllers/PhimController.cs",
+        "Web/Data/TrangChuData.cs",
+        "Web/Data/PhimData.cs"
+      ],
+      "image_width": 1974,
+      "image_height": 1094
+    },
+    {
+      "id": "16-UC14",
+      "title": "Use Case 14 — Tài khoản khách hàng trên Web",
+      "heading": "Use Case tài khoản khách hàng trên web",
+      "width": 1000,
+      "height": 695,
+      "source": [
+        "Web/Controllers/TaiKhoanController.cs",
+        "Web/Data/TaiKhoanData.cs",
+        "Web/Services/KhachHangSession.cs",
+        "SQL19/24"
+      ],
+      "image_width": 1966,
+      "image_height": 1154
+    },
+    {
+      "id": "17-UC15",
+      "title": "Use Case 15 — Đặt vé và thanh toán mô phỏng trên Web",
+      "heading": "Use Case đặt vé và thanh toán mô phỏng trên web",
+      "width": 1000,
+      "height": 695,
+      "source": [
+        "Web/Controllers/DatVeController.cs",
+        "Web/Controllers/DonController.cs",
+        "Web/Data/DatVeData.cs",
+        "SQL13/24"
+      ],
+      "image_width": 1964,
+      "image_height": 1094
+    },
+    {
+      "id": "18-UC16",
+      "title": "Use Case 16 — Đơn hàng và vé cá nhân trên Web",
+      "heading": "Use Case đơn hàng và vé cá nhân trên web",
+      "width": 1000,
+      "height": 695,
+      "source": [
+        "Web/Controllers/DonController.cs",
+        "Web/Data/DatVeData.cs",
+        "SQL23/24"
+      ],
+      "image_width": 1964,
+      "image_height": 1094
+    },
+    {
+      "id": "19-Kien-truc-trien-khai",
+      "title": "Sơ đồ kiến trúc triển khai",
+      "heading": "Sơ đồ kiến trúc WinForms Web và SQL Server",
+      "width": 1100,
+      "height": 1260,
+      "source": [
+        "Web/Program.cs",
+        "Web/Data/WebDb.cs",
+        "Web/Controllers/TaiKhoanController.cs",
+        "Admin/Infrastructure/Db.cs",
+        "Admin/Infrastructure/CauHinh.cs",
+        "*.csproj"
+      ],
+      "image_width": 2220,
+      "image_height": 2194
+    }
+  ]
+}
