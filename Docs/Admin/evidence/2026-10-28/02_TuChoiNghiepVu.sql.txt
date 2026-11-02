@@ -1,0 +1,179 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                   9 B0C0C5EA-E776-4EE2-B869-915109D3845C CHO_THANH_TOAN                      80000                    2026-10-28 07:16:33
+PASS: Giữ trùng ghế
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                  10 A7A16D6A-35E1-4061-B29A-BD4463FED924 CHO_THANH_TOAN                      80000                    2026-10-28 07:16:33
+PASS: Thanh toán sai số tiền
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                  11 6A126BB5-6A45-419E-A13E-9ED319969227 CHO_THANH_TOAN                      80000                    2026-10-28 07:16:34
+PASS: Sửa lịch khi có đơn giữ
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                  12 33619D0B-1048-4AA9-9636-22E0A7AE7EB2 CHO_THANH_TOAN                      80000                    2026-10-28 07:16:34
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+912289D5-B11D-4ADF-BD28-7DA5D56762DD                   12        1133 HIEU_LUC                                2026-10-28 07:06:34                                   NULL        NULL
+MaVe                                 TrangThai            NgaySoatUtc                            TenPhim                                                                                                                                                                                                  TenRap                                                                                                                                                                                                   TenPhong                                                                                             NhanGhe              GioBatDau                             
+------------------------------------ -------------------- -------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------- -------------------- --------------------------------------
+912289D5-B11D-4ADF-BD28-7DA5D56762DD DA_SU_DUNG                              2026-10-28 07:06:34 TEST_8D57F78325554349                                                                                                                                                                                    TEST_8D57F78325554349                                                                                                                                                                                    TEST                                                                                                 A1                                      2026-10-28 14:26:34
+PASS: Kiểm vé lần hai
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                  13 D1A492BA-F36C-4508-AD6A-61FB3A509239 CHO_THANH_TOAN                      80000                    2026-10-28 07:16:34
+
+(1 rows affected)
+PASS: Thanh toán hết hạn
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                  14 725423B2-90A3-480C-8C2B-480D1E51FB55 CHO_THANH_TOAN                      80000                    2026-10-28 07:16:35
+
+(1 rows affected)
+PASS: Truy cập đơn người khác

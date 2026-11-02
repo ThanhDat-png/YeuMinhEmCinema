@@ -1,0 +1,153 @@
+/* Cosmic Blue — tải sau site.css, giữ nguyên cấu trúc và nghiệp vụ MVC. */
+:root {
+    --bg: #030b1b;
+    --panel: #0a1b33;
+    --line: #294561;
+    --text: #edf5ff;
+    --muted: #b0c3dd;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-text: #8bdcff;
+    --focus: #70e3ff;
+    --input-bg: #07162b;
+    --input-border: #6082a9;
+    --header-bg: rgb(3 11 27 / 94%);
+    --hero-shade-start: rgb(3 11 27 / 95%);
+    --hero-shade-middle: rgb(3 11 27 / 70%);
+    --hero-shade-end: rgb(3 11 27 / 28%);
+    --badge-bg: rgb(3 11 27 / 94%);
+}
+
+body {
+    isolation: isolate;
+}
+
+.cosmic-sky {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 95% 20%, #103b73, #06172e 48%, #020712 90%);
+}
+
+.cosmic-sky::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('../images/cosmic/constellations.png') center / cover;
+    opacity: .25;
+    mask-image: linear-gradient(110deg, #0003, #000 90%);
+}
+
+.cosmic-sky::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #02071266, transparent),
+                linear-gradient(0deg, #02071288, transparent);
+}
+
+#cosmic-sky-canvas {
+    width: 100%;
+    height: 100%;
+    opacity: .8;
+}
+
+.site-header {
+    backdrop-filter: blur(18px);
+    border-bottom-color: #79caff35;
+}
+
+/* Ảnh rạp làm lớp phụ mờ, để nền sao vẫn nhìn thấy ở phần đầu trang. */
+.hero {
+    isolation: isolate;
+    background: linear-gradient(90deg, #030b1b55, #061a321a);
+
+    border-bottom: 1px solid #70caff26;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url('/images/entrance-hero.webp') center / cover;
+    opacity: .12;
+}
+
+h1 span {
+    background: linear-gradient(110deg, #d7f7ff, #81cdff 45%, #6b9aff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.movie-card,
+.cinema-card {
+    border-color: #70caff30;
+    box-shadow: 0 14px 40px #0003;
+}
+
+.movie-card:hover,
+.cinema-card:hover {
+    border-color: #70caff80;
+}
+
+body:has(.film-detail-page) {
+    background: var(--bg);
+}
+
+.film-atmosphere {
+    background: transparent;
+    opacity: .4;
+}
+
+.reference-film-hero {
+    background: var(--panel);
+    border-color: var(--line);
+}
+
+/* Các khối trang chi tiết trước đây dùng trực tiếp mã đỏ. */
+.film-info-panel {
+    background: var(--panel);
+}
+
+.cosmic-motion-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 30;
+    min-height: 42px;
+    padding: 9px 15px;
+    color: #d5f3ff;
+    background: #071b32f0;
+    border: 1px solid #70caff66;
+    border-radius: 24px;
+    box-shadow: 0 6px 24px #0005;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.cosmic-motion-toggle:hover {
+    background: #12345a;
+}
+
+@media (max-width: 600px) {
+    .cosmic-motion-toggle {
+        right: 12px;
+        bottom: 12px;
+        font-size: 11px;
+    }
+
+    .footer {
+        padding-bottom: 78px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}

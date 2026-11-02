@@ -1,0 +1,672 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 726 83638E11-C8B0-4727-87E3-0EF6D6D94A41 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:14
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+A56554CA-6735-4AA6-BF75-417791E32B1C                  726        1968 HIEU_LUC                                2026-10-28 12:52:14                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: Tìm mã đơn
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 727 ABC18027-07D6-4782-BD7C-88BA09F71950 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:15
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+8EEC7D67-286C-49A3-966E-7424FAA098CC                  727        1969 HIEU_LUC                                2026-10-28 12:52:15                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: Tìm GUID vé
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 728 F47A9985-13E0-4471-8F29-F0AEC8743BC4 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:16
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+4AB7FE1A-EFA0-4A2C-B671-82B00696EF92                  728        1970 HIEU_LUC                                2026-10-28 12:52:16                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: Tìm GUID tham chiếu đơn
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 729 910EF2A7-D583-4EC1-95F2-BC618E1D20FC CHO_THANH_TOAN                      80000                    2026-10-28 13:02:16
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+5D915F53-B04F-42B5-B5AD-8F226165C215                  729        1971 HIEU_LUC                                2026-10-28 12:52:16                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: Tìm mã giao dịch thu
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 730 FB84EEB5-3F7C-4B97-96A5-3DE718C31EAA CHO_THANH_TOAN                      80000                    2026-10-28 13:02:17
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+E423212D-7304-4AEB-BEDE-0282A6E5D6E8                  730        1972 HIEU_LUC                                2026-10-28 12:52:17                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: Cắt khoảng trắng quanh mã
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 731 B16DA1BC-C653-4506-AA39-62427D383907 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:17
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+4981D6E8-EE2D-4AF1-BF5E-FA5AFA456EBB                  731        1973 HIEU_LUC                                2026-10-28 12:52:17                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: Từ khóa rỗng giữ danh sách
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 732 634A2D63-4938-4C13-8145-CC147EAA7394 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:18
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+B0FEB80A-DE40-4BC7-8C4F-A5CF4AE90443                  732        1974 HIEU_LUC                                2026-10-28 12:52:18                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Không có mã phù hợp
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 733 F1AA04F5-58D4-4874-A9DD-70FBDE7AC2F2 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:18
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+4C7B87FD-7DC9-459F-9457-D18703A980DB                  733        1975 HIEU_LUC                                2026-10-28 12:52:18                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Không hiểu wildcard như tìm gần đúng
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 734 2B9E5AAF-E9EB-4FFF-B2BE-0F932C7B48A1 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:19
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+941BAB9B-58F2-4BF6-85CD-5DC6E72F9DAC                  734        1976 HIEU_LUC                                2026-10-28 12:52:19                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: GUID có đuôi không được cắt thành vé
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 735 834878BD-7A86-4EAC-A1D5-CBF86BEB9D10 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:19
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+66562019-C67B-4587-8FB7-47AA8A692ADC                  735        1977 HIEU_LUC                                2026-10-28 12:52:19                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Mã số vượt BIGINT không gây lỗi
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 736 6453E03E-0008-4F49-AB41-0EEB3A533919 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:20
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+2FF5E5FC-54A5-4759-9A1E-96D5C7448178                  736        1978 HIEU_LUC                                2026-10-28 12:52:20                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Mã kết hợp trạng thái
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 737 EA02CB21-F4C6-4688-BB7C-B1484EC241D1 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:20
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+A5743995-A696-492B-A0E3-A52898981DD1                  737        1979 HIEU_LUC                                2026-10-28 12:52:20                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Mã kết hợp ngày tạo
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 738 B8B4A1C5-E911-4BB6-9DF1-B8252A8DA46F CHO_THANH_TOAN                      80000                    2026-10-28 13:02:20
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+AEEC46B8-1DA5-4EF4-8AA7-26A2D1E5F0DB                  738        1980 HIEU_LUC                                2026-10-28 12:52:20                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+PASS: Mã ngoài phạm vi rạp không lộ dữ liệu
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 739 703B982D-6A00-44F0-AA55-1F4F3F08FFE2 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:21
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+47361811-45D9-419C-998A-4C9F1DF2B45B                  739        1981 HIEU_LUC                                2026-10-28 12:52:21                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+PASS: Thu hồi phân công rạp
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 740 99C99393-9194-4E8B-B9B8-FFD268799A24 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:21
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+E1A0FD0A-CC09-4A6B-9793-3B545FF077DE                  740        1982 HIEU_LUC                                2026-10-28 12:52:21                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+PASS: Thu hồi quyền xem đơn
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 741 ED44E7A6-9450-4C9B-9BFE-9A2A9CD116C0 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:22
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+29375CCD-B917-4DEA-9A3C-C62EB4F45439                  741        1983 HIEU_LUC                                2026-10-28 12:52:22                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+PASS: Tài khoản ngừng hoạt động
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 742 9F80EA11-6E12-4B80-96A1-BE9FE4B43AB9 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:22
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+DDDB87DB-B8AE-44A3-9CF5-E4BF5B7441C7                  742        1984 HIEU_LUC                                2026-10-28 12:52:22                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Trang 0 bị từ chối
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 743 3575FF0E-F08D-4461-84B8-6C6EE4A2F2D0 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:23
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+BE7D7B8D-1CC6-4E25-A854-747C66A54375                  743        1985 HIEU_LUC                                2026-10-28 12:52:23                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Kích thước trang sai
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 744 8451AEA6-0466-40E3-8272-B37702857C24 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:23
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+CB327C1C-D2BE-4909-9C7B-0F19C8266FD5                  744        1986 HIEU_LUC                                2026-10-28 12:52:23                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: Admin vẫn tìm được đơn
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 745 26CA637B-A6B3-4FB8-8113-AC783B256A94 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:24
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+270F6DBA-A62F-473D-BFF5-48DA2E370F1A                  745        1987 HIEU_LUC                                2026-10-28 12:52:24                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(0 rows affected)
+PASS: Trang rỗng vẫn trả tổng qua output
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 746 E04C8F88-8C29-42CB-90DB-4C7D48804A81 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:24
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+C79B612F-EC27-4135-886F-5BD9D8F53748                  746        1988 HIEU_LUC                                2026-10-28 12:52:24                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(50 rows affected)
+PASS: Trang đầu 50 trên 51 đơn, thứ tự ổn định
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 797 9EA6FB48-0B17-4D70-80DF-CC5FF800111C CHO_THANH_TOAN                      80000                    2026-10-28 13:02:25
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+A1846CA0-1949-4A24-87B7-651A95D12BD8                  797        1989 HIEU_LUC                                2026-10-28 12:52:25                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+PASS: Trang cuối một đơn
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 848 F221241E-0AA3-4D0D-A012-CBE0561FB9F7 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:25
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+717C5C04-EF01-4204-B0AD-59D56151194E                  848        1990 HIEU_LUC                                2026-10-28 12:52:25                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+PASS: Trang vượt cuối vẫn có tổng 51
+MaDonHang            MaThamChieu                          TrangThai            TongTien             HanThanhToanUtc                       
+-------------------- ------------------------------------ -------------------- -------------------- --------------------------------------
+                 899 E8D3D91F-A6B4-4D11-A929-384FAD52DD75 CHO_THANH_TOAN                      80000                    2026-10-28 13:02:26
+MaVe                                 MaDonHang            MaGhe       TrangThai            NgayPhatHanhUtc                        NgaySoatUtc                            NguoiSoat  
+------------------------------------ -------------------- ----------- -------------------- -------------------------------------- -------------------------------------- -----------
+88629402-1815-4C6B-A084-43D1EE4F9723                  899        1991 HIEU_LUC                                2026-10-28 12:52:26                                   NULL        NULL
+
+(1 rows affected)
+
+(1 rows affected)
+
+(0 rows affected)
+
+(1 rows affected)
+PASS: caller cũ không truyền từ khóa/output vẫn dùng được
+Hoàn tất 24 ca tra cứu; fixture đã rollback.

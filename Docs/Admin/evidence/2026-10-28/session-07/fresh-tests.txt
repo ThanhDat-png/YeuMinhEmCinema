@@ -1,0 +1,54 @@
+﻿Changed database context to 'YMC_GenreInstall_6bd94117_Test'.
+PASS: Tạo, trim tên, mô tả Unicode
+MaTheLoai  
+-----------
+          4
+PASS: Sửa tên và mô tả
+PASS: Gán nhiều thể loại, không trùng khi lưu lại
+PASS: Thay đổi thể loại đã gán
+PASS: Bỏ hết thể loại và phim cũ không bắt buộc có thể loại
+MaTheLoai  
+-----------
+         12
+PASS: Ngừng sử dụng giữ liên kết cũ, giữ lại khi lưu phim
+PASS: Bỏ liên kết với thể loại ngừng sử dụng
+MaTheLoai  
+-----------
+         16
+MaTheLoai  
+-----------
+         16
+PASS: Sử dụng lại cho phép gán mới
+PASS: Chỉ xem đọc danh mục và phim
+PASS: Tên rỗng
+PASS: Tên NULL
+PASS: Tên quá 100 ký tự
+PASS: Tên có ký tự xuống dòng
+PASS: Mô tả quá 1000 ký tự
+PASS: Trạng thái NULL
+PASS: Tên trùng không phân biệt hoa thường và khoảng trắng biên
+PASS: Sửa thành tên trùng
+PASS: Không dùng lại tên thể loại đã ngừng
+PASS: Sửa mã thể loại không tồn tại
+PASS: Gán mã thể loại không tồn tại
+PASS: Gán phim không tồn tại
+PASS: Đọc phim không tồn tại
+PASS: Không gán mới thể loại ngừng sử dụng
+PASS: Thể loại bị ngừng sau khi mở form
+PASS: Chỉ xem không tạo thể loại
+PASS: Chỉ xem không sửa/ngừng thể loại
+PASS: Chỉ xem không gán thể loại
+PASS: Không quyền không đọc danh mục
+PASS: Không quyền không đọc thể loại phim
+PASS: Không quyền không đọc phim kèm thể loại
+MaTheLoai   TenTheLoai                                                                                           MoTa                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     DangSuDung SoPhim     
+----------- ---------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------- -----------
+         63 TEST hài 89CF1CA40762                                                                                NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              1           0
+         62 TEST hành động 89CF1CA40762                                                                          Mô tả tiếng Việt                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  1           0
+PASS: Thu hồi quyền khi form đang mở
+PASS: Khóa tài khoản chặn đọc
+PASS: Nhân viên ngừng việc chặn đọc
+PASS: Vai trò quản lý rạp không được tự cấp quyền quản lý phim chung
+PASS: Admin gộp nhiều thể loại thành một dòng phim
+PASS: Web danh sách và chi tiết giữ một phim dù nhiều thể loại
+PASS: Lưu phim cũ vẫn giữ liên kết, trả mã theo hợp đồng cũ

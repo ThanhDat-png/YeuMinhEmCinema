@@ -1,0 +1,2281 @@
+{
+  "source_commit": "a217f8216aa606aaf0029b84f0c6997f0447652b",
+  "repository_head": "2e5b770fc57347d07089690b759bbcc23aa4a7e7",
+  "tables": {
+    "Phim": {
+      "columns": [
+        {
+          "name": "MaPhim",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaPhim INT IDENTITY(1,1) CONSTRAINT PK_Phim PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "TenPhim",
+          "type": "NVARCHAR(200)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenPhim NVARCHAR(200) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "MoTa",
+          "type": "NVARCHAR(MAX)",
+          "nullable": true,
+          "identity": false,
+          "raw": "MoTa NVARCHAR(MAX) NULL",
+          "pk": false
+        },
+        {
+          "name": "ThoiLuong",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "ThoiLuong INT NOT NULL CONSTRAINT CK_Phim_ThoiLuong CHECK (ThoiLuong > 0)",
+          "pk": false
+        },
+        {
+          "name": "NgayKhoiChieu",
+          "type": "DATE",
+          "nullable": false,
+          "identity": false,
+          "raw": "NgayKhoiChieu DATE NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "GioiHanTuoi",
+          "type": "VARCHAR(10)",
+          "nullable": false,
+          "identity": false,
+          "raw": "GioiHanTuoi VARCHAR(10) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "Poster",
+          "type": "NVARCHAR(500)",
+          "nullable": true,
+          "identity": false,
+          "raw": "Poster NVARCHAR(500) NULL",
+          "pk": false
+        },
+        {
+          "name": "Trailer",
+          "type": "NVARCHAR(500)",
+          "nullable": true,
+          "identity": false,
+          "raw": "Trailer NVARCHAR(500) NULL",
+          "pk": false
+        },
+        {
+          "name": "TrangThai",
+          "type": "NVARCHAR(30)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TrangThai NVARCHAR(30) NOT NULL CONSTRAINT DF_Phim_TrangThai DEFAULT N'Sắp chiếu'",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaPhim"
+      ],
+      "uniques": [
+        [
+          "MaPhim"
+        ]
+      ],
+      "constraints": [
+        "CONSTRAINT CK_Phim_TrangThai CHECK (TrangThai IN (N'Sắp chiếu', N'Đang chiếu', N'Ngừng chiếu'))"
+      ],
+      "source": "Database/Scripts/00_TaoDatabase_Phim.sql"
+    },
+    "LoaiGhe": {
+      "columns": [
+        {
+          "name": "MaLoai",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaLoai INT IDENTITY(1,1) CONSTRAINT PK_LoaiGhe PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "TenLoai",
+          "type": "NVARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenLoai NVARCHAR(50) NOT NULL CONSTRAINT UQ_LoaiGhe_TenLoai UNIQUE",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaLoai"
+      ],
+      "uniques": [
+        [
+          "TenLoai"
+        ],
+        [
+          "MaLoai"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/01_CauTruc_Rap_Phong_Ghe.sql"
+    },
+    "Rap": {
+      "columns": [
+        {
+          "name": "MaRap",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaRap INT IDENTITY(1,1) CONSTRAINT PK_Rap PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "TenRap",
+          "type": "NVARCHAR(200)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenRap NVARCHAR(200) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "DiaChi",
+          "type": "NVARCHAR(500)",
+          "nullable": true,
+          "identity": false,
+          "raw": "DiaChi NVARCHAR(500) NULL",
+          "pk": false
+        },
+        {
+          "name": "TrangThai",
+          "type": "NVARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TrangThai NVARCHAR(50) NOT NULL CONSTRAINT DF_Rap_TrangThai DEFAULT N'Đang hoạt động'",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaRap"
+      ],
+      "uniques": [
+        [
+          "MaRap"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/01_CauTruc_Rap_Phong_Ghe.sql"
+    },
+    "PhongChieu": {
+      "columns": [
+        {
+          "name": "MaPhong",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaPhong INT IDENTITY(1,1) CONSTRAINT PK_PhongChieu PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaRap",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaRap INT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "TenPhong",
+          "type": "NVARCHAR(100)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenPhong NVARCHAR(100) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "DinhDang",
+          "type": "NVARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "DinhDang NVARCHAR(50) NOT NULL CONSTRAINT DF_PhongChieu_DinhDang DEFAULT N'2D'",
+          "pk": false
+        },
+        {
+          "name": "TrangThai",
+          "type": "NVARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TrangThai NVARCHAR(50) NOT NULL CONSTRAINT DF_PhongChieu_TrangThai DEFAULT N'Đang hoạt động'",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaPhong"
+      ],
+      "uniques": [
+        [
+          "MaRap",
+          "TenPhong"
+        ],
+        [
+          "MaPhong"
+        ]
+      ],
+      "constraints": [
+        "CONSTRAINT FK_PhongChieu_Rap FOREIGN KEY (MaRap) REFERENCES dbo.Rap(MaRap)",
+        "CONSTRAINT UQ_PhongChieu_Rap_Ten UNIQUE (MaRap, TenPhong)"
+      ],
+      "source": "Database/Scripts/01_CauTruc_Rap_Phong_Ghe.sql"
+    },
+    "Ghe": {
+      "columns": [
+        {
+          "name": "MaGhe",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaGhe INT IDENTITY(1,1) CONSTRAINT PK_Ghe PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaPhong",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaPhong INT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "HangGhe",
+          "type": "VARCHAR(5)",
+          "nullable": false,
+          "identity": false,
+          "raw": "HangGhe VARCHAR(5) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "SoGhe",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "SoGhe INT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "MaLoaiGhe",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaLoaiGhe INT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "TrangThai",
+          "type": "NVARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TrangThai NVARCHAR(50) NOT NULL CONSTRAINT DF_Ghe_TrangThai DEFAULT N'Hoạt động'",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaGhe"
+      ],
+      "uniques": [
+        [
+          "MaPhong",
+          "HangGhe",
+          "SoGhe"
+        ],
+        [
+          "MaGhe"
+        ]
+      ],
+      "constraints": [
+        "CONSTRAINT FK_Ghe_PhongChieu FOREIGN KEY (MaPhong) REFERENCES dbo.PhongChieu(MaPhong)",
+        "CONSTRAINT FK_Ghe_LoaiGhe FOREIGN KEY (MaLoaiGhe) REFERENCES dbo.LoaiGhe(MaLoai)",
+        "CONSTRAINT UQ_Ghe_Phong_ViTri UNIQUE (MaPhong, HangGhe, SoGhe)",
+        "CONSTRAINT CK_Ghe_SoGhe CHECK (SoGhe > 0)"
+      ],
+      "source": "Database/Scripts/01_CauTruc_Rap_Phong_Ghe.sql"
+    },
+    "SuatChieu": {
+      "columns": [
+        {
+          "name": "MaSuatChieu",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaSuatChieu INT IDENTITY(1,1) CONSTRAINT PK_SuatChieu PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaPhim",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaPhim INT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "MaPhong",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaPhong INT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "GioBatDau",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "GioBatDau DATETIME2(0) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "GioKetThuc",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "GioKetThuc DATETIME2(0) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "PhutDonPhong",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhutDonPhong INT NOT NULL CONSTRAINT DF_SuatChieu_PhutDonPhong DEFAULT 15",
+          "pk": false
+        },
+        {
+          "name": "TrangThai",
+          "type": "NVARCHAR(30)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TrangThai NVARCHAR(30) NOT NULL CONSTRAINT DF_SuatChieu_TrangThai DEFAULT N'Mở bán'",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaSuatChieu"
+      ],
+      "uniques": [
+        [
+          "MaSuatChieu"
+        ]
+      ],
+      "constraints": [
+        "CONSTRAINT FK_SuatChieu_Phim FOREIGN KEY (MaPhim) REFERENCES dbo.Phim(MaPhim)",
+        "CONSTRAINT FK_SuatChieu_PhongChieu FOREIGN KEY (MaPhong) REFERENCES dbo.PhongChieu(MaPhong)",
+        "CONSTRAINT CK_SuatChieu_ThoiGian CHECK (GioKetThuc > GioBatDau)",
+        "CONSTRAINT CK_SuatChieu_PhutDonPhong CHECK (PhutDonPhong BETWEEN 0 AND 120)",
+        "CONSTRAINT CK_SuatChieu_TrangThai CHECK (TrangThai IN ( N'Mở bán', N'Ngừng bán', N'Đã hủy' ))"
+      ],
+      "source": "Database/Scripts/04_TaoBang_SuatChieu.sql"
+    },
+    "GiaVe": {
+      "columns": [
+        {
+          "name": "MaGiaVe",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaGiaVe INT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaLoaiGhe",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaLoaiGhe INT NOT NULL REFERENCES dbo.LoaiGhe(MaLoai)",
+          "pk": false
+        },
+        {
+          "name": "DinhDang",
+          "type": "NVARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "DinhDang NVARCHAR(50) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "LoaiNgay",
+          "type": "NVARCHAR(20)",
+          "nullable": false,
+          "identity": false,
+          "raw": "LoaiNgay NVARCHAR(20) NOT NULL CHECK(LoaiNgay IN(N'Ngày thường',N'Cuối tuần'))",
+          "pk": false
+        },
+        {
+          "name": "TuNgay",
+          "type": "DATE",
+          "nullable": false,
+          "identity": false,
+          "raw": "TuNgay DATE NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "DenNgay",
+          "type": "DATE",
+          "nullable": true,
+          "identity": false,
+          "raw": "DenNgay DATE NULL",
+          "pk": false
+        },
+        {
+          "name": "DonGia",
+          "type": "DECIMAL(18,0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "DonGia DECIMAL(18,0) NOT NULL CHECK(DonGia>0 AND DonGia<=1000000000)",
+          "pk": false
+        },
+        {
+          "name": "DangApDung",
+          "type": "BIT",
+          "nullable": false,
+          "identity": false,
+          "raw": "DangApDung BIT NOT NULL DEFAULT 1",
+          "pk": false
+        },
+        {
+          "name": "PhienBan",
+          "type": "ROWVERSION",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhienBan ROWVERSION",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaGiaVe"
+      ],
+      "uniques": [
+        [
+          "MaGiaVe"
+        ]
+      ],
+      "constraints": [
+        "CHECK(DenNgay IS NULL OR DenNgay>=TuNgay)",
+        "CHECK(LEN(LTRIM(RTRIM(DinhDang)))>0)"
+      ],
+      "source": "Database/Scripts/09_GiaVe_Fnb.sql"
+    },
+    "FnbSanPham": {
+      "columns": [
+        {
+          "name": "MaSanPham",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaSanPham INT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaHang",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaHang VARCHAR(30) NOT NULL UNIQUE",
+          "pk": false
+        },
+        {
+          "name": "TenSanPham",
+          "type": "NVARCHAR(150)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenSanPham NVARCHAR(150) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "Nhom",
+          "type": "NVARCHAR(20)",
+          "nullable": false,
+          "identity": false,
+          "raw": "Nhom NVARCHAR(20) NOT NULL CHECK(Nhom IN(N'Bắp',N'Nước',N'Đồ ăn',N'Combo'))",
+          "pk": false
+        },
+        {
+          "name": "KichCo",
+          "type": "NVARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "KichCo NVARCHAR(50) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "DonGia",
+          "type": "DECIMAL(18,0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "DonGia DECIMAL(18,0) NOT NULL CHECK(DonGia>0 AND DonGia<=1000000000)",
+          "pk": false
+        },
+        {
+          "name": "DangBan",
+          "type": "BIT",
+          "nullable": false,
+          "identity": false,
+          "raw": "DangBan BIT NOT NULL DEFAULT 1",
+          "pk": false
+        },
+        {
+          "name": "PhienBan",
+          "type": "ROWVERSION",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhienBan ROWVERSION",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaSanPham"
+      ],
+      "uniques": [
+        [
+          "MaHang"
+        ],
+        [
+          "MaSanPham"
+        ]
+      ],
+      "constraints": [
+        "CHECK(LEN(LTRIM(RTRIM(TenSanPham)))>0)"
+      ],
+      "source": "Database/Scripts/09_GiaVe_Fnb.sql"
+    },
+    "FnbComboChiTiet": {
+      "columns": [
+        {
+          "name": "MaCombo",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaCombo INT NOT NULL REFERENCES dbo.FnbSanPham(MaSanPham)",
+          "pk": true
+        },
+        {
+          "name": "MaThanhPhan",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaThanhPhan INT NOT NULL REFERENCES dbo.FnbSanPham(MaSanPham)",
+          "pk": true
+        },
+        {
+          "name": "SoLuong",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "SoLuong INT NOT NULL CHECK(SoLuong BETWEEN 1 AND 99)",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaCombo",
+        "MaThanhPhan"
+      ],
+      "uniques": [
+        [
+          "MaCombo",
+          "MaThanhPhan"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaCombo,MaThanhPhan)",
+        "CHECK(MaCombo<>MaThanhPhan)"
+      ],
+      "source": "Database/Scripts/09_GiaVe_Fnb.sql"
+    },
+    "VaiTro": {
+      "columns": [
+        {
+          "name": "MaVaiTro",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaVaiTro INT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "TenVaiTro",
+          "type": "VARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenVaiTro VARCHAR(50) NOT NULL UNIQUE",
+          "pk": false
+        },
+        {
+          "name": "TenHienThi",
+          "type": "NVARCHAR(100)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenHienThi NVARCHAR(100) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "MoTa",
+          "type": "NVARCHAR(500)",
+          "nullable": true,
+          "identity": false,
+          "raw": "MoTa NVARCHAR(500) NULL",
+          "pk": false
+        },
+        {
+          "name": "DangHoatDong",
+          "type": "BIT",
+          "nullable": false,
+          "identity": false,
+          "raw": "DangHoatDong BIT NOT NULL DEFAULT 1",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaVaiTro"
+      ],
+      "uniques": [
+        [
+          "TenVaiTro"
+        ],
+        [
+          "MaVaiTro"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/10_TaiKhoan_PhanQuyen.sql"
+    },
+    "Quyen": {
+      "columns": [
+        {
+          "name": "MaQuyen",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaQuyen VARCHAR(80) PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "TenQuyen",
+          "type": "NVARCHAR(150)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenQuyen NVARCHAR(150) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "NhomChucNang",
+          "type": "NVARCHAR(100)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NhomChucNang NVARCHAR(100) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "MoTa",
+          "type": "NVARCHAR(500)",
+          "nullable": true,
+          "identity": false,
+          "raw": "MoTa NVARCHAR(500) NULL",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaQuyen"
+      ],
+      "uniques": [
+        [
+          "MaQuyen"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/10_TaiKhoan_PhanQuyen.sql"
+    },
+    "VaiTroQuyen": {
+      "columns": [
+        {
+          "name": "MaVaiTro",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaVaiTro INT REFERENCES dbo.VaiTro(MaVaiTro)",
+          "pk": true
+        },
+        {
+          "name": "MaQuyen",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaQuyen VARCHAR(80) REFERENCES dbo.Quyen(MaQuyen)",
+          "pk": true
+        }
+      ],
+      "pk": [
+        "MaVaiTro",
+        "MaQuyen"
+      ],
+      "uniques": [
+        [
+          "MaVaiTro",
+          "MaQuyen"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaVaiTro,MaQuyen)"
+      ],
+      "source": "Database/Scripts/10_TaiKhoan_PhanQuyen.sql"
+    },
+    "TaiKhoan": {
+      "columns": [
+        {
+          "name": "MaTaiKhoan",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaTaiKhoan INT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "TenDangNhap",
+          "type": "VARCHAR(50)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenDangNhap VARCHAR(50) NOT NULL UNIQUE",
+          "pk": false
+        },
+        {
+          "name": "MatKhauHash",
+          "type": "VARCHAR(1000)",
+          "nullable": false,
+          "identity": false,
+          "raw": "MatKhauHash VARCHAR(1000) NOT NULL CHECK(LEN(LTRIM(RTRIM(MatKhauHash)))>0)",
+          "pk": false
+        },
+        {
+          "name": "Email",
+          "type": "NVARCHAR(254)",
+          "nullable": true,
+          "identity": false,
+          "raw": "Email NVARCHAR(254) NULL",
+          "pk": false
+        },
+        {
+          "name": "DangHoatDong",
+          "type": "BIT",
+          "nullable": false,
+          "identity": false,
+          "raw": "DangHoatDong BIT NOT NULL DEFAULT 1",
+          "pk": false
+        },
+        {
+          "name": "SoLanDangNhapSai",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "SoLanDangNhapSai INT NOT NULL DEFAULT 0 CHECK(SoLanDangNhapSai>=0)",
+          "pk": false
+        },
+        {
+          "name": "KhoaDenLuc",
+          "type": "DATETIME2(0)",
+          "nullable": true,
+          "identity": false,
+          "raw": "KhoaDenLuc DATETIME2(0) NULL",
+          "pk": false
+        },
+        {
+          "name": "NgayTao",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NgayTao DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME()",
+          "pk": false
+        },
+        {
+          "name": "LanDangNhapCuoi",
+          "type": "DATETIME2(0)",
+          "nullable": true,
+          "identity": false,
+          "raw": "LanDangNhapCuoi DATETIME2(0) NULL",
+          "pk": false
+        },
+        {
+          "name": "PhienBan",
+          "type": "ROWVERSION",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhienBan ROWVERSION",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaTaiKhoan"
+      ],
+      "uniques": [
+        [
+          "TenDangNhap"
+        ],
+        [
+          "MaTaiKhoan"
+        ],
+        [
+          "Email"
+        ]
+      ],
+      "constraints": [
+        "CHECK(LEN(TenDangNhap) BETWEEN 3 AND 50 AND DATALENGTH(TenDangNhap)=DATALENGTH(LTRIM(RTRIM(TenDangNhap))) AND TenDangNhap COLLATE Latin1_General_100_BIN2 NOT LIKE '%[^a-zA-Z0-9_.-]%')",
+        "CHECK(Email IS NULL OR LEN(LTRIM(RTRIM(Email)))>0)"
+      ],
+      "source": "Database/Scripts/10_TaiKhoan_PhanQuyen.sql"
+    },
+    "TaiKhoanVaiTro": {
+      "columns": [
+        {
+          "name": "MaTaiKhoan",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaTaiKhoan INT REFERENCES dbo.TaiKhoan(MaTaiKhoan)",
+          "pk": true
+        },
+        {
+          "name": "MaVaiTro",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaVaiTro INT REFERENCES dbo.VaiTro(MaVaiTro)",
+          "pk": true
+        }
+      ],
+      "pk": [
+        "MaTaiKhoan",
+        "MaVaiTro"
+      ],
+      "uniques": [
+        [
+          "MaTaiKhoan",
+          "MaVaiTro"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaTaiKhoan,MaVaiTro)"
+      ],
+      "source": "Database/Scripts/10_TaiKhoan_PhanQuyen.sql"
+    },
+    "KhachHang": {
+      "columns": [
+        {
+          "name": "MaKhachHang",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaKhachHang INT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaTaiKhoan",
+          "type": "INT",
+          "nullable": true,
+          "identity": false,
+          "raw": "MaTaiKhoan INT NULL REFERENCES dbo.TaiKhoan(MaTaiKhoan)",
+          "pk": false
+        },
+        {
+          "name": "HoTen",
+          "type": "NVARCHAR(150)",
+          "nullable": false,
+          "identity": false,
+          "raw": "HoTen NVARCHAR(150) NOT NULL CHECK(LEN(LTRIM(RTRIM(HoTen)))>0)",
+          "pk": false
+        },
+        {
+          "name": "DienThoai",
+          "type": "VARCHAR(20)",
+          "nullable": true,
+          "identity": false,
+          "raw": "DienThoai VARCHAR(20) NULL",
+          "pk": false
+        },
+        {
+          "name": "NgaySinh",
+          "type": "DATE",
+          "nullable": true,
+          "identity": false,
+          "raw": "NgaySinh DATE NULL",
+          "pk": false
+        },
+        {
+          "name": "DangHoatDong",
+          "type": "BIT",
+          "nullable": false,
+          "identity": false,
+          "raw": "DangHoatDong BIT NOT NULL DEFAULT 1",
+          "pk": false
+        },
+        {
+          "name": "NgayTao",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NgayTao DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME()",
+          "pk": false
+        },
+        {
+          "name": "PhienBan",
+          "type": "ROWVERSION",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhienBan ROWVERSION",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaKhachHang"
+      ],
+      "uniques": [
+        [
+          "MaKhachHang"
+        ],
+        [
+          "MaTaiKhoan"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/11_KhachHang_NhanVien.sql"
+    },
+    "NhanVien": {
+      "columns": [
+        {
+          "name": "MaNhanVien",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaNhanVien INT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaTaiKhoan",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaTaiKhoan INT NOT NULL UNIQUE REFERENCES dbo.TaiKhoan(MaTaiKhoan)",
+          "pk": false
+        },
+        {
+          "name": "HoTen",
+          "type": "NVARCHAR(150)",
+          "nullable": false,
+          "identity": false,
+          "raw": "HoTen NVARCHAR(150) NOT NULL CHECK(LEN(LTRIM(RTRIM(HoTen)))>0)",
+          "pk": false
+        },
+        {
+          "name": "DienThoai",
+          "type": "VARCHAR(20)",
+          "nullable": true,
+          "identity": false,
+          "raw": "DienThoai VARCHAR(20) NULL",
+          "pk": false
+        },
+        {
+          "name": "DangLamViec",
+          "type": "BIT",
+          "nullable": false,
+          "identity": false,
+          "raw": "DangLamViec BIT NOT NULL DEFAULT 1",
+          "pk": false
+        },
+        {
+          "name": "PhienBan",
+          "type": "ROWVERSION",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhienBan ROWVERSION",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaNhanVien"
+      ],
+      "uniques": [
+        [
+          "MaTaiKhoan"
+        ],
+        [
+          "MaNhanVien"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/11_KhachHang_NhanVien.sql"
+    },
+    "NhanVienRap": {
+      "columns": [
+        {
+          "name": "MaNhanVien",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaNhanVien INT REFERENCES dbo.NhanVien(MaNhanVien)",
+          "pk": true
+        },
+        {
+          "name": "MaRap",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaRap INT REFERENCES dbo.Rap(MaRap)",
+          "pk": true
+        }
+      ],
+      "pk": [
+        "MaNhanVien",
+        "MaRap"
+      ],
+      "uniques": [
+        [
+          "MaNhanVien",
+          "MaRap"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaNhanVien,MaRap)"
+      ],
+      "source": "Database/Scripts/11_KhachHang_NhanVien.sql"
+    },
+    "DonHang": {
+      "columns": [
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaDonHang BIGINT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaThamChieu",
+          "type": "UNIQUEIDENTIFIER",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaThamChieu UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() UNIQUE",
+          "pk": false
+        },
+        {
+          "name": "MaYeuCau",
+          "type": "UNIQUEIDENTIFIER",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaYeuCau UNIQUEIDENTIFIER NOT NULL UNIQUE",
+          "pk": false
+        },
+        {
+          "name": "MaSuatChieu",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaSuatChieu INT NOT NULL REFERENCES dbo.SuatChieu(MaSuatChieu)",
+          "pk": false
+        },
+        {
+          "name": "MaKhachHang",
+          "type": "INT",
+          "nullable": true,
+          "identity": false,
+          "raw": "MaKhachHang INT NULL REFERENCES dbo.KhachHang(MaKhachHang)",
+          "pk": false
+        },
+        {
+          "name": "NguoiTao",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "NguoiTao INT NOT NULL REFERENCES dbo.TaiKhoan(MaTaiKhoan)",
+          "pk": false
+        },
+        {
+          "name": "Kenh",
+          "type": "VARCHAR(10)",
+          "nullable": false,
+          "identity": false,
+          "raw": "Kenh VARCHAR(10) NOT NULL CHECK(Kenh IN('WEB','QUAY'))",
+          "pk": false
+        },
+        {
+          "name": "TrangThai",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TrangThai VARCHAR(20) NOT NULL DEFAULT 'CHO_THANH_TOAN' CHECK(TrangThai IN('CHO_THANH_TOAN','DA_THANH_TOAN','DA_HUY','HET_HAN','DA_HOAN_TIEN'))",
+          "pk": false
+        },
+        {
+          "name": "NgayTaoUtc",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NgayTaoUtc DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME()",
+          "pk": false
+        },
+        {
+          "name": "HanThanhToanUtc",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "HanThanhToanUtc DATETIME2(0) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "TongTien",
+          "type": "DECIMAL(18,0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TongTien DECIMAL(18,0) NOT NULL CHECK(TongTien>0)",
+          "pk": false
+        },
+        {
+          "name": "HoTenLienHe",
+          "type": "NVARCHAR(150)",
+          "nullable": false,
+          "identity": false,
+          "raw": "HoTenLienHe NVARCHAR(150) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "DienThoaiLienHe",
+          "type": "VARCHAR(20)",
+          "nullable": true,
+          "identity": false,
+          "raw": "DienThoaiLienHe VARCHAR(20) NULL",
+          "pk": false
+        },
+        {
+          "name": "LyDoHuy",
+          "type": "NVARCHAR(500)",
+          "nullable": true,
+          "identity": false,
+          "raw": "LyDoHuy NVARCHAR(500) NULL",
+          "pk": false
+        },
+        {
+          "name": "PhienBan",
+          "type": "ROWVERSION",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhienBan ROWVERSION",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaDonHang"
+      ],
+      "uniques": [
+        [
+          "MaThamChieu"
+        ],
+        [
+          "MaYeuCau"
+        ],
+        [
+          "MaDonHang"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "ChiTietVe": {
+      "columns": [
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaDonHang BIGINT REFERENCES dbo.DonHang(MaDonHang)",
+          "pk": true
+        },
+        {
+          "name": "MaGhe",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaGhe INT REFERENCES dbo.Ghe(MaGhe)",
+          "pk": true
+        },
+        {
+          "name": "MaGiaVe",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaGiaVe INT NOT NULL REFERENCES dbo.GiaVe(MaGiaVe)",
+          "pk": false
+        },
+        {
+          "name": "DonGia",
+          "type": "DECIMAL(18,0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "DonGia DECIMAL(18,0) NOT NULL CHECK(DonGia>0)",
+          "pk": false
+        },
+        {
+          "name": "TenPhim",
+          "type": "NVARCHAR(200)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenPhim NVARCHAR(200) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "TenRap",
+          "type": "NVARCHAR(200)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenRap NVARCHAR(200) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "TenPhong",
+          "type": "NVARCHAR(100)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenPhong NVARCHAR(100) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "NhanGhe",
+          "type": "NVARCHAR(20)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NhanGhe NVARCHAR(20) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "GioBatDau",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "GioBatDau DATETIME2(0) NOT NULL",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaDonHang",
+        "MaGhe"
+      ],
+      "uniques": [
+        [
+          "MaDonHang",
+          "MaGhe"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaDonHang,MaGhe)"
+      ],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "ChiTietDonFnb": {
+      "columns": [
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaDonHang BIGINT REFERENCES dbo.DonHang(MaDonHang)",
+          "pk": true
+        },
+        {
+          "name": "MaSanPham",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaSanPham INT REFERENCES dbo.FnbSanPham(MaSanPham)",
+          "pk": true
+        },
+        {
+          "name": "TenSanPham",
+          "type": "NVARCHAR(150)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenSanPham NVARCHAR(150) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "SoLuong",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "SoLuong INT NOT NULL CHECK(SoLuong BETWEEN 1 AND 99)",
+          "pk": false
+        },
+        {
+          "name": "DonGia",
+          "type": "DECIMAL(18,0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "DonGia DECIMAL(18,0) NOT NULL CHECK(DonGia>0)",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaDonHang",
+        "MaSanPham"
+      ],
+      "uniques": [
+        [
+          "MaDonHang",
+          "MaSanPham"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaDonHang,MaSanPham)"
+      ],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "ChiTietComboDaBan": {
+      "columns": [
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaDonHang BIGINT NOT NULL",
+          "pk": true
+        },
+        {
+          "name": "MaSanPham",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaSanPham INT NOT NULL",
+          "pk": true
+        },
+        {
+          "name": "MaThanhPhan",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaThanhPhan INT NOT NULL REFERENCES dbo.FnbSanPham(MaSanPham)",
+          "pk": true
+        },
+        {
+          "name": "TenThanhPhan",
+          "type": "NVARCHAR(150)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenThanhPhan NVARCHAR(150) NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "SoLuongTrongCombo",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "SoLuongTrongCombo INT NOT NULL CHECK(SoLuongTrongCombo>0)",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaDonHang",
+        "MaSanPham",
+        "MaThanhPhan"
+      ],
+      "uniques": [
+        [
+          "MaDonHang",
+          "MaSanPham",
+          "MaThanhPhan"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaDonHang,MaSanPham,MaThanhPhan)",
+        "FOREIGN KEY(MaDonHang,MaSanPham) REFERENCES dbo.ChiTietDonFnb(MaDonHang,MaSanPham)"
+      ],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "GiuGhe": {
+      "columns": [
+        {
+          "name": "MaSuatChieu",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaSuatChieu INT REFERENCES dbo.SuatChieu(MaSuatChieu)",
+          "pk": true
+        },
+        {
+          "name": "MaGhe",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaGhe INT REFERENCES dbo.Ghe(MaGhe)",
+          "pk": true
+        },
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaDonHang BIGINT NOT NULL REFERENCES dbo.DonHang(MaDonHang)",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaSuatChieu",
+        "MaGhe"
+      ],
+      "uniques": [
+        [
+          "MaSuatChieu",
+          "MaGhe"
+        ]
+      ],
+      "constraints": [
+        "PRIMARY KEY(MaSuatChieu,MaGhe)"
+      ],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "ThanhToan": {
+      "columns": [
+        {
+          "name": "MaThanhToan",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaThanhToan BIGINT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaDonHang BIGINT NOT NULL UNIQUE REFERENCES dbo.DonHang(MaDonHang)",
+          "pk": false
+        },
+        {
+          "name": "MaGiaoDich",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaGiaoDich VARCHAR(100) NOT NULL UNIQUE",
+          "pk": false
+        },
+        {
+          "name": "PhuongThuc",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "identity": false,
+          "raw": "PhuongThuc VARCHAR(20) NOT NULL CHECK(PhuongThuc IN('TIEN_MAT','CHUYEN_KHOAN','CONG_THANH_TOAN'))",
+          "pk": false
+        },
+        {
+          "name": "SoTien",
+          "type": "DECIMAL(18,0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "SoTien DECIMAL(18,0) NOT NULL CHECK(SoTien>0)",
+          "pk": false
+        },
+        {
+          "name": "NgayThuUtc",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NgayThuUtc DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME()",
+          "pk": false
+        },
+        {
+          "name": "NguoiXacNhan",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "NguoiXacNhan INT NOT NULL REFERENCES dbo.TaiKhoan(MaTaiKhoan)",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaThanhToan"
+      ],
+      "uniques": [
+        [
+          "MaDonHang"
+        ],
+        [
+          "MaGiaoDich"
+        ],
+        [
+          "MaThanhToan"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "Ve": {
+      "columns": [
+        {
+          "name": "MaVe",
+          "type": "UNIQUEIDENTIFIER",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaVe UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaDonHang BIGINT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "MaGhe",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaGhe INT NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "TrangThai",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TrangThai VARCHAR(20) NOT NULL DEFAULT 'HIEU_LUC' CHECK(TrangThai IN('HIEU_LUC','DA_SU_DUNG','DA_HUY'))",
+          "pk": false
+        },
+        {
+          "name": "NgayPhatHanhUtc",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NgayPhatHanhUtc DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME()",
+          "pk": false
+        },
+        {
+          "name": "NgaySoatUtc",
+          "type": "DATETIME2(0)",
+          "nullable": true,
+          "identity": false,
+          "raw": "NgaySoatUtc DATETIME2(0) NULL",
+          "pk": false
+        },
+        {
+          "name": "NguoiSoat",
+          "type": "INT",
+          "nullable": true,
+          "identity": false,
+          "raw": "NguoiSoat INT NULL REFERENCES dbo.TaiKhoan(MaTaiKhoan)",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaVe"
+      ],
+      "uniques": [
+        [
+          "MaVe"
+        ],
+        [
+          "MaDonHang",
+          "MaGhe"
+        ],
+        [
+          "MaVe"
+        ]
+      ],
+      "constraints": [
+        "UNIQUE(MaDonHang,MaGhe)",
+        "FOREIGN KEY(MaDonHang,MaGhe) REFERENCES dbo.ChiTietVe(MaDonHang,MaGhe)"
+      ],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "HoanTien": {
+      "columns": [
+        {
+          "name": "MaHoanTien",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaHoanTien BIGINT IDENTITY PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "MaDonHang",
+          "type": "BIGINT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaDonHang BIGINT NOT NULL UNIQUE REFERENCES dbo.ThanhToan(MaDonHang)",
+          "pk": false
+        },
+        {
+          "name": "MaGiaoDichHoan",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaGiaoDichHoan VARCHAR(100) NOT NULL UNIQUE",
+          "pk": false
+        },
+        {
+          "name": "SoTien",
+          "type": "DECIMAL(18,0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "SoTien DECIMAL(18,0) NOT NULL CHECK(SoTien>0)",
+          "pk": false
+        },
+        {
+          "name": "LyDo",
+          "type": "NVARCHAR(500)",
+          "nullable": false,
+          "identity": false,
+          "raw": "LyDo NVARCHAR(500) NOT NULL CHECK(LEN(LTRIM(RTRIM(LyDo)))>0)",
+          "pk": false
+        },
+        {
+          "name": "NgayHoanUtc",
+          "type": "DATETIME2(0)",
+          "nullable": false,
+          "identity": false,
+          "raw": "NgayHoanUtc DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME()",
+          "pk": false
+        },
+        {
+          "name": "NguoiThucHien",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "NguoiThucHien INT NOT NULL REFERENCES dbo.TaiKhoan(MaTaiKhoan)",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaHoanTien"
+      ],
+      "uniques": [
+        [
+          "MaDonHang"
+        ],
+        [
+          "MaGiaoDichHoan"
+        ],
+        [
+          "MaHoanTien"
+        ]
+      ],
+      "constraints": [],
+      "source": "Database/Scripts/12_DonHang_Ve_ThanhToan.sql"
+    },
+    "TheLoai": {
+      "columns": [
+        {
+          "name": "MaTheLoai",
+          "type": "INT",
+          "nullable": false,
+          "identity": true,
+          "raw": "MaTheLoai INT IDENTITY(1,1) CONSTRAINT PK_TheLoai PRIMARY KEY",
+          "pk": true
+        },
+        {
+          "name": "TenTheLoai",
+          "type": "NVARCHAR(100)",
+          "nullable": false,
+          "identity": false,
+          "raw": "TenTheLoai NVARCHAR(100) COLLATE Vietnamese_100_CI_AS NOT NULL",
+          "pk": false
+        },
+        {
+          "name": "MoTa",
+          "type": "NVARCHAR(1000)",
+          "nullable": true,
+          "identity": false,
+          "raw": "MoTa NVARCHAR(1000) NULL",
+          "pk": false
+        },
+        {
+          "name": "DangSuDung",
+          "type": "BIT",
+          "nullable": false,
+          "identity": false,
+          "raw": "DangSuDung BIT NOT NULL CONSTRAINT DF_TheLoai_DangSuDung DEFAULT 1",
+          "pk": false
+        }
+      ],
+      "pk": [
+        "MaTheLoai"
+      ],
+      "uniques": [
+        [
+          "TenTheLoai"
+        ],
+        [
+          "MaTheLoai"
+        ]
+      ],
+      "constraints": [
+        "CONSTRAINT UQ_TheLoai_Ten UNIQUE(TenTheLoai)",
+        "CONSTRAINT CK_TheLoai_Ten CHECK(LEN(LTRIM(RTRIM(TenTheLoai)))>0 AND DATALENGTH(TenTheLoai)=DATALENGTH(LTRIM(RTRIM(TenTheLoai))))"
+      ],
+      "source": "Database/Scripts/30_Admin_TheLoaiPhim.sql"
+    },
+    "PhimTheLoai": {
+      "columns": [
+        {
+          "name": "MaPhim",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaPhim INT NOT NULL CONSTRAINT FK_PhimTheLoai_Phim REFERENCES dbo.Phim(MaPhim)",
+          "pk": true
+        },
+        {
+          "name": "MaTheLoai",
+          "type": "INT",
+          "nullable": false,
+          "identity": false,
+          "raw": "MaTheLoai INT NOT NULL CONSTRAINT FK_PhimTheLoai_TheLoai REFERENCES dbo.TheLoai(MaTheLoai)",
+          "pk": true
+        }
+      ],
+      "pk": [
+        "MaPhim",
+        "MaTheLoai"
+      ],
+      "uniques": [
+        [
+          "MaPhim",
+          "MaTheLoai"
+        ]
+      ],
+      "constraints": [
+        "CONSTRAINT PK_PhimTheLoai PRIMARY KEY(MaPhim,MaTheLoai)"
+      ],
+      "source": "Database/Scripts/30_Admin_TheLoaiPhim.sql"
+    }
+  },
+  "foreign_keys": [
+    {
+      "child": "PhongChieu",
+      "columns": [
+        "MaRap"
+      ],
+      "parent": "Rap",
+      "parent_columns": [
+        "MaRap"
+      ],
+      "id": "fk1",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "Ghe",
+      "columns": [
+        "MaPhong"
+      ],
+      "parent": "PhongChieu",
+      "parent_columns": [
+        "MaPhong"
+      ],
+      "id": "fk2",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "Ghe",
+      "columns": [
+        "MaLoaiGhe"
+      ],
+      "parent": "LoaiGhe",
+      "parent_columns": [
+        "MaLoai"
+      ],
+      "id": "fk3",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "SuatChieu",
+      "columns": [
+        "MaPhim"
+      ],
+      "parent": "Phim",
+      "parent_columns": [
+        "MaPhim"
+      ],
+      "id": "fk4",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "SuatChieu",
+      "columns": [
+        "MaPhong"
+      ],
+      "parent": "PhongChieu",
+      "parent_columns": [
+        "MaPhong"
+      ],
+      "id": "fk5",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "GiaVe",
+      "columns": [
+        "MaLoaiGhe"
+      ],
+      "parent": "LoaiGhe",
+      "parent_columns": [
+        "MaLoai"
+      ],
+      "id": "fk6",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "FnbComboChiTiet",
+      "columns": [
+        "MaCombo"
+      ],
+      "parent": "FnbSanPham",
+      "parent_columns": [
+        "MaSanPham"
+      ],
+      "id": "fk7",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "FnbComboChiTiet",
+      "columns": [
+        "MaThanhPhan"
+      ],
+      "parent": "FnbSanPham",
+      "parent_columns": [
+        "MaSanPham"
+      ],
+      "id": "fk8",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "VaiTroQuyen",
+      "columns": [
+        "MaVaiTro"
+      ],
+      "parent": "VaiTro",
+      "parent_columns": [
+        "MaVaiTro"
+      ],
+      "id": "fk9",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "VaiTroQuyen",
+      "columns": [
+        "MaQuyen"
+      ],
+      "parent": "Quyen",
+      "parent_columns": [
+        "MaQuyen"
+      ],
+      "id": "fk10",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "TaiKhoanVaiTro",
+      "columns": [
+        "MaTaiKhoan"
+      ],
+      "parent": "TaiKhoan",
+      "parent_columns": [
+        "MaTaiKhoan"
+      ],
+      "id": "fk11",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "TaiKhoanVaiTro",
+      "columns": [
+        "MaVaiTro"
+      ],
+      "parent": "VaiTro",
+      "parent_columns": [
+        "MaVaiTro"
+      ],
+      "id": "fk12",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "KhachHang",
+      "columns": [
+        "MaTaiKhoan"
+      ],
+      "parent": "TaiKhoan",
+      "parent_columns": [
+        "MaTaiKhoan"
+      ],
+      "id": "fk13",
+      "optional": true,
+      "unique": true
+    },
+    {
+      "child": "NhanVien",
+      "columns": [
+        "MaTaiKhoan"
+      ],
+      "parent": "TaiKhoan",
+      "parent_columns": [
+        "MaTaiKhoan"
+      ],
+      "id": "fk14",
+      "optional": false,
+      "unique": true
+    },
+    {
+      "child": "NhanVienRap",
+      "columns": [
+        "MaNhanVien"
+      ],
+      "parent": "NhanVien",
+      "parent_columns": [
+        "MaNhanVien"
+      ],
+      "id": "fk15",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "NhanVienRap",
+      "columns": [
+        "MaRap"
+      ],
+      "parent": "Rap",
+      "parent_columns": [
+        "MaRap"
+      ],
+      "id": "fk16",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "DonHang",
+      "columns": [
+        "MaSuatChieu"
+      ],
+      "parent": "SuatChieu",
+      "parent_columns": [
+        "MaSuatChieu"
+      ],
+      "id": "fk17",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "DonHang",
+      "columns": [
+        "MaKhachHang"
+      ],
+      "parent": "KhachHang",
+      "parent_columns": [
+        "MaKhachHang"
+      ],
+      "id": "fk18",
+      "optional": true,
+      "unique": false
+    },
+    {
+      "child": "DonHang",
+      "columns": [
+        "NguoiTao"
+      ],
+      "parent": "TaiKhoan",
+      "parent_columns": [
+        "MaTaiKhoan"
+      ],
+      "id": "fk19",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ChiTietVe",
+      "columns": [
+        "MaDonHang"
+      ],
+      "parent": "DonHang",
+      "parent_columns": [
+        "MaDonHang"
+      ],
+      "id": "fk20",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ChiTietVe",
+      "columns": [
+        "MaGhe"
+      ],
+      "parent": "Ghe",
+      "parent_columns": [
+        "MaGhe"
+      ],
+      "id": "fk21",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ChiTietVe",
+      "columns": [
+        "MaGiaVe"
+      ],
+      "parent": "GiaVe",
+      "parent_columns": [
+        "MaGiaVe"
+      ],
+      "id": "fk22",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ChiTietDonFnb",
+      "columns": [
+        "MaDonHang"
+      ],
+      "parent": "DonHang",
+      "parent_columns": [
+        "MaDonHang"
+      ],
+      "id": "fk23",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ChiTietDonFnb",
+      "columns": [
+        "MaSanPham"
+      ],
+      "parent": "FnbSanPham",
+      "parent_columns": [
+        "MaSanPham"
+      ],
+      "id": "fk24",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ChiTietComboDaBan",
+      "columns": [
+        "MaThanhPhan"
+      ],
+      "parent": "FnbSanPham",
+      "parent_columns": [
+        "MaSanPham"
+      ],
+      "id": "fk25",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ChiTietComboDaBan",
+      "columns": [
+        "MaDonHang",
+        "MaSanPham"
+      ],
+      "parent": "ChiTietDonFnb",
+      "parent_columns": [
+        "MaDonHang",
+        "MaSanPham"
+      ],
+      "id": "fk26",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "GiuGhe",
+      "columns": [
+        "MaSuatChieu"
+      ],
+      "parent": "SuatChieu",
+      "parent_columns": [
+        "MaSuatChieu"
+      ],
+      "id": "fk27",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "GiuGhe",
+      "columns": [
+        "MaGhe"
+      ],
+      "parent": "Ghe",
+      "parent_columns": [
+        "MaGhe"
+      ],
+      "id": "fk28",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "GiuGhe",
+      "columns": [
+        "MaDonHang"
+      ],
+      "parent": "DonHang",
+      "parent_columns": [
+        "MaDonHang"
+      ],
+      "id": "fk29",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "ThanhToan",
+      "columns": [
+        "MaDonHang"
+      ],
+      "parent": "DonHang",
+      "parent_columns": [
+        "MaDonHang"
+      ],
+      "id": "fk30",
+      "optional": false,
+      "unique": true
+    },
+    {
+      "child": "ThanhToan",
+      "columns": [
+        "NguoiXacNhan"
+      ],
+      "parent": "TaiKhoan",
+      "parent_columns": [
+        "MaTaiKhoan"
+      ],
+      "id": "fk31",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "Ve",
+      "columns": [
+        "NguoiSoat"
+      ],
+      "parent": "TaiKhoan",
+      "parent_columns": [
+        "MaTaiKhoan"
+      ],
+      "id": "fk32",
+      "optional": true,
+      "unique": false
+    },
+    {
+      "child": "Ve",
+      "columns": [
+        "MaDonHang",
+        "MaGhe"
+      ],
+      "parent": "ChiTietVe",
+      "parent_columns": [
+        "MaDonHang",
+        "MaGhe"
+      ],
+      "id": "fk33",
+      "optional": false,
+      "unique": true
+    },
+    {
+      "child": "HoanTien",
+      "columns": [
+        "MaDonHang"
+      ],
+      "parent": "ThanhToan",
+      "parent_columns": [
+        "MaDonHang"
+      ],
+      "id": "fk34",
+      "optional": false,
+      "unique": true
+    },
+    {
+      "child": "HoanTien",
+      "columns": [
+        "NguoiThucHien"
+      ],
+      "parent": "TaiKhoan",
+      "parent_columns": [
+        "MaTaiKhoan"
+      ],
+      "id": "fk35",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "PhimTheLoai",
+      "columns": [
+        "MaPhim"
+      ],
+      "parent": "Phim",
+      "parent_columns": [
+        "MaPhim"
+      ],
+      "id": "fk36",
+      "optional": false,
+      "unique": false
+    },
+    {
+      "child": "PhimTheLoai",
+      "columns": [
+        "MaTheLoai"
+      ],
+      "parent": "TheLoai",
+      "parent_columns": [
+        "MaTheLoai"
+      ],
+      "id": "fk37",
+      "optional": false,
+      "unique": false
+    }
+  ],
+  "script_sha256": {
+    "Database/Scripts/00_Full_Setup_Rap_Phong_Ghe.sql": "59d464623255790775921723dfb6d5a672fbe053aed9342ff3e65f79215c5dc1",
+    "Database/Scripts/00_TaoDatabase_Phim.sql": "876dbfd99cb157ef1e1c5672828bf3e44503777840bfabee9d70fdfda2f316a6",
+    "Database/Scripts/01_CauTruc_Rap_Phong_Ghe.sql": "d29ab5af11839e0cbde531c611e4260e90d08d45d9e4e0b2f8cdfec43e8fa767",
+    "Database/Scripts/02_DuLieuMau_Rap_Phong_Ghe.sql": "cb952420cdf80db074819df1cd09410d61c5ce8e41073c382cc662d2c3674289",
+    "Database/Scripts/03_KiemTraDuLieu.sql": "95feb520d7a1d7316236fa6348d175c665fbc525c269806fe644dd722d52c58d",
+    "Database/Scripts/04_TaoBang_SuatChieu.sql": "fae520c05c55380931189be8e07238e6a2a262ebc767a05fd62f6ffb35195ee1",
+    "Database/Scripts/05_ThemSuatChieu.sql": "3b4c3bd86b8374ff41ef2c67a264c2b5d5d942d620c84cd4739a8529300fb20a",
+    "Database/Scripts/06_SuaSuatChieu.sql": "21b3727cd5b6dc4e5a5b8dcc85273366da58997d1f69abc299097c6ea9a30789",
+    "Database/Scripts/07_DoiTrangThaiSuatChieu.sql": "9b4238f069f71a0234a8a6e08d708dd7be6482d884d2aad77d85eacce6f15cba",
+    "Database/Scripts/08_SaoChepLich.sql": "22c80d8f5d42a7a6ccc8d127179178603360cb7af13ed725c1e7c020fd2ad0c7",
+    "Database/Scripts/09_GiaVe_Fnb.sql": "e03d1ac9529170f980ee2ac815c329ce558be45ce562f5eca538534979518e50",
+    "Database/Scripts/10_TaiKhoan_PhanQuyen.sql": "31c9394925c45f5e2d71564443bd275e0a5a6ba95eae51feaeaa01ada304e2be",
+    "Database/Scripts/11_KhachHang_NhanVien.sql": "6e33cd8ce40257037eb1a22b2138e714d1bc1acdbc8cfba51cf99f609ef1303d",
+    "Database/Scripts/12_DonHang_Ve_ThanhToan.sql": "0c9554ada80eb78576227de57522a502cca3ff49d93b2742cdeaeedeae15df13",
+    "Database/Scripts/13_DatVe_GiuGhe.sql": "ab989cada8e72bc829c55d4b22977ff84729e472e6b63e4afd653c1135b27083",
+    "Database/Scripts/14_BanVe_ThanhToan.sql": "64fc97b18a9e972e75c34c1d0c83dcdf99e1e8007906d5b534944edf2e353736",
+    "Database/Scripts/15_HuyDon_HoanTien.sql": "b23de95d8d84a8b83f73c61e6dd427efb01eddbefe13da56ff355f25c97211a0",
+    "Database/Scripts/16_KiemTraVe.sql": "dde56bb3481891c31ff74e4054a5e59846e2dcdd48f5d6dc4f8b4a80c509de1c",
+    "Database/Scripts/17_QuanLyDanhMuc.sql": "4fb4222530201e0dec39d1fadd6ca841d7898d68abae72653921b8ece668da2d",
+    "Database/Scripts/18_BaoCao_ThongKe.sql": "58f266740081c63ec0223724607945c41357ea2a7b7254bbab72c1e83dac806b",
+    "Database/Scripts/19_TruyVan_Web.sql": "c9750bcca1eb59f1187f78f7228192ae3a355f822c8d6ac7910814924fe22cc3",
+    "Database/Scripts/20_KiemThu_NghiepVu.sql": "1aa58a56c34efb652cc6a1750b6d11b1b59c3019f464c6b607f04961284e6d74",
+    "Database/Scripts/21_QuanTriTaiKhoan.sql": "14049ef52d0cf78a3f55c09c5d8563127d590cd70cd746645ee0da44e930dcf5",
+    "Database/Scripts/22_TichHop_PhanQuyen_Lich_Gia.sql": "68e4dae22fa3dd22cf4cc3147a33406b930561494a58ebc33d6d8542d430c895",
+    "Database/Scripts/23_WinForms_HoanThien.sql": "9a4929beca040d624ab31b9a185c3e890e845e85f32cc5d5deb2152227235eea",
+    "Database/Scripts/24_Web_MoPhongThanhToan.sql": "2a8cb9047d247355ce83a764726cb4d5dc9d6b98519e56a47303700131cfc8d2",
+    "Database/Scripts/25_Admin_PhamViRap.sql": "39d1b2715da963fcadb343754e6ec2464229d48fde97ebc6f05084e1be424ece",
+    "Database/Scripts/26_Admin_SoatVeTheoSuat.sql": "0f60df0fbcaa3ba78da63c90391b58238317a2f93517b4008c852341558111b5",
+    "Database/Scripts/27_Admin_ThuTien_TraCuuDon.sql": "c9006c301ce17b6e5150bd9ecb543c2b4d34f9cf5d8cab1ccfb4228b4f93c86b",
+    "Database/Scripts/28_Admin_TimKiem.sql": "1858c40c2cc3c605b80734f019a653ba824480a66712d20cbe5c724e7a76f2f2",
+    "Database/Scripts/29_Admin_BaoCaoPhimSuat.sql": "d8c7b5af9ff2a3a12e41356471bb2a708faebab0d51ae3ef9175da1e4d5c82d9",
+    "Database/Scripts/30_Admin_TheLoaiPhim.sql": "de3b537046cf8a07d8c78bcb7c49d829458ccac148a58368b26f3c53dbb62ade"
+  }
+}

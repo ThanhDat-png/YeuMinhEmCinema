@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="32.6.1" type="device">
+  <diagram id="10-UC08" name="Use Case 08 — Bán vé tại quầy">
+    <mxGraphModel dx="1000" dy="925" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="770" math="0" shadow="0" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" value="Use Case 08 — Bán vé tại quầy" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=26;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;shape=label;strokeColor=none;fillColor=none;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="15" width="940" height="65" />
+        </mxCell>
+        <mxCell id="n3" value="YeuMinhEm Cinema — WinForms" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;verticalAlign=top;spacingTop=12;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="250" y="95" width="720" height="655" />
+        </mxCell>
+        <mxCell id="n4" value="UC08.01&lt;br&gt;Tìm suất và lập giỏ tại quầy" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;ellipse;perimeter=ellipsePerimeter;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="300" y="150" width="620" height="88" />
+        </mxCell>
+        <mxCell id="n5" value="UC08.02&lt;br&gt;Tạo đơn và giữ ghế tại quầy" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;ellipse;perimeter=ellipsePerimeter;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="300" y="265" width="620" height="88" />
+        </mxCell>
+        <mxCell id="n6" value="UC08.03&lt;br&gt;Xác nhận thu tiền tại quầy" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;ellipse;perimeter=ellipsePerimeter;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="300" y="380" width="620" height="88" />
+        </mxCell>
+        <mxCell id="n7" value="UC08.04&lt;br&gt;Xuất phiếu vé" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;ellipse;perimeter=ellipsePerimeter;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="300" y="495" width="620" height="88" />
+        </mxCell>
+        <mxCell id="n8" value="UC08.05&lt;br&gt;Bắt đầu giỏ mới tại quầy" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;ellipse;perimeter=ellipsePerimeter;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="300" y="610" width="620" height="88" />
+        </mxCell>
+        <mxCell id="n9" value="Nhân sự có&lt;br&gt;quyền tương ứng" style="html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=21;fontColor=#111111;strokeColor=#333333;strokeWidth=1.5;fillColor=#ffffff;spacing=10;align=center;verticalAlign=middle;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;labelPosition=center;spacingTop=8;labelWidth=180;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="373" width="60" height="95" />
+        </mxCell>
+        <mxCell id="e10" value="" style="edgeStyle=none;html=1;endArrow=none;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n9" target="n4">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" value="" style="edgeStyle=none;html=1;endArrow=none;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n9" target="n5">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e12" value="" style="edgeStyle=none;html=1;endArrow=none;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n9" target="n6">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e13" value="" style="edgeStyle=none;html=1;endArrow=none;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n9" target="n7">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e14" value="" style="edgeStyle=none;html=1;endArrow=none;strokeWidth=1.4;strokeColor=#444444;fontFamily=Arial;fontSize=18;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="n9" target="n8">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

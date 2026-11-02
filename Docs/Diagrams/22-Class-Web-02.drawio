@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="32.6.1" type="device">
+  <diagram id="22-Class-Web-02" name="02 Trang chủ và dữ liệu danh mục công khai">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1045" pageHeight="1197" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Trang chủ và dữ liệu danh mục công khai" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=24;fontStyle=1;fontColor=#172b46;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20" y="10" width="1005.0" height="45" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Controllers.HomeController" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;HomeController&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- data: TrangChuData&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- logger: ILogger&amp;lt;HomeController&amp;gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ HomeController(TrangChuData data,&lt;br&gt;ILogger&amp;lt;HomeController&amp;gt; logger)&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Index(string? tuKhoa, string? trangThai, int trang =&lt;br&gt;1, CancellationToken cancellationToken = default):&lt;br&gt;Task&amp;lt;IActionResult&amp;gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Loi(): IActionResult&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="92.0" width="440" height="286" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Data.TrangChuData" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;TrangChuData&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- configuration: IConfiguration&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TrangChuData(IConfiguration configuration)&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;- TaoKetNoi(): SqlConnection&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ LayPhimAsync(string? tuKhoa, string? trangThai,&lt;br&gt;int trang, int kichThuoc, CancellationToken&lt;br&gt;cancellationToken): Task&amp;lt;(List&amp;lt;Phim&amp;gt; phim, int&lt;br&gt;tong)&amp;gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ LayRapAsync(CancellationToken&lt;br&gt;cancellationToken): Task&amp;lt;List&amp;lt;Rap&amp;gt;&amp;gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="580.0" y="80.0" width="440" height="310" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.ViewModels.TrangChuViewModel" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;TrangChuViewModel&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TuKhoa: string?&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TrangThai: string?&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Trang: int&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TongKetQua: int&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TongTrang: int&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Loi: string?&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Phim: List&amp;lt;Phim&amp;gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ PhimNoiBat: List&amp;lt;Phim&amp;gt;&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Rap: List&amp;lt;Rap&amp;gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="465.0" width="440" height="300" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Models.Phim" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;Phim&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ MaPhim: int&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TenPhim: string&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ ThoiLuong: int&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ NgayKhoiChieu: DateTime&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ GioiHanTuoi: string&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TrangThai: string&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ Poster: string?&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ AnhPoster: string&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="580.0" y="477.0" width="440" height="276" />
+        </mxCell>
+        <mxCell id="YeuMinhEmCinema.Web.Models.Rap" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:60px;background:#e2eaf4;text-align:center;font-size:18px&quot;&gt;&lt;b&gt;Rap&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border-top:1px solid #52647b;padding:5px 8px;text-align:left;vertical-align:top&quot;&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ TenRap: string&lt;/div&gt;&lt;div style=&quot;line-height:22px&quot;&gt;+ DiaChi: string&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="840.0" width="440" height="132" />
+        </mxCell>
+        <mxCell id="Microsoft.AspNetCore.Mvc.Controller" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:17px&quot;&gt;&lt;tr&gt;&lt;td style=&quot;height:56px;background:#edf0f3;text-align:center;font-size:18px&quot;&gt;«framework»&lt;br&gt;&lt;b&gt;Controller&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="50.0" y="1067.0" width="225" height="58" />
+        </mxCell>
+        <mxCell id="e0" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=block;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00036;exitY=0.33217;exitPerimeter=0;entryX=-0.00098;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Controllers.HomeController" target="Microsoft.AspNetCore.Mvc.Controller">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="35.12" y="187.0" />
+              <mxPoint x="26.0" y="187.0" />
+              <mxPoint x="26.0" y="187.0" />
+              <mxPoint x="26.0" y="187.0" />
+              <mxPoint x="26.0" y="1096.0" />
+              <mxPoint x="26.0" y="1096.0" />
+              <mxPoint x="26.0" y="1096.0" />
+              <mxPoint x="35.63" y="1096.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00036;exitY=0.33217;exitPerimeter=0;entryX=-0.00075;entryY=0.34516;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Controllers.HomeController" target="YeuMinhEmCinema.Web.Data.TrangChuData">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="519.74" y="187.0" />
+              <mxPoint x="550.09" y="187.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00036;exitY=0.65333;exitPerimeter=0;entryX=-0.00075;entryY=0.66667;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.ViewModels.TrangChuViewModel" target="YeuMinhEmCinema.Web.Models.Phim">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="519.74" y="661.0" />
+              <mxPoint x="550.09" y="661.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=none;html=1;rounded=0;dashed=0;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.50000;exitY=1.00063;exitPerimeter=0;entryX=0.50000;entryY=-0.00311;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.ViewModels.TrangChuViewModel" target="YeuMinhEmCinema.Web.Models.Rap">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="270.0" y="791.32" />
+              <mxPoint x="270.0" y="817.24" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.50000;exitY=1.00136;exitPerimeter=0;entryX=0.50000;entryY=-0.00133;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Controllers.HomeController" target="YeuMinhEmCinema.Web.ViewModels.TrangChuViewModel">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="270.0" y="406.57" />
+              <mxPoint x="270.0" y="436.2" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=0.50000;exitY=1.00123;exitPerimeter=0;entryX=0.50000;entryY=-0.00091;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Data.TrangChuData" target="YeuMinhEmCinema.Web.Models.Phim">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="800.0" y="418.99" />
+              <mxPoint x="800.0" y="448.69" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00064;exitY=0.98065;exitPerimeter=0;entryX=1.00077;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Data.TrangChuData" target="YeuMinhEmCinema.Web.Models.Rap">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="544.84" y="384.0" />
+              <mxPoint x="520.0" y="384.0" />
+              <mxPoint x="520.0" y="384.0" />
+              <mxPoint x="520.0" y="384.0" />
+              <mxPoint x="520.0" y="906.0" />
+              <mxPoint x="520.0" y="906.0" />
+              <mxPoint x="520.0" y="906.0" />
+              <mxPoint x="508.46" y="906.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=1.00064;exitY=0.66783;exitPerimeter=0;entryX=-0.00077;entryY=0.33333;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Controllers.HomeController" target="YeuMinhEmCinema.Web.Models.Phim">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="525.16" y="283.0" />
+              <mxPoint x="550.0" y="283.0" />
+              <mxPoint x="550.0" y="283.0" />
+              <mxPoint x="550.0" y="283.0" />
+              <mxPoint x="550.0" y="569.0" />
+              <mxPoint x="550.0" y="569.0" />
+              <mxPoint x="550.0" y="569.0" />
+              <mxPoint x="561.54" y="569.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=none;html=1;rounded=0;dashed=1;dashPattern=5 4;startArrow=none;endArrow=open;endFill=0;endSize=17;strokeWidth=1.5;strokeColor=#52647b;exitX=-0.00114;exitY=0.66783;exitPerimeter=0;entryX=-0.00114;entryY=0.50000;entryPerimeter=0;" edge="1" parent="1" source="YeuMinhEmCinema.Web.Controllers.HomeController" target="YeuMinhEmCinema.Web.Models.Rap">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="42.21" y="283.0" />
+              <mxPoint x="38.0" y="283.0" />
+              <mxPoint x="38.0" y="283.0" />
+              <mxPoint x="38.0" y="283.0" />
+              <mxPoint x="38.0" y="906.0" />
+              <mxPoint x="38.0" y="906.0" />
+              <mxPoint x="38.0" y="906.0" />
+              <mxPoint x="42.21" y="906.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

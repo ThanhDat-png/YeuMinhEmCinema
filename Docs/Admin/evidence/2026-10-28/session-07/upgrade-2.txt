@@ -1,0 +1,2 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+Đã bổ sung SQL 30: thể loại Admin, giữ nguyên hợp đồng Web và phim cũ.

@@ -1,0 +1,10 @@
+PASS: Lịch mặc định tải suất gợi ý và có nút chọn ghế
+PASS: Gợi ý tôn trọng rạp ngay khi chưa chọn phim
+PASS: Lọc ngày và rạp không bắt buộc chọn phim
+PASS: Nút tại cụm rạp đi vào trang riêng của rạp
+PASS: Trang riêng rạp hiển thị phim và mở chi tiết với đúng rạp
+PASS: Chi tiết phim giữ rạp và có lối quay về
+PASS: Lịch rỗng có thông báo và lối khám phá phim
+PASS: Rạp chưa có phim có thông báo riêng
+PASS: Rạp không tồn tại trả 404
+PASS: Bộ lọc sai trả 400

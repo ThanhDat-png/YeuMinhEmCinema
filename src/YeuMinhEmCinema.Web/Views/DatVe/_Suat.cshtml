@@ -1,0 +1,9 @@
+@model DatVeModel
+@if (Model.Suat != null)
+{
+    <div class="notice">
+        <h2>@Model.Suat["TenPhim"]</h2>
+        <p>@Model.Suat["TenRap"] · @Model.Suat["TenPhong"] · @Model.Suat["DinhDang"]</p>
+        <p>@Convert.ToDateTime(Model.Suat["GioBatDau"]).ToString("dd/MM/yyyy HH:mm") (giờ Việt Nam)</p>
+    </div>
+}

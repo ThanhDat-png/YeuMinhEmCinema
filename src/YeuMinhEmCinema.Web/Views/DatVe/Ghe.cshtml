@@ -1,0 +1,55 @@
+@model DatVeModel
+@{
+    ViewData["Title"] = "Chọn ghế";
+}
+<div class="container page-content">
+    <h1>Chọn ghế</h1>
+    <partial name="_Suat" model="Model" />
+    <div asp-validation-summary="All" class="validation" role="alert"></div>
+    <p>Chọn tối đa 8 ghế. Ghế chỉ được giữ khi bạn xác nhận ở bước bắp nước.</p>
+    <p class="seat-legend">□ Trống · <span>Đỏ: đang chọn</span> · Đang giữ · Đã bán · Không sử dụng · Chưa có giá</p>
+    <form asp-action="BapNuoc" method="post" data-submit>
+        <input asp-for="MaSuatChieu" type="hidden" />
+        <input asp-for="MaYeuCau" type="hidden" />
+        <div class="screen">MÀN HÌNH</div>
+        <div class="seat-scroll" tabindex="0" aria-label="Sơ đồ ghế, có thể cuộn ngang trong sơ đồ">
+            @foreach (var hang in Model.SoDo.AsEnumerable().GroupBy(r => (string)r["HangGhe"]))
+            {
+                <div class="seat-row">
+                    <strong>@hang.Key</strong>
+                    @foreach (var ghe in hang)
+                    {
+                        var trangThai = (string)ghe["TinhTrang"];
+                        var chonDuoc = trangThai == "Trống" && ghe["Gia"] != DBNull.Value;
+                        var nhan = trangThai;
+                        if (ghe["Gia"] == DBNull.Value && trangThai == "Trống")
+                        {
+                            nhan = "Chưa có giá";
+                        }
+                        <label class="seat" title="@ghe["TenLoai"] · @nhan">
+                            <input type="checkbox" name="Ghe" value="@ghe["MaGhe"]" checked="@Model.Ghe.Contains((int)ghe["MaGhe"])" disabled="@(!chonDuoc)" />
+                            <span class="seat-face" data-state="@nhan">
+                                <b>@ghe["HangGhe"]@ghe["SoGhe"]</b>
+                                <small>@ghe["TenLoai"]</small>
+                                @if (ghe["Gia"] != DBNull.Value)
+                                {
+                                    <small>@HienThi.Tien(ghe["Gia"])</small>
+                                }
+                                <small>@nhan</small>
+                            </span>
+                        </label>
+                    }
+                </div>
+            }
+        </div>
+        <div class="account-form">
+            <label asp-for="HoTen">Tên liên hệ</label>
+            <input asp-for="HoTen" maxlength="150" />
+            <span asp-validation-for="HoTen" class="validation"></span>
+            <label asp-for="DienThoai">Điện thoại</label>
+            <input asp-for="DienThoai" maxlength="20" />
+            <span asp-validation-for="DienThoai" class="validation"></span>
+            <button type="submit" class="button">Tiếp tục chọn bắp nước</button>
+        </div>
+    </form>
+</div>

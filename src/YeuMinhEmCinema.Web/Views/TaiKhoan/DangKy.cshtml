@@ -1,0 +1,30 @@
+@model DangKyModel
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+<div class="container page-content">
+    <form asp-action="DangKy" method="post" class="account-form" data-submit>
+        <h1>Đăng ký khách hàng</h1>
+        <div asp-validation-summary="All" class="validation"></div>
+        <label asp-for="TenDangNhap">Tên đăng nhập</label>
+        <input asp-for="TenDangNhap" autocomplete="username" maxlength="50" />
+        <span asp-validation-for="TenDangNhap" class="validation"></span>
+        <label asp-for="HoTen">Họ tên</label>
+        <input asp-for="HoTen" autocomplete="name" maxlength="150" />
+        <span asp-validation-for="HoTen" class="validation"></span>
+        <label asp-for="Email">Email (không bắt buộc)</label>
+        <input asp-for="Email" type="email" autocomplete="email" />
+        <span asp-validation-for="Email" class="validation"></span>
+        <label asp-for="DienThoai">Điện thoại (không bắt buộc)</label>
+        <input asp-for="DienThoai" autocomplete="tel" maxlength="20" />
+        <span asp-validation-for="DienThoai" class="validation"></span>
+        <label asp-for="MatKhau">Mật khẩu (12–200 ký tự)</label>
+        <input asp-for="MatKhau" type="password" autocomplete="new-password" />
+        <span asp-validation-for="MatKhau" class="validation"></span>
+        <label asp-for="XacNhanMatKhau">Xác nhận mật khẩu</label>
+        <input asp-for="XacNhanMatKhau" type="password" autocomplete="new-password" />
+        <span asp-validation-for="XacNhanMatKhau" class="validation"></span>
+        <button type="submit" class="button">Tạo tài khoản khách hàng</button>
+        <a asp-action="DangNhap">Đã có tài khoản? Đăng nhập</a>
+    </form>
+</div>

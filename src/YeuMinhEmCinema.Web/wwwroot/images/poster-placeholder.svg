@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+    <rect width="400" height="600" fill="#14243a"/>
+    <rect x="145" y="220" width="110" height="85" rx="10" fill="none" stroke="#82bbff" stroke-width="4"/>
+    <path d="m185 242 35 21-35 21Z" fill="#82bbff"/>
+    <text x="200" y="355" text-anchor="middle" fill="#bbcee5" font-family="Arial,sans-serif" font-size="19">YeuMinhEm Cinema</text>
+    <text x="200" y="388" text-anchor="middle" fill="#bbcee5" font-family="Arial,sans-serif" font-size="15">Chưa có ảnh poster</text>
+    </svg>

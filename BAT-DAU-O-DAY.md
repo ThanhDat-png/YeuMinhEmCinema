@@ -1,0 +1,88 @@
+﻿# Cập nhật WinForms YeuMinhEm Cinema
+
+Bản này sửa trực tiếp source bạn gửi YeuMinhEmCinema(4).zip. Không chứa mật khẩu Admin, không chứa database .bak/.mdf.
+
+## Máy bạn đã chạy SQL 00–22 và đã có tài khoản Admin
+
+1. Đóng ứng dụng Admin và Visual Studio để tránh chép trúng file đang chạy.
+2. Giải nén vào một thư mục riêng. Có thể mở và thử bản riêng trước khi chép vào repo.
+3. Trong SSMS kết nối `.\SQLEXPRESS`, chạy **Database/Scripts/23_WinForms_HoanThien.sql** nếu chưa có SQL 23, sau đó chạy **Database/Scripts/25_Admin_PhamViRap.sql**. SQL 25 vá quyền sửa rạp/phòng/ghế, không seed dữ liệu hoặc đổi mật khẩu.
+4. Chạy **Database/KIEM-TRA-WINFORMS.sql**. Các cột ID object phải khác NULL. File không sửa tài khoản.
+5. Mở **src/YeuMinhEmCinema.Admin/YeuMinhEmCinema.Admin.csproj** bằng Visual Studio.
+6. Build (Ctrl+Shift+B), rồi F5. NuGet tự khôi phục thư viện, gồm QRCoder để xuất vé QR.
+7. Đăng nhập bằng tài khoản Admin đã tạo trước đây. Không cần tạo lại tài khoản hoặc chạy lại seed.
+
+Không cần chạy lại CAI-DAT-TAT-CA.sql trên database đang dùng. Nếu sau này chạy lại các script cũ 11/15/22, hãy chạy 23 rồi 25 cuối cùng để giữ bản tích hợp và bản vá quyền mới.
+
+Nếu chép vào repo cũ, chép NỘI DUNG thư mục YeuMinhEmCinema vào đúng thư mục dự án, chọn thay thế file. Giữ thư mục .git của bạn; tránh lồng thành YeuMinhEmCinema/YeuMinhEmCinema. Các Designer chuyển sang giao diện bằng code có file stub đi kèm, phải chép thay thế cả chúng.
+
+## Chạy bằng lệnh
+
+Mở PowerShell tại thư mục có YeuMinhEmCinema.slnx:
+
+```powershell
+dotnet run --project .\src\YeuMinhEmCinema.Admin\YeuMinhEmCinema.Admin.csproj
+```
+
+Hoặc nhấp đúp **CHAY-ADMIN.cmd**. Cần Windows, .NET SDK 10 và SQL Server đang chạy; không phải app Web.
+
+## Muốn thử riêng trên database Test
+
+Mở bản sao file 23, đổi dòng `USE YeuMinhEmCinema;` thành `USE YeuMinhEmCinema_Test;`, chạy trên SSMS.
+Sau đó chạy từ PowerShell:
+
+```powershell
+$env:YMC_CONNECTION = 'Server=.\SQLEXPRESS;Database=YeuMinhEmCinema_Test;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;'
+dotnet run --project .\src\YeuMinhEmCinema.Admin\YeuMinhEmCinema.Admin.csproj
+Remove-Item Env:\YMC_CONNECTION
+```
+
+Database Test có cấu trúc riêng. Dữ liệu fixture của bài thử trước đã rollback, nên có thể cần tạo Admin/danh mục riêng trong Test để thao tác UI.
+
+## Database mới hoàn toàn
+
+Mở Database/CAI-DAT-TAT-CA.sql và chạy toàn bộ (đã kèm 23 và bản vá 25 ở cuối). Seed tùy chọn, không bắt buộc. Đủ bảng giá cho từng loại ghế/định dạng/ngày chiếu trước khi bán. Không có admin/mật khẩu mặc định.
+
+## Điểm cần hiểu khi chạy
+
+- Danh mục và tài khoản hiện có giữ trên SQL Server; ZIP không mang theo hay thay mật khẩu.
+- Các màn hình từng minh họa đã thay bằng truy vấn/thao tác SQL. Web trong Design là bản thiết kế cũ, không phải Web backend mới.
+- Thu/hoàn chỉ GHI NHẬN tiền đã nhận/đã hoàn. Không tích hợp ngân hàng thật; không bấm xác nhận nếu chưa thu/hoàn tiền.
+- Đọc Docs/HuongDan/WINFORMS.md để biết quy trình từng mục và các giới hạn đã chốt.
+- Bản này đã build và kiểm tra tự động như KET-QUA-WINFORMS.md; chưa chạy GUI Windows hay SQL 23 trong môi trường đóng gói. Cần kiểm tra chức năng trên máy bạn.
+
+## Bản vá phạm vi Admin SQL 25
+
+Database đang dùng đã có SQL 23 chỉ cần chạy `Database/Scripts/25_Admin_PhamViRap.sql` sau khi chọn đúng database. Không chạy lại seed. Khi dùng database Test, đổi dòng `USE YeuMinhEmCinema;` thành `USE YeuMinhEmCinema_Test;`. Hai file tổng cài mới đã kèm SQL 25. SQL 24 là phần thanh toán mô phỏng Web riêng, không phải điều kiện để áp dụng SQL 25.
+
+## Soát vé theo suất — SQL 26
+
+Admin mới cần `Database/Scripts/26_Admin_SoatVeTheoSuat.sql` để chọn suất và kiểm đúng suất/phòng. Database đã có SQL 23: áp dụng bản vá 25 rồi 26; không seed lại. Đổi dòng USE nếu dùng Test. Hai bộ cài tổng đã kèm 26. Không cần chạy SQL 24 của Web để dùng 26.
+
+Tại Kiểm tra vé: chọn ngày → Tải suất → chọn suất có rạp/phòng/giờ chiếu → nhập GUID/QR → Tra cứu hoặc Xác nhận vào rạp. Chưa chọn suất thì hai nút bị khóa. Danh sách gồm cả suất qua đêm còn chiếu trong ngày chọn, bỏ suất hủy và lọc phạm vi người soát. Khung vào vẫn từ trước 30 phút đến trước giờ kết thúc.
+
+## Tiền khách đưa và tra cứu — SQL 27
+
+Database đang có SQL 23/25/26: áp dụng `Database/Scripts/27_Admin_ThuTien_TraCuuDon.sql` trước khi dùng bản Admin mới. Đổi USE khi dùng Test; không seed hoặc đổi schema. Hai bộ cài tổng đã kèm27. SQL 24 Web không phải điều kiện.
+
+Tiền mặt: giữ ghế để chốt tổng đơn rồi nhập tiền khách đưa (100000 hoặc 100.000); form báo thiếu/thừa, chặn tiền thiếu hoặc sai định dạng. Chỉ tổng đơn được ghi thu. Tra cứu: nhập mã đơn/mã giao dịch thu/GUID vé, bấm Lọc / tìm; mã kết hợp rạp/ngày tạo/trạng thái đang chọn. Nút Trước/Sau khóa ở biên.
+
+## Tìm kiếm Admin — SQL 28
+
+Database đã có SQL 23/25/26/27: áp dụng `Database/Scripts/28_Admin_TimKiem.sql` trước khi chạy Admin mới. Đổi USE khi dùng Test; không seed hoặc đổi schema. Hai bộ cài tổng đã kèm SQL 28. Không cần SQL 24 Web.
+
+- Nhân viên: tên đăng nhập/họ tên, mã nhân viên/mã tài khoản hoặc một phần SĐT. Mã hồ sơ và mã tài khoản có thể trùng số nên có thể trả nhiều dòng phù hợp; nhìn rõ hai cột mã.
+- Rạp/Phòng: người có RAP_XEM mở được màn hình, tìm theo mã/tên phòng; không có RAP_QUAN_LY thì nút ghi và menu chuột phải bị khóa. Chỉ trả phòng trong rạp được phân công.
+- Quầy: nhập tên phim rồi bấm Tải suất / tìm phim hoặc Enter. Lọc cùng rạp/ngày và điều kiện còn được bán. Đổi bộ lọc xóa ghế/tổng tạm cũ; đơn đã có yêu cầu giữ vẫn khóa giỏ.
+
+## Báo cáo phim/suất — SQL 29
+
+Database đang có SQL 23/25/26/27/28: chạy `Database/Scripts/29_Admin_BaoCaoPhimSuat.sql` trên đúng database rồi dùng Admin mới. Với Test đổi USE; không seed/schema mới/SQL 24 Web. Hai bộ cài tổng đã kèm29. Không tự chạy lên database chính khi chỉ kiểm thử.
+
+Trong Tổng quan/Báo cáo: chọn rạp, phim hoặc Tất cả phim, khoảng ngày Việt Nam rồi chọn chế độ. Thu/hoàn dùng ngày giao dịch; Từng suất dùng ngày bắt đầu chiếu và tiền lũy kế của suất. Các cột thu vé/F&B là trước hoàn; tổng thu lấy ThanhToan, hoàn lấy HoanTien; thuần=thu−hoàn. Hiệu quả phim và Bắp nước bán giữ nghĩa chỉ đơn đã trả chưa hoàn, có nhãn giải thích riêng.
+
+## Cập nhật T07 (28/10/2026)
+
+Admin có danh mục thể loại và gán nhiều thể loại/phim. Nâng cấp SQL30 trước khi chạy Admin mới, chọn đúng database Test khi kiểm thử. T06 đã commit a4e3ae6; T07 chưa commit/push. Kết quả và tồn tại: Docs/Admin/PHIEN-07-KET-QUA.md, PHIEN-07-CON-TON-TAI.md. Không sửa DOCX/triển khai T08 trong T07.
+
+Cập nhật Git 28/10/2026: người dùng đã duyệt commit/push T07 và đổi thông điệp5 commit Admin trước sang tiếng Việt. Mã commit lịch sử đối chiếu tại Docs/Admin/DOI-CHIEU-COMMIT.md; không chuyển T08.

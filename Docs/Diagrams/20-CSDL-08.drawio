@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="32.6.1" type="device">
+  <diagram id="csdl-08" name="08 Sản phẩm, combo và chi tiết F&amp;B đã bán">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageScale="1" pageWidth="881" pageHeight="785" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Sản phẩm, combo và chi tiết F&amp;amp;B đã bán" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=24;fontStyle=1;fontColor=#172b46;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20" y="12" width="841.0" height="44" />
+        </mxCell>
+        <mxCell id="FnbSanPham" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:16px&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; style=&quot;background:#e2eaf4;border-bottom:1px solid #52647b;height:34px;text-align:center;font-size:19px&quot;&gt;&lt;b&gt;FnbSanPham&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK  MaSanPham&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;UQ  MaHang&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;VARCHAR(30)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;TenSanPham&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;NVARCHAR(150)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;Nhom&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;NVARCHAR(20)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;KichCo&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;NVARCHAR(50)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;DonGia&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;DECIMAL(18,0)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;DangBan&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;BIT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PhienBan&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;ROWVERSION&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="196.0" y="80.0" width="330" height="236" />
+        </mxCell>
+        <mxCell id="FnbComboChiTiet" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:16px&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; style=&quot;background:#e2eaf4;border-bottom:1px solid #52647b;height:34px;text-align:center;font-size:19px&quot;&gt;&lt;b&gt;FnbComboChiTiet&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK / FK  MaCombo&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK / FK  MaThanhPhan&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;SoLuong&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20.0" y="404.6" width="330" height="111" />
+        </mxCell>
+        <mxCell id="ChiTietDonFnb" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:16px&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; style=&quot;background:#e2eaf4;border-bottom:1px solid #52647b;height:34px;text-align:center;font-size:19px&quot;&gt;&lt;b&gt;ChiTietDonFnb&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK / FK  MaDonHang&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;BIGINT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK / FK  MaSanPham&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;TenSanPham&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;NVARCHAR(150)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;SoLuong&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;DonGia&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;DECIMAL(18,0)&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="531.0" y="379.6" width="330" height="161" />
+        </mxCell>
+        <mxCell id="ChiTietComboDaBan" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:16px&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; style=&quot;background:#e2eaf4;border-bottom:1px solid #52647b;height:34px;text-align:center;font-size:19px&quot;&gt;&lt;b&gt;ChiTietComboDaBan&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK / FK  MaDonHang&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;BIGINT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK / FK  MaSanPham&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK / FK  MaThanhPhan&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;TenThanhPhan&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;NVARCHAR(150)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;SoLuongTrongCombo&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;INT&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="276.0" y="604.2" width="330" height="161" />
+        </mxCell>
+        <mxCell id="DonHang" value="&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width:100%;font-family:Arial;font-size:16px&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; style=&quot;background:#edf0f3;border-bottom:1px solid #52647b;height:34px;text-align:center;font-size:19px&quot;&gt;&lt;b&gt;DonHang ↗&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding-left:8px;height:25px;white-space:nowrap&quot;&gt;PK  MaDonHang&lt;/td&gt;&lt;td style=&quot;padding-right:8px;text-align:right;white-space:nowrap;font-size:14px&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;html=1;whiteSpace=wrap;overflow=fill;fillColor=#ffffff;strokeColor=#52647b;strokeWidth=1.2;spacing=0;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="586.0" y="167.5" width="220" height="61" />
+        </mxCell>
+        <mxCell id="fk7" value="" style="edgeStyle=none;html=1;rounded=0;startArrow=ERmandOne;startFill=0;endArrow=ERzeroToMany;endFill=0;startSize=16;endSize=16;strokeWidth=1.5;strokeColor=#52647b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=0.32721;exitY=1.00208;exitPerimeter=0;entryX=0.66039;entryY=-0.00252;entryPerimeter=0;" edge="1" parent="1" source="FnbSanPham" target="FnbComboChiTiet">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="293.08" y="338.94" />
+              <mxPoint x="285.0" y="355.6" />
+              <mxPoint x="285.0" y="355.6" />
+              <mxPoint x="285.0" y="355.6" />
+              <mxPoint x="261.91" y="379.49" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label-fk7" value="MaCombo" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=13;fontColor=#172b46;fillColor=#ffffff;strokeColor=none;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="258.54" y="351.77" width="61" height="19" />
+        </mxCell>
+        <mxCell id="fk8" value="" style="edgeStyle=none;html=1;rounded=0;startArrow=ERmandOne;startFill=0;endArrow=ERzeroToMany;endFill=0;startSize=16;endSize=16;strokeWidth=1.5;strokeColor=#52647b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=0.07288;exitY=1.00169;exitPerimeter=0;entryX=0.50933;entryY=-0.00153;entryPerimeter=0;" edge="1" parent="1" source="FnbSanPham" target="FnbComboChiTiet">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="203.14" y="330.49" />
+              <mxPoint x="191.72" y="340.0" />
+              <mxPoint x="191.72" y="340.0" />
+              <mxPoint x="191.72" y="340.0" />
+              <mxPoint x="189.85" y="373.12" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label-fk8" value="MaThanhPhan" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=13;fontColor=#172b46;fillColor=#ffffff;strokeColor=none;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="144.47" y="349.28" width="89" height="19" />
+        </mxCell>
+        <mxCell id="fk23" value="" style="edgeStyle=none;html=1;rounded=0;startArrow=ERmandOne;startFill=0;endArrow=ERzeroToMany;endFill=0;startSize=16;endSize=16;strokeWidth=1.5;strokeColor=#52647b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=0.50000;exitY=1.00557;exitPerimeter=0;entryX=0.50000;entryY=-0.00230;entryPerimeter=0;" edge="1" parent="1" source="DonHang" target="ChiTietDonFnb">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="696.0" y="265.27" />
+              <mxPoint x="696.0" y="328.31" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk24" value="" style="edgeStyle=none;html=1;rounded=0;startArrow=ERmandOne;startFill=0;endArrow=ERzeroToMany;endFill=0;startSize=16;endSize=16;strokeWidth=1.5;strokeColor=#52647b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=0.95858;exitY=1.00212;exitPerimeter=0;entryX=0.18876;entryY=-0.00149;entryPerimeter=0;" edge="1" parent="1" source="FnbSanPham" target="ChiTietDonFnb">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="539.72" y="337.77" />
+              <mxPoint x="567.7" y="359.49" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk25" value="" style="edgeStyle=none;html=1;rounded=0;startArrow=ERmandOne;startFill=0;endArrow=ERzeroToMany;endFill=0;startSize=16;endSize=16;strokeWidth=1.5;strokeColor=#52647b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=0.55867;exitY=1.00140;exitPerimeter=0;entryX=0.46003;entryY=-0.00242;entryPerimeter=0;" edge="1" parent="1" source="FnbSanPham" target="ChiTietComboDaBan">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="395.07" y="405.43" />
+              <mxPoint x="414.9" y="525.56" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fk26" value="" style="edgeStyle=none;html=1;rounded=0;startArrow=ERmandOne;startFill=0;endArrow=ERzeroToMany;endFill=0;startSize=16;endSize=16;strokeWidth=1.5;strokeColor=#52647b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=0.22321;exitY=1.00149;exitPerimeter=0;entryX=0.77745;entryY=-0.00267;entryPerimeter=0;" edge="1" parent="1" source="ChiTietDonFnb" target="ChiTietComboDaBan">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="581.22" y="561.3" />
+              <mxPoint x="556.01" y="583.31" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label-fk26" value="MaDonHang, MaSanPham" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=13;fontColor=#172b46;fillColor=#ffffff;strokeColor=none;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="377.28" y="549.04" width="152" height="19" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

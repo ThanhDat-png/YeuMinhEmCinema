@@ -1,0 +1,33 @@
+@model DataTable
+@{
+    ViewData["Title"] = "Phim tại " + ViewData["TenRap"];
+}
+<div class="container page-content cinema-movies-page">
+    <a asp-action="Rap">← Danh sách cụm rạp</a>
+    <h1>@ViewData["TenRap"]</h1>
+    <p class="muted">@ViewData["DiaChi"]</p>
+    <h2>Phim đang chiếu tại rạp</h2>
+    <p>Các phim có suất sắp tới đang mở bán. Chọn phim để xem giờ chiếu tại rạp này.</p>
+    @if (Model.Rows.Count == 0)
+    {
+        <div class="notice">
+            <p>Rạp hiện chưa có suất sắp tới đang mở bán.</p>
+            <a class="button" asp-action="Rap">Xem rạp khác</a>
+        </div>
+    }
+    <div class="cinema-grid">
+        @foreach (DataRow row in Model.Rows)
+        {
+            var anh = new Phim { Poster = row["Poster"] as string };
+            <article class="cinema-card cinema-movie-card">
+                <div class="poster-wrap">
+                    <img src="@anh.AnhPoster" alt="Poster @row["TenPhim"]" loading="lazy" />
+                </div>
+                <h3>@row["TenPhim"]</h3>
+                <p>@row["ThoiLuong"] phút · @row["GioiHanTuoi"]</p>
+                <p>Suất gần nhất: @Convert.ToDateTime(row["SuatGanNhat"]).ToString("dd/MM/yyyy HH:mm")</p>
+                <a class="button" asp-action="ChiTiet" asp-route-id="@row["MaPhim"]" asp-route-maRap="@ViewData["MaRap"]">Xem chi tiết phim</a>
+            </article>
+        }
+    </div>
+</div>

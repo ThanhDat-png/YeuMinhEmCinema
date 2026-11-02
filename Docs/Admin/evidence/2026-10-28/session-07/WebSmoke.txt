@@ -1,0 +1,19 @@
+PASS: Từ chối trang 0
+PASS: Từ chối trang -1
+PASS: Từ chối trang 1000001
+PASS: Từ chối trang 2147483647
+PASS: ModelState lỗi không được dùng trang mặc định
+PASS: Từ khóa quá dài
+PASS: Trạng thái không hợp lệ
+PASS: Đầu vào sai không gọi DAL
+PASS: Vượt trang chuyển về trang cuối của 25 phim
+PASS: Chuyển trang giữ bộ lọc
+PASS: Danh sách rỗng chuẩn hóa về trang đầu
+PASS: Không có kết quả khác với vượt trang, trạng thái rỗng là tất cả
+PASS: Chặn đường dẫn C:\anh\phim.jpg
+PASS: Chặn đường dẫn //host/anh.jpg
+PASS: Chặn đường dẫn /\host/anh.jpg
+PASS: Chặn đường dẫn javascript:alert(1)
+PASS: Chặn đường dẫn file:///C:/anh.jpg
+PASS: Chấp nhận ảnh wwwroot
+PASS: Thiếu cấu hình trả 503 với thông báo an toàn

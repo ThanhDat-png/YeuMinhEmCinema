@@ -1,0 +1,289 @@
+/* Cinema Blue: giao diện dùng dữ liệu MVC hiện có, tải sau cosmic-theme.css. */
+:root {
+    --accent: #39d9f5;
+    --accent-hover: #7eeaff;
+    --accent-text: #80ddf6;
+    --text: #f1f7ff;
+    --muted: #b4c7df;
+}
+body {
+    font-size: 18px;
+    line-height: 1.65;
+}
+.container {
+    width: min(1440px, 92%);
+}
+.navigation {
+    width: min(1500px, 94%);
+    min-height: 90px;
+    gap: 22px;
+}
+.brand { font-size: 23px; }
+.nav-links { gap: 24px; }
+.nav-links a, .account-nav, .nav-button { font-size: 16px; }
+.account-nav { flex-wrap: wrap; }
+.account-nav > a:last-child, .nav-button {
+    border: 1px solid #74d6f178;
+    border-radius: 12px;
+    padding: 8px 14px;
+}
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 49px;
+    padding: 11px 23px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #052035;
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.45;
+    text-align: center;
+    transition: background .18s ease, transform .18s ease;
+}
+.button:hover {
+    color: #052035;
+    background: var(--accent-hover);
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+.button-outline {
+    background: #0414268c;
+    color: var(--text);
+    border-color: #82d8f1a6;
+}
+.button-outline:hover { background: #15364f; color: white; }
+.button:disabled { transform: none; }
+.eyebrow { font-size: 13px; }
+h2 { font-size: clamp(27px, 2.5vw, 38px); }
+input, select, textarea { font-size: 17px; }
+input, select { min-height: 48px; border-radius: 10px; }
+.filters label { font-size: 16px; }
+.muted, .footer p { color: var(--muted); }
+.cosmic-motion-toggle { font-size: 14px; }
+
+/* Banner: một ảnh minh họa vũ trụ và poster phim thật từ Model. */
+.cinema-spotlight {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin-top: 24px;
+    min-height: 590px;
+    border: 1px solid #6dc8f236;
+    border-radius: 26px;
+    background: #08172a;
+    box-shadow: 0 22px 80px #0004;
+}
+.spotlight-landscape {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: url('../images/cosmic/cinema-horizon.png') 50% 30% / cover;
+}
+.cinema-spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, #0411219c, #04112130 60%),
+                linear-gradient(0deg, #041121f5, #04112108 85%);
+}
+.spotlight-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 36px;
+    min-height: 530px;
+    padding: 70px 40px 30px;
+}
+.spotlight-copy { min-width: 0; padding-bottom: 12px; }
+.spotlight-slide h1, .spotlight-copy > h1 {
+    margin: 16px 0 20px;
+    font-size: clamp(36px, 4.2vw, 65px);
+    font-weight: 800;
+    letter-spacing: -.025em;
+    line-height: 1.1;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+    color: #f5faff;
+    text-shadow: 0 4px 25px #0008;
+}
+.spotlight-meta { display: flex; align-items: center; gap: 10px 16px; flex-wrap: wrap; font-size: 16px; }
+.spotlight-age { border: 1px solid #b3e8ff; border-radius: 6px; padding: 1px 8px; font-weight: 700; }
+.spotlight-description { max-width: 520px; color: #d0e2f4; font-size: 18px; }
+.spotlight-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+.spotlight-gallery { min-width: 0; padding: 0 0 10px; }
+.spotlight-gallery-label { color: #bfe8fa; font-size: 12px; letter-spacing: 2px; font-weight: 700; }
+.spotlight-posters { display: flex; align-items: center; min-height: 315px; padding: 16px 0; }
+.spotlight-card {
+    display: block;
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    aspect-ratio: 2 / 3;
+    max-height: 325px;
+    margin-left: -20px;
+    overflow: hidden;
+    border: 1px solid #81d5ff73;
+    border-radius: 20px;
+    background: #0a2039;
+    box-shadow: 0 15px 30px #0008;
+    transform: rotate(3deg);
+    transition: transform .25s ease, border-color .25s ease;
+}
+.spotlight-card:first-child { margin-left: 0; }
+.spotlight-card:nth-child(even) { transform: rotate(-2deg); }
+.spotlight-card.is-active {
+    z-index: 2;
+    flex-grow: 1.25;
+    transform: translateY(-13px) rotate(-2deg);
+    border-color: #8deaff;
+}
+.spotlight-card:hover, .spotlight-card:focus-visible { z-index: 3; transform: translateY(-17px); }
+.spotlight-card .slide-poster { width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.spotlight-card-caption {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 32px 12px 16px;
+    background: linear-gradient(transparent, #031021f5);
+    color: white;
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 700;
+    text-align: center;
+}
+.spotlight-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+.spotlight-controls span { color: #c1def3; font-size: 14px; margin-right: 12px; }
+.spotlight-controls button {
+    width: 42px;
+    height: 42px;
+    background: #0b243ee0;
+    color: #d2f2ff;
+    border: 1px solid #6597bf;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.spotlight-controls button:hover { background: #205784; }
+.spotlight-footnote {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 16px 40px 20px;
+    color: #b9d3ea;
+    font-size: 14px;
+    border-top: 1px solid #a0dfff1f;
+}
+.spotlight-footnote > span { width: 6px; height: 6px; border-radius: 50%; background: #65e1fa; }
+.spotlight-footnote a { margin-left: auto; }
+.spotlight-slide { animation: spotlight-reveal .3s ease-out; }
+@keyframes spotlight-reveal {
+    from { opacity: .4; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.home-page { padding-top: 26px; }
+.quick-booking {
+    padding: 25px 28px;
+    margin-bottom: 55px;
+    border: 1px solid #72d3fc40;
+    border-radius: 20px;
+    background: linear-gradient(110deg, #102a45f5, #0a1b32f5);
+    box-shadow: 0 18px 45px #0003;
+}
+.quick-booking-heading { display: flex; gap: 20px; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.quick-booking-heading h2 { font-size: 25px; margin: 0; }
+.quick-booking-heading .eyebrow { margin: 0 0 5px; font-size: 11px; }
+.quick-booking-heading > p { color: #abc5df; font-size: 14px; margin: 0; }
+.quick-booking-heading > p span { color: #4bddf3; margin: 0 8px; }
+.quick-booking-form { display: grid; grid-template-columns: 1.4fr 1fr 1fr auto; gap: 18px; align-items: start; }
+.quick-booking-form > div { min-width: 0; }
+.quick-booking-form label, .quick-label { display: block; color: #b6cde4; font-size: 14px; margin-bottom: 7px; }
+.quick-booking-form select, .quick-booking-form input { width: 100%; background: #061a30; border: 1px solid #3c5b7a; color: white; padding: 10px 12px; }
+.quick-booking-form small { display: block; font-size: 12px; color: #afc5de; margin-top: 5px; }
+.quick-booking-form .button { margin-top: 30px; white-space: nowrap; }
+.quick-cinema > a { display: flex; align-items: center; min-height: 48px; border-bottom: 1px solid #3c5b7a; font-size: 17px; }
+.home-page .filters { border-radius: 16px; background: #081b30d9; padding: 22px; border: 1px solid #86bce827; }
+.home-page .section-heading { margin-bottom: 20px; }
+.home-page .group-title { font-size: 27px; margin: 32px 0 22px; }
+.movie-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.movie-card { border-radius: 17px; overflow: hidden; background: #081b30de; }
+.movie-card .poster-wrap { aspect-ratio: 2 / 3; }
+.movie-card .poster-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.movie-card:hover .poster-wrap img { transform: scale(1.035); }
+.movie-card .card-content { padding: 20px; }
+.movie-card h4 { font-size: 22px; margin: 8px 0 12px; }
+.movie-card p { font-size: 15px; }
+.movie-card .button { width: 100%; margin-top: 12px; }
+.cinema-card { border-radius: 18px; }
+.film-hero-copy h1 { font-size: clamp(36px, 4.8vw, 64px); }
+.film-hero-copy .description { font-size: 18px; line-height: 1.8; }
+.filters, .cinema-card, .account-panel, .notice { font-size: 17px; }
+.footer { margin-top: 60px; padding-bottom: 80px; }
+
+@media (min-width: 1600px) {
+    .home-page .movie-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+@media (max-width: 1200px) {
+    .navigation { flex-wrap: wrap; justify-content: center; padding: 14px 0; gap: 14px 24px; }
+    .navigation .nav-links { margin-right: 0; }
+    .spotlight-inner { gap: 24px; padding: 50px 28px 25px; }
+    .spotlight-slide h1 { font-size: 44px; }
+    .spotlight-posters { min-height: 270px; }
+    .spotlight-description { font-size: 17px; }
+    .quick-booking-form { grid-template-columns: 1fr 1fr; }
+    .quick-booking-form .button { margin-top: 30px; }
+}
+@media (max-width: 850px) {
+    .spotlight-inner { grid-template-columns: 1fr; padding: 40px 26px 20px; gap: 30px; }
+    .spotlight-copy { max-width: 650px; }
+    .spotlight-gallery { max-width: 560px; width: 100%; justify-self: center; }
+    .spotlight-posters { min-height: 0; }
+    .spotlight-card { max-height: 265px; }
+    .spotlight-slide h1 { font-size: clamp(33px, 6.5vw, 49px); }
+    .quick-booking-heading { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .movie-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .movie-card .card-content { padding: 14px; }
+}
+@media (max-width: 600px) {
+    body { font-size: 17px; }
+    .container { width: 94%; }
+    .navigation { width: 94%; gap: 12px; }
+    .brand { font-size: 22px; }
+    .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px 21px; }
+    .nav-links a, .account-nav, .nav-button { font-size: 15px; }
+    .account-nav { justify-content: center; gap: 10px; }
+    .cinema-spotlight { margin-top: 12px; border-radius: 18px; }
+    .spotlight-inner { padding: 30px 18px 20px; }
+    .spotlight-slide h1, .spotlight-copy > h1 { font-size: 35px; }
+    .spotlight-meta { font-size: 14px; gap: 8px; }
+    .spotlight-description { font-size: 16px; }
+    .spotlight-actions { gap: 9px; }
+    .spotlight-actions .button { padding: 10px 13px; font-size: 16px; }
+    .spotlight-gallery-label { font-size: 10px; }
+    .spotlight-card { margin-left: -10px; border-radius: 11px; }
+    .spotlight-card-caption { font-size: 12px; padding: 25px 7px 10px; }
+    .spotlight-footnote { padding: 14px 18px; font-size: 12px; }
+    .spotlight-footnote a { margin-left: 0; }
+    .quick-booking { padding: 20px 16px; border-radius: 16px; margin-bottom: 38px; }
+    .quick-booking-form { grid-template-columns: 1fr; gap: 16px; }
+    .quick-booking-form .button { margin-top: 0; width: 100%; }
+    .quick-booking-heading > p { font-size: 12px; }
+    .home-page .filters { padding: 16px; }
+    .movie-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .movie-card h4 { font-size: 18px; }
+    .movie-card .card-content { padding: 12px; }
+    .movie-card .button { font-size: 15px; min-height: 44px; padding: 8px 10px; }
+    .movie-card .eyebrow { font-size: 10px; }
+    .movie-card p { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .spotlight-slide { animation: none; }
+    .button, .spotlight-card, .movie-card .poster-wrap img { transition: none; }
+    .button:hover, .movie-card:hover .poster-wrap img { transform: none; }
+}
+@media print {
+    .cinema-spotlight, .quick-booking, .cosmic-sky, .cosmic-motion-toggle { display: none !important; }
+}

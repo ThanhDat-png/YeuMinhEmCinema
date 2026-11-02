@@ -1,0 +1,41 @@
+﻿Changed database context to 'YeuMinhEmCinema_Test'.
+PASS: GUI tiền khách đưa 100000 nhưng ghi thu đúng 80000.
+
+(57 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(57 rows affected)
+
+(2 rows affected)
+
+(4 rows affected)
+
+(2 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(1 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+PASS: đã dọn đúng fixture GUI, giữ dữ liệu người dùng.

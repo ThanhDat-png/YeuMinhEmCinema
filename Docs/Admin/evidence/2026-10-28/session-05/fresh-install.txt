@@ -1,0 +1,49 @@
+﻿Changed database context to 'master'.
+Changed database context to 'YMC_SearchInstall_cc16a298_Test'.
+Đang chạy 00_TaoDatabase_Phim.sql
+Đang chạy 01_CauTruc_Rap_Phong_Ghe.sql
+-> Đã tạo bảng dbo.LoaiGhe thành công.
+-> Đã tạo bảng dbo.Rap thành công.
+-> Đã tạo bảng dbo.PhongChieu thành công.
+-> Đã tạo bảng dbo.Ghe thành công.
+======================================================
+ĐÃ HOÀN THÀNH CẬP NHẬT CẤU TRÚC DATABASE CHO RẠP - PHÒNG - GHẾ.
+======================================================
+Đang chạy 04_TaoBang_SuatChieu.sql
+MaSuatChieu MaPhim      MaPhong     GioBatDau                              GioKetThuc                             PhutDonPhong TrangThai                     
+----------- ----------- ----------- -------------------------------------- -------------------------------------- ------------ ------------------------------
+
+(0 rows affected)
+Đang chạy 05_ThemSuatChieu.sql
+Đang chạy 06_SuaSuatChieu.sql
+Đang chạy 07_DoiTrangThaiSuatChieu.sql
+Đang chạy 08_SaoChepLich.sql
+Đang chạy 09_GiaVe_Fnb.sql
+Đang chạy 10_TaiKhoan_PhanQuyen.sql
+
+(5 rows affected)
+
+(23 rows affected)
+
+(23 rows affected)
+
+(24 rows affected)
+Đang chạy 11_KhachHang_NhanVien.sql
+Đang chạy 12_DonHang_Ve_ThanhToan.sql
+Đang chạy 13_DatVe_GiuGhe.sql
+Đang chạy 14_BanVe_ThanhToan.sql
+Đang chạy 15_HuyDon_HoanTien.sql
+Đang chạy 16_KiemTraVe.sql
+Đang chạy 17_QuanLyDanhMuc.sql
+Đang chạy 18_BaoCao_ThongKe.sql
+Đang chạy 19_TruyVan_Web.sql
+Đang chạy 21_QuanTriTaiKhoan.sql
+Đang chạy 22_TichHop_PhanQuyen_Lich_Gia.sql
+HOÀN TẤT CẤU TRÚC SQL. Dữ liệu mẫu chưa được thêm.
+Changed database context to 'YMC_SearchInstall_cc16a298_Test'.
+Đã cập nhật SQL 23 cho WinForms. Không xóa hoặc seed lại dữ liệu.
+Changed database context to 'YMC_SearchInstall_cc16a298_Test'.
+Đã cập nhật SQL 25: kiểm phạm vi rạp khi ghi danh mục Admin.
+Changed database context to 'YMC_SearchInstall_cc16a298_Test'.
+Changed database context to 'YMC_SearchInstall_cc16a298_Test'.
+Changed database context to 'YMC_SearchInstall_cc16a298_Test'.
