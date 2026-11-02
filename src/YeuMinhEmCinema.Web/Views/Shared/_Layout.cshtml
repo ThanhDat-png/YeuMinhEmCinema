@@ -9,8 +9,17 @@
         </title>
         <link rel="icon" href="~/images/brand-mascot.png" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/cosmic-theme.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/cinema-blue.css" asp-append-version="true" />
     </head>
     <body>
+        <div class="cosmic-sky" aria-hidden="true">
+            <canvas id="cosmic-sky-canvas"></canvas>
+        </div>
+        <button class="cosmic-motion-toggle" type="button" aria-pressed="false"
+                aria-label="Tạm dừng hiệu ứng sao băng" hidden>
+            Tạm dừng sao băng
+        </button>
         <a class="skip" href="#noi-dung">
             Đến nội dung
         </a>
@@ -92,5 +101,7 @@
         </footer>
         <script src="~/js/site.js" asp-append-version="true" defer>
         </script>
+        <script src="~/js/cosmic-sky.js" asp-append-version="true" defer></script>
+        <script src="~/js/cinema-home.js" asp-append-version="true" defer></script>
     </body>
 </html>

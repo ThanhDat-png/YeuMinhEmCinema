@@ -3,7 +3,7 @@ using System.Globalization;
 namespace YeuMinhEmCinema.Admin;
 internal static class AdminUi
 {
- internal static Color Primary=Color.FromArgb(211, 47, 47);
+ internal static Color Primary=AdminTheme.Primary;
  internal static Button Button(string text,Action action)=>MakeButton(text,(_,_)=>Guard(action));
  private static Button MakeButton(string text,EventHandler h){var b=new Button{Text=text,AutoSize=true,MinimumSize=new Size(95,34),Margin=new Padding(4),FlatStyle=FlatStyle.Flat,BackColor=Primary,ForeColor=Color.White};b.Click+=h;return b;}
  internal static void Guard(Action action){try{action();}catch(Exception ex){MessageBox.Show(Db.Error(ex),"Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Warning);}}

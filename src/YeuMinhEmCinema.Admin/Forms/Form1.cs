@@ -14,6 +14,7 @@ namespace YeuMinhEmCinema.Admin
 
             // Khởi tạo danh sách các nút điều hướng sidebar
             KhoiTaoMenuSidebar();
+            KhoiTaoBoCucLavender();
             KhoiTaoTheLoai();
             KhoiTaoPhanQuyen();
 
@@ -94,12 +95,16 @@ namespace YeuMinhEmCinema.Admin
                 }
                 else
                     pnlQuanLyPhim.BringToFront();
-                lblScreenTitle.Text = tieuDe;
+                lblScreenTitle.Text = tieuDe == nutDangChon.Text
+                    && _tenMenuDayDu.TryGetValue(nutDangChon, out var tenMenu)
+                    ? tenMenu : tieuDe;
                 foreach (Button btn in _danhSachNutMenu)
                 {
                     bool active = btn == nutDangChon;
-                    btn.BackColor = active ? AdminUi.Primary : Color.FromArgb(20, 20, 26);
-                    btn.ForeColor = active ? Color.White : Color.FromArgb(203, 213, 225);
+                    btn.BackColor = active ? AdminUi.Primary : AdminTheme.Sidebar;
+                    btn.ForeColor = active ? Color.White : AdminTheme.SidebarText;
+                    btn.FlatAppearance.MouseOverBackColor = active ? AdminTheme.Primary : AdminTheme.SidebarHover;
+                    btn.FlatAppearance.MouseDownBackColor = active ? AdminTheme.Primary : AdminTheme.SidebarHover;
                     btn.Font = new Font("Segoe UI", 9.75F, active ? FontStyle.Bold : FontStyle.Regular);
                 }
             }

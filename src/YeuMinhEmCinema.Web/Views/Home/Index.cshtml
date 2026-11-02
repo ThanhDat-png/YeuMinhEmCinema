@@ -2,95 +2,104 @@
 @{
     ViewData["Title"] = "Khám phá điện ảnh";
 }
-<section class="hero">
-    <div class="container hero-content">
-        <p class="eyebrow">
-            CHÀO MỪNG ĐẾN VỚI YEUMINHEM CINEMA
-        </p>
-        <h1>
-            Chạm vào cảm xúc.
-            <br />
-            <span>
-                Sống cùng điện ảnh.
-            </span>
-        </h1>
-        <p>
-            Một khoảng thời gian dành cho bạn, những người thương và những câu chuyện trên màn ảnh rộng.
-        </p>
-        <a class="button" href="#phim">
-            Khám phá phim
-        </a>
-        <a class="text-link" href="#rap">
-            Tìm hiểu cụm rạp ↗
-        </a>
-    </div>
-</section>
-<div class="container page-content">
-    @if (Model.Loi != null)
-    {
-        <div class="notice" role="alert">
-            <h2>
-                Dữ liệu tạm thời chưa sẵn sàng
-            </h2>
-            <p>
-                @Model.Loi
-            </p>
-            <a href="/">
-                Tải lại trang chủ
-            </a>
-        </div>
-    }
-    @if (Model.PhimNoiBat.Count > 0)
-    {
-        <section class="featured" aria-labelledby="hot-title">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">
-                        TIÊU ĐIỂM MÀN ẢNH
-                    </p>
-                    <h2 id="hot-title">
-                        Phim hot hôm nay
-                    </h2>
-                    <p>
-                        Khám phá những phim đang chiếu mới khởi chiếu.
-                    </p>
-                </div>
-            </div>
-            <div class="carousel-frame">
-            <div class="carousel" aria-roledescription="trình chiếu">
+<section class="cinema-spotlight container" aria-label="Phim nổi bật" data-spotlight>
+    <div class="spotlight-landscape" aria-hidden="true"></div>
+    <div class="spotlight-inner">
+        <div class="spotlight-copy">
+            @if (Model.PhimNoiBat.Count > 0)
+            {
                 @for (var i = 0; i < Model.PhimNoiBat.Count; i++)
                 {
                     var phim = Model.PhimNoiBat[i];
-                    <article class="slide" hidden="@(i != 0)">
-                        <img class="slide-poster" src="@phim.AnhPoster" alt="Poster @phim.TenPhim" />
-                        <div>
-                            <p class="eyebrow">
-                                ĐANG CHIẾU · @phim.GioiHanTuoi
-                            </p>
-                            <h3>
-                                @phim.TenPhim
-                            </h3>
-                            <p>
-                                @phim.ThoiLuong phút · Khởi chiếu @phim.NgayKhoiChieu.ToString("dd/MM/yyyy")
-                            </p>
-                            <a class="button" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim">
-                                Xem chi tiết
-                            </a>
+                    <article class="spotlight-slide" id="tieu-diem-@i" hidden="@(i != 0)">
+                        <p class="eyebrow">TIÊU ĐIỂM ĐIỆN ẢNH · @phim.TrangThai</p>
+                        <h1>@phim.TenPhim</h1>
+                        <p class="spotlight-meta">
+                            <span class="spotlight-age">@phim.GioiHanTuoi</span>
+                            <span>@phim.ThoiLuong phút</span>
+                            <span>Khởi chiếu @phim.NgayKhoiChieu.ToString("dd/MM/yyyy")</span>
+                        </p>
+                        <p class="spotlight-description">Một câu chuyện mới đang chờ bạn trên màn ảnh rộng. Chọn suất chiếu và tận hưởng khoảnh khắc điện ảnh của riêng mình.</p>
+                        <div class="spotlight-actions">
+                            <a class="button" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim" asp-fragment="lich-chieu">Đặt vé ngay ↗</a>
+                            <a class="button button-outline" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim">Xem chi tiết</a>
                         </div>
                     </article>
                 }
+            }
+            else
+            {
+                <p class="eyebrow">YEUMINHEM CINEMA</p>
+                <h1>Chạm vào cảm xúc.<br />Sống cùng điện ảnh.</h1>
+                <p class="spotlight-description">Hẹn nhau tại rạp, cùng khám phá những câu chuyện trên màn ảnh rộng.</p>
+                <a class="button" href="#phim">Khám phá phim ↗</a>
+            }
+        </div>
+        @if (Model.PhimNoiBat.Count > 0)
+        {
+            <div class="spotlight-gallery">
+                <p class="spotlight-gallery-label">LỰA CHỌN CHO TỐI NAY</p>
+                <div class="spotlight-posters">
+                    @for (var i = 0; i < Model.PhimNoiBat.Count; i++)
+                    {
+                        var phim = Model.PhimNoiBat[i];
+                        <a class="spotlight-card @(i == 0 ? "is-active" : "")"
+                           asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim"
+                           data-spotlight-choice="@i" aria-controls="tieu-diem-@i"
+                           aria-label="Giới thiệu phim @phim.TenPhim">
+                            <img class="slide-poster" src="@phim.AnhPoster" alt="Poster @phim.TenPhim" />
+                            <span class="spotlight-card-caption">@phim.TenPhim</span>
+                        </a>
+                    }
+                </div>
+                <div class="spotlight-controls" hidden>
+                    <span data-spotlight-counter aria-live="polite">1 / @Model.PhimNoiBat.Count</span>
+                    <button type="button" data-spotlight-previous aria-label="Phim trước">←</button>
+                    <button type="button" data-spotlight-next aria-label="Phim tiếp theo">→</button>
+                </div>
             </div>
-            <div class="slide-controls" hidden>
-                <button type="button" class="slide-arrow slide-previous" id="previous" aria-label="Phim trước">
-                    ❮
-                </button>
-                <button type="button" class="slide-arrow slide-next" id="next" aria-label="Phim tiếp theo">
-                    ❯
-                </button>
-            </div>
-            </div>
-        </section>
+        }
+    </div>
+    <div class="spotlight-footnote"><span></span> Không gian điện ảnh của bạn <a href="#rap">Khám phá cụm rạp ↗</a></div>
+</section>
+<div class="container page-content home-page">
+    @if (Model.Loi != null)
+    {
+        <div class="notice" role="alert">
+            <h2>Dữ liệu tạm thời chưa sẵn sàng</h2>
+            <p>@Model.Loi</p>
+            <a href="/">Tải lại trang chủ</a>
+        </div>
     }
+    <section class="quick-booking" aria-labelledby="quick-booking-title">
+        <div class="quick-booking-heading">
+            <div><p class="eyebrow">HẸN MỘT BUỔI XEM PHIM</p><h2 id="quick-booking-title">Đặt vé nhanh</h2></div>
+            <p>01 Chọn phim <span>→</span> 02 Chọn suất <span>→</span> 03 Chọn ghế</p>
+        </div>
+        <form asp-controller="Phim" asp-action="Lich" method="get" class="quick-booking-form">
+            <div>
+                <label for="quick-film">Bạn muốn xem phim gì?</label>
+                <select id="quick-film" name="maPhim">
+                    <option value="">Tất cả phim</option>
+                    @foreach (var phim in Model.PhimNoiBat.Concat(Model.Phim).DistinctBy(p => p.MaPhim))
+                    {
+                        <option value="@phim.MaPhim">@phim.TenPhim</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="quick-date">Ngày chiếu</label>
+                <input id="quick-date" name="ngay" type="date" aria-describedby="quick-date-help" />
+                <small id="quick-date-help">Để trống để xem suất gần nhất.</small>
+            </div>
+            <div class="quick-cinema">
+                <span class="quick-label">Cụm rạp</span>
+                <a asp-controller="Phim" asp-action="Rap">Chọn theo rạp ↗</a>
+                <small>Hoặc lọc rạp ở bước chọn suất.</small>
+            </div>
+            <button class="button" type="submit">Tìm suất chiếu →</button>
+        </form>
+    </section>
     <section id="phim" aria-labelledby="movies-title">
         <div class="section-heading">
             <div>
@@ -98,7 +107,7 @@
                     CÂU CHUYỆN TIẾP THEO CỦA BẠN
                 </p>
                 <h2 id="movies-title">
-                    Khám phá phim
+                    Phim dành cho bạn
                 </h2>
             </div>
         </div>
@@ -171,7 +180,14 @@
                                     <p>
                                         Khởi chiếu @phim.NgayKhoiChieu.ToString("dd/MM/yyyy")
                                     </p>
-                                    <a class="button" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim">Xem chi tiết</a>
+                                    @if (phim.TrangThai == "Đang chiếu")
+                                    {
+                                        <a class="button" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim" asp-fragment="lich-chieu">Đặt vé ngay</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="button button-outline" asp-controller="Phim" asp-action="ChiTiet" asp-route-id="@phim.MaPhim">Xem chi tiết</a>
+                                    }
                                 </div>
                             </article>
                         }

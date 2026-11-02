@@ -897,7 +897,7 @@ html {
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
-    background: #0f0f14;
+    background: var(--bg);
 }
 .film-atmosphere img {
     width: 100%;
@@ -910,7 +910,7 @@ html {
 }
 body:has(.film-detail-page) {
     isolation: isolate;
-    background: #0f0f14;
+    background: var(--bg);
 }
 .film-detail-page {
     padding-top: 28px;
@@ -926,7 +926,7 @@ body:has(.film-detail-page) {
     margin: 24px 0 48px;
     border-radius: 24px;
     border: 1px solid #ffffff24;
-    background: #18181b;
+    background: var(--panel);
     box-shadow: 0 28px 90px #0009;
 }
 .reference-film-hero > .film-backdrop {
@@ -1010,11 +1010,11 @@ body:has(.film-detail-page) {
 }
 .profile-identity {
     padding: 28px;
-    background: radial-gradient(ellipse at top left, #a5213644, transparent 65%), #18181b;
+    background: radial-gradient(ellipse at top left, #2469c344, transparent 65%), var(--panel);
 }
 .profile-badge {
     display: inline-block;
-    color: #ffb7bf;
+    color: #9addff;
     font-size: 11px;
     letter-spacing: 2px;
     margin-bottom: 22px;
@@ -1023,7 +1023,7 @@ body:has(.film-detail-page) {
     aspect-ratio: 4 / 5;
     border-radius: 16px;
     border: 1px solid #ffffff25;
-    background: linear-gradient(145deg, #411c25, #121216);
+    background: linear-gradient(145deg, #103459, #061326);
     overflow: hidden;
 }
 .profile-portrait img {
@@ -1051,12 +1051,12 @@ body:has(.film-detail-page) {
     min-width: 0;
 }
 .profile-order-link {
-    color: #ffb7bf;
+    color: #9addff;
     display: inline-block;
 }
 .profile-details {
     padding: 32px;
-    background: linear-gradient(120deg, #24191e, #18181b 55%);
+    background: linear-gradient(120deg, #0c2947, var(--panel) 55%);
 }
 .profile-section-heading {
     display: flex;
@@ -1070,9 +1070,9 @@ body:has(.film-detail-page) {
     font-size: 27px;
 }
 .profile-step {
-    color: #ffb7bf;
+    color: #9addff;
     padding: 12px 15px;
-    border: 1px solid #db5b6d55;
+    border: 1px solid #65baff55;
     border-radius: 12px;
 }
 .profile-form {
@@ -1083,7 +1083,7 @@ body:has(.film-detail-page) {
 .profile-field {
     background: #ffffff03;
     border: 1px solid #ffffff12;
-    border-left: 3px solid #b93143;
+    border-left: 3px solid #58baff;
     border-radius: 10px;
     padding: 16px 18px;
 }
@@ -1195,7 +1195,7 @@ body:has(.film-detail-page) {
 }
 .fnb-card.is-selected {
     border-color: var(--accent);
-    background: linear-gradient(135deg, rgb(180 25 35 / 12%), var(--panel));
+    background: linear-gradient(135deg, rgb(37 99 235 / 15%), var(--panel));
 }
 .fnb-select,
 .quantity-stepper button {

@@ -5,6 +5,7 @@ internal static class Program
     [STAThread] static void Main()
     {
         ApplicationConfiguration.Initialize();
+        AdminTheme.Initialize();
         while (true)
         {
             using var login = new FormDangNhap();

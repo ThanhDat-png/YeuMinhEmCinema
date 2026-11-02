@@ -48,6 +48,8 @@ namespace YeuMinhEmCinema.Admin
             btnDangNhap.Size = new Size(180, 38);
             btnKhoiTaoAdmin.Enabled = false;
 
+            KhoiTaoGiaoDienCinemaBlue();
+
             // Gắn sự kiện tại đây, không cần nhấp đúp nút.
             Shown += FormDangNhap_Shown;
             btnDangNhap.Click += BtnDangNhap_Click;

@@ -5,7 +5,7 @@ public partial class UcBaoCaoThongKe : DataPage
  private readonly ComboBox rap=AdminUi.Combo(),phim=AdminUi.Combo();
  private readonly DateTimePicker tu=new(){Value=DateTime.Today.AddDays(-6),Width=130,Format=DateTimePickerFormat.Custom,CustomFormat="dd/MM/yyyy"},
   den=new(){Width=130,Format=DateTimePickerFormat.Custom,CustomFormat="dd/MM/yyyy"};
- private readonly Label totals=new(){Dock=DockStyle.Fill,UseMnemonic=false,Padding=new Padding(10,4,10,2)};
+ private readonly Label totals=new(){Name="ReportSummary",Dock=DockStyle.Fill,UseMnemonic=false,Padding=new Padding(10,4,10,2)};
  private readonly DoanhThuChart chart=new(){Dock=DockStyle.Fill};
  private string kind="Thu";
  private bool loading;

@@ -91,16 +91,33 @@ public static class SuatChieuDAL
 
     public static DataTable LayLichPhongTrongNgay(int maPhong, DateTime ngay)
     {
-        // Bao gồm suất bắt đầu từ hôm trước nhưng còn chiếm phòng trong ngày chọn.
+        return LayLichPhongTrongKhoang(maPhong, ngay.Date, ngay.Date.AddDays(1));
+    }
+
+    public static DataTable LayLichPhongTrongKhoang(int maPhong, DateTime tu, DateTime den)
+    {
+        if (den <= tu)
+        {
+            throw new ArgumentException("Khoảng xem lịch không hợp lệ.");
+        }
+
+        // Bao gồm suất từ ngày trước còn chiếm phòng và thời gian dọn phòng.
+        // Truy vấn có tham số; giữ nguyên kiểm quyền xem lịch và phạm vi rạp.
         using var c = new SqlCommand(@"SELECT sc.MaSuatChieu,p.TenPhim,sc.GioBatDau,sc.GioKetThuc,
             sc.PhutDonPhong,DATEADD(MINUTE,sc.PhutDonPhong,sc.GioKetThuc) AS GioSanSang,sc.TrangThai
             FROM dbo.SuatChieu sc JOIN dbo.Phim p ON p.MaPhim=sc.MaPhim
             WHERE sc.MaPhong=@Phong AND sc.TrangThai<>N'Đã hủy'
-            AND sc.GioBatDau<DATEADD(DAY,1,@Ngay)
-            AND DATEADD(MINUTE,sc.PhutDonPhong,sc.GioKetThuc)>@Ngay ORDER BY sc.GioBatDau;");
+            AND sc.GioBatDau<@Den
+            AND DATEADD(MINUTE,sc.PhutDonPhong,sc.GioKetThuc)>@Tu
+            ORDER BY sc.GioBatDau,sc.MaSuatChieu;");
         Db.Require("LICH_CHIEU_XEM", Db.RoomRap(maPhong));
         So(c, "@Phong", maPhong);
-        Ngay(c, "@Ngay", ngay);
+        var tuParameter = c.Parameters.Add("@Tu", SqlDbType.DateTime2);
+        tuParameter.Scale = 0;
+        tuParameter.Value = tu;
+        var denParameter = c.Parameters.Add("@Den", SqlDbType.DateTime2);
+        denParameter.Scale = 0;
+        denParameter.Value = den;
         return Doc(c);
     }
 
