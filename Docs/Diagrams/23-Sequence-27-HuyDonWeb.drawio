@@ -38,7 +38,7 @@
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_20" value="2: LayMaKhachHangTuClaims(User)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_20" value="2: Id() -&gt; Lay MaKhachHang tu Claims" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
             <mxPoint x="510" y="256" as="targetPoint" />
@@ -48,19 +48,19 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_21" value="3: HuyDon(id, maKhachHang)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_21" value="3: Huy(Id(), id)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="276" as="sourcePoint" />
             <mxPoint x="860" y="276" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_22" value="4: EXEC dbo.sp_YMC_HuyDonChuaThanhToan @MaDonHang=id, @NguoiYeuCau=maKhachHang" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_22" value="4: EXEC dbo.sp_YMC_HuyDonChuaThanhToan @MaKhachHang, @MaDonHang, @LyDo=&apos;Khách hủy web&apos;" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="318" as="sourcePoint" />
             <mxPoint x="1210" y="318" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_23" value="5: BEGIN TRAN: Kiểm tra trạng thái đơn phải là &apos;CHO_THANH_TOAN&apos;" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_23" value="5: BEGIN TRAN: UPDATE DonHang SET TrangThai=&apos;DA_HUY&apos;; DELETE GiuGhe; COMMIT TRAN" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="1210" y="360" as="sourcePoint" />
             <mxPoint x="1210" y="384" as="targetPoint" />
@@ -70,42 +70,22 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_24" value="6: DELETE FROM GiuGhe WHERE MaDonHang=@id (Giải phóng ghế)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry x="1" relative="1" as="geometry">
+        <mxCell id="step_24" value="6: return void (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="404" as="sourcePoint" />
-            <mxPoint x="1210" y="428" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="1245" y="404" />
-              <mxPoint x="1245" y="428" />
-            </Array>
+            <mxPoint x="860" y="404" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_25" value="7: UPDATE DonHang SET TrangThai=&apos;DA_HUY&apos;, LyDoHuy=N&apos;Khách hàng tự hủy&apos; ...; COMMIT" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="1210" y="448" as="sourcePoint" />
-            <mxPoint x="1210" y="472" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="1245" y="448" />
-              <mxPoint x="1245" y="472" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step_26" value="8: return 1 (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_25" value="7: return void" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1210" y="492" as="sourcePoint" />
-            <mxPoint x="860" y="492" as="targetPoint" />
+            <mxPoint x="860" y="446" as="sourcePoint" />
+            <mxPoint x="510" y="446" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_27" value="9: return bool thanhCong" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_26" value="8: RedirectToAction(&quot;ChiTiet&quot;, &quot;Don&quot;, new { id = id }) -&gt; Hiển thị nhãn &quot;ĐÃ HỦY&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="860" y="534" as="sourcePoint" />
-            <mxPoint x="510" y="534" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step_28" value="10: RedirectToAction(&quot;ChiTiet&quot;, &quot;Don&quot;, new { id = id }) -&gt; Hiển thị nhãn &quot;ĐÃ HỦY&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="576" as="sourcePoint" />
-            <mxPoint x="160" y="576" as="targetPoint" />
+            <mxPoint x="510" y="488" as="sourcePoint" />
+            <mxPoint x="160" y="488" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>

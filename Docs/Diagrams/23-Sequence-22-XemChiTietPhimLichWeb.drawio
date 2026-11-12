@@ -32,61 +32,61 @@
         <mxCell id="line_18" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="1205" y="150" width="10" height="640" as="geometry" />
         </mxCell>
-        <mxCell id="step_19" value="1: GET /Phim/ChiTiet/{id}?ngay={date}&amp;rapId={rapId}" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_19" value="1: GET /Phim/ChiTiet/{id}?maRap={rap}&amp;ngay={date}" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_20" value="2: LayChiTietPhim(id)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_20" value="2: ChiTiet(id)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
             <mxPoint x="860" y="232" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_21" value="3: EXEC dbo.sp_YMC_WebChiTietPhim @MaPhim=id" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_21" value="3: EXEC dbo.sp_YMC_ChiTietPhimWeb @MaPhim" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="274" as="sourcePoint" />
             <mxPoint x="1210" y="274" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_22" value="4: return Phim (Tên, Thể loại, Thời lượng, Đạo diễn, Trailer, Poster)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_22" value="4: return DataRow (TenPhim, DaoDien, ThoiLuong, Poster...)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="316" as="sourcePoint" />
             <mxPoint x="860" y="316" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_23" value="5: return PhimModel" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_23" value="5: return DataRow rowPhim" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="358" as="sourcePoint" />
             <mxPoint x="510" y="358" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_24" value="6: LayLichChieuCuaPhim(id, ngay, rapId)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_24" value="6: Lich(id, maRap, ngay)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="400" as="sourcePoint" />
             <mxPoint x="860" y="400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_25" value="7: EXEC dbo.sp_YMC_WebLichChieu @MaPhim=id, @Ngay=ngay, @MaRap=rapId" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_25" value="7: EXEC dbo.sp_YMC_LichChieuPhimWeb @MaPhim, @MaRap, @Ngay" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="442" as="sourcePoint" />
             <mxPoint x="1210" y="442" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_26" value="8: return DanhSachSuatChieu (Rạp, Định dạng, Phòng, Giờ bắt đầu)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_26" value="8: return DataTable (Danh sách suất chiếu theo rạp &amp; phòng)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="484" as="sourcePoint" />
             <mxPoint x="860" y="484" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_27" value="9: return LichModel" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_27" value="9: return DataTable tableLich" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="526" as="sourcePoint" />
             <mxPoint x="510" y="526" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_28" value="10: GopThongTinVaoViewModel(phim, lichModel)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_28" value="10: TaoLich(phim, rap, ngay) -&gt; Gop thong tin vao ViewModel ChiTiet" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="510" y="568" as="sourcePoint" />
             <mxPoint x="510" y="592" as="targetPoint" />
@@ -96,7 +96,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_29" value="11: return View(&quot;ChiTiet&quot;, viewModel) -&gt; Render trang chi tiết phim &amp; suất chiếu" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_29" value="11: return View(&quot;ChiTiet&quot;, viewModel) -&gt; Render trang chi tiết &amp; suất chiếu" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="612" as="sourcePoint" />
             <mxPoint x="160" y="612" as="targetPoint" />

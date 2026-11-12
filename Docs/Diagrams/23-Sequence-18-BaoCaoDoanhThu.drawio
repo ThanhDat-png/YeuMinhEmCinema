@@ -26,7 +26,7 @@
         <mxCell id="line_16" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="855" y="150" width="10" height="640" as="geometry" />
         </mxCell>
-        <mxCell id="ll_17" value="&lt;b&gt;«Database»&lt;/b&gt;&lt;br&gt;sp_YMC_BaoCaoDoanhThu" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="ll_17" value="&lt;b&gt;«Database»&lt;/b&gt;&lt;br&gt;sp_YMC_BaoCaoDoanhThuTheoNgay" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1125" y="90" width="170" height="55" as="geometry" />
         </mxCell>
         <mxCell id="line_18" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
@@ -38,19 +38,19 @@
         <mxCell id="line_20" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="1555" y="150" width="10" height="640" as="geometry" />
         </mxCell>
-        <mxCell id="step_21" value="1: ChonKhoangNgay(tuNgay, denNgay, maRap, kieuNgay) &amp; Click btnXem" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_21" value="1: ChonKhoangNgay(tu, den, rap, movie) &amp; Click btnXem [Reload()]" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_22" value="2: Read(&quot;sp_YMC_BaoCaoDoanhThu&quot;, tuNgay, denNgay, maRap, kieuNgay)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_22" value="2: Table(proc, (&quot;@NguoiThucHien&quot;, Db.Actor), (&quot;@MaRap&quot;, id), (&quot;@TuNgay&quot;, tu), ...)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
             <mxPoint x="860" y="232" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_23" value="3: EXEC dbo.sp_YMC_BaoCaoDoanhThu @TuNgay, @DenNgay, @MaRap, @KieuNgay" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_23" value="3: EXEC dbo.sp_YMC_BaoCaoDoanhThuTheoNgay @NguoiThucHien, @MaRap, @TuNgay, @DenNgay, @MaPhim" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="274" as="sourcePoint" />
             <mxPoint x="1210" y="274" as="targetPoint" />
@@ -66,54 +66,60 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_25" value="5: return DataTable (Doanh thu theo ngày/suất/phim)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_25" value="5: return DataTable kết quả báo cáo" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="360" as="sourcePoint" />
-            <mxPoint x="510" y="360" as="targetPoint" />
+            <mxPoint x="860" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_26" value="6: Nạp dữ liệu lên DataGridView, gọi DoanhThuChart.VeBieuDo(dt)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_26" value="6: return DataTable table" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="402" as="sourcePoint" />
+            <mxPoint x="510" y="402" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_27" value="7: Nap dữ liệu lên DataGridView, VeBieuDoDoanhThu(table)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="510" y="402" as="sourcePoint" />
-            <mxPoint x="510" y="426" as="targetPoint" />
+            <mxPoint x="510" y="444" as="sourcePoint" />
+            <mxPoint x="510" y="468" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="545" y="402" />
-              <mxPoint x="545" y="426" />
+              <mxPoint x="545" y="444" />
+              <mxPoint x="545" y="468" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_27" value="7: (Tùy chọn) Click btnXuatCSV" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_28" value="8: Click btnXuatCsv [Chon đường dẫn file lưu]" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="160" y="446" as="sourcePoint" />
-            <mxPoint x="510" y="446" as="targetPoint" />
+            <mxPoint x="160" y="488" as="sourcePoint" />
+            <mxPoint x="510" y="488" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_28" value="8: XuatCsv(dataTable, filePath)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_29" value="9: Ghi(filePath, table)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="488" as="sourcePoint" />
-            <mxPoint x="1560" y="488" as="targetPoint" />
+            <mxPoint x="510" y="530" as="sourcePoint" />
+            <mxPoint x="1560" y="530" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_29" value="9: Ghi UTF-8 BOM, escape dấu phẩy &amp; dấu nháy kép, chặn Formula Injection" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_30" value="10: Ghi UTF-8 BOM, escape dấu phẩy &amp; dấu nháy kép, chặn Formula Injection" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="1560" y="530" as="sourcePoint" />
-            <mxPoint x="1560" y="554" as="targetPoint" />
+            <mxPoint x="1560" y="572" as="sourcePoint" />
+            <mxPoint x="1560" y="596" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1595" y="530" />
-              <mxPoint x="1595" y="554" />
+              <mxPoint x="1595" y="572" />
+              <mxPoint x="1595" y="596" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_30" value="10: return bool thanhCong" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_31" value="11: return void (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1560" y="574" as="sourcePoint" />
-            <mxPoint x="510" y="574" as="targetPoint" />
+            <mxPoint x="1560" y="616" as="sourcePoint" />
+            <mxPoint x="510" y="616" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_31" value="11: HienThiBaoCao() &amp; ThongBao(&quot;Xuất tệp CSV báo cáo thành công!&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_32" value="12: HienThiThongBao(&quot;Xuất tệp CSV báo cáo thành công!&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="616" as="sourcePoint" />
-            <mxPoint x="160" y="616" as="targetPoint" />
+            <mxPoint x="510" y="658" as="sourcePoint" />
+            <mxPoint x="160" y="658" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>

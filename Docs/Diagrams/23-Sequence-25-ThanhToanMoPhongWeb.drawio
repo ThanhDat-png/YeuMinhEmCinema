@@ -32,13 +32,13 @@
         <mxCell id="line_18" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="1205" y="150" width="10" height="694" as="geometry" />
         </mxCell>
-        <mxCell id="step_19" value="1: POST /Don/MoPhongThanhToan (maDonHang, phuongThuc=&apos;THE_NOI_DIA&apos;)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_19" value="1: POST /Don/ThanhToan/{id}?ketQua=THANH_CONG" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_20" value="2: KiemTraQuyenSoHuuDon(User, maDonHang)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_20" value="2: ThuocKhach(Id(), id) -&gt; Kiem tra don thuoc quyen so huu cua khach" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
             <mxPoint x="510" y="256" as="targetPoint" />
@@ -48,13 +48,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_21" value="3: MoPhongThanhToan(maDonHang, maKhachHang, phuongThuc)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_21" value="3: MoPhong(Id(), id)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="276" as="sourcePoint" />
             <mxPoint x="860" y="276" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_22" value="4: EXEC dbo.sp_YMC_WebMoPhongThanhToan @MaDonHang, @MaKhachHang, @PhuongThuc" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_22" value="4: EXEC dbo.sp_YMC_WebMoPhongThanhToan @MaKhachHang, @MaDonHang" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="318" as="sourcePoint" />
             <mxPoint x="1210" y="318" as="targetPoint" />
@@ -89,7 +89,7 @@
             <mxPoint x="510" y="494" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_27" value="HienThiLoi(&quot;Đơn hàng đã hết hạn, ghế đã được giải phóng!&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_27" value="RedirectToAction(&quot;ChiTiet&quot;, new { id }) kèm thông báo đơn hết hạn" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="536" as="sourcePoint" />
             <mxPoint x="160" y="536" as="targetPoint" />
@@ -108,7 +108,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_30" value="8: INSERT INTO Ve SELECT NEWID(), MaDonHang, MaGhe, &apos;HIEU_LUC&apos; ...; COMMIT" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_30" value="8: INSERT INTO Ve SELECT NEWID(), MaDonHang, MaGhe, &apos;HIEU_LUC&apos;...; COMMIT" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="1210" y="664" as="sourcePoint" />
             <mxPoint x="1210" y="688" as="targetPoint" />
@@ -118,19 +118,19 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_31" value="9: return 1 (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_31" value="9: return void (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="708" as="sourcePoint" />
             <mxPoint x="860" y="708" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_32" value="10: return bool thanhCong" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_32" value="10: return void" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="750" as="sourcePoint" />
             <mxPoint x="510" y="750" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_33" value="11: RedirectToAction(&quot;ChiTiet&quot;, &quot;Don&quot;, new { id = maDonHang }) -&gt; Hiển thị vé điện tử kèm mã QR" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_33" value="11: RedirectToAction(&quot;ChiTiet&quot;, &quot;Don&quot;, new { id = maDonHang }) -&gt; Hiển thị vé điện tử" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="792" as="sourcePoint" />
             <mxPoint x="160" y="792" as="targetPoint" />

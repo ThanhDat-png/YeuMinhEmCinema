@@ -50,7 +50,7 @@
             <mxPoint x="860" y="232" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_23" value="3: SELECT 1 FROM TaiKhoanVaiTro (TenVaiTro=&apos;ADMIN&apos;)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_23" value="3: SELECT 1 FROM TaiKhoanVaiTro WHERE TenVaiTro=&apos;ADMIN&apos;" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="274" as="sourcePoint" />
             <mxPoint x="1560" y="274" as="targetPoint" />
@@ -78,13 +78,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_27" value="7: NhapThongTin(tenDangNhap, matKhau) &amp; Click btnKhoiTaoAdmin" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_27" value="7: NhapThongTin(ten, pass) &amp; Click btnKhoiTaoAdmin [BtnKhoiTaoAdmin_Click]" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="444" as="sourcePoint" />
             <mxPoint x="510" y="444" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_28" value="8: KiemTraHopLe(tenDangNhap.Length &gt;= 3, matKhau.Length &gt;= 12, XacNhanMatKhau)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_28" value="8: KiemTraHopLe(ten.Length &gt;= 3, pass.Length &gt;= 12, XacNhanMatKhau)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="510" y="486" as="sourcePoint" />
             <mxPoint x="510" y="510" as="targetPoint" />

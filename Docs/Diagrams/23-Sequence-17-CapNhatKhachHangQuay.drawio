@@ -32,80 +32,60 @@
         <mxCell id="line_18" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="1205" y="150" width="10" height="640" as="geometry" />
         </mxCell>
-        <mxCell id="step_19" value="1: ChonKhachHang(maKhachHang) &amp; Nhap(hoTen, sdt, email, ngaySinh) &amp; Click btnLuu" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_19" value="1: ChonKhachHang(r) &amp; Click &quot;Sửa&quot; [Edit()] &amp; Nhap(hoTen, sdt, email, ngaySinh)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_20" value="2: KiemTraHopLe(hoTen != &quot;&quot; &amp;&amp; sdt.Length &gt;= 10)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry x="1" relative="1" as="geometry">
+        <mxCell id="step_20" value="2: Call(&quot;dbo.sp_YMC_CapNhatKhachHang&quot;, (&quot;@NguoiThucHien&quot;, Db.Actor), (&quot;@MaKhachHang&quot;, id), ...)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
-            <mxPoint x="510" y="256" as="targetPoint" />
+            <mxPoint x="860" y="232" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_21" value="3: EXEC dbo.sp_YMC_CapNhatKhachHang @NguoiThucHien, @MaKhachHang, @HoTen, @DienThoai, @Email, @NgaySinh" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="274" as="sourcePoint" />
+            <mxPoint x="1210" y="274" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_22" value="4: UPDATE KhachHang SET HoTen=@HoTen, DienThoai=@DienThoai, Email=@Email, PhienBan=NEWID()" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="1210" y="316" as="sourcePoint" />
+            <mxPoint x="1210" y="340" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="545" y="232" />
-              <mxPoint x="545" y="256" />
+              <mxPoint x="1245" y="316" />
+              <mxPoint x="1245" y="340" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_21" value="3: ExecuteNonQuery(&quot;sp_YMC_CapNhatKhachHang&quot;, maKhachHang, hoTen, sdt, email, ngaySinh)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_23" value="5: return DataSet (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="276" as="sourcePoint" />
-            <mxPoint x="860" y="276" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step_22" value="4: EXEC dbo.sp_YMC_CapNhatKhachHang @MaKhachHang, @HoTen, @DienThoai, @Email, @NgaySinh" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="860" y="318" as="sourcePoint" />
-            <mxPoint x="1210" y="318" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step_23" value="5: UPDATE KhachHang SET HoTen=@HoTen, DienThoai=@DienThoai, Email=@Email, NgaySinh=@NgaySinh" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="1210" y="360" as="sourcePoint" />
-            <mxPoint x="1210" y="384" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="1245" y="360" />
-              <mxPoint x="1245" y="384" />
-            </Array>
+            <mxPoint x="860" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_24" value="6: IF MaTaiKhoan IS NOT NULL UPDATE TaiKhoan SET Email=@Email" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_24" value="6: return DataSet ds" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="402" as="sourcePoint" />
+            <mxPoint x="510" y="402" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_25" value="7: Reload() [Nap lại danh sách khách hàng]" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="1210" y="404" as="sourcePoint" />
-            <mxPoint x="1210" y="428" as="targetPoint" />
+            <mxPoint x="510" y="444" as="sourcePoint" />
+            <mxPoint x="510" y="468" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1245" y="404" />
-              <mxPoint x="1245" y="428" />
+              <mxPoint x="545" y="444" />
+              <mxPoint x="545" y="468" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_25" value="7: return 1 (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_26" value="8: HienThiThongBao(&quot;Cập nhật hồ sơ khách hàng thành công!&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1210" y="448" as="sourcePoint" />
-            <mxPoint x="860" y="448" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step_26" value="8: return int rowsAffected" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="860" y="490" as="sourcePoint" />
-            <mxPoint x="510" y="490" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step_27" value="9: CapNhatHienThiTrenLuoi(maKhachHang, hoTen, sdt)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry x="1" relative="1" as="geometry">
-            <mxPoint x="510" y="532" as="sourcePoint" />
-            <mxPoint x="510" y="556" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="545" y="532" />
-              <mxPoint x="545" y="556" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="step_28" value="10: HienThiThongBao(&quot;Cập nhật hồ sơ khách hàng thành công!&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="576" as="sourcePoint" />
-            <mxPoint x="160" y="576" as="targetPoint" />
+            <mxPoint x="510" y="488" as="sourcePoint" />
+            <mxPoint x="160" y="488" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>

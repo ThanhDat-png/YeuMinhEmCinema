@@ -38,13 +38,13 @@
         <mxCell id="line_20" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="1555" y="150" width="10" height="648" as="geometry" />
         </mxCell>
-        <mxCell id="step_21" value="1: NhapThongTinPhim(ten, thoiLuong, ngayKC, doTuoi, poster, trailer, trangThai) &amp; Click btnLuu" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_21" value="1: NhapThongTinPhim(ten, moTa, thoiLuong, ngayKC, doTuoi, poster, trailer, tt) &amp; Click btnLuu" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_22" value="2: KiemTraHopLe(tenPhim != &quot;&quot; &amp;&amp; thoiLuong &gt; 0 &amp;&amp; ngayKhoiChieu != null)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_22" value="2: KiemTraHopLe(ten != &quot;&quot; &amp;&amp; thoiLuong &gt; 0 &amp;&amp; ngayKC != null)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
             <mxPoint x="510" y="256" as="targetPoint" />
@@ -66,19 +66,19 @@
         <mxCell id="div_25" value="" style="line;strokeWidth=1;dashed=1;strokeColor=#000000;direction=east;" vertex="1" parent="1">
           <mxGeometry x="40" y="364" width="2000" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="step_26" value="3: LuuPhim(phimModel)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_26" value="3: ThemPhim(...) / CapNhatPhim(_maPhim, ...)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="406" as="sourcePoint" />
             <mxPoint x="860" y="406" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_27" value="4: ExecuteScalar(&quot;sp_YMC_LuuPhim&quot;, maPhim, tenPhim, thoiLuong, ngayKC, ...)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_27" value="4: Call(&quot;dbo.sp_YMC_LuuPhim&quot;, (&quot;@NguoiThucHien&quot;, Db.Actor), (&quot;@MaPhim&quot;, ma), ...)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="448" as="sourcePoint" />
             <mxPoint x="1210" y="448" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_28" value="5: EXEC dbo.sp_YMC_LuuPhim @MaPhim, @TenPhim, @ThoiLuong, @NgayKhoiChieu, ..." style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_28" value="5: EXEC dbo.sp_YMC_LuuPhim @NguoiThucHien, @MaPhim, @TenPhim, @ThoiLuong, @NgayKhoiChieu, ..." style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="490" as="sourcePoint" />
             <mxPoint x="1560" y="490" as="targetPoint" />
@@ -94,19 +94,19 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_30" value="7: return MaPhim (IDENTITY / Existing ID)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_30" value="7: return DataSet (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1560" y="576" as="sourcePoint" />
             <mxPoint x="1210" y="576" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_31" value="8: return int maPhim" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_31" value="8: return DataSet ds" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="618" as="sourcePoint" />
             <mxPoint x="860" y="618" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_32" value="9: return int maPhim" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_32" value="9: return (bool thanhCong, string thongBao)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="660" as="sourcePoint" />
             <mxPoint x="510" y="660" as="targetPoint" />

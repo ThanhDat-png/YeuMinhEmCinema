@@ -38,13 +38,13 @@
         <mxCell id="line_20" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="1555" y="150" width="10" height="640" as="geometry" />
         </mxCell>
-        <mxCell id="step_21" value="1: POST /TaiKhoan/DangKy (DangKyModel: ten, pass, hoTen, email, sdt)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_21" value="1: POST /TaiKhoan/DangKy (DangKyModel model)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_22" value="2: KiemTraModelState(ModelState.IsValid)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_22" value="2: ModelState.IsValid &amp;&amp; MatKhau == XacNhanMatKhau" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
             <mxPoint x="510" y="256" as="targetPoint" />
@@ -57,7 +57,7 @@
         <mxCell id="frame_23" value="alt [Dữ liệu đầu vào sai: mật khẩu ngắn / email sai định dạng]" style="shape=umlFrame;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=11;fontStyle=1;fillColor=none;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="40" y="276" width="2000" height="488" as="geometry" />
         </mxCell>
-        <mxCell id="step_24" value="return View(model) kèm thông báo lỗi kiểm tra" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_24" value="return View(model) kèm thông báo lỗi ModelState" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="322" as="sourcePoint" />
             <mxPoint x="160" y="322" as="targetPoint" />
@@ -66,7 +66,7 @@
         <mxCell id="div_25" value="" style="line;strokeWidth=1;dashed=1;strokeColor=#000000;direction=east;" vertex="1" parent="1">
           <mxGeometry x="40" y="364" width="2000" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="step_26" value="3: DangKyKhachHang(model)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_26" value="3: DangKy(model)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="406" as="sourcePoint" />
             <mxPoint x="860" y="406" as="targetPoint" />
@@ -100,13 +100,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_31" value="8: return MaKhachHang (IDENTITY)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_31" value="8: return void (Thành công)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1560" y="618" as="sourcePoint" />
             <mxPoint x="860" y="618" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_32" value="9: return int maKhachHang" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_32" value="9: return void" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="660" as="sourcePoint" />
             <mxPoint x="510" y="660" as="targetPoint" />

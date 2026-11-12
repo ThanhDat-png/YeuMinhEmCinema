@@ -44,7 +44,7 @@
         <mxCell id="line_22" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
           <mxGeometry x="1905" y="150" width="10" height="1032" as="geometry" />
         </mxCell>
-        <mxCell id="step_23" value="1: NhapThongTin(tenDangNhap, matKhau) &amp; Click btnDangNhap" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_23" value="1: NhapThongTin(ten, pass) &amp; Click btnDangNhap [BtnDangNhap_Click]" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
@@ -84,7 +84,7 @@
             <mxPoint x="1210" y="402" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_29" value="7: PasswordHasher.VerifyHashedPassword(hash, matKhau)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_29" value="7: BoBam.VerifyHashedPassword(NguoiDung, hash, matKhau)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="1210" y="444" as="sourcePoint" />
             <mxPoint x="1210" y="468" as="targetPoint" />
@@ -94,7 +94,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_30" value="8: return dungMatKhau (bool: Success / Failed)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_30" value="8: return PasswordVerificationResult (Success / Failed)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="488" as="sourcePoint" />
             <mxPoint x="860" y="488" as="targetPoint" />
@@ -178,13 +178,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_43" value="17: KhoiTao(ketQuaDangNhap) &amp; Show()" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_43" value="17: Show() / TaoManHinhPhu()" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="1044" as="sourcePoint" />
             <mxPoint x="1910" y="1044" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_44" value="18: ApDungPhanQuyen(DanhSachQuyen), An/Hien cac tab chuc nang" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_44" value="18: KhoiTaoMenuSidebar(), ApDungPhanQuyen(DanhSachQuyen)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="1910" y="1086" as="sourcePoint" />
             <mxPoint x="1910" y="1110" as="targetPoint" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mxfile host="app.diagrams.net" version="21.0.0" type="device">
   <diagram id="23-Sequence-28-XemQrVeWeb" name="1.7.28. SƠ ĐỒ TUẦN TỰ: XEM ẢNH QR CỦA VÉ CÁ NHÂN (UC16.03)">
-    <mxGraphModel dx="1200" dy="840" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2080" pageHeight="840" background="#ffffff">
+    <mxGraphModel dx="1200" dy="846" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2080" pageHeight="846" background="#ffffff">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -12,39 +12,39 @@
           <mxGeometry x="140" y="80" width="40" height="70" as="geometry" />
         </mxCell>
         <mxCell id="line_12" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
-          <mxGeometry x="155" y="150" width="10" height="640" as="geometry" />
+          <mxGeometry x="155" y="150" width="10" height="646" as="geometry" />
         </mxCell>
         <mxCell id="ll_13" value="&lt;b&gt;:DonController&lt;/b&gt;&lt;br&gt;«Web Controller»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="425" y="90" width="170" height="55" as="geometry" />
         </mxCell>
         <mxCell id="line_14" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
-          <mxGeometry x="505" y="150" width="10" height="640" as="geometry" />
+          <mxGeometry x="505" y="150" width="10" height="646" as="geometry" />
         </mxCell>
         <mxCell id="ll_15" value="&lt;b&gt;:DatVeData&lt;/b&gt;&lt;br&gt;«Web Data Layer»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="775" y="90" width="170" height="55" as="geometry" />
         </mxCell>
         <mxCell id="line_16" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
-          <mxGeometry x="855" y="150" width="10" height="640" as="geometry" />
+          <mxGeometry x="855" y="150" width="10" height="646" as="geometry" />
         </mxCell>
         <mxCell id="ll_17" value="&lt;b&gt;:TicketQr&lt;/b&gt;&lt;br&gt;«Helper / QR»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1125" y="90" width="170" height="55" as="geometry" />
         </mxCell>
         <mxCell id="line_18" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
-          <mxGeometry x="1205" y="150" width="10" height="640" as="geometry" />
+          <mxGeometry x="1205" y="150" width="10" height="646" as="geometry" />
         </mxCell>
         <mxCell id="ll_19" value="&lt;b&gt;«Database»&lt;/b&gt;&lt;br&gt;SQL Server (KiemTraQuyenVe)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1475" y="90" width="170" height="55" as="geometry" />
         </mxCell>
         <mxCell id="line_20" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
-          <mxGeometry x="1555" y="150" width="10" height="640" as="geometry" />
+          <mxGeometry x="1555" y="150" width="10" height="646" as="geometry" />
         </mxCell>
-        <mxCell id="step_21" value="1: GET /Don/MaVeQr/{maVeGuid} (Trình duyệt tải ảnh &lt;img src=&quot;...&quot;&gt;)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_21" value="1: GET /Don/Qr/{id} (Trình duyệt tải ảnh &lt;img src=&quot;/Don/Qr/...&quot;&gt;)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="160" y="190" as="sourcePoint" />
             <mxPoint x="510" y="190" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_22" value="2: LayMaKhachHangTuClaims(User)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_22" value="2: Id() -&gt; Lay MaKhachHang tu Claims" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="510" y="232" as="sourcePoint" />
             <mxPoint x="510" y="256" as="targetPoint" />
@@ -54,13 +54,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_23" value="3: KiemTraQuyenXemVe(maVeGuid, maKhachHang)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_23" value="3: Ve(Id(), id)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="276" as="sourcePoint" />
             <mxPoint x="860" y="276" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_24" value="4: SELECT 1 FROM Ve v JOIN DonHang d ON d.MaDonHang=v.MaDonHang WHERE v.MaVe=@maVe AND d.MaKhachHang=@kh" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_24" value="4: SELECT 1 FROM Ve v JOIN DonHang d ON d.MaDonHang=v.MaDonHang WHERE v.MaVe=@id AND d.MaKhachHang=@kh" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="318" as="sourcePoint" />
             <mxPoint x="1560" y="318" as="targetPoint" />
@@ -73,15 +73,15 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="frame_26" value="alt [Không sở hữu vé hoặc vé không tồn tại]" style="shape=umlFrame;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=11;fontStyle=1;fillColor=none;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="402" width="2000" height="362" as="geometry" />
+          <mxGeometry x="40" y="402" width="2000" height="404" as="geometry" />
         </mxCell>
-        <mxCell id="step_27" value="return false" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_27" value="return null" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="860" y="448" as="sourcePoint" />
             <mxPoint x="510" y="448" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_28" value="return Forbid() / NotFound() -&gt; Chặn xem vé của người khác" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_28" value="return NotFound() -&gt; Chặn xem vé của người khác" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="510" y="490" as="sourcePoint" />
             <mxPoint x="160" y="490" as="targetPoint" />
@@ -90,9 +90,9 @@
         <mxCell id="div_29" value="" style="line;strokeWidth=1;dashed=1;strokeColor=#000000;direction=east;" vertex="1" parent="1">
           <mxGeometry x="40" y="532" width="2000" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="step_30" value="6: TaoQrVe(maVeGuid)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_30" value="6: Create(id)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="574" as="sourcePoint" />
+            <mxPoint x="860" y="574" as="sourcePoint" />
             <mxPoint x="1210" y="574" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -109,13 +109,19 @@
         <mxCell id="step_32" value="8: return byte[] qrBytes" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1210" y="660" as="sourcePoint" />
-            <mxPoint x="510" y="660" as="targetPoint" />
+            <mxPoint x="860" y="660" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="step_33" value="9: return File(qrBytes, &quot;image/png&quot;) -&gt; Render ảnh QR trực tiếp lên trang vé" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+        <mxCell id="step_33" value="9: return byte[] qrBytes" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="702" as="sourcePoint" />
-            <mxPoint x="160" y="702" as="targetPoint" />
+            <mxPoint x="860" y="702" as="sourcePoint" />
+            <mxPoint x="510" y="702" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_34" value="10: return File(qrBytes, &quot;image/png&quot;) -&gt; Render ảnh QR trực tiếp lên trang vé" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="744" as="sourcePoint" />
+            <mxPoint x="160" y="744" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
