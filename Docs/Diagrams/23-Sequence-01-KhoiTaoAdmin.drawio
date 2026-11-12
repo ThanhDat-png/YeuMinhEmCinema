@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" version="21.0.0" type="device">
+  <diagram id="23-Sequence-01-KhoiTaoAdmin" name="1.7.1. SƠ ĐỒ TUẦN TỰ: KHỞI TẠO QUẢN TRỊ VIÊN ĐẦU TIÊN (UC01.01)">
+    <mxGraphModel dx="1200" dy="1234" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2080" pageHeight="1234" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="1.7.1. SƠ ĐỒ TUẦN TỰ: KHỞI TẠO QUẢN TRỊ VIÊN ĐẦU TIÊN (UC01.01)" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=18;fontStyle=1;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="25" width="1980" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_11" value="&lt;b&gt;:NguoiKhoiTao&lt;/b&gt;&lt;br&gt;(Người vận hành)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Arial;fontSize=13;fontColor=#000000;strokeColor=#000000;strokeWidth=1.5;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="140" y="80" width="40" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="line_12" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="155" y="150" width="10" height="1034" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_13" value="&lt;b&gt;:FormDangNhap&lt;/b&gt;&lt;br&gt;«UI Boundary»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="425" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_14" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="505" y="150" width="10" height="1034" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_15" value="&lt;b&gt;:TaiKhoanDAL&lt;/b&gt;&lt;br&gt;«Data Access Layer»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="775" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_16" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="855" y="150" width="10" height="1034" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_17" value="&lt;b&gt;:BaoMatMatKhau&lt;/b&gt;&lt;br&gt;«Helper / Security»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1125" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_18" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="150" width="10" height="1034" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_19" value="&lt;b&gt;«Database»&lt;/b&gt;&lt;br&gt;sp_YMC_KhoiTaoAdmin" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_20" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="1555" y="150" width="10" height="1034" as="geometry" />
+        </mxCell>
+        <mxCell id="step_21" value="1: MoForm() [FormDangNhap_Shown]" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="190" as="sourcePoint" />
+            <mxPoint x="510" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_22" value="2: DaCoAdmin()" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="232" as="sourcePoint" />
+            <mxPoint x="860" y="232" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_23" value="3: SELECT 1 FROM TaiKhoanVaiTro (TenVaiTro=&apos;ADMIN&apos;)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="274" as="sourcePoint" />
+            <mxPoint x="1560" y="274" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_24" value="4: return false (chưa có tài khoản ADMIN)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1560" y="316" as="sourcePoint" />
+            <mxPoint x="860" y="316" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_25" value="5: return false" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="358" as="sourcePoint" />
+            <mxPoint x="510" y="358" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_26" value="6: BatNutKhoiTaoAdmin(true), HienThiThongBaoChuaCoAdmin()" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="510" y="400" as="sourcePoint" />
+            <mxPoint x="510" y="424" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="545" y="400" />
+              <mxPoint x="545" y="424" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_27" value="7: NhapThongTin(tenDangNhap, matKhau) &amp; Click btnKhoiTaoAdmin" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="444" as="sourcePoint" />
+            <mxPoint x="510" y="444" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_28" value="8: KiemTraHopLe(tenDangNhap.Length &gt;= 3, matKhau.Length &gt;= 12, XacNhanMatKhau)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="510" y="486" as="sourcePoint" />
+            <mxPoint x="510" y="510" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="545" y="486" />
+              <mxPoint x="545" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame_29" value="alt [Dữ liệu không hợp lệ: tên &lt; 3 ký tự HOẶC mật khẩu &lt; 12 ký tự HOẶC không khớp]" style="shape=umlFrame;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=11;fontStyle=1;fillColor=none;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="530" width="2000" height="664" as="geometry" />
+        </mxCell>
+        <mxCell id="step_30" value="HienThiThongBaoLoi(&quot;Tên hoặc Mật khẩu không hợp lệ&quot;), txt.Focus()" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="576" as="sourcePoint" />
+            <mxPoint x="160" y="576" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div_31" value="" style="line;strokeWidth=1;dashed=1;strokeColor=#000000;direction=east;" vertex="1" parent="1">
+          <mxGeometry x="40" y="618" width="2000" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="step_32" value="9: KhoiTaoAdmin(tenDangNhap, matKhau)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="660" as="sourcePoint" />
+            <mxPoint x="860" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_33" value="10: TaoHash(matKhau)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="702" as="sourcePoint" />
+            <mxPoint x="1210" y="702" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_34" value="11: Sinh Salt ngẫu nhiên + Băm PBKDF2 (HMAC-SHA256)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="1210" y="744" as="sourcePoint" />
+            <mxPoint x="1210" y="768" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1245" y="744" />
+              <mxPoint x="1245" y="768" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_35" value="12: return matKhauHash (chuỗi base64)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="788" as="sourcePoint" />
+            <mxPoint x="860" y="788" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_36" value="13: EXEC dbo.sp_YMC_KhoiTaoAdmin @TenDangNhap, @MatKhauHash" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="830" as="sourcePoint" />
+            <mxPoint x="1560" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_37" value="14: BEGIN TRAN &amp; EXEC sp_getapplock(N&apos;YMC_Account_Write&apos;)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="1560" y="872" as="sourcePoint" />
+            <mxPoint x="1560" y="896" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1595" y="872" />
+              <mxPoint x="1595" y="896" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_38" value="15: Kiểm tra EXISTS(ADMIN). Nếu có -&gt; THROW 50406" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="1560" y="916" as="sourcePoint" />
+            <mxPoint x="1560" y="940" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1595" y="916" />
+              <mxPoint x="1595" y="940" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_39" value="16: INSERT TaiKhoan, INSERT TaiKhoanVaiTro(&apos;ADMIN&apos;), COMMIT TRAN" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="1560" y="960" as="sourcePoint" />
+            <mxPoint x="1560" y="984" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1595" y="960" />
+              <mxPoint x="1595" y="984" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_40" value="17: Trả về MaTaiKhoan (IDENTITY)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1560" y="1004" as="sourcePoint" />
+            <mxPoint x="860" y="1004" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_41" value="18: return int maTaiKhoan" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="1046" as="sourcePoint" />
+            <mxPoint x="510" y="1046" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_42" value="19: daCoAdmin = true, txtMatKhau.Clear(), txtMatKhau.Focus()" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="510" y="1088" as="sourcePoint" />
+            <mxPoint x="510" y="1112" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="545" y="1088" />
+              <mxPoint x="545" y="1112" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_43" value="20: HienThiThongBao(&quot;Đã tạo Admin thành công. Nhập lại mật khẩu rồi bấm Đăng nhập.&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="1132" as="sourcePoint" />
+            <mxPoint x="160" y="1132" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

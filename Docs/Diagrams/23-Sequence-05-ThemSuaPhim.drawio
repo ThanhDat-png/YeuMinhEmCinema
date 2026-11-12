@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" version="21.0.0" type="device">
+  <diagram id="23-Sequence-05-ThemSuaPhim" name="1.7.5. SƠ ĐỒ TUẦN TỰ: THÊM HOẶC CẬP NHẬT THÔNG TIN PHIM (UC03.01 / UC03.02)">
+    <mxGraphModel dx="1200" dy="848" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2080" pageHeight="848" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" value="1.7.5. SƠ ĐỒ TUẦN TỰ: THÊM HOẶC CẬP NHẬT THÔNG TIN PHIM (UC03.01 / UC03.02)" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=18;fontStyle=1;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="25" width="1980" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_11" value="&lt;b&gt;:QuanLy&lt;/b&gt;&lt;br&gt;(Người vận hành)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Arial;fontSize=13;fontColor=#000000;strokeColor=#000000;strokeWidth=1.5;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="140" y="80" width="40" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="line_12" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="155" y="150" width="10" height="648" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_13" value="&lt;b&gt;:FormThemSuaPhim&lt;/b&gt;&lt;br&gt;«UI Boundary»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="425" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_14" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="505" y="150" width="10" height="648" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_15" value="&lt;b&gt;:PhimDAL&lt;/b&gt;&lt;br&gt;«Data Access Layer»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="775" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_16" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="855" y="150" width="10" height="648" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_17" value="&lt;b&gt;:Db&lt;/b&gt;&lt;br&gt;«Infrastructure»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1125" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_18" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="150" width="10" height="648" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_19" value="&lt;b&gt;«Database»&lt;/b&gt;&lt;br&gt;sp_YMC_LuuPhim" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=13;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1475" y="90" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="line_20" value="" style="line;strokeWidth=1;dashed=1;labelPosition=top;verticalLabelPosition=bottom;align=center;verticalAlign=top;strokeColor=#888888;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="1555" y="150" width="10" height="648" as="geometry" />
+        </mxCell>
+        <mxCell id="step_21" value="1: NhapThongTinPhim(ten, thoiLuong, ngayKC, doTuoi, poster, trailer, trangThai) &amp; Click btnLuu" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="190" as="sourcePoint" />
+            <mxPoint x="510" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_22" value="2: KiemTraHopLe(tenPhim != &quot;&quot; &amp;&amp; thoiLuong &gt; 0 &amp;&amp; ngayKhoiChieu != null)" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="510" y="232" as="sourcePoint" />
+            <mxPoint x="510" y="256" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="545" y="232" />
+              <mxPoint x="545" y="256" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame_23" value="alt [Thiếu tên phim HOẶC thời lượng &lt;= 0]" style="shape=umlFrame;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=11;fontStyle=1;fillColor=none;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="276" width="2000" height="532" as="geometry" />
+        </mxCell>
+        <mxCell id="step_24" value="HienThiThongBaoLoi(&quot;Tên phim và thời lượng không hợp lệ&quot;), txtTenPhim.Focus()" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="322" as="sourcePoint" />
+            <mxPoint x="160" y="322" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div_25" value="" style="line;strokeWidth=1;dashed=1;strokeColor=#000000;direction=east;" vertex="1" parent="1">
+          <mxGeometry x="40" y="364" width="2000" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="step_26" value="3: LuuPhim(phimModel)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="406" as="sourcePoint" />
+            <mxPoint x="860" y="406" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_27" value="4: ExecuteScalar(&quot;sp_YMC_LuuPhim&quot;, maPhim, tenPhim, thoiLuong, ngayKC, ...)" style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="448" as="sourcePoint" />
+            <mxPoint x="1210" y="448" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_28" value="5: EXEC dbo.sp_YMC_LuuPhim @MaPhim, @TenPhim, @ThoiLuong, @NgayKhoiChieu, ..." style="html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="490" as="sourcePoint" />
+            <mxPoint x="1560" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_29" value="6: IF @MaPhim = 0 INSERT INTO Phim; ELSE UPDATE Phim WHERE MaPhim=@MaPhim" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="1560" y="532" as="sourcePoint" />
+            <mxPoint x="1560" y="556" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1595" y="532" />
+              <mxPoint x="1595" y="556" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_30" value="7: return MaPhim (IDENTITY / Existing ID)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1560" y="576" as="sourcePoint" />
+            <mxPoint x="1210" y="576" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_31" value="8: return int maPhim" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="618" as="sourcePoint" />
+            <mxPoint x="860" y="618" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_32" value="9: return int maPhim" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="660" as="sourcePoint" />
+            <mxPoint x="510" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_33" value="10: DialogResult = DialogResult.OK, Close()" style="edgeStyle=orthogonalEdgeStyle;html=1;align=left;spacingLeft=5;verticalAlign=bottom;endArrow=block;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="510" y="702" as="sourcePoint" />
+            <mxPoint x="510" y="726" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="545" y="702" />
+              <mxPoint x="545" y="726" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step_34" value="11: HienThiThongBao(&quot;Lưu thông tin phim thành công!&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;strokeColor=#000000;fontFamily=Arial;fontSize=11;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="746" as="sourcePoint" />
+            <mxPoint x="160" y="746" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
